@@ -18,7 +18,7 @@ Army builder communautaire pour **DUST 194∞** (règles DUST 1947), qui remplac
 
 ## Shot Format (DUST 194∞)
 
-La page `shot.html` est une version courte et simplifiée pour le **Shot Format** de L'Heure du Loir (parties de 30 à 45 minutes) : un héros de commandement, une escouade obligatoire (armure 4 max.), jusqu'à trois escouades facultatives (armure 3 max.) et un véhicule obligatoire (armure 5 max.), pour 40 PA (+4 PA de bonus héros en armée de faction). Pas d'aéronef, de mercenaire, de véhicule capturé ni d'avantage de peloton ; unités avec les compétences Super Human ou Strong Point interdites.
+La page `shot.html` est une version courte et simplifiée pour le **Shot Format** de L'Heure du Loir (parties de 30 à 45 minutes) : un héros de commandement, une escouade obligatoire (armure 4 max.), jusqu'à trois escouades facultatives (armure 3 max.) et un véhicule obligatoire (armure 5 max.), pour 40 PA (+4 PA de bonus héros en armée de faction). Armée Mercenaire jouable (avec le bonus héros), mais pas de mercenaire dans les armées des autres blocs. Pas d'aéronef, de véhicule capturé ni d'avantage de peloton ; unités avec les compétences Super Human ou Strong Point interdites.
 
 Tous les réglages du format sont dans `data/short-format.json` : budget, bonus, armures maximum, nombre d'escouades facultatives, compétences interdites (`bannedSkills` : nom exact de la compétence et libellé affiché), héros interdits en plus (`bannedHeroes`, noms exacts de la base), textes de mise en place et rappels. Modifiez ce fichier sur GitHub pour faire évoluer le format ; le site suit automatiquement. Il utilise la même base d'unités que le builder complet : une correction d'unité profite aux deux.
 
