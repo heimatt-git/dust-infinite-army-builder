@@ -64,7 +64,6 @@ function topbar(active) {
     <nav class="topnav">
       <a href="#/" class="${active === 'home' ? 'on' : ''}">Mes listes</a>
       <a href="shot.html">Shot Format</a>
-      <a href="editor.html">Éditeur de base</a>
       <button id="theme-btn" title="Changer de thème">Thème</button>
     </nav>
   </header>`;
@@ -124,7 +123,7 @@ function renderHome() {
       </section>
     </div>
     ${imagesPanelHTML()}
-    <p class="foot">Outil de fan non officiel. DUST, DUST 1947 et les données de jeu appartiennent à leurs ayants droit. Les photos de la communauté appartiennent à leurs auteurs (CC BY 4.0). Données reprises de l'application DUST ENLIST 1.50 et corrigées par la communauté. Signalez une erreur via l'éditeur de base ou le dépôt GitHub.</p>
+    <p class="foot">Outil de fan non officiel. DUST, DUST 1947 et les données de jeu appartiennent à leurs ayants droit. Les photos de la communauté appartiennent à leurs auteurs (CC BY 4.0). Données reprises de l'application DUST ENLIST 1.50 et corrigées par la communauté. Signalez une erreur via le dépôt GitHub (Issues → Signaler une erreur d'unité).</p>
   </main>`;
   bindTopbar();
   bindImagesPanel();
