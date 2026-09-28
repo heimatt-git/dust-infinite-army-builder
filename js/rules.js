@@ -1,5 +1,6 @@
 // Règles de construction d'armée — DUST 1947 (livre de règles p.46-55 + errata/FAQ 02/2019)
 import { MERC, unitCost, heroBaseName, canPilot } from './data.js';
+import { t, LANG } from './i18n.js';
 
 export const CAPTURED_SURCHARGE = 2;
 export const BONUS_RATE = 0.10;
@@ -34,7 +35,7 @@ export function analyzeArmy(list, data) {
   const rows = list.entries
     .map((e) => { const u = data.unitsById.get(e.u); return { e, u, fac: u?.faction || null, cost: entryCost(e, data), cat: entryCategory(e, list, data) }; })
     .filter((r) => {
-      if (!r.u) warnings.push(`Unité inconnue retirée de l'analyse (${r.e.u}). Elle a peut-être été renommée dans la base.`);
+      if (!r.u) warnings.push(t("Unité inconnue retirée de l'analyse ({id}). Elle a peut-être été renommée dans la base.", { id: r.e.u }));
       return !!r.u;
     });
 
@@ -42,21 +43,21 @@ export function analyzeArmy(list, data) {
 
   // --- Légalité des unités
   for (const r of rows) {
-    if (r.cat === 'illegal') errors.push(`${r.u.name} n'appartient pas au bloc ${blocName(list.bloc, data)} (ni mercenaire, ni véhicule capturé).`);
+    if (r.cat === 'illegal') errors.push(t("{name} n'appartient pas au bloc {bloc} (ni mercenaire, ni véhicule capturé).", { name: r.u.name, bloc: blocName(list.bloc, data) }));
   }
   const captured = rows.filter((r) => r.e.cap);
-  if (captured.length > 1) errors.push(`Un seul véhicule capturé est autorisé (${captured.length} dans la liste).`);
+  if (captured.length > 1) errors.push(t('Un seul véhicule capturé est autorisé ({n} dans la liste).', { n: captured.length }));
   for (const r of captured) {
-    if (r.u.type !== 'vehicle') errors.push(`${r.u.name} : seuls les véhicules peuvent être capturés.`);
-    else if (!r.u.capturable) warnings.push(`${r.u.name} ne figure pas dans la table des véhicules capturés.`);
-    if (r.u.bloc === list.bloc) warnings.push(`${r.u.name} est un véhicule de votre propre bloc : pas besoin de le capturer.`);
+    if (r.u.type !== 'vehicle') errors.push(t('{name} : seuls les véhicules peuvent être capturés.', { name: r.u.name }));
+    else if (!r.u.capturable) warnings.push(t('{name} ne figure pas dans la table des véhicules capturés.', { name: r.u.name }));
+    if (r.u.bloc === list.bloc) warnings.push(t('{name} est un véhicule de votre propre bloc : pas besoin de le capturer.', { name: r.u.name }));
   }
 
   // --- Héros uniques
   const seen = new Map();
   for (const r of rows.filter((r) => r.u.type === 'hero')) {
     const k = heroBaseName(r.u.name);
-    if (seen.has(k)) errors.push(`Héros en double : ${seen.get(k)} et ${r.u.name}. Un héros est unique dans une armée.`);
+    if (seen.has(k)) errors.push(t('Héros en double : {a} et {b}. Un héros est unique dans une armée.', { a: seen.get(k), b: r.u.name }));
     else seen.set(k, r.u.name);
   }
 
@@ -64,39 +65,39 @@ export function analyzeArmy(list, data) {
   const byKey = new Map(rows.map((r) => [r.e.k, r]));
   const joinedBy = new Map();
   for (const r of rows.filter((r) => r.e.join)) {
-    const t = byKey.get(r.e.join);
-    if (!t) { warnings.push(`${r.u.name} est rattaché à une unité absente de la liste.`); continue; }
-    if (!isJoiner(r.u)) { warnings.push(`${r.u.name} n'est ni un héros ni un commissaire et ne peut pas rejoindre une unité.`); continue; }
-    if (t.u.type === 'infantry' || (t.u.type === 'hero' && isCommissar(r.u))) {
-      if (t.u.armor !== r.u.armor) errors.push(`${r.u.name} (armure ${r.u.armor}) ne peut rejoindre ${t.u.name} (armure ${t.u.armor}) : les valeurs d'armure doivent être identiques.`);
-    } else if (t.u.type === 'vehicle' || t.u.type === 'aircraft') {
-      if (!canPilot(r.u, t.u)) errors.push(`${r.u.name} n'a pas la compétence nécessaire pour piloter ${t.u.name}.`);
+    const tg = byKey.get(r.e.join);
+    if (!tg) { warnings.push(t('{name} est rattaché à une unité absente de la liste.', { name: r.u.name })); continue; }
+    if (!isJoiner(r.u)) { warnings.push(t("{name} n'est ni un héros ni un commissaire et ne peut pas rejoindre une unité.", { name: r.u.name })); continue; }
+    if (tg.u.type === 'infantry' || (tg.u.type === 'hero' && isCommissar(r.u))) {
+      if (tg.u.armor !== r.u.armor) errors.push(t("{name} (armure {a}) ne peut rejoindre {target} (armure {b}) : les valeurs d'armure doivent être identiques.", { name: r.u.name, a: r.u.armor, target: tg.u.name, b: tg.u.armor }));
+    } else if (tg.u.type === 'vehicle' || tg.u.type === 'aircraft') {
+      if (!canPilot(r.u, tg.u)) errors.push(t("{name} n'a pas la compétence nécessaire pour piloter {target}.", { name: r.u.name, target: tg.u.name }));
     } else {
-      errors.push(`${r.u.name} ne peut pas rejoindre ${t.u.name}.`);
+      errors.push(t('{name} ne peut pas rejoindre {target}.', { name: r.u.name, target: tg.u.name }));
     }
-    const list2 = joinedBy.get(t.e.k) || [];
+    const list2 = joinedBy.get(tg.e.k) || [];
     list2.push(r);
-    joinedBy.set(t.e.k, list2);
+    joinedBy.set(tg.e.k, list2);
   }
   // FAQ : une escouade rejointe par un commissaire de faction appartient à cette faction
   for (const r of rows.filter((r) => isCommissar(r.u) && r.u.faction && r.e.join)) {
-    const t = byKey.get(r.e.join);
-    if (t && t.cat === 'bloc' && t.u.type === 'infantry') { t.cat = 'faction'; t.fac = r.u.faction; }
+    const tg = byKey.get(r.e.join);
+    if (tg && tg.cat === 'bloc' && tg.u.type === 'infantry') { tg.cat = 'faction'; tg.fac = r.u.faction; }
   }
   for (const r of rows.filter((r) => isCommissar(r.u) && !r.e.join)) {
-    warnings.push(`${r.u.name} (commissaire) doit rejoindre une unité d'infanterie de même armure.`);
+    warnings.push(t("{name} (commissaire) doit rejoindre une unité d'infanterie de même armure.", { name: r.u.name }));
   }
   for (const [k, hs] of joinedBy) {
     if (hs.length > 1) {
       const siblings = hs.length === 2 && hs.every((h) => (h.u.skills || []).includes('Siblings'));
-      if (!siblings) errors.push(`${byKey.get(k).u.name} est rejoint par ${hs.length} héros : un seul autorisé (sauf paire « Siblings »).`);
+      if (!siblings) errors.push(t('{name} est rejoint par {n} héros : un seul autorisé (sauf paire « Siblings »).', { name: byKey.get(k).u.name, n: hs.length }));
     }
   }
 
   // --- Type d'armée et bonus héros
   const factions = new Set(rows.filter((r) => r.cat === 'faction').map((r) => r.fac));
   let kind = 'none';
-  let kindLabel = 'Aucun bonus';
+  let kindLabel = t('Aucun bonus');
   let covered = 0;
   let share = 0;
   let reason = '';
@@ -118,10 +119,10 @@ export function analyzeArmy(list, data) {
     const allMerc = rows.every((r) => r.cat === 'bloc' || r.cat === 'captured');
     if (rows.length && allMerc) {
       const { c } = cover(rows.filter((r) => r.u.type === 'hero' && r.cat === 'bloc'));
-      covered = c; kind = 'merc'; kindLabel = 'Armée mercenaire'; share = 1;
+      covered = c; kind = 'merc'; kindLabel = t('Armée mercenaire'); share = 1;
     }
   } else if (factions.size > 1) {
-    reason = `Plusieurs factions présentes (${[...factions].map((f) => factionName(f, data)).join(', ')}) : pas de bonus.`;
+    reason = t('Plusieurs factions présentes ({list}) : pas de bonus.', { list: [...factions].map((f) => factionName(f, data)).join(', ') });
   } else if (factions.size === 1) {
     const F = [...factions][0];
     const heroes = rows.filter((r) => r.u.type === 'hero' && (r.cat === 'bloc' || (r.cat === 'faction' && r.fac === F)));
@@ -130,20 +131,20 @@ export function analyzeArmy(list, data) {
     const fPts = rows.filter((r) => r.cat === 'faction').reduce((s, r) => s + r.cost, 0) - coveredBy.faction;
     const base = total - c;
     share = base > 0 ? fPts / base : 0;
-    if (share >= FACTION_SHARE) { kind = 'faction'; kindLabel = `Armée de faction ${factionName(F, data)}`; covered = c; }
-    else reason = `Faction ${factionName(F, data)} : ${Math.round(share * 100)} % des points (75 % requis pour le bonus).`;
+    if (share >= FACTION_SHARE) { kind = 'faction'; kindLabel = t('Armée de faction {f}', { f: factionName(F, data) }); covered = c; }
+    else reason = t('Faction {f} : {p} % des points (75 % requis pour le bonus).', { f: factionName(F, data), p: Math.round(share * 100) });
   } else {
     const heroes = rows.filter((r) => r.u.type === 'hero' && r.cat === 'bloc');
     const { c } = cover(heroes);
     const bPts = rows.filter((r) => r.cat === 'bloc').reduce((s, r) => s + r.cost, 0) - c;
     const base = total - c;
     share = base > 0 ? bPts / base : 0;
-    if (rows.length && share >= FACTION_SHARE) { kind = 'bloc'; kindLabel = `Armée de bloc ${blocName(list.bloc, data)}`; covered = c; }
-    else if (rows.length) reason = `Unités du bloc : ${Math.round(share * 100)} % des points (75 % requis pour le bonus).`;
+    if (rows.length && share >= FACTION_SHARE) { kind = 'bloc'; kindLabel = t('Armée de bloc {b}', { b: blocName(list.bloc, data) }); covered = c; }
+    else if (rows.length) reason = t('Unités du bloc : {p} % des points (75 % requis pour le bonus).', { p: Math.round(share * 100) });
   }
 
   const counted = total - covered;
-  if (counted > limit) errors.push(`Limite dépassée : ${counted} pts comptés pour ${limit} pts autorisés.`);
+  if (counted > limit) errors.push(t('Limite dépassée : {c} pts comptés pour {l} pts autorisés.', { c: counted, l: limit }));
 
   // --- Pelotons
   const platoonStatus = (list.platoons || []).map((pi) => analyzePlatoon(pi, list, rows, data));
@@ -157,7 +158,7 @@ export function analyzeArmy(list, data) {
   return {
     total, counted, limit, pool, covered, kind, kindLabel, share, reason,
     factions: [...factions], errors, warnings, platoonStatus,
-    ok: errors.length === 0,
+    ok: errors.length === 0, overLimit: counted > limit,
   };
 }
 
@@ -187,7 +188,8 @@ export const isCommissar = (u) => (u.skills || []).includes('Commissar');
 export const isJoiner = (u) => u.type === 'hero' || isCommissar(u);
 
 export function blocName(id, data) {
-  return data.blocsById.get(id)?.name || id;
+  const b = data.blocsById.get(id);
+  return (LANG === 'en' ? b?.nameEn : b?.name) || id;
 }
 export function factionName(id, data) {
   return data.factionsById.get(id)?.name || id;

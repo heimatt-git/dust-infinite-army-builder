@@ -1,3 +1,4 @@
+import { t } from './i18n.js';
 // Chargement et indexation de la base (data/*.json)
 
 export const TYPE_LABELS = {
@@ -7,6 +8,8 @@ export const TYPE_LABELS = {
   hero: 'Héros',
   token: 'Objet',
 };
+
+export const typeLabel = (type) => t(TYPE_LABELS[type] || type);
 
 export const MERC = 'Mercenaries';
 

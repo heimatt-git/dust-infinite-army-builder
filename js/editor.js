@@ -445,7 +445,7 @@ function renderPublish(body, ch) {
       <p class="hint" style="margin:0">Crée un commit sur votre dépôt ; le site est mis à jour en une à deux minutes. Nécessite un jeton GitHub « fine-grained » limité à ce dépôt, avec la permission <b>Contents : Read and write</b>.</p>
       <div class="row2">
         <label class="field"><span>Propriétaire</span><input type="text" id="gh-owner" value="${esc(gh.owner || '')}" placeholder="votre-pseudo"></label>
-        <label class="field"><span>Dépôt</span><input type="text" id="gh-repo" value="${esc(gh.repo || '')}" placeholder="dust-infinite-army-builder"></label>
+        <label class="field"><span>Dépôt</span><input type="text" id="gh-repo" value="${esc(gh.repo || '')}" placeholder="dust1947-army-builder"></label>
         <label class="field"><span>Branche</span><input type="text" id="gh-branch" value="${esc(gh.branch || 'main')}"></label>
       </div>
       <label class="field"><span>Jeton d'accès</span><input type="password" id="gh-token" value="${esc(gh.token || '')}" placeholder="github_pat_…" autocomplete="off"></label>

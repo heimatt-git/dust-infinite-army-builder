@@ -61,5 +61,31 @@
  "reminders": [
   "Pas d'aéronef, pas d'avantage de peloton, pas de héros « surhumain » (Super Human), pas d'unité Strong Point.",
   "Spy et Airborne : utilisables au tour 1 uniquement, par une seule unité même si plusieurs les possèdent. Si le jet échoue au tour 1, l'unité entre au tour 2 par la zone de déploiement de son joueur (erreur de coordonnées)."
- ]
+ ],
+ "en": {
+  "duration": "30 to 45 minutes",
+  "feedback": {
+   "label": "Give feedback",
+   "intro": "The Shot Format is in testing. Your feedback helps us fix units and improve the tool: join the Discord and post it in the #avis-et-retour-sur-le-builder channel.",
+   "ask": [
+    "The bloc and army you built (use “Share” to copy its link).",
+    "A unit, cost or rule that looks wrong.",
+    "Anything that bothered you or was missing, on phone or computer."
+   ]
+  },
+  "bannedSkills": {
+   "Super Human": "“Super Human” heroes",
+   "Strong Point": "Strong Point units"
+  },
+  "settings": [
+   "6×9 square war zone (starter set map format).",
+   "Minimum scenery: 6 trees, 2 impassable elements, 2 ammunition boxes and 2 anti-tank traps.",
+   "Ammo boxes and anti-tank traps are placed by the players, alternately, in their own half of the field before the game.",
+   "The game lasts 5 rounds."
+  ],
+  "reminders": [
+   "No aircraft, no platoon advantage, no “Super Human” heroes, no Strong Point units.",
+   "Spy and Airborne: usable on the first turn only, by a single unit even if several have the skill. If the roll fails on turn 1, the unit enters on turn 2 from its player's deployment zone (coordinate error)."
+  ]
+ }
 }

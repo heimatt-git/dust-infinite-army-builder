@@ -61,9 +61,9 @@ a { color: var(--accent-ink); }
   display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
   padding: 10px 16px;
 }
-.brand { display: grid; line-height: 1.05; text-decoration: none; color: inherit; }
-.brand b { font-family: var(--f-display); font-weight: 400; font-size: 20px; letter-spacing: .05em; }
-.brand small { font-size: 11px; text-transform: uppercase; letter-spacing: .16em; font-weight: 700; color: var(--accent); }
+.brand { display: flex; align-items: baseline; gap: 10px; text-decoration: none; color: inherit; }
+.brand b { font-family: var(--f-display); font-weight: 400; font-size: 22px; letter-spacing: .04em; }
+.brand small { font-size: 11px; text-transform: uppercase; letter-spacing: .14em; opacity: .7; }
 .topnav { display: flex; gap: 4px; margin-left: auto; flex-wrap: wrap; }
 .topnav a, .topnav button {
   color: var(--bar-ink); text-decoration: none; background: transparent; border: 1px solid transparent;

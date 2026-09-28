@@ -118,3 +118,10 @@
 .sf-fb p { margin: 0; font-size: 14px; }
 .sf-fb ul { margin: 0; padding-left: 18px; display: grid; gap: 3px; font-size: 14px; color: var(--muted); }
 @media (max-width: 420px) { .sf-top nav a.sf-fb-top { padding: 5px 7px; font-size: 12.5px; } }
+.sf-brand, .sf-top nav a, .sf-top nav button { white-space: nowrap; }
+.sf-top nav { align-items: center; }
+@media (max-width: 440px) {
+  .sf-top { gap: 8px; padding-inline: 12px; }
+  .sf-brand b { font-size: 17px; }
+  .sf-top nav button { padding: 5px 6px; font-size: 12.5px; }
+}

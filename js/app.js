@@ -60,7 +60,7 @@ function go(hash) {
 
 function topbar(active) {
   return `<header class="topbar">
-    <a class="brand" href="#/"><b>DUST 194∞</b><small>Builder</small></a>
+    <a class="brand" href="#/"><b>DUST 1947</b><small>Army Builder</small></a>
     <nav class="topnav">
       <a href="#/" class="${active === 'home' ? 'on' : ''}">Mes listes</a>
       <a href="shot.html">Shot Format</a>
