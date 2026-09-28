@@ -1,0 +1,46 @@
+name: Proposer une photo de figurine
+description: Partagez une photo de votre figurine peinte pour illustrer une unité dans l'army builder.
+title: "Photo : "
+labels: ["photo"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Merci ! Les photos de la communauté illustrent les fiches d'unités pour tous les joueurs.
+        **Uniquement des photos de figurines que vous avez prises vous-même.** Pas de scan de carte, pas d'illustration officielle, pas d'image trouvée sur internet.
+  - type: input
+    id: unit
+    attributes:
+      label: Unité
+      description: Nom de l'unité tel qu'il apparaît dans l'army builder.
+      placeholder: "Pounder"
+    validations:
+      required: true
+  - type: textarea
+    id: photo
+    attributes:
+      label: Photo
+      description: Glissez votre image ici (JPG ou PNG, figurine bien visible, fond neutre si possible).
+    validations:
+      required: true
+  - type: input
+    id: author
+    attributes:
+      label: Nom à afficher dans le crédit
+      placeholder: "Votre pseudo"
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Remarques (facultatif)
+      description: Peintre si différent de vous, schéma de couleurs, etc.
+  - type: checkboxes
+    id: consent
+    attributes:
+      label: Autorisation
+      options:
+        - label: J'ai pris cette photo moi-même et il s'agit d'une figurine (pas d'un scan de carte ni d'une image officielle).
+          required: true
+        - label: J'accepte que cette photo soit publiée dans l'army builder sous licence CC BY 4.0, avec mon nom en crédit.
+          required: true
