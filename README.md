@@ -113,6 +113,16 @@ Pour valider une proposition :
 
 Pour activer les formulaires, vérifiez que le dossier `.github/ISSUE_TEMPLATE/` est bien présent dans le dépôt et que les **Issues** sont activées (Settings → General → Features). Un second formulaire, **Signaler une erreur d'unité**, sert aux corrections de la base.
 
+## Mettre à jour le code sans casser le cache
+
+Les navigateurs gardent les fichiers JS et CSS en cache une dizaine de minutes. Pour éviter qu'un joueur mélange d'anciens et de nouveaux fichiers après une mise à jour (page bloquée sur « Chargement… »), chaque page porte un numéro de version. **Après toute modification d'un fichier `js/` ou `css/`**, lancez :
+
+```bash
+node scripts/bump-version.mjs
+```
+
+Le script met à jour `index.html`, `shot.html` et l'éditeur ; publiez-les avec les fichiers modifiés. Les modifications de `data/` n'en ont pas besoin (les données sont toujours rechargées).
+
 ## Tester sur son ordinateur
 
 Le site charge les fichiers JSON avec `fetch`, il faut donc un petit serveur (ouvrir `index.html` en double-cliquant ne suffit pas) :

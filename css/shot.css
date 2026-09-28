@@ -125,3 +125,7 @@
   .sf-brand b { font-size: 17px; }
   .sf-top nav button { padding: 5px 6px; font-size: 12.5px; }
 }
+.sf-sum-detail { grid-column: 2; font-size: 12.5px; font-family: var(--f-mono); opacity: .9; }
+.sf-over { color: #ffb4a3; font-family: var(--f-body); margin-left: 6px; white-space: nowrap; }
+.sf-cost { display: grid; justify-items: end; line-height: 1.15; }
+.sf-cost small { font-family: var(--f-body); font-size: 11px; font-weight: 600; color: var(--ok); }

@@ -73,6 +73,21 @@ function banReason(u) {
   return null;
 }
 
+// Coût affiché d'une unité : le bonus héros est déduit du coût du HQ (« 7 → 3 »)
+function hqBonus(R) { return R?.A?.covered || 0; }
+function costLabel(u, slot, R) {
+  const b = slot === 'cmd' ? hqBonus(R) : 0;
+  return b ? `${unitCost(u)} → ${unitCost(u) - b}` : `${unitCost(u)}`;
+}
+function budgetLine(A, F) {
+  const over = A.counted - F.budget;
+  let m = A.covered
+    ? t('{s} PA dépensés − {b} PA de bonus HQ = {c} / {l} PA', { s: A.total, b: A.covered, c: A.counted, l: F.budget })
+    : t('{c} / {l} PA', { c: A.counted, l: F.budget });
+  if (over > 0) m += t(' : {n} PA de trop', { n: over });
+  return m;
+}
+
 function allowedFor(slot, bloc) {
   const spec = slotSpec(slot);
   return S.data.units.filter((u) => u.bloc === bloc
@@ -100,15 +115,15 @@ function analyze(L) {
     const br = banReason(u); if (br) bad.push(br);
     checks.push({ ok: !bad.length, msg: `${spec.label}${LANG === 'en' ? ':' : ' :'} ${u.name}${bad.length ? ' — ' + bad.join(', ') : ''}` });
   }
-  const bonus = A.covered;
-  checks.push({ ok: A.counted <= F.budget, msg: t('Budget : {c} / {b} PA', { c: A.counted, b: F.budget }) + (bonus ? t(' (+{n} PA de bonus sur le héros)', { n: bonus }) : '') });
+  checks.push({ ok: A.counted <= F.budget, msg: t('Budget : ') + budgetLine(A, F) });
   // Erreurs de rattachement / unicité détectées par les règles de base (hors limite de points, déjà vérifiée)
   const limitMsg = A.overLimit ? A.errors[A.errors.length - 1] : null;
   for (const e of A.errors) if (e !== limitMsg) checks.push({ ok: false, msg: e });
   const firstTurn = toEntries(L).map((e) => D.unitsById.get(e.u)).filter((u) => u && (u.skills || []).some((s) => F.firstTurnSkills.includes(s)));
   const info = [];
-  if (A.kind !== 'none') info.push(t('{k} : bonus de {n} PA réservé au héros.', { k: A.kindLabel, n: F.heroBonus }));
-  else if (A.reason) info.push(A.reason);
+  const hq = D.unitsById.get(L.slots.cmd?.u);
+  if (A.kind !== 'none') info.push(A.covered && hq ? t('{k} : {n} PA de bonus déduits du coût du HQ ({hq}).', { k: A.kindLabel, n: A.covered, hq: hq.name }) : t('{k} : jusqu\'à {n} PA de bonus déduits du coût du HQ.', { k: A.kindLabel, n: F.heroBonus }));
+  else if (A.reason) info.push(t('Pas de bonus : {r}', { r: A.reason }));
   if (firstTurn.length > 1) info.push(t("{list} ont Spy ou Airborne : une seule unité pourra s'en servir, et seulement au tour 1.", { list: firstTurn.map((u) => u.name).join(', ') }));
   else if (firstTurn.length === 1) info.push(t("{name} a Spy ou Airborne : utilisable au tour 1 uniquement. En cas d'échec, entrée au tour 2 par votre zone de déploiement.", { name: firstTurn[0].name }));
   const ok = checks.every((c) => c.ok);
@@ -240,9 +255,9 @@ function renderArmy() {
       <div class="sf-bar"><i class="${R.A.counted > F.budget ? 'over' : ''}" style="width:${pct}%"></i></div>
       <div class="sf-sum-chips">
         <span class="chip ${R.ok ? 'ok' : 'warn'}">${R.ok ? t('Prête à jouer') : t('Incomplète')}</span>
-        ${R.A.covered ? `<span class="chip">${t('+{n} PA héros', { n: R.A.covered })}</span>` : ''}
         ${R.A.kind !== 'none' ? `<span class="chip ok">${esc(R.A.kindLabel)}</span>` : ''}
       </div>
+      ${R.A.covered || R.A.counted > F.budget ? `<div class="sf-sum-detail">${R.A.covered ? esc(t('{s} dépensés − {b} bonus HQ', { s: R.A.total, b: R.A.covered })) : ''}${R.A.counted > F.budget ? ` <b class="sf-over">${esc(t('{n} PA de trop', { n: R.A.counted - F.budget }))}</b>` : ''}</div>` : ''}
     </section>
 
     <ol class="sf-tree">
@@ -272,6 +287,7 @@ function renderArmy() {
 
 function slotHTML(slot) {
   const D = S.data, L = S.list;
+  const R = slot === 'cmd' ? analyze(L) : null;
   const spec = slotSpec(slot);
   const e = L.slots[slot];
   const u = e?.u ? D.unitsById.get(e.u) : null;
@@ -291,7 +307,7 @@ function slotHTML(slot) {
       <div><b>${esc(spec.label)}</b><small>${spec.required ? t('Obligatoire') : t('Facultative')} · ${esc(spec.hint)}</small></div></div>
     ${u ? `<div class="sf-unit">
         <button class="sf-unit-n" data-card="${esc(u.id)}"><b>${esc(u.name)}</b><small>${esc(u.subtitle || typeLabel(u.type))}${u.armor ? ' · ' + t('Armure {n}', { n: u.armor }) : ''}${u.faction ? ' · ' + esc(factionName(u.faction, D)) : ''}</small></button>
-        <span class="sf-cost">${unitCost(u)}</span>
+        <span class="sf-cost">${esc(costLabel(u, slot, R))}${slot === 'cmd' && hqBonus(R) ? `<small>${esc(t('bonus −{n}', { n: hqBonus(R) }))}</small>` : ''}</span>
         <button class="btn sm" data-pick="${slot}">${t('Changer')}</button>
         <button class="btn sm icon danger" data-clear="${slot}" aria-label="${t('Retirer')}">✕</button>
       </div>${extra}`
@@ -412,13 +428,13 @@ function share() {
 
 function listText() {
   const D = S.data, F = S.F, L = S.list, R = analyze(L);
-  const out = [`${L.name}`, `${F.game} · ${F.name} · ${blocName(L.bloc, D)} · ${R.A.counted}/${F.budget} ${t('PA')}${R.A.covered ? t(' (+{n} bonus héros)', { n: R.A.covered }) : ''}`, ''];
+  const out = [`${L.name}`, `${F.game} · ${F.name} · ${blocName(L.bloc, D)} · ${R.A.counted} / ${F.budget} ${t('PA')}${R.A.covered ? t(' ({s} dépensés, −{b} bonus HQ)', { s: R.A.total, b: R.A.covered }) : ''}`, ''];
   for (const s of SLOTS) {
     const u = D.unitsById.get(L.slots[s]?.u);
     if (!u) continue;
     let tail = '';
     if (s === 'cmd' && L.slots.cmd.join) { const tu = D.unitsById.get(L.slots[L.slots.cmd.join]?.u); if (tu) tail = ` [${tu.type === 'vehicle' ? t('pilote') : t('rejoint')} ${tu.name}]`; }
-    out.push(`${slotSpec(s).short}${LANG === 'en' ? ':' : ' :'} ${u.name} (${unitCost(u)})${tail}`);
+    out.push(`${slotSpec(s).short}${LANG === 'en' ? ':' : ' :'} ${u.name} (${costLabel(u, s, R)})${tail}`);
   }
   if (!R.ok) out.push('', t('À compléter : ') + R.checks.filter((c) => !c.ok).map((c) => c.msg).join(' ; '));
   return out.join('\n');
@@ -430,11 +446,11 @@ function sheetHTML() {
     const u = D.unitsById.get(L.slots[s]?.u);
     if (!u) return '';
     const ws = u.weapons || [];
-    return `<div class="pu"><b>${esc(slotSpec(s).short)} — ${esc(u.name)}</b> · ${unitCost(u)} ${t('PA')} · Arm ${esc(u.armor ?? '-')} · ${esc(t('Santé {n}', { n: u.health ?? '-' }))} · Mv ${esc(u.move ?? '-')}/${esc(u.march ?? '-')}
+    return `<div class="pu"><b>${esc(slotSpec(s).short)} — ${esc(u.name)}</b> · ${esc(costLabel(u, s, R))} ${t('PA')} · Arm ${esc(u.armor ?? '-')} · ${esc(t('Santé {n}', { n: u.health ?? '-' }))} · Mv ${esc(u.move ?? '-')}/${esc(u.march ?? '-')}
       ${(u.skills || []).length ? `<div><i>${u.skills.map(esc).join(', ')}</i></div>` : ''}
       ${ws.length ? `<table><tr><th>${t('Arme')}</th><th>${t('Nb')}</th><th>${t('Portée')}</th><th>Inf 1-4</th><th>${LANG === 'en' ? 'Veh' : 'Véh'} 1-7</th></tr>${ws.map((w) => `<tr><td class="wn">${esc(w.name)}${(w.specials || []).length ? ' (' + w.specials.map(esc).join(', ') + ')' : ''}</td><td>${esc(w.count ?? '')}</td><td>${esc(w.range ?? '')}</td><td>${(w.vsInfantry || []).map(esc).join(' ')}</td><td>${(w.vsVehicle || []).map(esc).join(' ')}</td></tr>`).join('')}</table>` : ''}</div>`;
   };
-  return `<h1>${esc(L.name)}</h1><p>${esc(F.game)} · ${esc(F.name)} · ${esc(blocName(L.bloc, D))} · ${R.A.counted}/${F.budget} ${t('PA')}${R.A.covered ? t(' (+{n} bonus héros)', { n: R.A.covered }) : ''}</p>
+  return `<h1>${esc(L.name)}</h1><p>${esc(F.game)} · ${esc(F.name)} · ${esc(blocName(L.bloc, D))} · ${R.A.counted} / ${F.budget} ${t('PA')}${R.A.covered ? t(' ({s} dépensés, −{b} bonus HQ)', { s: R.A.total, b: R.A.covered }) : ''}</p>
     ${SLOTS.map(card).join('')}
     <h3>${t('Rappels')}</h3><ul>${[...F.settings, ...F.reminders].map((s) => `<li>${esc(s)}</li>`).join('')}</ul>`;
 }
