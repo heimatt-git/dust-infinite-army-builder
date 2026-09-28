@@ -32,6 +32,7 @@
  },
  "allowMercenaries": false,
  "allowCaptured": false,
+ "showFullBuilderLink": false,
  "bannedSkills": {
   "Super Human": "héros « surhumain »",
   "Strong Point": "unité Strong Point (place-forte)"
