@@ -106,6 +106,8 @@ const EN = {
   "{b} PA, +{h} PA (10 %) pour le héros si l'armée respecte les règles de faction (livre DUST 1947).":
     '{b} AP, +{h} AP (10%) for the hero if the army follows the faction rules (DUST 1947 rulebook).',
   'Ni mercenaire, ni véhicule capturé.': 'No mercenaries, no captured vehicles.',
+  'Voir la fiche': 'View unit card', 'Voir la fiche : {name}': 'View unit card: {name}',
+  '← Retour à la liste': '← Back to the list', 'Choisir cette unité ({n} PA)': 'Choose this unit ({n} AP)',
   'Armée Mercenaire jouable, mais pas de mercenaire dans les armées des autres blocs ; pas de véhicule capturé.': 'Mercenary army allowed, but no mercenaries in other blocs\' armies; no captured vehicles.',
   'Interdits : {list}.': 'Not allowed: {list}.',
   'Résumé': 'Summary', 'PA': 'AP', 'Prête à jouer': 'Ready to play', 'Incomplète': 'Incomplete', '+{n} PA héros': '+{n} AP hero',
