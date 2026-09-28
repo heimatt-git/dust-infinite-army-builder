@@ -1,0 +1,19 @@
+name: Signaler une erreur d'unité
+description: Un coût, une arme ou une compétence est faux dans l'army builder.
+title: "Correction : "
+labels: ["correction"]
+body:
+  - type: input
+    id: unit
+    attributes:
+      label: Unité
+      placeholder: "Pounder"
+    validations:
+      required: true
+  - type: textarea
+    id: issue
+    attributes:
+      label: Ce qui est faux et la bonne valeur
+      description: Indiquez votre source (carte, errata, FAQ) ; une photo de la carte aide beaucoup.
+    validations:
+      required: true
