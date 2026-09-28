@@ -33,6 +33,16 @@
  "allowMercenaries": false,
  "allowCaptured": false,
  "showFullBuilderLink": false,
+ "feedback": {
+  "label": "Donner mon avis",
+  "url": "https://discord.gg/ajn9XjQfX",
+  "intro": "Le Shot Format est en test. Vos retours nous aident à corriger les unités et à améliorer l'outil : rejoignez le Discord et postez-les dans le salon #avis-et-retour-sur-le-builder.",
+  "ask": [
+   "Le bloc et l'armée que vous avez construits (bouton « Partager » pour copier le lien).",
+   "Une unité, un coût ou une règle qui vous semble faux.",
+   "Ce qui vous a gêné ou manqué, sur téléphone ou sur ordinateur."
+  ]
+ },
  "bannedSkills": {
   "Super Human": "héros « surhumain »",
   "Strong Point": "unité Strong Point (place-forte)"
