@@ -112,3 +112,9 @@
 .sf-fac button small { font-family: var(--f-mono); opacity: .7; font-weight: 400; }
 .sf-fac button.on { background: var(--bar); color: var(--bar-ink); border-color: var(--bar); }
 .sf-fac button[disabled] { opacity: .4; cursor: not-allowed; }
+.sf-top nav a.sf-fb-top { background: var(--rust); color: #fff6f0; border-color: var(--rust); font-weight: 600; }
+.sf-top nav a.sf-fb-top:hover { filter: brightness(1.08); }
+.sf-fb { border-color: var(--rust); }
+.sf-fb p { margin: 0; font-size: 14px; }
+.sf-fb ul { margin: 0; padding-left: 18px; display: grid; gap: 3px; font-size: 14px; color: var(--muted); }
+@media (max-width: 420px) { .sf-top nav a.sf-fb-top { padding: 5px 7px; font-size: 12.5px; } }
