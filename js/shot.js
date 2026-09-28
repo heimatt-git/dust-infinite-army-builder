@@ -370,7 +370,7 @@ function openPicker(slot) {
   const row = (u) => `<div class="sf-pick-row"><button class="sf-pick" data-u="${esc(u.id)}">
       <span><b>${esc(u.name)}</b><small>${esc(u.subtitle || typeLabel(u.type))}${u.armor ? ' · ' + t('Arm. {n}', { n: u.armor }) : ''}${u.faction ? ' · ' + esc(factionName(u.faction, D)) : ''}</small></span>
       <span class="sf-cost ${unitCost(u) > left ? 'over' : ''}">${unitCost(u)}</span></button>
-      <button type="button" class="sf-info" data-info="${esc(u.id)}" title="${t('Voir la fiche')}" aria-label="${esc(t('Voir la fiche : {name}', { name: u.name }))}">i</button></div>`;
+      <button type="button" class="sf-unit-info" data-info="${esc(u.id)}" title="${t('Voir la fiche')}" aria-label="${esc(t('Voir la fiche : {name}', { name: u.name }))}">i</button></div>`;
   const listHTML = () => {
     const shown = all.filter((u) => (L.fac === 'all' || (L.fac === 'none' ? !u.faction : u.faction === L.fac))
       && (!q || (u.name + ' ' + u.subtitle).toLowerCase().includes(q)));
