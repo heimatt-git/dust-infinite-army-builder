@@ -111,7 +111,7 @@ function header(back) {
   return `<header class="sf-top">
     ${back ? '<a class="sf-back" href="#/" aria-label="Retour aux listes">←</a>' : ''}
     <a class="sf-brand" href="#/"><b>${esc(S.F.game)}</b><span>${esc(S.F.name)}</span></a>
-    <nav><a href="index.html">Builder complet</a><button id="theme-btn" type="button">Thème</button></nav>
+    <nav>${S.F.showFullBuilderLink ? '<a href="index.html">Builder complet</a>' : ''}<button id="theme-btn" type="button">Thème</button></nav>
   </header>`;
 }
 function bindHeader() {
