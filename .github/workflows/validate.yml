@@ -1,0 +1,19 @@
+name: Vérifier la base
+
+on:
+  push:
+    paths: ['data/**', 'photos/**', 'js/validate.js', 'scripts/**']
+  pull_request:
+    paths: ['data/**', 'photos/**', 'js/validate.js', 'scripts/**']
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Vérifier units.json, blocs.json et skills.json
+        run: node scripts/validate.mjs
