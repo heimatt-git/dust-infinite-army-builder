@@ -88,8 +88,8 @@ const EN = {
   'Retour aux listes': 'Back to lists', 'Builder complet': 'Full builder', 'Thème': 'Theme',
   'Passer en anglais': 'Switch to French',
   'par {by}': 'by {by}',
-  'Des parties courtes, {d}. Un héros, une à quatre escouades, un véhicule : <b>{b} PA</b>, +{h} PA pour le héros en armée de faction.':
-    'Short games, {d}. One hero, one to four squads, one vehicle: <b>{b} AP</b>, +{h} AP for the hero in a faction army.',
+  'Des parties courtes, {d}. Un héros, une à quatre escouades, un véhicule : <b>{b} PA</b>, +{h} PA pour le héros en armée de faction ou mercenaire.':
+    'Short games, {d}. One hero, one to four squads, one vehicle: <b>{b} AP</b>, +{h} AP for the hero in a faction or mercenary army.',
   'Nouvelle armée': 'New army', 'Nom (facultatif)': 'Name (optional)', "Nom de l'armée": 'Army name', 'Créer': 'Create',
   'Mes armées ({n})': 'My armies ({n})', 'valide': 'valid', 'incomplète': 'incomplete',
   'Supprimer {n}': 'Delete {n}', 'Supprimer ?': 'Delete?',
@@ -106,6 +106,7 @@ const EN = {
   "{b} PA, +{h} PA (10 %) pour le héros si l'armée respecte les règles de faction (livre DUST 1947).":
     '{b} AP, +{h} AP (10%) for the hero if the army follows the faction rules (DUST 1947 rulebook).',
   'Ni mercenaire, ni véhicule capturé.': 'No mercenaries, no captured vehicles.',
+  'Armée Mercenaire jouable, mais pas de mercenaire dans les armées des autres blocs ; pas de véhicule capturé.': 'Mercenary army allowed, but no mercenaries in other blocs\' armies; no captured vehicles.',
   'Interdits : {list}.': 'Not allowed: {list}.',
   'Résumé': 'Summary', 'PA': 'AP', 'Prête à jouer': 'Ready to play', 'Incomplète': 'Incomplete', '+{n} PA héros': '+{n} AP hero',
   'Vérification': 'Checks', 'Partager': 'Share', 'Fiche de partie': 'Game sheet', 'Texte': 'Text',
