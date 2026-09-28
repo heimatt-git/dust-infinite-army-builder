@@ -1,6 +1,6 @@
-# DUST 1947 Army Builder (web)
+# DUST 194∞ Builder (web)
 
-Army builder communautaire pour **DUST 1947**, qui remplace l'application Android DUST ENLIST (plus installable sur les versions récentes d'Android). Il fonctionne dans n'importe quel navigateur (ordinateur, téléphone, tablette), sans compte et sans installation.
+Army builder communautaire pour **DUST 194∞** (règles DUST 1947), qui remplace l'application Android DUST ENLIST (plus installable sur les versions récentes d'Android). Il fonctionne dans n'importe quel navigateur (ordinateur, téléphone, tablette), sans compte et sans installation.
 
 - **543 unités**, **54 pelotons**, **6 blocs** (Alliés, Axe, SSU, Mercenaires, Mythos, IJN) et leurs factions, repris de DUST ENLIST 1.50.
 - Règles de construction du livre DUST 1947 (p.46-55) et de l'errata/FAQ de février 2019 vérifiées en direct :
@@ -22,15 +22,15 @@ La page `shot.html` est une version courte et simplifiée pour le **Shot Format*
 
 Tous les réglages du format sont dans `data/short-format.json` : budget, bonus, armures maximum, nombre d'escouades facultatives, compétences interdites (`bannedSkills` : nom exact de la compétence et libellé affiché), héros interdits en plus (`bannedHeroes`, noms exacts de la base), textes de mise en place et rappels. Modifiez ce fichier sur GitHub pour faire évoluer le format ; le site suit automatiquement. Il utilise la même base d'unités que le builder complet : une correction d'unité profite aux deux.
 
-Adresse : `https://VOTRE-PSEUDO.github.io/dust1947-army-builder/shot.html`
+Adresse : `https://VOTRE-PSEUDO.github.io/dust-infinite-army-builder/shot.html`
 
 ## Mettre le site en ligne (GitHub Pages, gratuit)
 
-1. Créez un compte sur [github.com](https://github.com) si besoin, puis **New repository** : nom `dust1947-army-builder`, visibilité **Public**, sans README.
+1. Créez un compte sur [github.com](https://github.com) si besoin, puis **New repository** : nom `dust-infinite-army-builder`, visibilité **Public**, sans README.
 2. Sur la page du dépôt vide, cliquez sur **uploading an existing file**, glissez **tout le contenu** du dossier (pas le dossier lui-même : `index.html` doit être à la racine), puis **Commit changes**.
    - Le dossier `.github` (vérification automatique) est parfois ignoré par le glisser-déposer. Si c'est le cas, créez-le ensuite avec **Add file → Create new file**, nom `.github/workflows/validate.yml`, et collez son contenu.
 3. **Settings → Pages** : *Source* = **Deploy from a branch**, *Branch* = `main` / `(root)`, **Save**.
-4. Après une à deux minutes, le site est disponible à l'adresse `https://VOTRE-PSEUDO.github.io/dust1947-army-builder/`. Partagez ce lien avec votre communauté.
+4. Après une à deux minutes, le site est disponible à l'adresse `https://VOTRE-PSEUDO.github.io/dust-infinite-army-builder/`. Partagez ce lien avec votre communauté.
 
 ## Corriger une unité (mise à jour de la base)
 
