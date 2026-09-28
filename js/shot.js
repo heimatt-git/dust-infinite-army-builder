@@ -111,7 +111,7 @@ function header(back) {
   return `<header class="sf-top">
     ${back ? '<a class="sf-back" href="#/" aria-label="Retour aux listes">←</a>' : ''}
     <a class="sf-brand" href="#/"><b>${esc(S.F.game)}</b><span>${esc(S.F.name)}</span></a>
-    <nav>${S.F.showFullBuilderLink ? '<a href="index.html">Builder complet</a>' : ''}<button id="theme-btn" type="button">Thème</button></nav>
+    <nav>${S.F.showFullBuilderLink ? '<a href="index.html">Builder complet</a>' : ''}${feedbackLink('sf-fb-top')}<button id="theme-btn" type="button">Thème</button></nav>
   </header>`;
 }
 function bindHeader() {
@@ -152,6 +152,8 @@ function renderHome() {
       }).join('')}</div>` : '<p class="hint" style="margin:0">Aucune armée pour l\'instant.</p>'}
     </section>
 
+    ${feedbackCard()}
+
     <details class="sf-card sf-rules">
       <summary>Règles du format</summary>
       ${rulesHTML()}
@@ -172,6 +174,23 @@ function renderHome() {
     const [rm] = S.lists.splice(i, 1); store.set(LS_KEY, S.lists); renderHome();
     toast(`« ${rm.name} » supprimée`, { label: 'Annuler', run: () => { S.lists.splice(i, 0, rm); store.set(LS_KEY, S.lists); renderHome(); } });
   }));
+}
+
+// Bouton « Donner mon avis » (lien réglable dans short-format.json → feedback)
+function feedbackLink(cls) {
+  const fb = S.F.feedback;
+  if (!fb?.url) return '';
+  return `<a class="${cls}" href="${esc(fb.url)}" target="_blank" rel="noopener">${esc(fb.label || 'Donner mon avis')}</a>`;
+}
+function feedbackCard() {
+  const fb = S.F.feedback;
+  if (!fb?.url) return '';
+  return `<section class="sf-card sf-fb">
+      <h2>Version de test</h2>
+      <p>${esc(fb.intro || '')}</p>
+      ${(fb.ask || []).length ? `<ul>${fb.ask.map((a) => `<li>${esc(a)}</li>`).join('')}</ul>` : ''}
+      <div>${feedbackLink('btn primary')}</div>
+    </section>`;
 }
 
 function rulesHTML() {
@@ -233,6 +252,7 @@ function renderArmy() {
       <button class="btn primary" id="btn-share">Partager</button>
       <button class="btn" id="btn-sheet">Fiche de partie</button>
       <button class="btn" id="btn-text">Texte</button>
+      ${feedbackLink('btn')}
     </div>
     <div class="print-sheet" id="print-sheet"></div>
   </main>`;
