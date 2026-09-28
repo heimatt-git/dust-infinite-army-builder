@@ -367,27 +367,41 @@ function openPicker(slot) {
   const chips = [['all', t('Toutes')], ['none', t('Bloc')], ...factions.map((f) => [f.id, f.name])];
   const count = (k) => all.filter((u) => k === 'all' || (k === 'none' ? !u.faction : u.faction === k)).length;
   let q = '';
-  const row = (u) => `<button class="sf-pick" data-u="${esc(u.id)}">
+  const row = (u) => `<div class="sf-pick-row"><button class="sf-pick" data-u="${esc(u.id)}">
       <span><b>${esc(u.name)}</b><small>${esc(u.subtitle || typeLabel(u.type))}${u.armor ? ' · ' + t('Arm. {n}', { n: u.armor }) : ''}${u.faction ? ' · ' + esc(factionName(u.faction, D)) : ''}</small></span>
-      <span class="sf-cost ${unitCost(u) > left ? 'over' : ''}">${unitCost(u)}</span></button>`;
+      <span class="sf-cost ${unitCost(u) > left ? 'over' : ''}">${unitCost(u)}</span></button>
+      <button type="button" class="sf-info" data-info="${esc(u.id)}" title="${t('Voir la fiche')}" aria-label="${esc(t('Voir la fiche : {name}', { name: u.name }))}">i</button></div>`;
   const listHTML = () => {
     const shown = all.filter((u) => (L.fac === 'all' || (L.fac === 'none' ? !u.faction : u.faction === L.fac))
       && (!q || (u.name + ' ' + u.subtitle).toLowerCase().includes(q)));
     return shown.map(row).join('') || `<p class="hint">${all.length ? t('Aucune unité ne correspond à ce filtre.') : t('Aucune unité autorisée pour ce poste dans ce bloc.')}</p>`;
   };
-  openModal(`<div class="modal-h"><div><div class="eyebrow">${esc(blocName(L.bloc, D))} · ${esc(spec.hint)}</div><h2>${esc(spec.label)}</h2>
+  openModal(`<div id="pk-main"><div class="modal-h"><div><div class="eyebrow">${esc(blocName(L.bloc, D))} · ${esc(spec.hint)}</div><h2>${esc(spec.label)}</h2>
       <p>${t('Il vous reste environ {n} PA', { n: left })}${slot === 'cmd' ? t(' (bonus héros compris)') : ''}.</p></div>
       <button class="btn icon" data-close-btn aria-label="${t('Fermer')}">✕</button></div>
     <div class="modal-b">
       ${factions.length ? `<div class="sf-fac" role="group" aria-label="${t('Filtrer par sous-faction')}">${chips.map(([k, l]) => `<button type="button" data-fac="${esc(k)}" class="${L.fac === k ? 'on' : ''}" ${count(k) ? '' : 'disabled'}>${esc(l)} <small>${count(k)}</small></button>`).join('')}</div>` : ''}
       <input type="search" id="pk-q" placeholder="${t('Rechercher')}" aria-label="${t('Rechercher une unité')}">
       <div class="sf-pick-list" id="pk-list">${listHTML()}</div>
-    </div>`, (root, close) => {
+    </div></div><div id="pk-card" hidden></div>`, (root, close) => {
     const list = root.querySelector('#pk-list');
-    const bind = () => list.querySelectorAll('[data-u]').forEach((b) => b.addEventListener('click', () => {
-      L.slots[slot] = { u: b.dataset.u };
-      compactOptional(); save(); close(); renderArmy();
-    }));
+    const main = root.querySelector('#pk-main'), card = root.querySelector('#pk-card'), box = root.querySelector('.modal');
+    const choose = (id) => { L.slots[slot] = { u: id }; compactOptional(); save(); close(); renderArmy(); };
+    // Fiche de l'unité affichée dans la même fenêtre : le retour conserve le filtre, la recherche et la position
+    let scrollPos = 0;
+    const showCard = (id) => {
+      const u = D.unitsById.get(id); if (!u) return;
+      scrollPos = box.scrollTop;
+      card.innerHTML = unitCardHTML(u, D, { cost: unitCost(u), topHTML: `<div class="sf-card-bar"><button type="button" class="btn" data-back>${t('← Retour à la liste')}</button><button type="button" class="btn primary" data-choose>${t('Choisir cette unité ({n} PA)', { n: unitCost(u) })}</button></div>` });
+      card.querySelector('[data-back]').addEventListener('click', () => { card.hidden = true; card.innerHTML = ''; main.hidden = false; box.scrollTop = scrollPos; });
+      card.querySelector('[data-choose]').addEventListener('click', () => choose(id));
+      main.hidden = true; card.hidden = false; box.scrollTop = 0;
+      card.querySelector('[data-back]').focus();
+    };
+    const bind = () => {
+      list.querySelectorAll('[data-u]').forEach((b) => b.addEventListener('click', () => choose(b.dataset.u)));
+      list.querySelectorAll('[data-info]').forEach((b) => b.addEventListener('click', () => showCard(b.dataset.info)));
+    };
     const refresh = () => { list.innerHTML = listHTML(); bind(); };
     bind();
     root.querySelectorAll('[data-fac]').forEach((b) => b.addEventListener('click', () => {
