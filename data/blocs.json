@@ -1,0 +1,2439 @@
+{
+ "blocs": [
+  {
+   "id": "Allies",
+   "name": "Alliés",
+   "nameEn": "Allies",
+   "color": "#6c7347",
+   "description": "The great alliance of democracies across the globe, united against the combined threats of fascism and communism.",
+   "factions": [
+    {
+     "id": "desert-scorpions",
+     "name": "Desert Scorpions",
+     "description": "A branch of the Long Range Desert Group. Deadly and mobile.",
+     "image": "desert_scorpions"
+    },
+    {
+     "id": "usmc",
+     "name": "USMC",
+     "description": "The unstoppable Marine Corps from the Grand Allied Army.",
+     "image": "usmc"
+    }
+   ]
+  },
+  {
+   "id": "Axis",
+   "name": "Axe",
+   "nameEn": "Axis",
+   "color": "#898582",
+   "description": "Germany, Italy and Japan united under a single, totalitarian flag. Creators of terrifying technological weapons.",
+   "factions": [
+    {
+     "id": "blutkreuz-korps",
+     "name": "Blutkreuz Korps",
+     "description": "A powerful and secret organization operating in the Axis bloc. Expert on VK applications.",
+     "image": "blutkreuz"
+    },
+    {
+     "id": "luftwaffe",
+     "name": "Luftwaffe",
+     "description": "A branch of the Axis army specialized in airborne assault.",
+     "image": "luftwaffe"
+    },
+    {
+     "id": "neue-deutsches-afrika-korps",
+     "name": "Neue Deutsches Afrika Korps",
+     "description": "The legendary german expeditionary force, now reinforced with walkers.",
+     "image": "ndak"
+    }
+   ]
+  },
+  {
+   "id": "SSU",
+   "name": "SSU",
+   "nameEn": "SSU",
+   "color": "#974f39",
+   "description": "The Sino-Soviet Union, throwing off the yoke of oppression using high-end armors and super heavy tanks.",
+   "factions": [
+    {
+     "id": "spetsnaz",
+     "name": "Spetsnaz",
+     "description": "The SSU elite special forces, able to deliver quick and deadly strikes.",
+     "image": "spetsnaz"
+    },
+    {
+     "id": "red-guard",
+     "name": "Red Guard",
+     "description": "The elite of the Sino-Soviet Armies, known for fielding half-robot soldier forces in heavy armor.",
+     "image": "red_guard"
+    },
+    {
+     "id": "people-s-liberation-army",
+     "name": "People's Liberation Army",
+     "description": "The independent Chinese Communist force, led by fierce siblings.",
+     "image": "pla"
+    }
+   ]
+  },
+  {
+   "id": "Mercenaries",
+   "name": "Mercenaires",
+   "nameEn": "Mercenaries",
+   "color": "#548187",
+   "description": "An eclectic bunch of hotheads from all around the world, ready to fight tirelessly for the highest bidder.",
+   "factions": []
+  },
+  {
+   "id": "Mythos",
+   "name": "Mythos",
+   "nameEn": "Mythos",
+   "color": "#8a6199",
+   "description": "Iä! Iä! Cthulhu fhtagn!",
+   "factions": []
+  },
+  {
+   "id": "IJN",
+   "name": "IJN",
+   "nameEn": "IJN",
+   "color": "#977c39",
+   "description": "Omae wa shindeiru.",
+   "factions": []
+  }
+ ],
+ "platoons": [
+  {
+   "id": "allies--allied-medium-combat-walker-platoon",
+   "bloc": "Allies",
+   "name": "Allied Medium Combat Walker Platoon",
+   "advantage": "All M3 Medium Combat Walkers in or supporting the Platoon can use the Get Moving You Bunch of Monkeys Special action on any M3 Medium Combat Walker in the same Platoon.",
+   "lore": "Grab them by the nose",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "allies--mickey"
+     ],
+     [
+      "allies--mickey-light"
+     ],
+     [
+      "allies--pounder"
+     ],
+     [
+      "allies--pounder-light"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "allies--mickey"
+     ],
+     [
+      "allies--mickey-light"
+     ],
+     [
+      "allies--hot-dog"
+     ],
+     [
+      "allies--pounder"
+     ],
+     [
+      "allies--pounder-light"
+     ],
+     [
+      "allies--cobra"
+     ],
+     [
+      "allies--barking-dog"
+     ],
+     [
+      "allies--barking-dog-light"
+     ]
+    ],
+    [
+     [
+      "allies--mickey"
+     ],
+     [
+      "allies--mickey-light"
+     ],
+     [
+      "allies--hot-dog"
+     ],
+     [
+      "allies--pounder"
+     ],
+     [
+      "allies--pounder-light"
+     ],
+     [
+      "allies--cobra"
+     ],
+     [
+      "allies--barking-dog"
+     ],
+     [
+      "allies--barking-dog-light"
+     ]
+    ]
+   ],
+   "image": "medium_combat_walker"
+  },
+  {
+   "id": "allies--allied-ranger-platoon",
+   "bloc": "Allies",
+   "name": "Allied Ranger Platoon",
+   "advantage": "All Ranger (but not Heavy Ranger) Units in or supporting the Platoon gain the Scout Skill. In addition, if they are held in Reserve, the roll one extra die when rolling for one of these Units to arrive on the play area.",
+   "lore": "Rangers lead the way",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "allies--bazooka-joe"
+     ],
+     [
+      "allies--ranger-command-squad"
+     ],
+     [
+      "allies--johnny-one-eye"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "allies--ranger-heavy-weapon-squad"
+     ],
+     [
+      "allies--ranger-weapon-squad"
+     ],
+     [
+      "allies--ranger-combat-squad"
+     ],
+     [
+      "allies--ranger-recon-squad"
+     ]
+    ],
+    [
+     [
+      "allies--ranger-heavy-weapon-squad"
+     ],
+     [
+      "allies--ranger-weapon-squad"
+     ],
+     [
+      "allies--ranger-combat-squad"
+     ],
+     [
+      "allies--ranger-recon-squad"
+     ]
+    ],
+    [
+     [
+      "allies--ranger-heavy-weapon-squad"
+     ],
+     [
+      "allies--ranger-weapon-squad"
+     ],
+     [
+      "allies--ranger-combat-squad"
+     ],
+     [
+      "allies--ranger-recon-squad"
+     ]
+    ]
+   ],
+   "image": "ranger"
+  },
+  {
+   "id": "allies--allied-heavy-ranger-platoon",
+   "bloc": "Allies",
+   "name": "Allied Heavy Ranger Platoon",
+   "advantage": "All heavy Ranger Units in or supporting a Heavy Ranger Platoon pass their Infantry Saves on scores of dice_shield as well as dice_block during the first Turn of the game. In addition, if they are held in Reserve, they roll one extra die when rolling to arrive on the play area.",
+   "lore": "Lightning Strike",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "allies--heavy-ranger-command-squad"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "allies--heavy-ranger-attack-squad"
+     ],
+     [
+      "allies--heavy-ranger-tank-hunter-squad"
+     ]
+    ],
+    [
+     [
+      "allies--heavy-ranger-attack-squad"
+     ],
+     [
+      "allies--heavy-ranger-tank-hunter-squad"
+     ]
+    ]
+   ],
+   "image": "heavy_ranger"
+  },
+  {
+   "id": "allies--allied-taskforce-rhino-platoon",
+   "bloc": "Allies",
+   "name": "Allied Taskforce Rhino Platoon",
+   "advantage": "When any Unit in or supporting this Platoon makes successful Close Combat Attack against an Unit, the player may select Rhino (individual or joined with a Unit) or any Heavy Ranger Assault Squad that is within Range 6 of the enemy Unit. This Unit Activates immediately after the Attacking Unit has completed its Activation. This Unit's first Action must be a March move Action towards the enemy Unit, followed by use of the Charge Skill. The resulting Close Combat Attack must also target the same Unit.",
+   "lore": "Knockout",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "allies--rhino"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "allies--heavy-ranger-assault-squad"
+     ]
+    ],
+    [
+     [
+      "allies--wildfire"
+     ]
+    ]
+   ],
+   "image": "rhino"
+  },
+  {
+   "id": "allies--heavy-commando-paratrooper-platoon",
+   "bloc": "Allies",
+   "name": "Heavy Commando Paratrooper Platoon",
+   "advantage": "Every Allied Heavy Commando Unit in or supporting this Platoon gains the Airborne Skill.",
+   "lore": "Air Drop",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "allies--action-jackson"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "allies--allied-heavy-commando-battle-squad"
+     ]
+    ],
+    [
+     [
+      "allies--allied-heavy-commando-battle-squad"
+     ]
+    ]
+   ],
+   "image": "heavy_commando"
+  },
+  {
+   "id": "allies--allied-heavy-destroyer-platoon",
+   "bloc": "Allies",
+   "name": "Allied Heavy Destroyer Platoon",
+   "advantage": "The Officer leading this Platoon gains the following Skill : An Officer performing a Seek, Strike, Destroy Special Action rolls a die. On a roll of dice_block or dice_sight, they may place a Move Stimulants token on an M5-series Heavy Destroyer Walker (such as an M5A Bulldog) or an M10A2 or M10A3 Medium Tank in its Platoon that does not already have one.",
+   "lore": "Seek, Strike, Destroy",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "allies--heavy-ranger-command-squad"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "allies--bulldog"
+     ],
+     [
+      "allies--six-shooter"
+     ],
+     [
+      "allies--wolverine-ii"
+     ],
+     [
+      "allies--wolverine-iii"
+     ]
+    ],
+    [
+     [
+      "allies--bulldog"
+     ],
+     [
+      "allies--six-shooter"
+     ],
+     [
+      "allies--wolverine-ii"
+     ],
+     [
+      "allies--wolverine-iii"
+     ]
+    ]
+   ],
+   "image": "heavy_destroyer"
+  },
+  {
+   "id": "allies--usmc-rifle-platoon",
+   "bloc": "Allies",
+   "name": "USMC Rifle Platoon",
+   "advantage": "All USMC Units and any open-topped M3 Medium Combat Walkers (such as an M3A2 Mickey (Light) or M3G2 Barking Dog (Light) Walker) in or supporting this Platoon gain the Brave Skill.",
+   "lore": "Semper Fi",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "allies--machete-mack"
+     ],
+     [
+      "allies--machete-mack-pistol"
+     ],
+     [
+      "allies--usmc-command-squad"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "allies--usmc-fire-squad"
+     ],
+     [
+      "allies--usmc-rifle-squad"
+     ],
+     [
+      "allies--usmc-demolition-squad"
+     ]
+    ],
+    [
+     [
+      "allies--usmc-fire-squad"
+     ],
+     [
+      "allies--usmc-rifle-squad"
+     ],
+     [
+      "allies--usmc-demolition-squad"
+     ]
+    ],
+    [
+     [
+      "allies--usmc-fire-squad"
+     ],
+     [
+      "allies--usmc-rifle-squad"
+     ],
+     [
+      "allies--usmc-demolition-squad"
+     ],
+     [
+      "allies--usmc-heavy-engineer-squad"
+     ]
+    ],
+    [
+     [
+      "allies--usmc-heavy-engineer-squad"
+     ],
+     [
+      "allies--mickey-light"
+     ],
+     [
+      "allies--barking-dog-light"
+     ]
+    ]
+   ],
+   "image": "usmc_rifle"
+  },
+  {
+   "id": "allies--usmc-heavy-assault-walker-platoon",
+   "bloc": "Allies",
+   "name": "USMC Heavy Assault Walker Platoon",
+   "advantage": "When an M7 Heavy Assault Walker (such as an M7D Devastator) in or supporting this Platoon Activates, the player may select a USMC Unit that has not been activated and any Heroes that join it within Range (2), or carried as passengers by, the Walker. This Unit will Activate immediately after the Walker completes its Activation. The Unit's first Action must be a Move/ Marche Move Action.",
+   "lore": "Close Cooperation",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "allies--punisher"
+     ],
+     [
+      "allies--fireball"
+     ],
+     [
+      "allies--devastator"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "allies--punisher"
+     ],
+     [
+      "allies--fireball"
+     ],
+     [
+      "allies--devastator"
+     ]
+    ],
+    [
+     [
+      "allies--usmc-fire-squad"
+     ],
+     [
+      "allies--usmc-rifle-squad"
+     ],
+     [
+      "allies--usmc-demolition-squad"
+     ]
+    ],
+    [
+     [
+      "allies--usmc-fire-squad"
+     ],
+     [
+      "allies--usmc-rifle-squad"
+     ],
+     [
+      "allies--usmc-demolition-squad"
+     ]
+    ]
+   ],
+   "image": "usmc_heavy"
+  },
+  {
+   "id": "allies--usmc-taskforce-diver-platoon",
+   "bloc": "Allies",
+   "name": "USMC Taskforce Diver Platoon",
+   "advantage": "All USMC Units and any M1 Light Assault Walkers (suchh as an M1A Wildfire or M1D Bushmaster) in or supporting this Platoon gain the Brave Skill. Additionally, any Units in or supporting this Platoon that already possess the Brave Skill can never be Suppressed and do not receive Under Fire or Suppression tokens.",
+   "lore": "Unflappable",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "allies--diver-usmc"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "allies--usmc-close-assault-squad"
+     ]
+    ],
+    [
+     [
+      "allies--bushmaster"
+     ]
+    ]
+   ],
+   "image": "usmc_diver"
+  },
+  {
+   "id": "allies--desert-scorpions-patrol-diver-platoon",
+   "bloc": "Allies",
+   "name": "Desert Scorpions Patrol Diver Platoon",
+   "advantage": "All Desert Scorpions Units in or supporting this Platoon gain the Brave Skill. Additionally, any Desert Scorpions Units in or supporting this Platoon that already possess the Brave Skill can never be Suppressed and do not receive Under Fire or Suppression tokens.",
+   "lore": "Unflappable",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "allies--diver-ds"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "allies--desert-scorpions-assault-squad"
+     ],
+     [
+      "allies--desert-scorpions-kill-squad"
+     ]
+    ],
+    [
+     [
+      "allies--desert-scorpions-assault-squad"
+     ],
+     [
+      "allies--desert-scorpions-kill-squad"
+     ]
+    ]
+   ],
+   "image": "desert_scorpions_patrol_diver_platoon"
+  },
+  {
+   "id": "allies--desert-scorpions-patrol-paratrooper-platoon",
+   "bloc": "Allies",
+   "name": "Desert Scorpions Patrol Paratrooper Platoon",
+   "advantage": "Every Desert Scorpions Heavy Commando Unit in or supporting this Platoon gains the Airborne Skill.",
+   "lore": "Air Drop",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "allies--action-jackson-ds"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "allies--desert-scorpions-heavy-commando-battle-squad"
+     ]
+    ],
+    [
+     [
+      "allies--desert-scorpions-heavy-commando-battle-squad"
+     ]
+    ]
+   ],
+   "image": "desert_scorpions_patrol_action_jackson"
+  },
+  {
+   "id": "allies--desert-scorpions-patrol-gregory-and-izzy-platoon",
+   "bloc": "Allies",
+   "name": "Desert Scorpions Patrol Gregory and Izzy Platoon",
+   "advantage": "From the start of the game until they activate during the second turn, all Desert Scorpions' Trucks in or supporting this platoon receive the following bonuses to their saves : if they are in Open Ground, they are considered in Cover, saving any hits on dice_block ; if they are already in Cover, they pass their Cover saves on dice_shield and dice_block.",
+   "lore": "Need for Speed",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "allies--gregory-and-izzy"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "allies--command-truck-ds"
+     ],
+     [
+      "allies--gun-truck"
+     ],
+     [
+      "allies--transport-truck"
+     ],
+     [
+      "allies--tank-hunter-truck"
+     ],
+     [
+      "allies--mortar-truck"
+     ],
+     [
+      "allies--assault-truck-ds"
+     ]
+    ],
+    [
+     [
+      "allies--command-truck-ds"
+     ],
+     [
+      "allies--gun-truck"
+     ],
+     [
+      "allies--transport-truck"
+     ],
+     [
+      "allies--tank-hunter-truck"
+     ],
+     [
+      "allies--mortar-truck"
+     ],
+     [
+      "allies--assault-truck-ds"
+     ]
+    ],
+    [
+     [
+      "allies--command-truck-ds"
+     ],
+     [
+      "allies--gun-truck"
+     ],
+     [
+      "allies--transport-truck"
+     ],
+     [
+      "allies--tank-hunter-truck"
+     ],
+     [
+      "allies--mortar-truck"
+     ],
+     [
+      "allies--assault-truck-ds"
+     ]
+    ]
+   ],
+   "image": "desert_scorpions_patrol_gregory_and_izzy_platoon"
+  },
+  {
+   "id": "allies--desert-scorpions-patrol-marek-platoon",
+   "bloc": "Allies",
+   "name": "Desert Scorpions Patrol Marek Platoon",
+   "advantage": "Once per game at the start of his Activation, Marek can issue a Bottoms Up Special Free Action : All Desert Scorpions Kill Squads, Heavy Kill Squads, Heavy Engineer Squads in or in support of this platoon(and Heroes joined) gain the Expert Skill with their Ranged Weapons until the end of the turn.",
+   "lore": "Heavy Drinkers",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "allies--marek"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "allies--desert-scorpions-kill-squad"
+     ],
+     [
+      "allies--desert-scorpions-heavy-kill-squad"
+     ],
+     [
+      "allies--desert-scorpions-heavy-engineer-squad"
+     ]
+    ],
+    [
+     [
+      "allies--desert-scorpions-kill-squad"
+     ],
+     [
+      "allies--desert-scorpions-heavy-kill-squad"
+     ],
+     [
+      "allies--desert-scorpions-heavy-engineer-squad"
+     ]
+    ],
+    [
+     [
+      "allies--desert-scorpions-kill-squad"
+     ],
+     [
+      "allies--desert-scorpions-heavy-kill-squad"
+     ],
+     [
+      "allies--desert-scorpions-heavy-engineer-squad"
+     ]
+    ]
+   ],
+   "image": "desert_scorpions_marek_platoon"
+  },
+  {
+   "id": "allies--desert-scorpions-patrol-shaun-platoon",
+   "bloc": "Allies",
+   "name": "Desert Scorpions Patrol Shaun Platoon",
+   "advantage": "Shaun McDermus gains the Follow Me Skill. All Desert Scorpion Assault Squads in or supporting this Platoon gain the Charge skill as long as Shaun is alive. In addition, if any enemy Mythos Creature or Lesser Mythos Creature is on the table, all Desert Scorpions Units in or supporting this Platoon are Immune to Suppression and Under Fire.",
+   "lore": "Know No Fear",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "allies--shaun"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "allies--desert-scorpions-assault-squad"
+     ]
+    ],
+    [
+     [
+      "allies--tank-hunter-truck"
+     ]
+    ]
+   ],
+   "image": "desert_scorpions_patrol_shaun_platoon"
+  },
+  {
+   "id": "allies--desert-scorpions-patrol-maggie-platoon",
+   "bloc": "Allies",
+   "name": "Desert Scorpions Patrol Maggie Platoon",
+   "advantage": "All Desert Scorpions Sniper Squads in or supporting the Desert Scorpions Patrol Maggie Platoon gain the Scout Skill.",
+   "lore": "Advanced Infiltration",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "allies--maggie"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "allies--desert-scorpions-sniper-squad"
+     ]
+    ],
+    [
+     [
+      "allies--desert-scorpions-sniper-squad"
+     ]
+    ]
+   ],
+   "image": "desert_scorpions_patrol_maggie_platoon"
+  },
+  {
+   "id": "axis--axis-kampfgruppe-platoon",
+   "bloc": "Axis",
+   "name": "Axis Kampfgruppe Platoon",
+   "advantage": "All Panzerkampfläufer II (like the Ludwig), Panzerkampfläufer IV-D, Jagdluther and Schützenpanzerläufer VI (like the Sturmluther) Walkers, and any Sturmgrenadier Recon Squads in or supporting this Platoon may roll a die at the start of their Activation. On a roll of dice_block, they gain the Move and Fire Skill for this Activation.",
+   "lore": "Mobile Warfare",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "axis--ludwig"
+     ],
+     [
+      "axis--prinzluther",
+      "axis--sturmgrenadier-command-squad"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "axis--luther"
+     ],
+     [
+      "axis--ludwig"
+     ],
+     [
+      "axis--jagdluther"
+     ],
+     [
+      "axis--lothar"
+     ]
+    ],
+    [
+     [
+      "axis--luther"
+     ],
+     [
+      "axis--ludwig"
+     ],
+     [
+      "axis--jagdluther"
+     ],
+     [
+      "axis--sturmluther",
+      "axis--sturmgrenadier-recon-squad"
+     ]
+    ]
+   ],
+   "image": "kampfgruppe"
+  },
+  {
+   "id": "axis--axis-sturmgrenadier-platoon",
+   "bloc": "Axis",
+   "name": "Axis Sturmgrenadier Platoon",
+   "advantage": "Platoon Leader may perform a Get Moving You Bunch of Monkeys Special Action targeting a Sturmgrenadier Unit in or supporting the Platoon as a third Action each time it Activates.",
+   "lore": "Blitzkrieg Tactics",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "axis--manfred"
+     ],
+     [
+      "axis--sturmgrenadier-command-squad"
+     ],
+     [
+      "axis--stefan"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "axis--sturmgrenadier-assault-squad"
+     ],
+     [
+      "axis--sturmgrenadier-tank-hunter-squad"
+     ],
+     [
+      "axis--sturmgrenadier-recon-squad"
+     ]
+    ],
+    [
+     [
+      "axis--sturmgrenadier-assault-squad"
+     ],
+     [
+      "axis--sturmgrenadier-tank-hunter-squad"
+     ],
+     [
+      "axis--sturmgrenadier-recon-squad"
+     ]
+    ],
+    [
+     [
+      "axis--sturmgrenadier-assault-squad"
+     ],
+     [
+      "axis--sturmgrenadier-tank-hunter-squad"
+     ],
+     [
+      "axis--sturmgrenadier-recon-squad"
+     ]
+    ]
+   ],
+   "image": "sturmgrenadier"
+  },
+  {
+   "id": "axis--axis-heavy-grenadier-platoon",
+   "bloc": "Axis",
+   "name": "Axis Heavy Grenadier Platoon",
+   "advantage": "When the Platoon Leader of this Platoon targets a Wehrmacht Heavy Grenadier Unit in or supporting this Platoon with the Get Moving You Bunch of Monkeys Special Action, it succeeds on rolls of dice_block as well as dice_sight.",
+   "lore": "Mission Tactics",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "axis--heavy-grenadier-command-squad"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "axis--heavy-grenadier-assault-squad"
+     ],
+     [
+      "axis--heavy-grenadier-anti-aircraft-squad"
+     ]
+    ],
+    [
+     [
+      "axis--heavy-grenadier-assault-squad"
+     ],
+     [
+      "axis--heavy-grenadier-anti-aircraft-squad"
+     ]
+    ]
+   ],
+   "image": "heavy_grenadier"
+  },
+  {
+   "id": "axis--blutkreuz-korps-platoon",
+   "bloc": "Axis",
+   "name": "Blutkreuz Korps Platoon",
+   "advantage": "As long as a required Command Unit is in play, Sigrid and all Laser Grenadiers, Laser Grenadiers Command Squad, Heavy Laser Grenadiers, Laser Tank-Hunters,Zombie Grenadier Squad and Zombie Suicide Squad (and Heroes joined), in or supporting this Platoon can never be Suppressed, and do not Receive Under Fire or Suppression tokens.",
+   "lore": "Fanatical Loyalty",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "axis--sigrid-i"
+     ],
+     [
+      "axis--sigrid-ii"
+     ],
+     [
+      "axis--sigrid-iii"
+     ],
+     [
+      "axis--laser-grenadier-command-squad"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "axis--laser-grenadier-squad"
+     ]
+    ],
+    [
+     [
+      "axis--laser-grenadier-squad"
+     ],
+     [
+      "axis--heavy-laser-grenadier-squad"
+     ],
+     [
+      "axis--zombie-grenadier-squad"
+     ],
+     [
+      "axis--zombie-suicide-squad"
+     ]
+    ],
+    [
+     [
+      "axis--laser-grenadier-squad"
+     ],
+     [
+      "axis--heavy-laser-grenadier-squad"
+     ],
+     [
+      "axis--laser-tank-hunter-squad"
+     ],
+     [
+      "axis--zombie-grenadier-squad"
+     ],
+     [
+      "axis--zombie-suicide-squad"
+     ]
+    ]
+   ],
+   "image": "bk"
+  },
+  {
+   "id": "axis--blutkreuz-kampfaffen-markus-platoon",
+   "bloc": "Axis",
+   "name": "Blutkreuz Kampfaffen Markus Platoon",
+   "advantage": "Gorilla Units in this Platoon cannot receive a Suppression token during a Charge Action (as a result of any Reactive Attack that interrupts it). Markus can also use the Get Moving You Bunch of Monkeys Officer Action as long as he is targetting an Ape Unit.",
+   "lore": "Primal Instinct",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "axis--markus"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "axis--gorilla-squad"
+     ],
+     [
+      "axis--gorilla-pioneer-squad"
+     ]
+    ],
+    [
+     [
+      "axis--gorilla-squad"
+     ],
+     [
+      "axis--gorilla-pioneer-squad"
+     ]
+    ],
+    [
+     [
+      "axis--gorilla-squad"
+     ],
+     [
+      "axis--gorilla-pioneer-squad"
+     ]
+    ],
+    [
+     [
+      "axis--gorilla-squad"
+     ],
+     [
+      "axis--gorilla-pioneer-squad"
+     ]
+    ]
+   ],
+   "image": "bk_markus"
+  },
+  {
+   "id": "axis--blutkreuz-zombie-schwarm-platoon",
+   "bloc": "Axis",
+   "name": "Blutkreuz Zombie Schwarm Platoon",
+   "advantage": "All Mindless Zombie Units in a Zombie Swarm gain the Charge Skill. In addition, they can control Objectives.",
+   "lore": "Brainssss!",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "axis--totenmeister"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "axis--zombie-squad"
+     ]
+    ],
+    [
+     [
+      "axis--zombie-squad"
+     ]
+    ],
+    [
+     [
+      "axis--zombie-squad"
+     ]
+    ],
+    [
+     [
+      "axis--zombie-squad"
+     ]
+    ],
+    [
+     [
+      "axis--zombie-squad"
+     ]
+    ],
+    [
+     [
+      "axis--zombie-squad"
+     ]
+    ]
+   ],
+   "image": "bk_zombie"
+  },
+  {
+   "id": "axis--blutkreuz-kampfgruppe-von-stein-s-platoon",
+   "bloc": "Axis",
+   "name": "Blutkreuz Kampfgruppe Von Stein's Platoon",
+   "advantage": "As long as Frank von Stein is in play, all Zombie Units in or supporting this Platoon inflict an Under Fire token to their Close Combat targets, regardless of wheter any Hits are generated or any Health was lost. If a target already has an Under Fire token, it replaces it with a Suppression token (it cannot have multiple Suppression tokens). Additionally, any enemy Unit within Range 3 that have Line of Sight to the Unit being Attacked is applied the same effect as if they were the original target.",
+   "lore": "Inflict Terror",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "axis--frank-von-stein"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "axis--zombie-grenadier-squad"
+     ]
+    ],
+    [
+     [
+      "axis--heinrich-tropical-bk"
+     ]
+    ]
+   ],
+   "image": "bk_von_stein"
+  },
+  {
+   "id": "axis--ndak-grenadier-platoon",
+   "bloc": "Axis",
+   "name": "NDAK Grenadier Platoon",
+   "advantage": "Platoon Leader may perform a Get Moving You Bunch of Monkeys Special Action targeting an NDAK Grenadier Unit or Wehrmacht Heavy Grenadier Unit in or supporting this Platoon as a third Action each time it activates.",
+   "lore": "Blitzkrieg Tactics",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "axis--the-desert-fox"
+     ],
+     [
+      "axis--grenadier-command-squad"
+     ],
+     [
+      "axis--tina-and-hyane"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "axis--grenadier-battle-squad"
+     ],
+     [
+      "axis--grenadier-tank-hunter-squad"
+     ]
+    ],
+    [
+     [
+      "axis--grenadier-battle-squad"
+     ],
+     [
+      "axis--grenadier-tank-hunter-squad"
+     ]
+    ],
+    [
+     [
+      "axis--heavy-grenadier-engineer-squad"
+     ],
+     [
+      "axis--heavy-grenadier-assault-squad"
+     ],
+     [
+      "axis--heavy-grenadier-anti-aircraft-squad"
+     ],
+     [
+      "axis--heavy-grenadier-anti-tank-squad"
+     ]
+    ]
+   ],
+   "image": "ndak_grenadier"
+  },
+  {
+   "id": "axis--ndak-panzergrenadier-platoon",
+   "bloc": "Axis",
+   "name": "NDAK Panzergrenadier Platoon",
+   "advantage": "When a Schützenpanzerläufer VI-series Walker (such as a Stummel or Sturmluther) in or supporting this Platoon makes a Close-Combat Attack, it gains one extra attack with a Standard Weapon (1/1) for each soldier from an NDAK Grenadier Unit or Wehrmacht Heavy Grenadier Unit it is carrying as Passengers.",
+   "lore": "Mounted Assault",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "axis--prinzluther",
+      "axis--the-desert-fox"
+     ],
+     [
+      "axis--grenadier-command-squad",
+      "axis--prinzluther"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "axis--stummel"
+     ],
+     [
+      "axis--sturmluther"
+     ]
+    ],
+    [
+     [
+      "axis--grenadier-battle-squad"
+     ],
+     [
+      "axis--grenadier-tank-hunter-squad"
+     ]
+    ],
+    [
+     [
+      "axis--stummel"
+     ],
+     [
+      "axis--sturmluther"
+     ]
+    ],
+    [
+     [
+      "axis--grenadier-battle-squad"
+     ],
+     [
+      "axis--grenadier-tank-hunter-squad"
+     ]
+    ]
+   ],
+   "image": "ndak_panzergrenadier"
+  },
+  {
+   "id": "axis--ndak-kampfgruppe-christoph-platoon",
+   "bloc": "Axis",
+   "name": "NDAK Kampfgruppe Christoph Platoon",
+   "advantage": "All NDAK Units in or supporting this Platoon gain the Scout Skill. As long as Christoph is in play, they also gain the Trail Blazer Skill.",
+   "lore": "Tight Quarters",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "axis--christoph"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "axis--grenadier-security-squad"
+     ]
+    ],
+    [
+     [
+      "axis--hermann-tropical"
+     ]
+    ]
+   ],
+   "image": "ndak_christoph"
+  },
+  {
+   "id": "axis--luftwaffe-fallschirmjager-platoon",
+   "bloc": "Axis",
+   "name": "Luftwaffe Fallschirmjäger Platoon",
+   "advantage": "All Fallschirjäger Infantry Units and Fallschirm RSO Vehicles in or supporting this Platoon can jump closer to Objectives when using the Airborne skill : they must not be within Range 1 instead of Range 2 when placed on the battlefield.",
+   "lore": "Precision Jump",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "axis--kurt"
+     ],
+     [
+      "axis--fallschirmjager-command-squad"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "axis--fallschirmjager-tank-hunter-squad"
+     ],
+     [
+      "axis--fallschirmjager-battle-squad"
+     ],
+     [
+      "axis--fallschirmjager-anti-aircraft-squad"
+     ]
+    ],
+    [
+     [
+      "axis--fallschirmjager-tank-hunter-squad"
+     ],
+     [
+      "axis--fallschirmjager-battle-squad"
+     ],
+     [
+      "axis--fallschirmjager-anti-aircraft-squad"
+     ]
+    ],
+    [
+     [
+      "axis--fallschirmjager-tank-hunter-squad"
+     ],
+     [
+      "axis--fallschirmjager-battle-squad"
+     ],
+     [
+      "axis--fallschirmjager-anti-aircraft-squad"
+     ]
+    ]
+   ],
+   "image": "luft_fall"
+  },
+  {
+   "id": "axis--luftwaffe-raketentruppe-platoon",
+   "bloc": "Axis",
+   "name": "Luftwaffe Raketentruppe Platoon",
+   "advantage": "All Raketentruppe units (with the Flying skill) in or supporting this Platoon pass their Infantry Saves on a score of dice_shield as well as dice_block during the first turn of the game.",
+   "lore": "Lightning Strike",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "axis--raketenmann"
+     ],
+     [
+      "axis--raketentruppe-command-squad"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "axis--raketentruppe-tank-hunter-squad"
+     ],
+     [
+      "axis--raketentruppe-battle-squad"
+     ],
+     [
+      "axis--raketentruppe-anti-aircraft-squad"
+     ]
+    ],
+    [
+     [
+      "axis--raketentruppe-tank-hunter-squad"
+     ],
+     [
+      "axis--raketentruppe-battle-squad"
+     ],
+     [
+      "axis--raketentruppe-anti-aircraft-squad"
+     ]
+    ],
+    [
+     [
+      "axis--raketentruppe-tank-hunter-squad"
+     ],
+     [
+      "axis--raketentruppe-battle-squad"
+     ],
+     [
+      "axis--raketentruppe-anti-aircraft-squad"
+     ]
+    ]
+   ],
+   "image": "luft_rak"
+  },
+  {
+   "id": "axis--luftwaffe-raketentruppe-shadow-platoon",
+   "bloc": "Axis",
+   "name": "Luftwaffe Raketentruppe Shadow Platoon",
+   "advantage": "One Raketentruppe unit (with the Flying skill) in this Platoon that has been Joined by Kaori can use her Camouflage Skill.",
+   "lore": "Shadow Strike",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "axis--kaori"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "axis--raketentruppe-tank-hunter-squad"
+     ],
+     [
+      "axis--raketentruppe-battle-squad"
+     ],
+     [
+      "axis--raketentruppe-anti-aircraft-squad"
+     ]
+    ]
+   ],
+   "image": "luft_rak_sha"
+  },
+  {
+   "id": "axis--luftwaffe-raketentruppe-assault-platoon",
+   "bloc": "Axis",
+   "name": "Luftwaffe Raketentruppe Assault Platoon",
+   "advantage": "All Raketentruppe Infantry Units in or supporting this Platoon gain the Brave Skill, rolling three dice when rolling to remove Under Fire or Suppressed tokens.",
+   "lore": "Have No Fear",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "axis--goliath"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "axis--raketentruppe-tank-hunter-squad"
+     ],
+     [
+      "axis--raketentruppe-battle-squad"
+     ],
+     [
+      "axis--raketentruppe-anti-aircraft-squad"
+     ]
+    ],
+    [
+     [
+      "axis--raketentruppe-tank-hunter-squad"
+     ],
+     [
+      "axis--raketentruppe-battle-squad"
+     ],
+     [
+      "axis--raketentruppe-anti-aircraft-squad"
+     ]
+    ]
+   ],
+   "image": "luft_rak_ass"
+  },
+  {
+   "id": "axis--luftwaffe-kampfgruppe-florentine-platoon",
+   "bloc": "Axis",
+   "name": "Luftwaffe Kampfgruppe Florentine Platoon",
+   "advantage": "All Luftwaffe Units in or supporting this Platoon that possess Limited-Ammo Weapons gain the ability to perforom a self-targeted Ammo Drop Special Action. Other than being self-targeting and performed by a Unit that does not possess an Officer, this ability functions identically to the Officer Special Action of the same name.",
+   "lore": "Fallschirmjäger Abwurfbehälter",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "axis--florentine"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "axis--raketentruppe-battle-squad"
+     ]
+    ],
+    [
+     [
+      "axis--fallschirm-rso-pak-40"
+     ]
+    ]
+   ],
+   "image": "luft_kam"
+  },
+  {
+   "id": "ssu--ssu-kv47-wolfpack-platoon",
+   "bloc": "SSU",
+   "name": "SSU KV47 Wolfpack Platoon",
+   "advantage": "If any KV-47 in or supporting this Platoon has Line of Sight to an enemy Unit within Range 4 that performs a triggering Action Combination, any other KV-47 in or supporting this Platoon that has not already taken an Action may attempt a Reactive Attack against the enemy Unit. Rolls of dice_shield as well as dice_block are considered successes for determining the number of Actions of the Unit attempting the Reactive Attack.",
+   "lore": "Pack Hunters",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "ssu--nadya"
+     ],
+     [
+      "ssu--natasha"
+     ],
+     [
+      "ssu--koshka",
+      "ssu--grand-ma"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "ssu--nadya"
+     ],
+     [
+      "ssu--natasha"
+     ],
+     [
+      "ssu--natalya"
+     ]
+    ],
+    [
+     [
+      "ssu--nadya"
+     ],
+     [
+      "ssu--natasha"
+     ],
+     [
+      "ssu--natalya"
+     ]
+    ],
+    [
+     [
+      "ssu--nadya"
+     ],
+     [
+      "ssu--natasha"
+     ],
+     [
+      "ssu--natalya"
+     ]
+    ]
+   ],
+   "image": "kv47"
+  },
+  {
+   "id": "ssu--ssu-koshka-s-smersh-kv-47-platoon",
+   "bloc": "SSU",
+   "name": "SSU Koshka's Smersh KV-47 Platoon",
+   "advantage": "KV-47A, B and C Walkers in or supporting this Platoon are not placed at the start of the game. Instead on the first Turn of the game, they are placed anywhere on play (but not within Range 2 of any Objective). The Walkers' first Action must be a Nothing Action, followed by rolling a die. On a roll of dice_block or dice_sight, the player may choose to assign the Walker a second Action. On a roll of dice_shield, the Walker must perform a second nothing Action. Walkers may not capture nor contest Objectives on the turn they're placed.",
+   "lore": "Airborne Assault",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "ssu--koshka",
+      "ssu--grand-ma"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "ssu--nadya"
+     ],
+     [
+      "ssu--natasha"
+     ]
+    ],
+    [
+     [
+      "ssu--nadya"
+     ],
+     [
+      "ssu--natasha"
+     ]
+    ]
+   ],
+   "image": "koshka"
+  },
+  {
+   "id": "ssu--ssu-heavy-breakthrough-tank-platoon",
+   "bloc": "SSU",
+   "name": "SSU Heavy Breakthrough Tank Platoon",
+   "advantage": "After making a March Move Action, an IS-5 or IS-48 or IUS-203 Tank in or supporting this Platoon rolls one die. On a roll of dice_block, it may perform a free Attack Action.",
+   "lore": "Breakthrough",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "ssu--iosef"
+     ],
+     [
+      "ssu--karl"
+     ],
+     [
+      "ssu--lavrentiy"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "ssu--iosef"
+     ],
+     [
+      "ssu--karl"
+     ],
+     [
+      "ssu--lavrentiy"
+     ]
+    ]
+   ],
+   "image": "tank"
+  },
+  {
+   "id": "ssu--yakov-s-stormwall-platoon",
+   "bloc": "SSU",
+   "name": "Yakov's Stormwall Platoon",
+   "advantage": "All Units in or supporting this Platoon gain Actions on a roll of dice_block or dice_shield when making Reactive Attack rolls. This platoon is a Fortified Platoon (see pages 133 and 134 in the rulebook).",
+   "lore": "Vigilant",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "ssu--yakov"
+     ],
+     [
+      "ssu--red-army-command-squad"
+     ],
+     [
+      "ssu--red-guards-command-squad"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "ssu--motherland-tesla-gun"
+     ],
+     [
+      "ssu--motherland-twin-tesla-gun"
+     ]
+    ],
+    [
+     [
+      "ssu--red-army-battle-squad"
+     ],
+     [
+      "ssu--red-guards-anti-tank-squad"
+     ],
+     [
+      "ssu--red-army-tesla-gun-squad"
+     ]
+    ],
+    [
+     [
+      "ssu--red-army-rifle-squad"
+     ],
+     [
+      "ssu--red-guards-assault-squad"
+     ],
+     [
+      "ssu--red-army-heavy-mortar-squad"
+     ],
+     [
+      "ssu--red-army-tesla-gun-squad"
+     ]
+    ]
+   ],
+   "image": "yakov"
+  },
+  {
+   "id": "ssu--ssu-red-sky-platoon",
+   "bloc": "SSU",
+   "name": "SSU Red Sky Platoon",
+   "advantage": "As long as Red Ace and the Red Star are in play, the Red Ace and the two required Units in the Red Sky Platoon gain the And Stay Down skill.",
+   "lore": "Night Witches",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "ssu--red-ace",
+      "ssu--the-red-star"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "ssu--striker"
+     ],
+     [
+      "ssu--blaster"
+     ],
+     [
+      "ssu--burner"
+     ],
+     [
+      "ssu--burster"
+     ]
+    ],
+    [
+     [
+      "ssu--striker"
+     ],
+     [
+      "ssu--blaster"
+     ],
+     [
+      "ssu--burner"
+     ],
+     [
+      "ssu--burster"
+     ]
+    ]
+   ],
+   "image": "red_sky"
+  },
+  {
+   "id": "ssu--pt-47-infiltration-platoon",
+   "bloc": "SSU",
+   "name": "PT-47 Infiltration Platoon",
+   "advantage": "All vehicles on the PT-47 chassis in or supporting this Platoon that execute a March Move when entering the battlefield, benefit from the Camouflage Skill. This Platoon Advantage only works on the first Turn of the game and the Vehicle remains camouflaged until its Activation on Turn 2. A Camouflaged Vehicle does not block Line of Sight. All PT-47 in this Platoon must be a part of the same Bloc/Faction.",
+   "lore": "Infiltration",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "ssu--pt-47a"
+     ],
+     [
+      "ssu--pt-47a-amphibious"
+     ],
+     [
+      "ssu--pt-47a-pla"
+     ],
+     [
+      "ssu--pt-47a-pla-amphibious"
+     ],
+     [
+      "ssu--pt-47a-spetsnaz"
+     ],
+     [
+      "ssu--pt-47a-spetsnaz-amphibious"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "ssu--pt-47b"
+     ],
+     [
+      "ssu--pt-47b-spetsnaz"
+     ],
+     [
+      "ssu--pt-47b-pla"
+     ]
+    ],
+    [
+     [
+      "ssu--pt-47b"
+     ],
+     [
+      "ssu--pt-47b-spetsnaz"
+     ],
+     [
+      "ssu--pt-47b-pla"
+     ]
+    ]
+   ],
+   "image": "pt47_infiltration_platoon"
+  },
+  {
+   "id": "ssu--ssu-red-guards-platoon",
+   "bloc": "SSU",
+   "name": "SSU Red Guards Platoon",
+   "advantage": "During the first three Turns of the game, roll a die each time a Soldier is eliminated from a Red Guards Infantry Unit. On a roll of dice_block, a remplacement comes forward and the Soldier is returned to play.",
+   "lore": "Wave Attack",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "ssu--red-guards-command-squad"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "ssu--red-guards-assault-squad"
+     ],
+     [
+      "ssu--red-guards-anti-tank-squad"
+     ]
+    ],
+    [
+     [
+      "ssu--red-guards-assault-squad"
+     ],
+     [
+      "ssu--red-guards-anti-tank-squad"
+     ]
+    ],
+    [
+     [
+      "ssu--red-guards-assault-squad"
+     ],
+     [
+      "ssu--red-guards-anti-tank-squad"
+     ]
+    ]
+   ],
+   "image": "red_guards"
+  },
+  {
+   "id": "ssu--ssu-steel-guard-platoon",
+   "bloc": "SSU",
+   "name": "SSU Steel Guard Platoon",
+   "advantage": "Steel Guards Squads in or supporting this Platoon may take a Move Action instead of a Nothing Action when Suppressed. They can Attack or use Special Actions as their second Action, but cannot perform a March Move or Sustained Attack Action.",
+   "lore": "Implacable Advance",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "ssu--steel-guards-command-squad"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "ssu--steel-guards-assault-squad"
+     ]
+    ],
+    [
+     [
+      "ssu--steel-guards-assault-squad"
+     ],
+     [
+      "ssu--steel-guards-sniper-squad"
+     ]
+    ]
+   ],
+   "image": "steel_guard"
+  },
+  {
+   "id": "ssu--the-hammer-steel-guards-platoon",
+   "bloc": "SSU",
+   "name": "The Hammer Steel Guards Platoon",
+   "advantage": "Any enemy Unit hit (but not necessarily damaged) by a Type 45 Heavy Gatling Walker in or supporting this Platoon is more susceptible to attacks until the end of the Turn. If a Steel Guards Close-Combat Unit (and any Hero Joined) in or supporting this Platoon attacks such a Unit, it gains the First Strike Skill. This applies only against enemies hit by the Type 45 weapons, not other enemy Units.",
+   "lore": "Cover Fire",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "ssu--karl-the-hammer"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "ssu--steel-guards-close-combat-squad"
+     ]
+    ],
+    [
+     [
+      "ssu--type-45"
+     ]
+    ]
+   ],
+   "image": "kowalski-marauders"
+  },
+  {
+   "id": "ssu--guai-lo-moloi-steel-guard-platoon",
+   "bloc": "SSU",
+   "name": "Guaï-Lo Moloï Steel Guard Platoon",
+   "advantage": "All Steel Guard Units in or supporting the Platoon may re-roll any failed dice once when determining the number of Actions received while trying to perform a Reactive Attack.",
+   "lore": "Fire Support",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "ssu--guai-lo"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "ssu--steel-guards-anti-infantry-squad"
+     ],
+     [
+      "ssu--steel-guards-anti-tank-squad"
+     ],
+     [
+      "ssu--steel-guards-tesla-squad"
+     ]
+    ],
+    [
+     [
+      "ssu--steel-guards-anti-infantry-squad"
+     ],
+     [
+      "ssu--steel-guards-anti-tank-squad"
+     ],
+     [
+      "ssu--steel-guards-tesla-squad"
+     ]
+    ],
+    [
+     [
+      "ssu--steel-guards-anti-infantry-squad"
+     ],
+     [
+      "ssu--steel-guards-anti-tank-squad"
+     ],
+     [
+      "ssu--steel-guards-tesla-squad"
+     ]
+    ]
+   ],
+   "image": "guai_lo_platoon"
+  },
+  {
+   "id": "ssu--spetsnaz-taskforce-platoon",
+   "bloc": "SSU",
+   "name": "Spetsnaz Taskforce Platoon",
+   "advantage": "Any Spetsnaz Unit or KV-47 (TSH) Tropical Light Walker (such as the KV-47K (TSH) Aleksei) in or supporting this Platoon gains the At The Double Skill for its first Activation, or the Activation in which it arrives from Reserves.",
+   "lore": "Surprise Strike",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "ssu--vasiliy"
+     ],
+     [
+      "ssu--spetsnaz-command-squad"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "ssu--spetsnaz-kill-squad"
+     ],
+     [
+      "ssu--spetsnaz-saboteur-squad"
+     ]
+    ],
+    [
+     [
+      "ssu--spetsnaz-kill-squad"
+     ],
+     [
+      "ssu--spetsnaz-saboteur-squad"
+     ]
+    ],
+    [
+     [
+      "ssu--spetsnaz-kill-squad"
+     ],
+     [
+      "ssu--spetsnaz-saboteur-squad"
+     ],
+     [
+      "ssu--aleksei-tsh"
+     ],
+     [
+      "ssu--anatoly-tsh"
+     ]
+    ],
+    [
+     [
+      "ssu--spetsnaz-kill-squad"
+     ],
+     [
+      "ssu--spetsnaz-saboteur-squad"
+     ],
+     [
+      "ssu--aleksei-tsh"
+     ],
+     [
+      "ssu--anatoly-tsh"
+     ]
+    ]
+   ],
+   "image": "spetsnaz_taskforce"
+  },
+  {
+   "id": "ssu--spetsnaz-battlegroup-roza-platoon",
+   "bloc": "SSU",
+   "name": "Spetsnaz Battlegroup Roza Platoon",
+   "advantage": "As long as Roza is in play, all Spetsnaz Infantry Units in or supporting this Platoon gain the Camouflage Skill.",
+   "lore": "Strike Unseen",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "ssu--roza"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "ssu--spetsnaz-assault-squad"
+     ]
+    ],
+    [
+     [
+      "ssu--natasha-tsh"
+     ]
+    ]
+   ],
+   "image": "roza"
+  },
+  {
+   "id": "ssu--the-dragon-and-the-phoenix-liberation-platoon",
+   "bloc": "SSU",
+   "name": "The Dragon and The Phoenix Liberation Platoon",
+   "advantage": "During each of their Activations, The Dragon and The Phoenix can perform a special Get Moving You Bunch of Monkeys Officer Action as a Free 3rd Action. This Free 3rd Action can only target themselves and any Unit they have Joined. If the Dragon and the Phoenix are not Joined with a Unit, they can re-roll once any failed attempt to Reactivate themselves.",
+   "lore": "For The Motherland!",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "ssu--the-dragon",
+      "ssu--the-phoenix"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "ssu--pla-assault-squad"
+     ]
+    ],
+    [
+     [
+      "ssu--nina-tsh-pla"
+     ]
+    ],
+    [
+     [
+      "ssu--type-47-pla"
+     ]
+    ]
+   ],
+   "image": "dragon_and_phoenix_liberation_platoon"
+  },
+  {
+   "id": "mercenaries--sister-s-luisa-mercenary-platoon",
+   "bloc": "Mercenaries",
+   "name": "Sister's Luisa Mercenary Platoon",
+   "advantage": "Mercenaries in or supporting this Platoon roll a die at the start of their Activation. On a dice_block or dice_sight, the Unit gains Brave for this Activation.",
+   "lore": "Go Get'Em Girls!",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "mercenaries--luisa"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "mercenaries--mercenary-cleaning-team"
+     ]
+    ],
+    [
+     [
+      "mercenaries--mercenary-cleaning-team"
+     ],
+     [
+      "mercenaries--demolisher"
+     ]
+    ]
+   ],
+   "image": "luisa"
+  },
+  {
+   "id": "mercenaries--task-force-tanya",
+   "bloc": "Mercenaries",
+   "name": "Task Force Tanya",
+   "advantage": "Mercenaries and Support Weapon Teams in or supporting this Platoon gain the Defensive Tactics Skill whenerver they are within Range 2 of Tanya. Additionally, once per game a Mercenary Unit within Range 2 of Tanya can force a successful Attack roll against that Unit to be rerolled. The Unit and successful Attack roll do not have to be declared until after the roll.",
+   "lore": "Dig In Girls!",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "mercenaries--tanya"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "mercenaries--mercenary-cleaning-team"
+     ]
+    ],
+    [
+     [
+      "mercenaries--wrecker"
+     ]
+    ]
+   ],
+   "image": "tanya"
+  },
+  {
+   "id": "mythos--mythos-will-of-cthulhu-platoon",
+   "bloc": "Mythos",
+   "name": "Mythos Will of Cthulhu Platoon",
+   "advantage": "All Required Units in the Platoon, as well as any Cultist Fire Squad (and Heroes Joined) or Mi-Go Squad (including Heroes Joined) in Support of this Platoon are immune to all friendly Spores Weapons. In addition, they are immune to friendly Psychic Scream or Psychic Vortex Skills. If they are ever in Range of these attacks, used by friendly Units, the Required Units and relevant Support Units simply ignore the effects of these Skills.",
+   "lore": "Will of Cthulhu",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "mythos--lilith"
+     ]
+    ],
+    [
+     [
+      "mythos--lilith-possessed"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "mythos--cultist-fire-squad"
+     ]
+    ],
+    [
+     [
+      "mythos--mi-go-assault-squad"
+     ]
+    ]
+   ],
+   "image": "mythos_will_of_cthulhu_platoon"
+  },
+  {
+   "id": "mythos--mythos-monstrous-creatures-platoon",
+   "bloc": "Mythos",
+   "name": "Mythos Monstrous Creatures Platoon",
+   "advantage": "Units with the Mythos Creature Skill in or supporting this Platoon can never be the target of a Sustained Attack. If an enemy Unit is attacking several targets, the enemy Unit can use its Weapons targeting other Units with Sustained Attacks (spending two actions as usual) but any Weapons targeting Mythos Creatures count as one regular Attack instead. \n          Special : this Platoon advantage is lost if the Avatar leading the Platoon is destroyed.",
+   "lore": "Unspeakable Fear",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "mythos--avatar-of-nyarlathotep"
+     ],
+     [
+      "mythos--avatar-of-cthulhu"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "mythos--spawn-of-cthulhu"
+     ],
+     [
+      "mythos--spawn-of-cthulhu-alt"
+     ]
+    ],
+    [
+     [
+      "mythos--spawn-of-cthulhu"
+     ],
+     [
+      "mythos--spawn-of-cthulhu-alt"
+     ]
+    ]
+   ],
+   "image": "Mythos_MonstrousCreatures"
+  },
+  {
+   "id": "mythos--mythos-strike-from-the-shadows-platoon",
+   "bloc": "Mythos",
+   "name": "Mythos Strike From The Shadows Platoon",
+   "advantage": "The Platoon's Command Unit, Ekaterina and Sabertooth Joined to a Cultist Saboteur Squad, gain the Spy Skill.",
+   "lore": "Strike From The shadows",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "mythos--ekaterina-and-sabertooth"
+     ]
+    ],
+    [
+     [
+      "mythos--cultist-saboteur-squad"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "mythos--cultist-saboteur-squad"
+     ]
+    ],
+    [
+     [
+      "mythos--cultist-saboteur-squad"
+     ]
+    ]
+   ],
+   "image": "mythos_strike_from_the_shadows_platoon"
+  },
+  {
+   "id": "ijn--shadow-of-death-ninja-platoon",
+   "bloc": "IJN",
+   "name": "Shadow of Death Ninja Platoon",
+   "advantage": "If a friendly Ninja Infantry Unit (Squad or Hero, as long as it has the word Ninja in its name) in or supporting this Platoon controls an Objective, it can never be contested by an enemy Unit. Ninja Units can contest an Objective, but when they are part of this Platoon, theirs can never be contested. Your opponent will have to “remove” them permanently from the Objective to be able to capture and even contest it.",
+   "lore": "The Mission Is Sacred",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "ijn--shadow-of-death"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "ijn--ninja-infiltration-squad"
+     ]
+    ],
+    [
+     [
+      "ijn--tengu"
+     ]
+    ]
+   ],
+   "image": "weng_si_platoon"
+  },
+  {
+   "id": "ijn--shadow-of-the-serpent-ninja-platoon",
+   "bloc": "IJN",
+   "name": "Shadow of the Serpent Ninja Platoon",
+   "advantage": "All Ninja Infantry Units do not lose their Improved Camouflage if they execute a March Move. These Units must be Camouflaged before the March Move and can start the game with a March Move and still be Camouflaged.",
+   "lore": "Silent but deadly",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "ijn--shadow-of-the-serpent"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "ijn--ninja-execution-squad"
+     ]
+    ],
+    [
+     [
+      "ijn--ninja-execution-squad"
+     ]
+    ],
+    [
+     [
+      "ijn--tengu"
+     ]
+    ]
+   ],
+   "image": "Shadow-of-the-Serpent-Platoon"
+  },
+  {
+   "id": "ijn--smoke-dragon-platoon",
+   "bloc": "IJN",
+   "name": "Smoke Dragon Platoon",
+   "advantage": "Genbu Type 113 Medium Artillery Walkers in or supporting this Platoon can re-roll the dice once when using their Artillery weapon to fire a Smoke shell. This Platoon advantage only works if there's a least one Ninja Observer Team still on the battlefield.",
+   "lore": "The Smoke Dragon",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "ijn--genbu"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "ijn--ninja-observer-team"
+     ]
+    ],
+    [
+     [
+      "ijn--ninja-observer-team"
+     ]
+    ],
+    [
+     [
+      "ijn--ninja-sniper-team"
+     ]
+    ]
+   ],
+   "image": "Smoke-Dragon-Platoon"
+  },
+  {
+   "id": "ijn--cadet-combat-platoon",
+   "bloc": "IJN",
+   "name": "Cadet Combat Platoon",
+   "advantage": "All Naval Academy Cadets, or Units with the IJN Cadet title in their name, in or supporting this Platoon that are the target of a succesfull Get moving You Bunch Of Monkeys Special Action immediately remove any Under Fire or Suppression token they might have.",
+   "lore": "Unflinching Loyalty",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "ijn--command-squad"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "ijn--kill-squad"
+     ]
+    ],
+    [
+     [
+      "ijn--kill-squad"
+     ]
+    ],
+    [
+     [
+      "ijn--railgun-team"
+     ]
+    ]
+   ],
+   "image": "Cadet-Combat-Platoon"
+  },
+  {
+   "id": "ijn--cadet-support-platoon",
+   "bloc": "IJN",
+   "name": "Cadet Support Platoon",
+   "advantage": "All Kill Squad Naval Academy Cadets in or supporting this Platoon gain the ability to perform the Makeshift Repair Special Action. These can only target Enenra, Basan or Genbu walkers in or supporting the Cadet Support Platoon. These Kill Squads Naval Academy Cadets also gain Expert on all their Weapons while they are adjacent to the type of Walker Units mentioned above, in or Supporting this Platoon.",
+   "lore": "Respect and Cooperation",
+   "onlyCombatUnitsAsSupport": true,
+   "command": [
+    [
+     [
+      "ijn--enenra"
+     ],
+     [
+      "ijn--genbu"
+     ],
+     [
+      "ijn--basan"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "ijn--enenra"
+     ],
+     [
+      "ijn--genbu"
+     ],
+     [
+      "ijn--basan"
+     ]
+    ],
+    [
+     [
+      "ijn--kill-squad"
+     ]
+    ]
+   ],
+   "image": "Cadet-Support-Platoon"
+  },
+  {
+   "id": "ijn--kamikaze-walker-platoon",
+   "bloc": "IJN",
+   "name": "Kamikaze Walker Platoon",
+   "advantage": "Any IJN Walker Unit with Vehicle Armor Value of 4 or 5 in or Supporting this Platoon can declare a Kamikaze Assault. It means this Walker gains a free Attack Action after it executes a March Move. Until the start of this Unit's next Activation, it is considered as having one less Vehicle Armor Value.",
+   "lore": "Kamikaze Walker Assault",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "ijn--enenra"
+     ],
+     [
+      "ijn--genbu"
+     ],
+     [
+      "ijn--basan"
+     ],
+     [
+      "ijn--tengu"
+     ],
+     [
+      "ijn--ryu"
+     ],
+     [
+      "ijn--ryu-ii"
+     ],
+     [
+      "ijn--ryu-iii"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "ijn--enenra"
+     ],
+     [
+      "ijn--genbu"
+     ],
+     [
+      "ijn--basan"
+     ],
+     [
+      "ijn--tengu"
+     ],
+     [
+      "ijn--ryu"
+     ],
+     [
+      "ijn--ryu-ii"
+     ],
+     [
+      "ijn--ryu-iii"
+     ]
+    ],
+    [
+     [
+      "ijn--enenra"
+     ],
+     [
+      "ijn--genbu"
+     ],
+     [
+      "ijn--basan"
+     ],
+     [
+      "ijn--tengu"
+     ],
+     [
+      "ijn--ryu"
+     ],
+     [
+      "ijn--ryu-ii"
+     ],
+     [
+      "ijn--ryu-iii"
+     ]
+    ]
+   ],
+   "image": "kamikaze-walker-platoon"
+  }
+ ]
+}

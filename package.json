@@ -1,0 +1,9 @@
+{
+  "name": "dust1947-army-builder",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "serve": "python3 -m http.server 8000"
+  }
+}

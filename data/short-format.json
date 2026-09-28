@@ -1,0 +1,54 @@
+{
+ "name": "Shot Format",
+ "game": "DUST 194∞",
+ "tagline": "Dust Infinite, the never ending war",
+ "by": "L'Heure du Loir",
+ "duration": "30 à 45 minutes",
+ "budget": 40,
+ "heroBonus": 4,
+ "command": {
+  "types": [
+   "hero"
+  ]
+ },
+ "combatRequired": {
+  "types": [
+   "infantry"
+  ],
+  "maxArmor": 4
+ },
+ "combatOptional": {
+  "types": [
+   "infantry"
+  ],
+  "maxArmor": 3,
+  "count": 3
+ },
+ "vehicle": {
+  "types": [
+   "vehicle"
+  ],
+  "maxArmor": 5
+ },
+ "allowMercenaries": false,
+ "allowCaptured": false,
+ "bannedSkills": {
+  "Super Human": "héros « surhumain »",
+  "Strong Point": "unité Strong Point (place-forte)"
+ },
+ "bannedHeroes": [],
+ "firstTurnSkills": [
+  "Spy",
+  "Airborne"
+ ],
+ "settings": [
+  "Zone de guerre de 6×9 cases (format de la boîte de démarrage).",
+  "Décors minimum : 6 arbres, 2 éléments infranchissables, 2 caisses de munitions et 2 pièges antichars.",
+  "Les caisses de munitions et les pièges antichars sont placés par les joueurs, en alternance, dans leur moitié de terrain avant la partie.",
+  "La partie se joue en 5 tours."
+ ],
+ "reminders": [
+  "Pas d'aéronef, pas d'avantage de peloton, pas de héros « surhumain » (Super Human), pas d'unité Strong Point.",
+  "Spy et Airborne : utilisables au tour 1 uniquement, par une seule unité même si plusieurs les possèdent. Si le jet échoue au tour 1, l'unité entre au tour 2 par la zone de déploiement de son joueur (erreur de coordonnées)."
+ ]
+}
