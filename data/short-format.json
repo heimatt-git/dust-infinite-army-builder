@@ -30,6 +30,7 @@
   ],
   "maxArmor": 5
  },
+ "allowMercenaryArmy": true,
  "allowMercenaries": false,
  "allowCaptured": false,
  "showFullBuilderLink": false,
