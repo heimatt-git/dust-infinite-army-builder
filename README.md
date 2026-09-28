@@ -45,7 +45,7 @@ Toute la base tient dans trois fichiers du dossier `data/` :
 
 ### Méthode recommandée : l'éditeur intégré
 
-1. Ouvrez **Éditeur de base** depuis le site.
+1. Ouvrez l'éditeur de base à son adresse privée (volontairement absente des menus du site et de ce README : gardez-la dans vos favoris).
 2. Cherchez l'unité, corrigez la fiche (les modifications sont gardées dans votre navigateur en brouillon). **Voir la carte** montre le résultat tel que les joueurs le verront.
 3. Onglet **Publier** : vérifiez la liste des changements et le résultat de la vérification.
 4. **Publier sur GitHub** avec un jeton d'accès (à créer une seule fois, voir ci-dessous). Le site est à jour une à deux minutes plus tard.
@@ -127,7 +127,7 @@ python3 -m http.server 8000
 ```
 index.html          army builder
 shot.html           Shot Format (version courte)
-editor.html         éditeur de base
+(page privée)       éditeur de base, non lié depuis le site
 css/                styles
 js/app.js           interface du builder
 js/rules.js         règles de construction (points, bonus, pelotons, héros…)
