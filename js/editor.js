@@ -1,6 +1,7 @@
 // Éditeur de base : corriger les unités, pelotons et compétences, puis publier
 import { indexData, typeLabel } from './data.js';
-import { validateData, UNIT_TYPES } from './validate.js';
+import { validateData, validateCustom, UNIT_TYPES } from './validate.js';
+import { initProposals, renderProposals, pendingCount, normCustom, blobs } from './proposals.js';
 import { esc, store, toast, openModal, unitCardHTML, guessRepo } from './ui.js';
 import { shrink } from './images.js';
 import { t, LANG, initLang, setLang } from './i18n.js';
@@ -45,8 +46,7 @@ async function init() {
   const get = (f) => fetch('data/' + f, { cache: 'no-cache' }).then((r) => { if (!r.ok) throw new Error(f + ' ' + r.status); return r.json(); });
   try {
     const [unitsFile, blocsFile, skills, photos, custom] = await Promise.all([get('units.json'), get('blocs.json'), get('skills.json'), get('photos.json').catch(() => ({})), get('custom.json').catch(() => null)]);
-    E.orig = { unitsFile, blocsFile, skills, photos };
-    E.customIds = (custom?.units || []).map((u) => u.id); // créations CONFIDENTIAL (gérées dans une prochaine étape)
+    E.orig = { unitsFile, blocsFile, skills, photos, custom: normCustom(custom), props: [] };
   } catch (e) {
     root.innerHTML = `<div class="issue bad"><b>!</b><span>${esc(t('Impossible de charger la base : {e}', { e: e.message }))}</span></div>`;
     return;
@@ -54,16 +54,23 @@ async function init() {
   const draft = store.get(DRAFT_KEY, null);
   if (draft && draft.base === E.orig.unitsFile.meta?.version) { E.d = draft.data; E.restored = true; }
   else E.d = clone(E.orig);
-  // Les images en attente ne survivent pas à un rechargement : on retire les photos non publiées du brouillon
+  E.d.custom = E.d.custom ? normCustom(E.d.custom) : clone(E.orig.custom);
+  E.d.props ||= [];
+  // Les images en attente sont gardées dans ce navigateur (IndexedDB) jusqu'à leur publication
   E.pending = new Map();
   E.d.photos ||= clone(E.orig.photos);
   const known = new Set(Object.values(E.orig.photos).flat().map((p) => p.file));
   let lost = 0;
   for (const [id, arr] of Object.entries(E.d.photos)) {
-    const keep = arr.filter((p) => known.has(p.file));
-    lost += arr.length - keep.length;
+    const keep = [];
+    for (const p of arr) {
+      if (known.has(p.file)) { keep.push(p); continue; }
+      const blob = await blobs.get('pending:' + p.file).catch(() => null);
+      if (blob) { E.pending.set(p.file, blob); keep.push(p); } else lost++;
+    }
     if (keep.length) E.d.photos[id] = keep; else delete E.d.photos[id];
   }
+  initProposals({ E, saveDraft, render, clone, slug, unitForm, bindUnitForm });
   if (lost) setTimeout(() => toast(t('{n} photo(s) non publiée(s) perdue(s) au rechargement : ajoutez-les à nouveau.', { n: lost })), 500);
   render();
 }
@@ -89,9 +96,10 @@ function changes() {
   for (const k of keys) if (E.orig.skills[k] !== E.d.skills[k]) sMod.push(k);
   const phMod = JSON.stringify(E.orig.photos) !== JSON.stringify(E.d.photos);
   const blocsChanged = JSON.stringify(E.orig.blocsFile.blocs) !== JSON.stringify(E.d.blocsFile.blocs);
-  const total = uMod.length + uAdd.length + uDel.length + pMod.length + pAdd.length + pDel.length + sMod.length + (blocsChanged ? 1 : 0) + (phMod ? 1 : 0);
-  return { uMod, uAdd, uDel, pMod, pAdd, pDel, sMod, blocsChanged, total,
-    files: { units: uMod.length + uAdd.length + uDel.length > 0, blocs: pMod.length + pAdd.length + pDel.length > 0 || blocsChanged, skills: sMod.length > 0, photos: phMod }, phMod };
+  const cMod = JSON.stringify(E.orig.custom) !== JSON.stringify(E.d.custom);
+  const total = uMod.length + uAdd.length + uDel.length + pMod.length + pAdd.length + pDel.length + sMod.length + (blocsChanged ? 1 : 0) + (phMod ? 1 : 0) + (cMod ? 1 : 0);
+  return { uMod, uAdd, uDel, pMod, pAdd, pDel, sMod, blocsChanged, total, cMod,
+    files: { units: uMod.length + uAdd.length + uDel.length > 0, blocs: pMod.length + pAdd.length + pDel.length > 0 || blocsChanged, skills: sMod.length > 0, photos: phMod, custom: cMod }, phMod };
 }
 
 // ---------------------------------------------------------------- Rendu
@@ -108,18 +116,24 @@ function render() {
   </div>
   ${E.restored && ch.total ? `<div class="issue info" style="margin-bottom:12px"><b>i</b><span>${t('Brouillon précédent restauré.')}</span></div>` : ''}
   <div class="ed-tabs" role="tablist">
-    ${[['units', t('Unités')], ['platoons', t('Pelotons')], ['skills', t('Compétences')], ['photos', t('Photos')], ['publish', t('Publier')]].map(([k, l]) =>
-      `<button role="tab" data-tab="${k}" class="${E.tab === k ? 'on' : ''}">${l}${k === 'publish' && ch.total ? `<span class="count">${ch.total}</span>` : ''}</button>`).join('')}
+    ${[['units', t('Unités')], ['platoons', t('Pelotons')], ['skills', t('Compétences')], ['photos', t('Photos')], ['proposals', t('Propositions')], ['publish', t('Publier')]].map(([k, l]) => {
+      const n = k === 'publish' ? ch.total : k === 'proposals' ? pendingCount() : 0;
+      return `<button role="tab" data-tab="${k}" class="${E.tab === k ? 'on' : ''}">${l}${n ? `<span class="count">${n}</span>` : ''}</button>`;
+    }).join('')}
   </div>
   <div id="ed-body"></div>`;
   root.querySelectorAll('[data-tab]').forEach((b) => b.addEventListener('click', () => { E.tab = b.dataset.tab; render(); }));
   root.querySelector('#reset-draft')?.addEventListener('click', (ev) => {
     const b = ev.currentTarget;
     if (!b.classList.contains('armed')) { b.classList.add('armed'); b.textContent = t('Confirmer : tout annuler'); return; }
-    E.d = clone(E.orig); E.restored = false; store.set(DRAFT_KEY, null); render(); toast(t('Brouillon abandonné'));
+    for (const k of E.pending.keys()) blobs.del('pending:' + k).catch(() => {});
+    E.pending.clear();
+    const props = E.d.props; // les dossiers importés restent, remis « en attente »
+    E.d = clone(E.orig); E.d.props = props.map((s) => ({ ...s, items: s.items.map(({ prev, photoPath, ...i }) => ({ ...i, status: 'pending', reason: '' })) }));
+    E.restored = false; store.set(DRAFT_KEY, null); saveDraft(); render(); toast(t('Brouillon abandonné'));
   });
   const body = root.querySelector('#ed-body');
-  ({ units: renderUnits, platoons: renderPlatoons, skills: renderSkills, photos: renderPhotos, publish: renderPublish })[E.tab](body, ch);
+  ({ units: renderUnits, platoons: renderPlatoons, skills: renderSkills, photos: renderPhotos, proposals: renderProposals, publish: renderPublish })[E.tab](body, ch);
 }
 
 // ---------------------------------------------------------------- Unités
@@ -157,8 +171,9 @@ function renderUnits(body, ch) {
   if (u) bindUnitForm(body, u);
 }
 
-function unitForm(u) {
-  const bloc = E.d.blocsFile.blocs.find((b) => b.id === u.bloc);
+function unitForm(u, o = {}) {
+  const blocs = o.blocs || E.d.blocsFile.blocs;
+  const bloc = blocs.find((b) => b.id === u.bloc);
   const allSkills = Object.keys(E.d.skills);
   return `<form class="ed-form" id="u-form" autocomplete="off">
     <div class="ed-sec">
@@ -169,7 +184,7 @@ function unitForm(u) {
         <label class="field"><span>${t('Sous-titre')}</span><input type="text" name="subtitle" value="${esc(u.subtitle)}"></label>
       </div>
       <div class="row2">
-        <label class="field"><span>${t('Bloc')}</span><select name="bloc">${E.d.blocsFile.blocs.map((b) => `<option value="${esc(b.id)}" ${b.id === u.bloc ? 'selected' : ''}>${esc(bn(b))}</option>`).join('')}</select></label>
+        <label class="field"><span>${t('Bloc')}</span><select name="bloc">${blocs.map((b) => `<option value="${esc(b.id)}" ${b.id === u.bloc ? 'selected' : ''}>${esc(bn(b))}</option>`).join('')}</select></label>
         <label class="field"><span>${t('Type')}</span><select name="type">${UNIT_TYPES.map((ty) => `<option value="${ty}" ${ty === u.type ? 'selected' : ''}>${esc(typeLabel(ty))}</option>`).join('')}</select></label>
         <label class="field"><span>${t('Faction')}</span><select name="faction"><option value="">${t('— Bloc (aucune) —')}</option>${(bloc?.factions || []).map((f) => `<option value="${esc(f.id)}" ${f.id === u.faction ? 'selected' : ''}>${esc(f.name)}</option>`).join('')}</select></label>
       </div>
@@ -212,24 +227,28 @@ function unitForm(u) {
       </div>`).join('')}
       <div><button type="button" class="btn sm" id="add-w">${t('+ Arme')}</button></div>
     </div>
-    <div class="ed-actions">
+    ${o.prop ? `<div class="ed-actions">
+      <button type="button" class="btn" id="u-preview">${t('Voir la carte')}</button>
+      <span class="spacer"></span>
+      <button type="button" class="btn primary" id="u-done">${t('Terminer la retouche')}</button>
+    </div>` : `<div class="ed-actions">
       <button type="button" class="btn" id="u-preview">${t('Voir la carte')}</button>
       <button type="button" class="btn" id="u-revert" ${JSON.stringify(E.orig.unitsFile.units.find((x) => x.id === u.id)) === JSON.stringify(u) ? 'disabled' : ''}>${t('Annuler les modifications de cette fiche')}</button>
       <span class="spacer"></span>
       <button type="button" class="btn" id="u-dup">${t('Dupliquer')}</button>
       <button type="button" class="btn danger" id="u-del">${t('Supprimer')}</button>
-    </div>
+    </div>`}
   </form>`;
 }
 
-function readUnitForm(form, u) {
+function readUnitForm(form, u, blocs = E.d.blocsFile.blocs) {
   const f = new FormData(form);
   const g = (k) => f.get(k);
   u.name = String(g('name') || '').trim() || u.name;
   u.subtitle = String(g('subtitle') || '').trim();
   u.bloc = g('bloc');
   u.type = g('type');
-  const bloc = E.d.blocsFile.blocs.find((b) => b.id === u.bloc);
+  const bloc = blocs.find((b) => b.id === u.bloc);
   u.faction = g('faction') && bloc?.factions.some((x) => x.id === g('faction')) ? g('faction') : null;
   for (const k of ['cost', 'armor', 'health', 'move', 'march']) u[k] = numOrNull(g(k));
   if (u.cost === null) u.cost = 0;
@@ -248,12 +267,14 @@ function readUnitForm(form, u) {
   });
 }
 
-function bindUnitForm(body, u) {
+function bindUnitForm(body, u, o = {}) {
   const form = body.querySelector('#u-form');
-  const apply = () => { readUnitForm(form, u); saveDraft(); };
+  const apply = () => { readUnitForm(form, u, o.blocs); o.onChange?.(); saveDraft(); };
   form.addEventListener('change', (e) => {
     apply();
-    if (['bloc', 'name', 'cost'].includes(e.target.name)) render();
+    if (['bloc', 'name', 'cost', 'faction', 'type'].includes(e.target.name) && o.prop) render();
+    else if (['bloc', 'name', 'cost'].includes(e.target.name)) render();
+    else if (o.prop) return;
     else {
       // mettre à jour le repère « modifiée » et le bouton d'annulation sans perdre le focus
       const same = JSON.stringify(E.orig.unitsFile.units.find((x) => x.id === u.id)) === JSON.stringify(u);
@@ -268,9 +289,11 @@ function bindUnitForm(body, u) {
   form.querySelectorAll('[data-rmcs]').forEach((b) => b.addEventListener('click', () => { apply(); u.customSkills.splice(+b.dataset.rmcs, 1); saveDraft(); render(); }));
   form.querySelector('#u-preview').addEventListener('click', () => {
     apply();
+    if (o.preview) return o.preview();
     const D = indexData(E.d.unitsFile, E.d.blocsFile, E.d.skills);
     openModal(unitCardHTML(D.unitsById.get(u.id), D));
   });
+  if (o.prop) { form.querySelector('#u-done').addEventListener('click', () => { apply(); o.onDone?.(); }); return; }
   form.querySelector('#u-revert').addEventListener('click', () => {
     const o = E.orig.unitsFile.units.find((x) => x.id === u.id);
     if (!o) return;
@@ -322,7 +345,7 @@ function renderPlatoons(body, ch) {
         <div class="idline">id : ${esc(p.id)}</div>
         <div class="row2">
           <label class="field"><span>${t('Nom')}</span><input type="text" name="name" value="${esc(p.name)}"></label>
-          <label class="field"><span>${t('Bloc')}</span><select name="bloc">${E.d.blocsFile.blocs.map((b) => `<option value="${esc(b.id)}" ${b.id === p.bloc ? 'selected' : ''}>${esc(bn(b))}</option>`).join('')}</select></label>
+          <label class="field"><span>${t('Bloc')}</span><select name="bloc">${blocs.map((b) => `<option value="${esc(b.id)}" ${b.id === p.bloc ? 'selected' : ''}>${esc(bn(b))}</option>`).join('')}</select></label>
         </div>
         <label class="field"><span>${t('Devise')}</span><input type="text" name="lore" value="${esc(p.lore)}"></label>
         <label class="field"><span>${t('Avantage de peloton')}</span><textarea name="advantage" rows="3" style="font-family:var(--f-body);font-size:14px">${esc(p.advantage)}</textarea></label>
@@ -422,13 +445,14 @@ function renderSkills(body, ch) {
 // ---------------------------------------------------------------- Publication
 function fileText(which) {
   const d = prepared();
-  const obj = which === 'units' ? d.unitsFile : which === 'blocs' ? d.blocsFile : which === 'photos' ? d.photos : d.skills;
+  const obj = which === 'units' ? d.unitsFile : which === 'blocs' ? d.blocsFile : which === 'photos' ? d.photos : which === 'custom' ? d.custom : d.skills;
   return JSON.stringify(obj, null, 1) + '\n';
 }
 function prepared() {
   const d = clone(E.d);
   const today = new Date().toISOString().slice(0, 10);
   d.unitsFile.meta = { ...(d.unitsFile.meta || {}), version: today.replace(/-/g, '.'), updated: today };
+  if (JSON.stringify(E.orig.custom) !== JSON.stringify(E.d.custom)) d.custom.meta = { ...(d.custom.meta || {}), version: today.replace(/-/g, '.'), updated: today };
   const sorted = {};
   for (const k of Object.keys(d.skills).sort((a, b) => a.localeCompare(b))) sorted[k] = d.skills[k];
   d.skills = sorted;
@@ -436,7 +460,9 @@ function prepared() {
 }
 
 function renderPublish(body, ch) {
-  const v = validateData(E.d.unitsFile, E.d.blocsFile, E.d.skills, E.d.photos, E.customIds || []);
+  const v0 = validateData(E.d.unitsFile, E.d.blocsFile, E.d.skills, E.d.photos, E.d.custom.units.map((u) => u.id));
+  const vc = validateCustom(E.d.custom, E.d.unitsFile, E.d.blocsFile, E.d.skills);
+  const v = { errors: [...v0.errors, ...vc.errors], warnings: [...v0.warnings, ...vc.warnings] };
   const name = (id) => E.d.unitsFile.units.find((u) => u.id === id)?.name || E.orig.unitsFile.units.find((u) => u.id === id)?.name || id;
   const pname = (id) => E.d.blocsFile.platoons.find((p) => p.id === id)?.name || E.orig.blocsFile.platoons.find((p) => p.id === id)?.name || id;
   const gh = { ...guessRepo(), ...store.get(GH_KEY, {}) };
@@ -448,6 +474,7 @@ function renderPublish(body, ch) {
         ${li(t('Unités modifiées'), ch.uMod, name)}${li(t('Unités ajoutées'), ch.uAdd, name)}${li(t('Unités supprimées'), ch.uDel, name)}
         ${li(t('Pelotons modifiés'), ch.pMod, pname)}${li(t('Pelotons ajoutés'), ch.pAdd, pname)}${li(t('Pelotons supprimés'), ch.pDel, pname)}
         ${li(t('Compétences modifiées'), ch.sMod, (x) => x)}
+        ${ch.cMod ? `<li><b>${t('Créations CONFIDENTIAL modifiées')}</b> (custom.json)</li>` : ''}
         ${ch.phMod ? `<li><b>${t('Photos de la communauté modifiées')}</b>${E.pending.size ? t(' ({n} image(s) à envoyer)', { n: E.pending.size }) : ''}</li>` : ''}
       </ul>` : `<p class="hint" style="margin:0">${t('Aucune modification : le brouillon est identique à la base publiée.')}</p>`}
     </div>
@@ -479,7 +506,7 @@ function renderPublish(body, ch) {
       <ol class="pub-steps">
         <li>${t('Téléchargez les fichiers modifiés :')}
           <span style="display:inline-flex;gap:6px;flex-wrap:wrap">
-          ${['units', 'blocs', 'skills', 'photos'].map((f) => `<button class="btn sm ${ch.files[f] ? 'primary' : ''}" data-dl="${f}">${f}.json${ch.files[f] ? t(' (modifié)') : ''}</button>`).join('')}
+          ${['units', 'blocs', 'skills', 'photos', 'custom'].map((f) => `<button class="btn sm ${ch.files[f] ? 'primary' : ''}" data-dl="${f}">${f}.json${ch.files[f] ? t(' (modifié)') : ''}</button>`).join('')}
           </span></li>
         ${E.pending.size ? `<li>${t('Téléchargez aussi les nouvelles images :')} ${[...E.pending.keys()].map((k) => `<button class="btn sm" data-dlimg="${esc(k)}">${esc(k.split('/').pop())}</button>`).join(' ')} ${t('et déposez-les dans le dossier <code>photos/</code>.')}</li>` : ''}
         <li>${t('Sur github.com, ouvrez le dossier <code>data/</code> de votre dépôt, puis <b>Add file → Upload files</b>.')}</li>
@@ -523,7 +550,7 @@ async function publishGitHub(ch) {
   store.set(GH_KEY, $('gh-remember').checked ? { owner, repo, branch, token } : { owner, repo, branch });
   const btn = $('gh-go'); btn.disabled = true;
   const H = { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' };
-  const files = ['units', 'blocs', 'skills', 'photos'].filter((f) => ch.files[f]);
+  const files = ['units', 'blocs', 'skills', 'photos', 'custom'].filter((f) => ch.files[f]);
   // units.json change toujours (date de version) dès qu'autre chose change
   if (!files.includes('units')) files.unshift('units');
   const lines = [];
@@ -552,8 +579,10 @@ async function publishGitHub(ch) {
       say(t('Envoi de {p}…', { p: path }));
       await putFile(path, b64(fileText(f)), files.length > 1 ? `${msg} (${f}.json)` : msg);
     }
+    for (const k of E.pending.keys()) blobs.del('pending:' + k).catch(() => {});
     E.pending.clear();
-    E.orig = clone(prepared()); E.d = clone(E.orig); store.set(DRAFT_KEY, null);
+    const props = E.d.props;
+    E.orig = clone(prepared()); E.orig.props = []; E.d = clone(E.orig); E.d.props = props; store.set(DRAFT_KEY, null); saveDraft();
     say(t("Terminé. Le site sera à jour d'ici une à deux minutes (GitHub Pages)."));
     toast(t('Base publiée sur GitHub'));
     setTimeout(render, 2500);
@@ -585,7 +614,7 @@ function renderPhotos(body) {
       <label class="field"><span>${t('Image')}</span><input type="file" id="ph-file" accept="image/*"></label>
       <label class="check"><input type="checkbox" id="ph-ok"> ${t("L'auteur a confirmé qu'il s'agit de sa propre photo de figurine et accepte la licence")}</label>
       <div><button class="btn primary" id="ph-add">${t('Ajouter au brouillon')}</button></div>
-      ${E.pending.size ? `<div class="issue warn"><b>!</b><span>${t("{n} image(s) en attente d'envoi : publiez-les avant de fermer cette page, elles ne sont pas conservées au rechargement.", { n: E.pending.size })}</span></div>` : ''}
+      ${E.pending.size ? `<div class="issue info"><b>i</b><span>${t("{n} image(s) en attente d'envoi : elles sont gardées dans ce navigateur jusqu'à la publication.", { n: E.pending.size })}</span></div>` : ''}
     </div>
     <div class="ed-sec">
       <h2>${t('Photos publiées ({n})', { n: entries.length })}</h2>
@@ -609,6 +638,7 @@ function renderPhotos(body) {
     let path = `photos/${u.id}-${slug(author) || 'photo'}-${n}.jpg`;
     let k = 2; while (Object.values(P).flat().some((p) => p.file === path) || E.pending.has(path)) path = `photos/${u.id}-${slug(author) || 'photo'}-${n}-${k++}.jpg`;
     E.pending.set(path, blob);
+    await blobs.set('pending:' + path, blob).catch(() => {});
     (P[u.id] ||= []).push({ file: path, author, license: body.querySelector('#ph-license').value.trim() || 'CC BY 4.0', added: new Date().toISOString().slice(0, 10) });
     saveDraft(); render(); toast(t("Photo ajoutée au brouillon : publiez-la dans l'onglet Publier."));
   });
@@ -616,7 +646,7 @@ function renderPhotos(body) {
     if (!b.classList.contains('armed')) { b.classList.add('armed'); b.textContent = t('Confirmer'); return; }
     const [id, i] = b.dataset.rmph.split('|');
     const [removed] = P[id].splice(+i, 1);
-    E.pending.delete(removed.file);
+    E.pending.delete(removed.file); blobs.del('pending:' + removed.file).catch(() => {});
     if (!P[id].length) delete P[id];
     saveDraft(); render();
   }));
