@@ -10,7 +10,7 @@
    "bloc": "Allies",
    "id": "revanchard",
    "name": "Revanchard",
-   "author": null
+   "author": "L'Heure du Loir"
   }
  ],
  "units": [
@@ -64,7 +64,7 @@
      "vsAircraft": []
     }
    ],
-   "author": null,
+   "author": "L'Heure du Loir",
    "approved": "2026-09-29"
   }
  ],
