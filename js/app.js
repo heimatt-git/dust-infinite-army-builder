@@ -4,6 +4,7 @@ import { analyzeArmy, entryCost, blocName, factionName, CAPTURED_SURCHARGE, isJo
 import { esc, uid, store, toast, copyText, openModal, unitCardHTML, guessRepo, brandLogo, mountCredit, printCredit } from './ui.js';
 import { t, LANG, initLang, setLang } from './i18n.js';
 import { generatedCardSVG, cardPNG, cardFontsReady } from './cardgen.js';
+import { exportListPDF, pdfDialogHTML, bindPdfDialog } from './pdf.js';
 import { initImages, imagesAvailable, imageURL, hasImage, imageCount, saveImage, deleteImage, clearImages, matchFiles, storageEstimate, SIDES } from './images.js';
 
 const LS_KEY = 'dust1947.lists';
@@ -328,6 +329,7 @@ function renderBuilder() {
         <button class="btn sm primary" id="btn-share">${t('Partager')}</button>
         <button class="btn sm" id="btn-text">${t('Texte')}</button>
         <button class="btn sm" id="btn-print">${t('Imprimer')}</button>
+        <button class="btn sm" id="btn-pdf">PDF</button>
       </div>
     </section>
     <div class="mtabs">
@@ -624,6 +626,7 @@ function bindBuilder(A) {
     $('print-sheet').innerHTML = printHTML(A);
     window.print();
   });
+  $('btn-pdf').addEventListener('click', () => openPdf(A));
 }
 
 function bindCards(root) {
@@ -682,6 +685,36 @@ function openShare() {
     <div><button class="btn primary" id="copy-url">${t('Copier le lien')}</button></div></div>`, (root) => {
     root.querySelector('#copy-url').addEventListener('click', () => copyText(url, root.querySelector('#share-url')));
   });
+}
+
+// Export PDF : récapitulatif + cartes des unités (une carte par unité de la liste)
+function listOrder(L) {
+  return [...L.platoons.flatMap((pi) => L.entries.filter((e) => e.pl === pi.k)), ...L.entries.filter((e) => !e.pl)];
+}
+function openPdf(A) {
+  const D = S.data, L = S.list;
+  const cards = listOrder(L).map((e) => ({ e, u: D.unitsById.get(e.u) })).filter((x) => x.u)
+    .map(({ e, u }) => ({ u, D, cost: entryCost(e, D), photo: communityPhotos(u.id)[0]?.file || null }));
+  openModal(pdfDialogHTML(cards.length), (root) => bindPdfDialog(root, (includeCards, onProgress) => {
+    const row = (e) => {
+      const u = D.unitsById.get(e.u);
+      if (!u) return null;
+      const stats = [`${t('Arm')} ${u.armor ?? '-'}`, `${t('Santé')} ${u.health ?? '-'}`, `${t('Mv')} ${u.move ?? '-'}/${u.march ?? '-'}`];
+      const extra = [...(u.skills || []), ...(u.customSkills || []).map((c) => c.name)];
+      return { name: u.name + (e.cap ? ` (${t('capturé')})` : '') + (u.confidential ? ' · CONFIDENTIAL' : ''), cost: `${entryCost(e, D)} pts`, detail: [stats.join(' · '), extra.join(', ')].filter(Boolean).join(' · ') };
+    };
+    const sections = L.platoons.map((pi) => {
+      const P = D.platoonsById.get(pi.p);
+      return { title: P?.name || t('Peloton'), note: P?.advantage || '', rows: L.entries.filter((e) => e.pl === pi.k).map(row).filter(Boolean) };
+    });
+    const ind = L.entries.filter((e) => !e.pl).map(row).filter(Boolean);
+    if (ind.length) sections.push({ title: t('Unités indépendantes'), rows: ind });
+    const recap = {
+      title: L.name, confidential: !!L.confidential, sections,
+      lines: [`${blocName(L.bloc, D)} · ${A.counted}/${L.limit} pts · ${A.kindLabel}`, t('{n} unité(s)', { n: cards.length })],
+    };
+    return exportListPDF({ filename: `${fileSlug(L.name)}.pdf`, recap, cards, includeCards, onProgress });
+  }));
 }
 
 function printHTML(A) {

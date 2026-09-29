@@ -1,6 +1,6 @@
 // Carte d'unité générée (format mono-face), dessinée en SVG à partir des données de la base.
 // Aucune image officielle n'est utilisée. Le même SVG sert à l'affichage et à l'export PNG
-// (et servira à l'export PDF) : ce qu'on voit est exactement ce qu'on télécharge.
+// et à l'export PDF : ce qu'on voit est exactement ce qu'on télécharge.
 import { t } from './i18n.js';
 
 const W = 1000;                    // largeur logique de la carte (format carré, comme la carte mono-face)
@@ -94,13 +94,18 @@ export function generatedCardSVG(u, D, { cost, photo } = {}) {
     `<text x="${x}" y="${y}" text-anchor="${anchor}" font-family="${xe(font)}" font-weight="${w}" font-size="${s}" fill="${fill}" ${extra}>${content}</text>`;
 
   // ---- Géométrie (proche de la carte mono-face)
-  const PX = 42, PY = 60, PW = 466, PH = 404;          // photo
-  const SX = 524, SY = 60, SW = W - 24 - SX, SH = 490; // encadré des compétences
-  const TY = 574;                                       // tableau d'armes
+  // Carte carrée (80 × 80 mm à l'impression) : les lignes d'armes et le haut de la carte
+  // se partagent la hauteur disponible (peu d'armes → grande photo ; beaucoup → lignes serrées)
+  const nW = Math.max(1, ws.length);
+  const ROW = Math.max(44, Math.min(66, 204 / nW));
+  const T = Math.max(-160, 204 - nW * ROW);            // hauteur ajoutée (ou retirée) au haut de la carte
+  const PX = 42, PY = 60, PW = 466, PH = 404 + T;      // photo
+  const SX = 524, SY = 60, SW = W - 24 - SX, SH = 490 + T; // encadré des compétences
+  const TY = 574 + T;                                   // tableau d'armes
   const x0 = 22, x1 = W - 22;
   const NAME_W = 300, RANGE_W = 64, NAME_X = x0, RANGE_X = x0 + NAME_W, VAL_X = RANGE_X + RANGE_W;
   const VAL_W = (x1 - VAL_X) / 14;
-  const HEAD = 80, ROW = 56;
+  const HEAD = 80;
   const footY = TY + HEAD + Math.max(1, ws.length) * ROW + 26;
   const H = footY + 116;
 
@@ -141,7 +146,7 @@ export function generatedCardSVG(u, D, { cost, photo } = {}) {
   }
 
   // ---- Cartouche du nom (pas d'emblème de faction : aucun logo officiel sur la carte)
-  const CX = 60, CY = 432, CW = 440, CH = 122;
+  const CX = 60, CY = 432 + T, CW = 440, CH = 122;
   out.push(`<rect x="${CX}" y="${CY}" width="${CW}" height="${CH}" rx="24" fill="#fffdf7" stroke="${INK}" stroke-width="4"/>`);
   out.push(`<rect x="${CX + 7}" y="${CY + 7}" width="${CW - 14}" height="${CH - 14}" rx="17" fill="none" stroke="${INK}" stroke-width="1.5" opacity=".6"/>`);
   const nm = nameLines(u.name.toUpperCase(), CW - 40, u.subtitle ? 2 : 3);
@@ -363,15 +368,16 @@ async function embeddedFonts() {
 }
 const blobToDataURL = (blob) => new Promise((res, rej) => { const fr = new FileReader(); fr.onload = () => res(fr.result); fr.onerror = rej; fr.readAsDataURL(blob); });
 
-export async function cardPNG(svg, { scale = 2 } = {}) {
+// SVG → canvas (polices et images intégrées), base des exports PNG et PDF
+export async function svgCanvas(svg, { scale = 2, bg = null } = {}) {
   await document.fonts?.ready;
   const css = await embeddedFonts();
   let s = svg;
   if (css) s = s.replace(/<defs>/, `<defs><style>${css}</style>`);
-  // Les images (photo) doivent être intégrées pour pouvoir être dessinées
-  const hrefs = [...s.matchAll(/<image href="([^"]+)"/g)].map((m) => m[1]).filter((h) => !h.startsWith('data:'));
+  // Les images (photo, logo) doivent être intégrées pour pouvoir être dessinées
+  const hrefs = [...new Set([...s.matchAll(/<image href="([^"]+)"/g)].map((m) => m[1]).filter((h) => !h.startsWith('data:')))];
   for (const h of hrefs) {
-    try { s = s.split(`href="${h}"`).join(`href="${await blobToDataURL(await fetch(h.replace(/&amp;/g, '&')).then((r) => r.blob()))}"`); } catch { /* photo ignorée */ }
+    try { s = s.split(`href="${h}"`).join(`href="${await blobToDataURL(await fetch(h.replace(/&amp;/g, '&')).then((r) => r.blob()))}"`); } catch { /* image ignorée */ }
   }
   const [, w, h] = s.match(/viewBox="0 0 (\d+(?:\.\d+)?) (\d+(?:\.\d+)?)"/) || [];
   s = s.replace('<svg ', `<svg width="${w}" height="${h}" `);
@@ -382,7 +388,16 @@ export async function cardPNG(svg, { scale = 2 } = {}) {
     await new Promise((res, rej) => { img.onload = res; img.onerror = () => rej(new Error('svg')); img.src = url; });
     const c = document.createElement('canvas');
     c.width = Math.round(+w * scale); c.height = Math.round(+h * scale);
-    c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
-    return await new Promise((res) => c.toBlob(res, 'image/png'));
+    const g = c.getContext('2d');
+    if (bg) { g.fillStyle = bg; g.fillRect(0, 0, c.width, c.height); }
+    g.drawImage(img, 0, 0, c.width, c.height);
+    return c;
   } finally { URL.revokeObjectURL(url); }
 }
+export async function cardPNG(svg, { scale = 2 } = {}) {
+  const c = await svgCanvas(svg, { scale });
+  return new Promise((res) => c.toBlob(res, 'image/png'));
+}
+
+// Outils de mise en page réutilisés par l'export PDF
+export { measure, wrap, FONT, FONT_NAME, xe };

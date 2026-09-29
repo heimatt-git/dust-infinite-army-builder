@@ -3,6 +3,7 @@ import { loadData, typeLabel, unitCost, heroBaseName, canPilot } from './data.js
 import { t, LANG, initLang, setLang } from './i18n.js';
 import { analyzeArmy, blocName, factionName } from './rules.js';
 import { esc, uid, store, toast, copyText, openModal, unitCardHTML, brandLogo, mountCredit, printCredit } from './ui.js';
+import { exportListPDF, pdfDialogHTML, bindPdfDialog } from './pdf.js';
 
 const LS_KEY = 'dust1947.short.lists';
 const SLOTS = ['cmd', 'c1', 'c2', 'c3', 'c4', 'veh'];
@@ -278,6 +279,7 @@ function renderArmy() {
     <div class="sf-actions">
       <button class="btn primary" id="btn-share">${t('Partager')}</button>
       <button class="btn" id="btn-sheet">${t('Fiche de partie')}</button>
+      <button class="btn" id="btn-pdf">PDF</button>
       <button class="btn" id="btn-text">${t('Texte')}</button>
       ${feedbackLink('btn')}
     </div>
@@ -338,6 +340,7 @@ function bindArmy() {
       <div class="modal-b"><textarea class="export-box" id="exp" readonly>${esc(txt)}</textarea><div><button class="btn primary" id="cp">${t('Copier')}</button></div></div>`,
     (root) => root.querySelector('#cp').addEventListener('click', () => copyText(txt, root.querySelector('#exp'))));
   });
+  document.getElementById('btn-pdf').addEventListener('click', openPdf);
   document.getElementById('btn-sheet').addEventListener('click', () => {
     document.getElementById('print-sheet').innerHTML = sheetHTML();
     window.print();
@@ -463,6 +466,28 @@ function listText() {
   }
   if (!R.ok) out.push('', t('À compléter : ') + R.checks.filter((c) => !c.ok).map((c) => c.msg).join(' ; '));
   return out.join('\n');
+}
+
+// Export PDF : récapitulatif + cartes des unités choisies
+function openPdf() {
+  const D = S.data, F = S.F, L = S.list, R = analyze(L);
+  const filled = SLOTS.filter((s) => D.unitsById.get(L.slots[s]?.u));
+  const cards = filled.map((s) => { const u = D.unitsById.get(L.slots[s].u); return { u, D, cost: unitCost(u), photo: D.photos?.[u.id]?.[0]?.file || null }; });
+  openModal(pdfDialogHTML(cards.length), (root) => bindPdfDialog(root, (includeCards, onProgress) => {
+    const rows = filled.map((s) => {
+      const u = D.unitsById.get(L.slots[s].u);
+      const stats = [`${t('Arm')} ${u.armor ?? '-'}`, `${t('Santé')} ${u.health ?? '-'}`, `${t('Mv')} ${u.move ?? '-'}/${u.march ?? '-'}`];
+      return { name: `${slotSpec(s).short} — ${u.name}`, cost: `${costLabel(u, s, R)} ${t('PA')}`, detail: [stats.join(' · '), (u.skills || []).join(', ')].filter(Boolean).join(' · ') };
+    });
+    const recap = {
+      title: L.name,
+      lines: [`${F.game} · ${F.name} · ${blocName(L.bloc, D)}`, `${R.A.counted} / ${F.budget} ${t('PA')}${R.A.covered ? t(' ({s} dépensés, −{b} bonus HQ)', { s: R.A.total, b: R.A.covered }) : ''}`],
+      sections: [{ title: t('Unités'), rows }],
+      notes: [...F.settings, ...F.reminders], notesTitle: t('Rappels'),
+    };
+    const slugName = String(L.name || 'liste').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'liste';
+    return exportListPDF({ filename: `${slugName}.pdf`, recap, cards, includeCards, onProgress });
+  }));
 }
 
 function sheetHTML() {

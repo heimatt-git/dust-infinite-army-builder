@@ -640,4 +640,16 @@ const EN = {
   "Retiré du brouillon": "Removed from the draft",
   // Signature
   "Créé par L'Heure du Loir": "Created by L'Heure du Loir",
+  // Export PDF
+  "{n} unité(s)": "{n} unit(s)",
+  "Contient des créations de la communauté, non officielles": "Contains community creations, not official",
+  "suite": "continued",
+  "Exporter en PDF": "Export to PDF",
+  "Le PDF contient le récapitulatif de la liste. Vous pouvez y ajouter les cartes des unités, prêtes à imprimer et découper.": "The PDF contains the list summary. You can add the unit cards, ready to print and cut out.",
+  "Inclure les cartes des unités ({n})": "Include the unit cards ({n})",
+  "Cartes de 80 × 80 mm, 6 par page A4, avec traits de coupe. Imprimez à 100 % (taille réelle), sans « ajuster à la page ».": "80 × 80 mm cards, 6 per A4 page, with cut marks. Print at 100 % (actual size), without “fit to page”.",
+  "Télécharger le PDF": "Download the PDF",
+  "Création du PDF… {d}/{n}": "Creating the PDF… {d}/{n}",
+  "PDF téléchargé.": "PDF downloaded.",
+  "Impossible de créer le PDF dans ce navigateur.": "Could not create the PDF in this browser.",
 };
