@@ -106,7 +106,8 @@ Les unités, factions et blocs créés par la communauté (non officiels) sont r
 - **Shot Format** : 100 % officiel, les créations n'y apparaissent pas.
 - **Format de `custom.json`** : `blocs` (blocs inédits, avec couleur et factions), `factions` (factions custom rattachées à un bloc existant : `bloc`, `id`, `name`), `units` (même format que `units.json`, plus `author` et `approved`), `platoons` (à venir) et `skills` (règles inédites). Les identifiants d'unités commencent obligatoirement par `conf--`.
 - **Vérification** : `node scripts/validate.mjs` contrôle aussi `custom.json` (identifiants, bloc et faction de rattachement, valeurs d'attaque, créateur renseigné).
-- **À venir** : un atelier public pour proposer une création (fichier à poster dans le salon Discord `#confidential-units`), puis un onglet « Propositions » dans l'éditeur pour les approuver.
+- **Atelier** (`atelier.html`, lien « Atelier » dans l'en-tête du builder) : les joueurs créent leurs unités (à partir de zéro ou d'une unité existante), factions et blocs inédits, voient l'aperçu des cartes, joignent une photo de figurine (réduite automatiquement), acceptent la charte puis exportent un fichier `confidential-<projet>.json` à poster dans le salon Discord `#confidential-units`. Le projet reste dans leur navigateur ; « Importer un fichier » le recharge pour le corriger. Les identifiants sont figés au premier export.
+- **À venir** : un onglet « Propositions » dans l'éditeur pour importer ces fichiers, les relire et les approuver.
 
 ## Mes images de cartes (personnelles)
 

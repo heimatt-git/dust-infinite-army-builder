@@ -1,0 +1,31 @@
+/* Atelier CONFIDENTIAL */
+.at-head .eyebrow { display: flex; align-items: center; gap: 6px; }
+.at-tip { display: none; margin-top: 6px; }
+@media (max-width: 860px) { .at-tip { display: block; } }
+.at-charter { margin-bottom: 14px; }
+.at-charter summary { cursor: pointer; list-style: none; display: flex; align-items: center; gap: 8px; }
+.at-charter summary::-webkit-details-marker { display: none; }
+.at-charter summary::before { content: '▸'; color: var(--muted); }
+.at-charter[open] summary::before { content: '▾'; }
+.at-charter p, .at-charter ul { margin: 0; font-size: 14px; }
+.at-charter ul { padding-left: 20px; display: grid; gap: 4px; }
+.at-project { margin-bottom: 14px; }
+.at-proj-acts { display: flex; gap: 8px; flex-wrap: wrap; }
+.at-tpl { display: grid; gap: 6px; padding: 10px; border: 1px dashed var(--line); border-radius: 8px; }
+.at-unit { display: grid; gap: 18px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 1280px) { .at-unit { grid-template-columns: minmax(0, 1fr) minmax(0, 460px); align-items: start; } .at-prev-col { position: sticky; top: 70px; } }
+.at-prev-col { display: grid; gap: 6px; }
+.at-card.modal { width: auto; max-height: none; box-shadow: none; overflow: visible; }
+.at-card [data-close-btn] { display: none; }
+.at-photo { max-width: 100%; max-height: 320px; border-radius: 6px; border: 1px solid var(--line); object-fit: contain; justify-self: start; }
+.at-palette { display: flex; gap: 8px; flex-wrap: wrap; }
+.at-palette label { position: relative; cursor: pointer; padding: 4px; border-radius: 6px; border: 1px solid var(--line); }
+.at-palette input { position: absolute; opacity: 0; pointer-events: none; }
+.at-palette .swatch { width: 22px; height: 22px; display: block; border-radius: 4px; }
+.at-palette label:has(input:checked) { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.at-palette label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+.at-prev-col, .at-unit > div { min-width: 0; }
+.at-card.modal { max-width: 100%; min-width: 0; }
+.at-card .wtable-wrap { overflow-x: auto; }
+.at-card .modal-b, .at-card .modal-h { grid-template-columns: minmax(0, 1fr); }
+.at-card .modal-h { grid-template-columns: minmax(0, 1fr) auto; }
