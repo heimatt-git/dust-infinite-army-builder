@@ -575,7 +575,7 @@ const EN = {
   "Aucune compétence.": "No skill.",
   "Aucune arme.": "No weapon.",
   "Télécharger la carte (PNG)": "Download the card (PNG)",
-  "Carte générée à partir de la base. Le texte complet des compétences est détaillé plus bas.": "Card generated from the database. The full skill text is detailed below.",
+  "Carte générée à partir de la base : cliquez dessus pour l'agrandir. Le texte complet des compétences est détaillé plus bas.": "Card generated from the database: click it to enlarge. The full skill text is detailed below.",
   "Mes images de la carte officielle (option)": "My official card images (optional)",
   "({n} image(s))": "({n} image(s))",
   "Impossible de créer l'image dans ce navigateur.": "Could not create the image in this browser.",

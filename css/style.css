@@ -366,7 +366,9 @@ table.wt { border-collapse: collapse; width: 100%; font-size: 13px; }
 
 /* Carte générée (format mono-face, SVG) */
 .gcard-box { display: grid; gap: 8px; justify-items: center; }
-.gcard-wrap { width: 100%; max-width: 720px; }
+.gcard-wrap { width: 100%; max-width: 300px; padding: 0; border: 0; background: none; cursor: zoom-in; transition: max-width .2s ease; }
+.gcard-wrap.zoomed { max-width: 720px; cursor: zoom-out; }
+.gcard-wrap:focus-visible { outline: 2px solid var(--accent, #d69a2d); outline-offset: 4px; }
 .gcard-wrap svg { width: 100%; height: auto; display: block; filter: drop-shadow(0 2px 8px rgba(0,0,0,.25)); }
 .gcard-acts { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; justify-content: center; }
 .gcard-acts .hint { font-size: 12.5px; }

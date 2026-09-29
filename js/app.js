@@ -750,9 +750,9 @@ function communitySectionHTML(u) {
 // Carte générée (format mono-face) à partir des données, avec export PNG
 const cardSVG = (u, cost) => generatedCardSVG(u, S.data, { cost, photo: communityPhotos(u.id)[0]?.file || null });
 function generatedCardSection(u, cost) {
-  return `<div class="gcard-box"><div class="gcard-wrap">${cardSVG(u, cost)}</div>
+  return `<div class="gcard-box"><button type="button" class="gcard-wrap" data-zoomc title="${t('Agrandir')}" aria-label="${t('Agrandir')}">${cardSVG(u, cost)}</button>
     <div class="gcard-acts"><button type="button" class="btn sm" data-png>${t('Télécharger la carte (PNG)')}</button>
-    <span class="hint">${t('Carte générée à partir de la base. Le texte complet des compétences est détaillé plus bas.')}</span></div></div>`;
+    <span class="hint">${t('Carte générée à partir de la base : cliquez dessus pour l\'agrandir. Le texte complet des compétences est détaillé plus bas.')}</span></div></div>`;
 }
 const fileSlug = (s) => String(s || 'carte').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
