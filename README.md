@@ -2,7 +2,7 @@
 
 Army builder communautaire pour **DUST 194∞** (règles DUST 1947), qui remplace l'application Android DUST ENLIST (plus installable sur les versions récentes d'Android). Il fonctionne dans n'importe quel navigateur (ordinateur, téléphone, tablette), sans compte et sans installation.
 
-- **543 unités**, **54 pelotons**, **6 blocs** (Alliés, Axe, SSU, Mercenaires, Mythos, IJN) et leurs factions, repris de DUST ENLIST 1.50.
+- **542 unités**, **54 pelotons**, **6 blocs** (Alliés, Axe, SSU, Mercenaires, Mythos, IJN) et leurs factions, repris de DUST ENLIST 1.50.
 - Règles de construction du livre DUST 1947 (p.46-55) et de l'errata/FAQ de février 2019 vérifiées en direct :
   - limite de points et **bonus héros de 10 %** (armée de faction : 75 % des points dans une faction et aucune autre faction ; armée de bloc : 75 % d'unités du bloc et aucune faction ; armée mercenaire) ;
   - **mercenaires** dans une armée de bloc (et en remplacement d'une unité de combat de peloton, même type et armure au moins égale) ;
@@ -12,6 +12,7 @@ Army builder communautaire pour **DUST 194∞** (règles DUST 1947), qui remplac
   - **pelotons** (TO&E) : postes de commandement et de combat requis, soutiens, avantage actif ou non.
 - Carte complète de chaque unité : caractéristiques, table d'armes, compétences avec description.
 - Listes sauvegardées dans le navigateur, **lien de partage**, export texte, impression.
+- **Français / anglais** (builder complet et Shot Format) : la langue suit celle du navigateur ; le bouton EN/FR de l'en-tête permet de changer, et le choix vaut pour les deux pages. L'éditeur reste en français. Les textes d'interface se traduisent dans `js/i18n.js`.
 - **Éditeur de base** intégré pour corriger une unité et publier la correction en un clic sur GitHub.
 - **Mes images de cartes** : chaque joueur peut ajouter ses propres scans ou photos de cartes (recto/verso). Ils restent dans son navigateur, ne sont ni envoyés ni partagés.
 - **Photos de la communauté** : photos de figurines peintes proposées par les joueurs, affichées avec leur crédit.

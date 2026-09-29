@@ -1,5 +1,6 @@
 // Images de cartes personnelles : stockées uniquement dans le navigateur du joueur (IndexedDB).
 // Rien n'est envoyé ni publié : chacun ajoute ses propres scans ou photos pour son usage.
+import { t } from './i18n.js';
 
 const DB_NAME = 'dust1947-images';
 const STORE = 'img';
@@ -44,7 +45,7 @@ export function imageCount() { return urls.size; }
 // Réduit l'image (max 1400 px) et la convertit en JPEG pour économiser l'espace
 export async function shrink(file, maxSide = MAX_SIDE) {
   const bmp = await createImageBitmap(file).catch(() => null);
-  if (!bmp) throw new Error(`${file.name} n'est pas une image lisible.`);
+  if (!bmp) throw new Error(t("{f} n'est pas une image lisible.", { f: file.name }));
   const scale = Math.min(1, maxSide / Math.max(bmp.width, bmp.height));
   const w = Math.round(bmp.width * scale), h = Math.round(bmp.height * scale);
   const c = document.createElement('canvas');
@@ -55,7 +56,7 @@ export async function shrink(file, maxSide = MAX_SIDE) {
 }
 
 export async function saveImage(unitId, side, file, { silent = false } = {}) {
-  if (!db) throw new Error('Stockage d\'images indisponible dans ce navigateur.');
+  if (!db) throw new Error(t("Stockage d'images indisponible dans ce navigateur."));
   const blob = await shrink(file);
   const key = `${unitId}|${side}`;
   await done(tx('readwrite').put(blob, key));

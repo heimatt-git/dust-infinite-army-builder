@@ -149,10 +149,10 @@ export function analyzeArmy(list, data) {
   // --- Pelotons
   const platoonStatus = (list.platoons || []).map((pi) => analyzePlatoon(pi, list, rows, data));
   for (const ps of platoonStatus) {
-    if (!ps.platoon) { warnings.push('Un peloton de la liste n\'existe plus dans la base.'); continue; }
-    if (!ps.complete) warnings.push(`${ps.platoon.name} : ${ps.missing} poste(s) requis vide(s). L'avantage de peloton ne s'applique pas.`);
-    if (ps.mercCount > 1) errors.push(`${ps.platoon.name} : une seule unité de combat peut être remplacée par un mercenaire.`);
-    for (const m of ps.issues) warnings.push(`${ps.platoon.name} : ${m}`);
+    if (!ps.platoon) { warnings.push(t("Un peloton de la liste n'existe plus dans la base.")); continue; }
+    if (!ps.complete) warnings.push(t("{p} : {n} poste(s) requis vide(s). L'avantage de peloton ne s'applique pas.", { p: ps.platoon.name, n: ps.missing }));
+    if (ps.mercCount > 1) errors.push(t('{p} : une seule unité de combat peut être remplacée par un mercenaire.', { p: ps.platoon.name }));
+    for (const m of ps.issues) warnings.push(t('{p} : {m}', { p: ps.platoon.name, m }));
   }
 
   return {
@@ -178,7 +178,7 @@ export function analyzePlatoon(pi, list, rows, data) {
   if (platoon.onlyCombatUnitsAsSupport) {
     const combatIds = new Set(platoon.combat.flat(2));
     for (const r of mine.filter((r) => r.e.role === 'sup')) {
-      if (!combatIds.has(r.u.id)) res.issues.push(`${r.u.name} ne peut pas être en soutien (seules les unités de combat du peloton sont autorisées).`);
+      if (!combatIds.has(r.u.id)) res.issues.push(t('{n} ne peut pas être en soutien (seules les unités de combat du peloton sont autorisées).', { n: r.u.name }));
     }
   }
   return res;
