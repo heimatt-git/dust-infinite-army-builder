@@ -1,0 +1,73 @@
+{
+ "meta": {
+  "version": "2026.09.29",
+  "updated": "2026-09-29",
+  "note": "Créations de la communauté (CONFIDENTIAL), non officielles. Visibles uniquement dans les armées où la case CONFIDENTIAL est cochée."
+ },
+ "blocs": [],
+ "factions": [
+  {
+   "bloc": "Allies",
+   "id": "revanchard",
+   "name": "Revanchard",
+   "author": null
+  }
+ ],
+ "units": [
+  {
+   "id": "conf--allies--b1-ter",
+   "name": "B1-Ter",
+   "subtitle": "(Loir) - 28e Régiment de Dragons",
+   "bloc": "Allies",
+   "type": "vehicle",
+   "faction": "revanchard",
+   "cost": 21,
+   "health": 7,
+   "move": 2,
+   "march": 4,
+   "armor": 5,
+   "capturable": false,
+   "skills": [
+    "Large",
+    "Tracked"
+   ],
+   "customSkills": [],
+   "weapons": [
+    {
+     "name": "Howitzer",
+     "count": 1,
+     "range": 10,
+     "mount": "Front",
+     "specials": [],
+     "vsInfantry": ["B/1", "B/1", "B/1", "B/1"],
+     "vsVehicle": ["1/AK", "1/4", "1/3", "1/3", "1/2", "1/2", "1/1"],
+     "vsAircraft": []
+    },
+    {
+     "name": "Anti-tank gun",
+     "count": 1,
+     "range": 14,
+     "mount": "Turret",
+     "specials": [],
+     "vsInfantry": ["B/1", "B/1", "B/1", "B/1"],
+     "vsVehicle": ["1/AK", "1/AK", "1/5", "1/4", "1/4", "1/3", "1/3"],
+     "vsAircraft": []
+    },
+    {
+     "name": "Machinegun",
+     "count": 1,
+     "range": 6,
+     "mount": "Turret",
+     "specials": [],
+     "vsInfantry": ["7/1", "6/1", "4/1", "2/1"],
+     "vsVehicle": ["4/1", "2/1"],
+     "vsAircraft": []
+    }
+   ],
+   "author": null,
+   "approved": "2026-09-29"
+  }
+ ],
+ "platoons": [],
+ "skills": {}
+}

@@ -44,8 +44,9 @@ async function init() {
   topbar();
   const get = (f) => fetch('data/' + f, { cache: 'no-cache' }).then((r) => { if (!r.ok) throw new Error(f + ' ' + r.status); return r.json(); });
   try {
-    const [unitsFile, blocsFile, skills, photos] = await Promise.all([get('units.json'), get('blocs.json'), get('skills.json'), get('photos.json').catch(() => ({}))]);
+    const [unitsFile, blocsFile, skills, photos, custom] = await Promise.all([get('units.json'), get('blocs.json'), get('skills.json'), get('photos.json').catch(() => ({})), get('custom.json').catch(() => null)]);
     E.orig = { unitsFile, blocsFile, skills, photos };
+    E.customIds = (custom?.units || []).map((u) => u.id); // créations CONFIDENTIAL (gérées dans une prochaine étape)
   } catch (e) {
     root.innerHTML = `<div class="issue bad"><b>!</b><span>${esc(t('Impossible de charger la base : {e}', { e: e.message }))}</span></div>`;
     return;
@@ -435,7 +436,7 @@ function prepared() {
 }
 
 function renderPublish(body, ch) {
-  const v = validateData(E.d.unitsFile, E.d.blocsFile, E.d.skills, E.d.photos);
+  const v = validateData(E.d.unitsFile, E.d.blocsFile, E.d.skills, E.d.photos, E.customIds || []);
   const name = (id) => E.d.unitsFile.units.find((u) => u.id === id)?.name || E.orig.unitsFile.units.find((u) => u.id === id)?.name || id;
   const pname = (id) => E.d.blocsFile.platoons.find((p) => p.id === id)?.name || E.orig.blocsFile.platoons.find((p) => p.id === id)?.name || id;
   const gh = { ...guessRepo(), ...store.get(GH_KEY, {}) };

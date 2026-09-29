@@ -347,3 +347,19 @@ table.wt { border-collapse: collapse; width: 100%; font-size: 13px; }
 .ph-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
 .ph-grid figure { margin: 0; display: grid; gap: 4px; }
 .ph-grid figcaption { font-size: 12px; color: var(--muted); }
+
+/* CONFIDENTIAL : créations de la communauté, non officielles */
+.tag.conf, .chip.conf, .conf-stamp, .conf-mini {
+  font-family: var(--f-mono); text-transform: uppercase; letter-spacing: .12em; font-weight: 700;
+  color: var(--bad); border: 1.5px solid var(--bad); background: transparent;
+}
+.tag.conf { font-size: 10px; padding: 0 5px; border-radius: 2px; }
+.chip.conf { font-size: 11px; padding: 2px 8px; border-radius: 3px; transform: rotate(-2deg); }
+.conf-stamp { font-size: 11px; padding: 1px 6px; border-radius: 2px; display: inline-block; justify-self: start; transform: rotate(-2deg); margin-right: 4px; }
+.conf-mini { font-size: 9.5px; padding: 0 4px; border-width: 1px; border-radius: 2px; }
+.conf-credit { font-size: 12.5px; color: var(--muted); margin-top: 0; }
+.conf-check { display: flex; gap: 10px; align-items: flex-start; padding: 10px 12px; border: 1px dashed var(--line); border-radius: 8px; cursor: pointer; }
+.conf-check input { margin-top: 4px; accent-color: var(--bad); }
+.conf-check > span { display: grid; gap: 3px; font-size: 14px; }
+.conf-check small { color: var(--muted); font-size: 12.5px; }
+.conf-check:has(input:checked) { border-style: solid; border-color: var(--bad); }

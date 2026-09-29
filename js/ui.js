@@ -86,7 +86,8 @@ export function unitCardHTML(u, data, { cost, captured, extraChips = '', topHTML
       <div class="eyebrow">${esc(typeLabel(u.type))} · ${esc(blocLabel)}${fac ? ' · ' + esc(fac.name) : ''}</div>
       <h2>${esc(u.name)}</h2>
       ${u.subtitle ? `<p>${esc(u.subtitle)}</p>` : ''}
-      <div class="tags">${captured ? `<span class="tag cap">${t('Capturé (+2)')}</span>` : ''}${u.capturable && !captured ? `<span class="tag">${t('Capturable')}</span>` : ''}${extraChips}</div>
+      ${u.confidential && u.author ? `<p class="conf-credit">${esc(t('Création : {a}', { a: u.author }))}</p>` : ''}
+      <div class="tags">${u.confidential ? `<span class="tag conf" title="${esc(t('Création de la communauté, non officielle'))}">CONFIDENTIAL</span>` : ''}${captured ? `<span class="tag cap">${t('Capturé (+2)')}</span>` : ''}${u.capturable && !captured ? `<span class="tag">${t('Capturable')}</span>` : ''}${extraChips}</div>
     </div>
     <button class="btn icon" data-close-btn aria-label="${t('Fermer')}">✕</button>
   </div>

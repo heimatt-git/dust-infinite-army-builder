@@ -4,7 +4,8 @@ import { t } from './i18n.js';
 export const UNIT_TYPES = ['infantry', 'vehicle', 'aircraft', 'hero', 'token'];
 const ATTACK = /^([0-9]+|B|BB|DB)\/([0-9]+|AK)$/;
 
-export function validateData(unitsFile, blocsFile, skills, photos = {}) {
+// extraIds : identifiants d'unités CONFIDENTIAL (data/custom.json), acceptés pour les photos
+export function validateData(unitsFile, blocsFile, skills, photos = {}, extraIds = []) {
   const errors = [];
   const warnings = [];
   const E = (m) => errors.push(m);
@@ -74,7 +75,7 @@ export function validateData(unitsFile, blocsFile, skills, photos = {}) {
 
   if (photos && typeof photos === 'object') {
     for (const [id, arr] of Object.entries(photos)) {
-      if (!ids.has(id)) E(t('photos.json : unité inconnue « {id} ».', { id }));
+      if (!ids.has(id) && !extraIds.includes(id)) E(t('photos.json : unité inconnue « {id} ».', { id }));
       if (!Array.isArray(arr)) { E(t('photos.json / {id} : doit être une liste.', { id })); continue; }
       for (const ph of arr) {
         if (!ph.file || !/^photos\/[\w.-]+\.(jpe?g|png|webp)$/i.test(ph.file)) E(t("photos.json / {id} : chemin d'image invalide ({f}).", { id, f: ph.file }));
@@ -82,5 +83,52 @@ export function validateData(unitsFile, blocsFile, skills, photos = {}) {
       }
     }
   }
+  return { errors, warnings };
+}
+
+// Vérification de data/custom.json (créations CONFIDENTIAL) : mêmes règles que la base officielle,
+// plus des identifiants préfixés « conf-- » qui ne doivent jamais entrer en collision avec l'officiel.
+export function validateCustom(custom, unitsFile, blocsFile, skills) {
+  const errors = [];
+  const warnings = [];
+  if (!custom || typeof custom !== 'object') return { errors: [t('custom.json doit être un objet.')], warnings };
+  for (const k of ['blocs', 'factions', 'units', 'platoons']) {
+    if (custom[k] !== undefined && !Array.isArray(custom[k])) errors.push(t('custom.json : la clé « {k} » doit être une liste.', { k }));
+  }
+  if (errors.length) return { errors, warnings };
+  const offIds = new Set(unitsFile.units.map((u) => u.id));
+  const offBlocs = new Set(blocsFile.blocs.map((b) => b.id));
+  const offFactions = new Set(blocsFile.blocs.flatMap((b) => (b.factions || []).map((f) => f.id)));
+  const cBlocs = custom.blocs || [], cFactions = custom.factions || [], cUnits = custom.units || [];
+  for (const b of cBlocs) {
+    if (offBlocs.has(b.id)) errors.push(t('custom.json : le bloc « {id} » existe déjà dans la base officielle.', { id: b.id }));
+    if (!b.color) warnings.push(t('custom.json : le bloc « {id} » n\'a pas de couleur.', { id: b.id }));
+  }
+  const allBlocs = new Set([...offBlocs, ...cBlocs.map((b) => b.id)]);
+  for (const f of cFactions) {
+    if (!f.id || !f.name) errors.push(t('custom.json : une faction n\'a pas d\'id ou de nom.'));
+    if (!allBlocs.has(f.bloc)) errors.push(t('custom.json : la faction « {id} » est rattachée à un bloc inconnu ({b}).', { id: f.id, b: f.bloc }));
+    if (offFactions.has(f.id)) errors.push(t('custom.json : la faction « {id} » existe déjà dans la base officielle.', { id: f.id }));
+  }
+  for (const u of cUnits) {
+    if (!String(u.id || '').startsWith('conf--')) errors.push(t('custom.json : l\'id « {id} » doit commencer par « conf-- ».', { id: u.id }));
+    if (offIds.has(u.id)) errors.push(t('custom.json : l\'id « {id} » existe déjà dans la base officielle.', { id: u.id }));
+    if (!u.author) warnings.push(t('custom.json : créateur non renseigné pour « {n} ».', { n: u.name || u.id }));
+  }
+  // Mêmes contrôles que la base officielle, sur la base fusionnée ; on ne garde que les messages nouveaux
+  const merged = {
+    units: { units: [...unitsFile.units, ...cUnits] },
+    blocs: {
+      blocs: [...blocsFile.blocs.map((b) => ({ ...b, factions: [...(b.factions || []), ...cFactions.filter((f) => f.bloc === b.id)] })),
+        ...cBlocs.map((b) => ({ ...b, factions: [...(b.factions || []), ...cFactions.filter((f) => f.bloc === b.id)] }))],
+      platoons: [...blocsFile.platoons, ...(custom.platoons || [])],
+    },
+    skills: { ...(custom.skills || {}), ...skills },
+  };
+  const before = validateData(unitsFile, blocsFile, skills);
+  const after = validateData(merged.units, merged.blocs, merged.skills);
+  const seenE = new Set(before.errors), seenW = new Set(before.warnings);
+  errors.push(...after.errors.filter((m) => !seenE.has(m)));
+  warnings.push(...after.warnings.filter((m) => !seenW.has(m)));
   return { errors, warnings };
 }

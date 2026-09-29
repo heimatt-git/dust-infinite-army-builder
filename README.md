@@ -98,6 +98,16 @@ Vous pouvez aussi modifier `data/units.json` directement sur github.com (icône 
 
 À chaque modification de `data/`, GitHub lance `scripts/validate.mjs` (onglet **Actions**). Une croix rouge signale une erreur (id en double, unité inconnue dans un peloton, JSON mal formé…) avec le message détaillé. En local : `node scripts/validate.mjs`.
 
+## Créations de la communauté (CONFIDENTIAL)
+
+Les unités, factions et blocs créés par la communauté (non officiels) sont rangés à part, dans `data/custom.json`. La base officielle n'est jamais modifiée.
+
+- **Dans le builder complet** : la case **CONFIDENTIAL — Inclure les unités et factions custom** se coche à la création de l'armée. Seules ces armées voient les créations : blocs custom dans le choix du bloc, factions custom dans le filtre, unités custom mêlées aux unités officielles de leur faction (elles comptent pour le bonus de faction). Chaque création porte le tampon **CONFIDENTIAL** (carte, catalogue, export texte, impression), et le lien de partage transmet le réglage.
+- **Shot Format** : 100 % officiel, les créations n'y apparaissent pas.
+- **Format de `custom.json`** : `blocs` (blocs inédits, avec couleur et factions), `factions` (factions custom rattachées à un bloc existant : `bloc`, `id`, `name`), `units` (même format que `units.json`, plus `author` et `approved`), `platoons` (à venir) et `skills` (règles inédites). Les identifiants d'unités commencent obligatoirement par `conf--`.
+- **Vérification** : `node scripts/validate.mjs` contrôle aussi `custom.json` (identifiants, bloc et faction de rattachement, valeurs d'attaque, créateur renseigné).
+- **À venir** : un atelier public pour proposer une création (fichier à poster dans le salon Discord `#confidential-units`), puis un onglet « Propositions » dans l'éditeur pour les approuver.
+
 ## Mes images de cartes (personnelles)
 
 Sur l'accueil, **Importer des images** accepte plusieurs fichiers d'un coup. Nommez-les comme l'unité pour une association automatique : `Pounder.jpg`, `Bazooka Joe - verso.jpg` (suffixes reconnus pour le verso : `verso`, `back`, `dos`). Un écran permet de corriger avant d'enregistrer. Les images sont réduites (1 400 px max) et stockées dans le navigateur (IndexedDB) ; elles ne sont jamais publiées. Depuis une fiche d'unité, **Ma carte** permet aussi d'ajouter, remplacer ou retirer une image.

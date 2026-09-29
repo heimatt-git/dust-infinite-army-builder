@@ -456,4 +456,22 @@ const EN = {
   "photos.json / {id} : doit être une liste.": "photos.json / {id}: must be a list.",
   "photos.json / {id} : chemin d'image invalide ({f}).": "photos.json / {id}: invalid image path ({f}).",
   "photos.json / {id} : crédit (author) manquant.": "photos.json / {id}: missing credit (author).",
+
+  // CONFIDENTIAL (créations de la communauté)
+  "Inclure les unités et factions custom": "Include custom units and factions",
+  "Créations de la communauté, non officielles. Réglage fixé à la création de l'armée.": "Community creations, not official. Set when the army is created.",
+  "Cette armée peut contenir des créations de la communauté, non officielles.": "This army may contain community creations, not official.",
+  "CONFIDENTIAL : contient des créations de la communauté, non officielles": "CONFIDENTIAL: contains community creations, not official",
+  "Création : {a}": "Created by: {a}",
+  "Création de la communauté, non officielle": "Community creation, not official",
+  "custom.json doit être un objet.": "custom.json must be an object.",
+  "custom.json : la clé « {k} » doit être une liste.": "custom.json: the “{k}” key must be a list.",
+  "custom.json : le bloc « {id} » existe déjà dans la base officielle.": "custom.json: bloc “{id}” already exists in the official database.",
+  "custom.json : le bloc « {id} » n'a pas de couleur.": "custom.json: bloc “{id}” has no color.",
+  "custom.json : une faction n'a pas d'id ou de nom.": "custom.json: a faction has no id or name.",
+  "custom.json : la faction « {id} » est rattachée à un bloc inconnu ({b}).": "custom.json: faction “{id}” belongs to an unknown bloc ({b}).",
+  "custom.json : la faction « {id} » existe déjà dans la base officielle.": "custom.json: faction “{id}” already exists in the official database.",
+  "custom.json : l'id « {id} » doit commencer par « conf-- ».": "custom.json: id “{id}” must start with “conf--”.",
+  "custom.json : l'id « {id} » existe déjà dans la base officielle.": "custom.json: id “{id}” already exists in the official database.",
+  "custom.json : créateur non renseigné pour « {n} ».": "custom.json: no creator set for “{n}”.",
 };

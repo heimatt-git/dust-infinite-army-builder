@@ -41,6 +41,37 @@ export function indexData(unitsFile, blocsFile, skills, photos = {}) {
   };
 }
 
+// ---------------------------------------------------------------- CONFIDENTIAL
+// Créations de la communauté (data/custom.json), non officielles. Elles ne sont chargées que
+// dans le builder complet et n'apparaissent que dans les armées où la case CONFIDENTIAL est cochée.
+export const CONF_PREFIX = 'conf--';
+
+export async function loadCustom(base = 'data/') {
+  try {
+    const r = await fetch(base + 'custom.json', { cache: 'no-cache' });
+    return r.ok ? await r.json() : null;
+  } catch { return null; }
+}
+
+// Base officielle + créations : chaque élément custom porte « confidential: true »
+export function withCustom(off, custom) {
+  if (!custom) return off;
+  const cf = (x) => ({ ...x, confidential: true });
+  const extraFactions = custom.factions || [];
+  const blocs = off.blocs.map((b) => ({
+    ...b,
+    factions: [...b.factions, ...extraFactions.filter((f) => f.bloc === b.id).map(({ bloc, ...f }) => cf(f))],
+  }));
+  for (const b of custom.blocs || []) blocs.push(cf({ ...b, factions: (b.factions || []).map(cf) }));
+  const units = [...off.units, ...(custom.units || []).map(cf)];
+  const platoons = [...off.platoons, ...(custom.platoons || []).map(cf)];
+  // Les règles officielles gardent la priorité sur une règle custom du même nom
+  const skills = { ...(custom.skills || {}), ...off.skills };
+  const D = indexData({ meta: off.meta, units }, { blocs, platoons }, skills, off.photos);
+  D.customMeta = custom.meta || {};
+  return D;
+}
+
 export function unitCost(u) {
   return typeof u.cost === 'number' ? u.cost : Number(u.cost) || 0;
 }
