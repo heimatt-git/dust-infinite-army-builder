@@ -103,8 +103,8 @@
 .sf-pick:hover { border-color: var(--rust); }
 .sf-pick-row { position: relative; display: grid; }
 .sf-pick-row .sf-pick { padding-left: 46px; }
-.sf-info { position: absolute; left: 8px; top: 50%; transform: translateY(-50%); width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--line); background: var(--panel); color: var(--rust); font: italic 700 15px/1 Georgia, serif; cursor: pointer; display: grid; place-items: center; padding: 0; }
-.sf-info:hover, .sf-info:focus-visible { border-color: var(--rust); background: var(--rust); color: #fff; }
+.sf-unit-info { position: absolute; left: 8px; top: 50%; transform: translateY(-50%); width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--line); background: var(--panel); color: var(--rust); font: italic 700 15px/1 Georgia, serif; cursor: pointer; display: grid; place-items: center; padding: 0; }
+.sf-unit-info:hover, .sf-unit-info:focus-visible { border-color: var(--rust); background: var(--rust); color: #fff; }
 .sf-card-bar { display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; }
 .sf-pick span:first-child { display: grid; min-width: 0; }
 .sf-pick small { color: var(--muted); font-size: 12.5px; }
