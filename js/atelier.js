@@ -150,9 +150,10 @@ function render() {
       <label class="field"><span>${t('Nom du projet')}</span><input type="text" id="p-name" maxlength="80" value="${esc(P.project)}" placeholder="${t('Ex. Revanchards')}"></label>
     </div>
     <div class="at-proj-acts">
-      <label class="btn sm">${t('Importer un fichier')}<input type="file" id="p-import" accept=".json,application/json" hidden></label>
+      <label class="btn sm">${t('Reprendre un projet (.json)')}<input type="file" id="p-import" accept=".json,application/json" hidden></label>
       <button type="button" class="btn sm danger" id="p-reset" ${counts.units + counts.factions + counts.blocs ? '' : 'disabled'}>${t('Nouveau projet')}</button>
     </div>
+    <p class="hint" style="margin:0">${t('Recharge un fichier exporté depuis cet atelier (<code>confidential-….json</code>) pour continuer ou corriger votre création. Les images se joignent unité par unité, dans l\'onglet Unités.')}</p>
   </section>
   <div class="ed-tabs" role="tablist">
     ${[['units', t('Unités')], ['factions', t('Factions')], ['blocs', t('Blocs inédits')], ['send', t('Envoyer')]].map(([k, l]) =>
@@ -529,7 +530,7 @@ function renderSend(body) {
         <li>${t('Postez ce fichier dans le salon {c} du Discord, avec quelques mots sur votre création.', { c: `<b>${CHANNEL}</b>` })} <a class="btn sm" href="${DISCORD}" target="_blank" rel="noopener">${t('Ouvrir le Discord')}</a></li>
         <li>${t('Votre proposition est relue. Une fois validée, elle apparaît dans le builder pour toutes les armées CONFIDENTIAL, avec votre crédit.')}</li>
       </ol>
-      <p class="hint" style="margin:0">${t('Pour corriger votre création plus tard, gardez ce fichier : « Importer un fichier » le recharge dans l\'atelier.')}</p>
+      <p class="hint" style="margin:0">${t('Pour corriger votre création plus tard, gardez ce fichier : « Reprendre un projet » le recharge dans l\'atelier.')}</p>
     </div>
   </div>`;
   body.querySelector('#s-charter').addEventListener('change', (e) => { P.charter = e.target.checked; save(); render(); });
@@ -570,8 +571,8 @@ async function resetProject() {
 
 async function importFile(file) {
   let data;
-  try { data = JSON.parse(await file.text()); } catch { toast(t('Ce fichier n\'est pas un projet de l\'atelier.')); return; }
-  if (data?.format !== FORMAT || !Array.isArray(data.units)) { toast(t('Ce fichier n\'est pas un projet de l\'atelier.')); return; }
+  try { data = JSON.parse(await file.text()); } catch { toast(t('Ce fichier n\'est pas un projet de l\'atelier. Choisissez un fichier confidential-….json exporté depuis l\'onglet Envoyer.')); return; }
+  if (data?.format !== FORMAT || !Array.isArray(data.units)) { toast(t('Ce fichier n\'est pas un projet de l\'atelier. Choisissez un fichier confidential-….json exporté depuis l\'onglet Envoyer.')); return; }
   const P = A.P;
   const doImport = async () => {
     await resetProject();
@@ -594,7 +595,7 @@ async function importFile(file) {
     toast(t('Projet « {n} » importé.', { n: NP.project || file.name }));
   };
   if (!P.units.length && !P.factions.length && !P.blocs.length) return doImport();
-  openModal(`<div class="modal-h"><div><div class="eyebrow">${t('Importer un fichier')}</div><h2>${t('Remplacer le projet actuel ?')}</h2>
+  openModal(`<div class="modal-h"><div><div class="eyebrow">${t('Reprendre un projet (.json)')}</div><h2>${t('Remplacer le projet actuel ?')}</h2>
       <p>${t('Le projet en cours dans l\'atelier sera remplacé par le contenu du fichier.')}</p></div><button class="btn icon" data-close-btn aria-label="${t('Fermer')}">✕</button></div>
     <div class="modal-b"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn primary" id="imp-ok">${t('Remplacer')}</button><button class="btn" data-close-btn>${t('Annuler')}</button></div></div>`, (r, close) => {
     r.querySelector('#imp-ok').addEventListener('click', () => { close(); doImport(); });
