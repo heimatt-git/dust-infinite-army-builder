@@ -12,7 +12,7 @@ Army builder communautaire pour **DUST 194∞** (règles DUST 1947), qui remplac
   - **pelotons** (TO&E) : postes de commandement et de combat requis, soutiens, avantage actif ou non.
 - Carte complète de chaque unité : caractéristiques, table d'armes, compétences avec description.
 - Listes sauvegardées dans le navigateur, **lien de partage**, export texte, impression.
-- **Français / anglais** (builder complet et Shot Format) : la langue suit celle du navigateur ; le bouton EN/FR de l'en-tête permet de changer, et le choix vaut pour les deux pages. L'éditeur reste en français. Les textes d'interface se traduisent dans `js/i18n.js`.
+- **Français / anglais** (builder complet, Shot Format et éditeur) : la langue suit celle du navigateur ; le bouton EN/FR de l'en-tête permet de changer, et le choix vaut pour les trois pages. Les textes d'interface se traduisent dans `js/i18n.js`.
 - **Éditeur de base** intégré pour corriger une unité et publier la correction en un clic sur GitHub.
 - **Mes images de cartes** : chaque joueur peut ajouter ses propres scans ou photos de cartes (recto/verso). Ils restent dans son navigateur, ne sont ni envoyés ni partagés.
 - **Photos de la communauté** : photos de figurines peintes proposées par les joueurs, affichées avec leur crédit.
