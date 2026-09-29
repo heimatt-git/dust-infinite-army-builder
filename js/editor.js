@@ -2,7 +2,7 @@
 import { indexData, typeLabel } from './data.js';
 import { validateData, validateCustom, UNIT_TYPES } from './validate.js';
 import { initProposals, renderProposals, pendingCount, normCustom, blobs } from './proposals.js';
-import { esc, store, toast, openModal, unitCardHTML, guessRepo } from './ui.js';
+import { esc, store, toast, openModal, unitCardHTML, guessRepo, brandLogo, mountCredit } from './ui.js';
 import { shrink } from './images.js';
 import { t, LANG, initLang, setLang } from './i18n.js';
 
@@ -24,7 +24,7 @@ const bn = (b) => (LANG === 'en' && b.nameEn) || b.name;
 function topbar() {
   const h = document.querySelector('header.topbar');
   if (!h) return;
-  h.innerHTML = `<a class="brand" href="index.html"><b>DUST 194∞</b><small>${t('Éditeur')}</small></a>
+  h.innerHTML = `<a class="brand with-logo" href="index.html">${brandLogo()}<b>DUST 194∞</b><small>${t('Éditeur')}</small></a>
   <nav class="topnav">
     <a href="index.html">${t('Army builder')}</a>
     <a href="editeur-2k26hdl.html" class="on">${t('Éditeur de base')}</a>
@@ -40,6 +40,7 @@ const list = (v) => String(v || '').split(',').map((s) => s.trim()).filter(Boole
 const attacks = (v) => String(v || '').trim().split(/\s+/).filter(Boolean);
 
 initLang();
+mountCredit();
 init();
 async function init() {
   topbar();

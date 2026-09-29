@@ -2,7 +2,7 @@
 import { loadData, typeLabel, unitCost, heroBaseName, canPilot } from './data.js';
 import { t, LANG, initLang, setLang } from './i18n.js';
 import { analyzeArmy, blocName, factionName } from './rules.js';
-import { esc, uid, store, toast, copyText, openModal, unitCardHTML } from './ui.js';
+import { esc, uid, store, toast, copyText, openModal, unitCardHTML, brandLogo, mountCredit, printCredit } from './ui.js';
 
 const LS_KEY = 'dust1947.short.lists';
 const SLOTS = ['cmd', 'c1', 'c2', 'c3', 'c4', 'veh'];
@@ -12,6 +12,7 @@ const S = { data: null, F: null, lists: [], list: null };
 init();
 async function init() {
   initLang();
+  mountCredit();
   try {
     const [data, F] = await Promise.all([
       loadData(),
@@ -135,7 +136,7 @@ function analyze(L) {
 function header(back) {
   return `<header class="sf-top">
     ${back ? `<a class="sf-back" href="#/" aria-label="${t('Retour aux listes')}">←</a>` : ''}
-    <a class="sf-brand" href="#/"><b>${esc(S.F.game)}</b><span>${esc(S.F.name)}</span></a>
+    <a class="sf-brand with-logo" href="#/">${brandLogo()}<b>${esc(S.F.game)}</b><span>${esc(S.F.name)}</span></a>
     <nav>${S.F.showFullBuilderLink ? `<a href="index.html">${t('Builder complet')}</a>` : ''}${feedbackLink('sf-fb-top')}<button id="lang-btn" type="button" lang="${LANG === 'fr' ? 'en' : 'fr'}" title="${LANG === 'fr' ? 'English version' : 'Version française'}">${LANG === 'fr' ? 'EN' : 'FR'}</button><button id="theme-btn" type="button">${t('Thème')}</button></nav>
   </header>`;
 }
@@ -476,5 +477,6 @@ function sheetHTML() {
   };
   return `<h1>${esc(L.name)}</h1><p>${esc(F.game)} · ${esc(F.name)} · ${esc(blocName(L.bloc, D))} · ${R.A.counted} / ${F.budget} ${t('PA')}${R.A.covered ? t(' ({s} dépensés, −{b} bonus HQ)', { s: R.A.total, b: R.A.covered }) : ''}</p>
     ${SLOTS.map(card).join('')}
-    <h3>${t('Rappels')}</h3><ul>${[...F.settings, ...F.reminders].map((s) => `<li>${esc(s)}</li>`).join('')}</ul>`;
+    <h3>${t('Rappels')}</h3><ul>${[...F.settings, ...F.reminders].map((s) => `<li>${esc(s)}</li>`).join('')}</ul>
+    ${printCredit()}`;
 }

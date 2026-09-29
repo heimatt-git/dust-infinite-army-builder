@@ -2,6 +2,20 @@
 import { typeLabel } from './data.js';
 import { t, LANG } from './i18n.js';
 
+// Signature de l'auteur du site (logo + crédit)
+export const LOGO = 'img/logo-loir.png';
+export const brandLogo = () => `<img class="brand-logo" src="${LOGO}" alt="" width="34" height="34">`;
+export const creditLine = () => t("Créé par L'Heure du Loir");
+export function mountCredit() {
+  if (document.querySelector('.site-credit')) return;
+  const f = document.createElement('footer');
+  f.className = 'site-credit';
+  f.innerHTML = `<img src="${LOGO}" alt="" width="40" height="40"><span>${esc(creditLine())}</span>`;
+  const anchor = document.getElementById('modal-root');
+  if (anchor) anchor.before(f); else document.body.append(f);
+}
+export const printCredit = () => `<div class="print-credit"><img src="${LOGO}" alt="" width="30" height="30"><span>DUST 194∞ · ${esc(creditLine())}</span></div>`;
+
 export const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
 export const uid = () => Math.random().toString(36).slice(2, 8);

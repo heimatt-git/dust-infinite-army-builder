@@ -1,7 +1,7 @@
 // DUST 194∞ Builder — application principale (français / anglais)
 import { loadData, loadCustom, withCustom, typeLabel, MERC, unitCost, canPilot } from './data.js';
 import { analyzeArmy, entryCost, blocName, factionName, CAPTURED_SURCHARGE, isJoiner, isCommissar } from './rules.js';
-import { esc, uid, store, toast, copyText, openModal, unitCardHTML, guessRepo } from './ui.js';
+import { esc, uid, store, toast, copyText, openModal, unitCardHTML, guessRepo, brandLogo, mountCredit, printCredit } from './ui.js';
 import { t, LANG, initLang, setLang } from './i18n.js';
 import { generatedCardSVG, cardPNG, cardFontsReady } from './cardgen.js';
 import { initImages, imagesAvailable, imageURL, hasImage, imageCount, saveImage, deleteImage, clearImages, matchFiles, storageEstimate, SIDES } from './images.js';
@@ -24,6 +24,7 @@ const app = document.getElementById('app');
 
 // ---------------------------------------------------------------- Démarrage
 initLang();
+mountCredit();
 init();
 async function init() {
   try {
@@ -75,7 +76,7 @@ function go(hash) {
 
 function topbar(active) {
   return `<header class="topbar">
-    <a class="brand" href="#/"><b>DUST 194∞</b><small>Builder</small></a>
+    <a class="brand with-logo" href="#/">${brandLogo()}<b>DUST 194∞</b><small>Builder</small></a>
     <nav class="topnav">
       <a href="#/" class="${active === 'home' ? 'on' : ''}">${t('Mes listes')}</a>
       <a href="shot.html">Shot Format</a>
@@ -697,7 +698,8 @@ function printHTML(A) {
   };
   return `<h1>${esc(L.name)}</h1>${L.confidential ? `<p><b>${esc(t('CONFIDENTIAL : contient des créations de la communauté, non officielles'))}</b></p>` : ''}<p>${esc(blocName(L.bloc, D))} · ${A.counted}/${L.limit} pts · ${esc(A.kindLabel)}</p>
     ${L.platoons.map((pi) => { const P = D.platoonsById.get(pi.p); return `<h3>${esc(P?.name || '')}</h3><p><i>${esc(P?.advantage || '')}</i></p>${L.entries.filter((e) => e.pl === pi.k).map(card).join('')}`; }).join('')}
-    ${L.entries.some((e) => !e.pl) ? `<h3>${t('Unités indépendantes')}</h3>${L.entries.filter((e) => !e.pl).map(card).join('')}` : ''}`;
+    ${L.entries.some((e) => !e.pl) ? `<h3>${t('Unités indépendantes')}</h3>${L.entries.filter((e) => !e.pl).map(card).join('')}` : ''}
+    ${printCredit()}`;
 }
 
 // ---------------------------------------------------------------- Images de cartes (locales)

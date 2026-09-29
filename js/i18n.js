@@ -638,4 +638,6 @@ const EN = {
   "Impossible : utilisé par {list}. Retirez-les d'abord.": "Not possible: used by {list}. Remove those first.",
   "Confirmer le retrait": "Confirm removal",
   "Retiré du brouillon": "Removed from the draft",
+  // Signature
+  "Créé par L'Heure du Loir": "Created by L'Heure du Loir",
 };

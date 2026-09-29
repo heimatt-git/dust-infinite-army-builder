@@ -3,7 +3,7 @@
 // Rien n'est envoyé automatiquement : le projet reste dans le navigateur jusqu'à l'export.
 import { loadData, loadCustom, withCustom, typeLabel, CONF_PREFIX } from './data.js';
 import { validateCustom, UNIT_TYPES } from './validate.js';
-import { esc, uid, store, toast, openModal, unitCardHTML } from './ui.js';
+import { esc, uid, store, toast, openModal, unitCardHTML, brandLogo, mountCredit } from './ui.js';
 import { shrink } from './images.js';
 import { t, LANG, initLang, setLang } from './i18n.js';
 
@@ -55,6 +55,7 @@ const dataURLToBlob = (d) => fetch(d).then((r) => r.blob());
 
 // ---------------------------------------------------------------- Démarrage
 initLang();
+mountCredit();
 topbar();
 init();
 async function init() {
@@ -77,7 +78,7 @@ const save = () => { if (!store.set(KEY, A.P)) toast(t('Projet non sauvegardé (
 
 function topbar() {
   const h = document.getElementById('topbar');
-  h.innerHTML = `<a class="brand" href="index.html"><b>DUST 194∞</b><small>${t('Atelier')}</small></a>
+  h.innerHTML = `<a class="brand with-logo" href="index.html">${brandLogo()}<b>DUST 194∞</b><small>${t('Atelier')}</small></a>
   <nav class="topnav">
     <a href="index.html">${t('Builder')}</a>
     <a href="atelier.html" class="on">${t('Atelier')}</a>

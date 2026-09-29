@@ -64,6 +64,13 @@ a { color: var(--accent-ink); }
 .brand { display: grid; line-height: 1.05; text-decoration: none; color: inherit; }
 .brand b { font-family: var(--f-display); font-weight: 400; font-size: 20px; letter-spacing: .05em; }
 .brand small { font-size: 11px; text-transform: uppercase; letter-spacing: .16em; font-weight: 700; color: var(--accent); }
+/* Logo de l'auteur du site, à gauche du nom */
+.with-logo { grid-template-columns: auto auto; column-gap: 9px; align-items: center; justify-content: start; }
+.with-logo > .brand-logo { grid-row: 1 / span 2; width: 34px; height: 34px; }
+.with-logo > b, .with-logo > small, .with-logo > span { grid-column: 2; }
+.site-credit { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 26px 16px calc(26px + env(safe-area-inset-bottom, 0px)); color: var(--muted); font-size: 13px; font-weight: 600; letter-spacing: .02em; }
+.site-credit img { width: 40px; height: 40px; }
+.print-credit { display: none; }
 .topnav { display: flex; gap: 4px; margin-left: auto; flex-wrap: wrap; }
 .topnav a, .topnav button {
   color: var(--bar-ink); text-decoration: none; background: transparent; border: 1px solid transparent;
@@ -302,7 +309,9 @@ table.wt { border-collapse: collapse; width: 100%; font-size: 13px; }
 .print-sheet { display: none; }
 @media print {
   body { background: #fff; color: #000; font-size: 11pt; }
-  .topbar, .summary, .builder, .army-head, .mtabs, .toast, #modal-root, .foot { display: none !important; }
+  .topbar, .summary, .builder, .army-head, .mtabs, .toast, #modal-root, .foot, .site-credit { display: none !important; }
+  .print-sheet .print-credit { display: flex !important; align-items: center; gap: 8px; margin-top: 14px; padding-top: 6px; border-top: 1px solid #bbb; font-size: 9pt; color: #444; }
+  .print-sheet .print-credit img { width: 30px; height: 30px; }
   .print-sheet { display: block !important; }
   .print-sheet h1 { font-family: var(--f-display); font-weight: 400; font-size: 22pt; }
   .print-sheet .pu { break-inside: avoid; border: 1px solid #999; border-radius: 4px; padding: 6px 8px; margin: 6px 0; }
