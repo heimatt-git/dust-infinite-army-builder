@@ -29,6 +29,7 @@ async function init() {
     return;
   }
   S.lists = store.get(LS_KEY, []);
+  S.lists.forEach(dropUnknown);
   { const t = store.get('dust1947.theme', null); if (t) document.documentElement.dataset.theme = t; }
   window.addEventListener('hashchange', route);
   route();
@@ -343,6 +344,14 @@ function bindArmy() {
 }
 
 // Garde les escouades facultatives groupées (c2, c3, c4) sans trou
+// Retire les unités qui n'existent plus dans la base (unité supprimée ou corrigée), pour ne pas bloquer l'affichage
+function dropUnknown(L) {
+  if (!L?.slots) return;
+  let changed = false;
+  for (const s of Object.keys(L.slots)) if (L.slots[s]?.u && !S.data.unitsById.has(L.slots[s].u)) { delete L.slots[s]; changed = true; }
+  if (L.slots.cmd?.join && !L.slots[L.slots.cmd.join]) { delete L.slots.cmd.join; changed = true; }
+  if (changed) { const keep = S.list; S.list = L; compactOptional(); S.list = keep; }
+}
 function compactOptional() {
   const L = S.list;
   const opt = ['c2', 'c3', 'c4'];
@@ -428,6 +437,7 @@ function importCode(code) {
     const slots = {};
     for (const [s, v] of Object.entries(c.s || {})) slots[s] = s === 'cmd' ? { u: v[0], ...(v[1] ? { join: v[1] } : {}) } : { u: v };
     S.list = { id: uid() + uid(), name: c.n, bloc: c.b, slots, created: Date.now() };
+    dropUnknown(S.list);
     save(); history.replaceState(null, '', '#/' + S.list.id); toast(t('« {n} » importée', { n: c.n })); renderArmy();
   } catch {
     toast(t('Lien de liste invalide.')); history.replaceState(null, '', '#/'); renderHome();
