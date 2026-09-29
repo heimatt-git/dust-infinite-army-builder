@@ -263,7 +263,7 @@ textarea { font-family: var(--f-mono); font-size: 13px; }
 .modal-h { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 12px; padding: 16px 18px 12px; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: var(--panel); }
 .modal-h h2 { font-family: var(--f-display); font-weight: 400; font-size: 26px; letter-spacing: .03em; line-height: 1.1; }
 .modal-h p { margin: 2px 0 6px; color: var(--muted); font-size: 14px; }
-.modal-b { padding: 14px 18px 20px; display: grid; gap: 16px; }
+.modal-b { padding: 14px 18px 20px; display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); }
 .statline { display: flex; gap: 0; border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; width: fit-content; max-width: 100%; flex-wrap: wrap; }
 .stat { padding: 6px 14px; display: grid; text-align: center; border-right: 1px solid var(--line); }
 .stat:last-child { border-right: 0; }
@@ -363,3 +363,10 @@ table.wt { border-collapse: collapse; width: 100%; font-size: 13px; }
 .conf-check > span { display: grid; gap: 3px; font-size: 14px; }
 .conf-check small { color: var(--muted); font-size: 12.5px; }
 .conf-check:has(input:checked) { border-style: solid; border-color: var(--bad); }
+
+/* Carte générée (format mono-face, SVG) */
+.gcard-box { display: grid; gap: 8px; justify-items: center; }
+.gcard-wrap { width: 100%; max-width: 720px; }
+.gcard-wrap svg { width: 100%; height: auto; display: block; filter: drop-shadow(0 2px 8px rgba(0,0,0,.25)); }
+.gcard-acts { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; justify-content: center; }
+.gcard-acts .hint { font-size: 12.5px; }

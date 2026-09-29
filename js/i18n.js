@@ -568,4 +568,15 @@ const EN = {
   "Recharge un fichier exporté depuis cet atelier (<code>confidential-….json</code>) pour continuer ou corriger votre création. Les images se joignent unité par unité, dans l'onglet Unités.": "Reloads a file exported from this workshop (<code>confidential-….json</code>) to continue or fix your creation. Images are attached unit by unit, in the Units tab.",
   "Pour corriger votre création plus tard, gardez ce fichier : « Reprendre un projet » le recharge dans l'atelier.": "To fix your creation later, keep this file: “Resume a project” reloads it into the workshop.",
   "Ce fichier n'est pas un projet de l'atelier. Choisissez un fichier confidential-….json exporté depuis l'onglet Envoyer.": "This file is not a workshop project. Choose a confidential-….json file exported from the Submit tab.",
+
+  // Carte générée
+  "PA": "AP",
+  "PORTÉE": "RANGE",
+  "Aucune compétence.": "No skill.",
+  "Aucune arme.": "No weapon.",
+  "Télécharger la carte (PNG)": "Download the card (PNG)",
+  "Carte générée à partir de la base. Le texte complet des compétences est détaillé plus bas.": "Card generated from the database. The full skill text is detailed below.",
+  "Mes images de la carte officielle (option)": "My official card images (optional)",
+  "({n} image(s))": "({n} image(s))",
+  "Impossible de créer l'image dans ce navigateur.": "Could not create the image in this browser.",
 };

@@ -3,6 +3,7 @@ import { loadData, loadCustom, withCustom, typeLabel, MERC, unitCost, canPilot }
 import { analyzeArmy, entryCost, blocName, factionName, CAPTURED_SURCHARGE, isJoiner, isCommissar } from './rules.js';
 import { esc, uid, store, toast, copyText, openModal, unitCardHTML, guessRepo } from './ui.js';
 import { t, LANG, initLang, setLang } from './i18n.js';
+import { generatedCardSVG, cardPNG, cardFontsReady } from './cardgen.js';
 import { initImages, imagesAvailable, imageURL, hasImage, imageCount, saveImage, deleteImage, clearImages, matchFiles, storageEstimate, SIDES } from './images.js';
 
 const LS_KEY = 'dust1947.lists';
@@ -724,8 +725,8 @@ function imagesSectionHTML(u) {
       </div>
     </div>`;
   };
-  return `<details class="img-box" ${hasImage(u.id) ? 'open' : ''}>
-    <summary>${t('Ma carte')} ${hasImage(u.id) ? '' : `<span class="hint">${t('(ajouter une photo ou un scan)')}</span>`}</summary>
+  return `<details class="img-box">
+    <summary>${t('Mes images de la carte officielle (option)')} ${hasImage(u.id) ? `<span class="hint">${t('({n} image(s))', { n: ['front', 'back'].filter((sd) => imageURL(u.id, sd)).length })}</span>` : ''}</summary>
     <div class="img-grid">${slot('front')}${slot('back')}</div>
     <p class="hint" style="margin:0">${t("Image gardée uniquement dans ce navigateur, pour votre usage personnel. Elle n'est ni envoyée ni partagée.")}</p>
   </details>`;
@@ -746,8 +747,29 @@ function communitySectionHTML(u) {
   </div>`;
 }
 
+// Carte générée (format mono-face) à partir des données, avec export PNG
+const cardSVG = (u, cost) => generatedCardSVG(u, S.data, { cost, photo: communityPhotos(u.id)[0]?.file || null });
+function generatedCardSection(u, cost) {
+  return `<div class="gcard-box"><div class="gcard-wrap">${cardSVG(u, cost)}</div>
+    <div class="gcard-acts"><button type="button" class="btn sm" data-png>${t('Télécharger la carte (PNG)')}</button>
+    <span class="hint">${t('Carte générée à partir de la base. Le texte complet des compétences est détaillé plus bas.')}</span></div></div>`;
+}
+const fileSlug = (s) => String(s || 'carte').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
 function openUnitCard(u, cap) {
-  openModal(unitCardHTML(u, S.data, { cost: unitCost(u) + (cap ? CAPTURED_SURCHARGE : 0), captured: cap, topHTML: communitySectionHTML(u) + imagesSectionHTML(u) }), (root, close) => {
+  const cost = unitCost(u) + (cap ? CAPTURED_SURCHARGE : 0);
+  openModal(unitCardHTML(u, S.data, { cost, captured: cap, topHTML: generatedCardSection(u, cost) + communitySectionHTML(u) + imagesSectionHTML(u) }), (root, close) => {
+    // Redessine la carte une fois ses polices chargées (les textes sont mesurés avec la bonne police)
+    cardFontsReady().then(() => { const w = root.querySelector('.gcard-wrap'); if (w?.isConnected) w.innerHTML = cardSVG(u, cost); });
+    root.querySelector('[data-png]')?.addEventListener('click', async (ev) => {
+      const b = ev.currentTarget; b.disabled = true;
+      try {
+        const blob = await cardPNG(root.querySelector('.gcard-wrap svg').outerHTML);
+        const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `${fileSlug(u.name)}.png`;
+        document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+      } catch { toast(t('Impossible de créer l\'image dans ce navigateur.')); }
+      b.disabled = false;
+    });
     root.querySelectorAll('[data-zoomc]').forEach((b) => b.addEventListener('click', () => b.classList.toggle('zoomed')));
     root.querySelectorAll('[data-up]').forEach((inp) => inp.addEventListener('change', async () => {
       const f = inp.files[0];
