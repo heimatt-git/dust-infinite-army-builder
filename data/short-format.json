@@ -33,7 +33,7 @@
  "allowMercenaryArmy": true,
  "allowMercenaries": false,
  "allowCaptured": false,
- "showFullBuilderLink": false,
+ "showFullBuilderLink": true,
  "feedback": {
   "label": "Donner mon avis",
   "url": "https://discord.gg/h3xfZKeNvU",
