@@ -652,4 +652,8 @@ const EN = {
   "Création du PDF… {d}/{n}": "Creating the PDF… {d}/{n}",
   "PDF téléchargé.": "PDF downloaded.",
   "Impossible de créer le PDF dans ce navigateur.": "Could not create the PDF in this browser.",
+  "Format des cartes": "Card format",
+  "80 × 80 mm (carrée), 6 par page": "80 × 80 mm (square), 6 per page",
+  "120 × 70 mm (format tarot, texte complet des compétences), 4 par page": "120 × 70 mm (tarot size, full skill text), 4 per page",
+  "Pages A4 avec traits de coupe. Imprimez à 100 % (taille réelle), sans « ajuster à la page ».": "A4 pages with cut marks. Print at 100 % (actual size), without “fit to page”.",
 };

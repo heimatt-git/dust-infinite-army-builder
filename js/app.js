@@ -695,7 +695,7 @@ function openPdf(A) {
   const D = S.data, L = S.list;
   const cards = listOrder(L).map((e) => ({ e, u: D.unitsById.get(e.u) })).filter((x) => x.u)
     .map(({ e, u }) => ({ u, D, cost: entryCost(e, D), photo: communityPhotos(u.id)[0]?.file || null }));
-  openModal(pdfDialogHTML(cards.length), (root) => bindPdfDialog(root, (includeCards, onProgress) => {
+  openModal(pdfDialogHTML(cards.length), (root) => bindPdfDialog(root, ({ includeCards, format }, onProgress) => {
     const row = (e) => {
       const u = D.unitsById.get(e.u);
       if (!u) return null;
@@ -713,7 +713,7 @@ function openPdf(A) {
       title: L.name, confidential: !!L.confidential, sections,
       lines: [`${blocName(L.bloc, D)} · ${A.counted}/${L.limit} pts · ${A.kindLabel}`, t('{n} unité(s)', { n: cards.length })],
     };
-    return exportListPDF({ filename: `${fileSlug(L.name)}.pdf`, recap, cards, includeCards, onProgress });
+    return exportListPDF({ filename: `${fileSlug(L.name)}.pdf`, recap, cards, includeCards, format, onProgress });
   }));
 }
 

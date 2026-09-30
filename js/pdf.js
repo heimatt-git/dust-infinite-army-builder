@@ -3,12 +3,18 @@
 // (mêmes polices que le site), convertie en image JPEG, puis assemblée dans un fichier PDF minimal.
 import { generatedCardSVG, svgCanvas, cardFontsReady, measure, wrap, FONT, FONT_NAME, xe } from './cardgen.js';
 import { t } from './i18n.js';
-import { LOGO, creditLine } from './ui.js';
+import { LOGO, creditLine, store } from './ui.js';
+
+const FORMAT_KEY = 'dust1947.pdfFormat';
 
 const MM = 72 / 25.4;                     // points PDF par millimètre
 const A4 = { w: 210, h: 297 };
-const CARD = 80;                          // côté d'une carte (mm)
-const GRID = { cols: 2, rows: 3, x: (A4.w - 2 * CARD) / 2, y: (A4.h - 3 * CARD) / 2 };
+// Formats de cartes : carrée 80 × 80 (6 par page) ; large 120 × 70, placée tournée d'un quart de tour (2 × 2 par page)
+const LAYOUTS = {
+  square: { cw: 80, ch: 80, cols: 2, rows: 3, rotate: false },
+  wide: { cw: 70, ch: 120, cols: 2, rows: 2, rotate: true },
+};
+const gridOf = (L) => ({ ...L, x: (A4.w - L.cols * L.cw) / 2, y: (A4.h - L.rows * L.ch) / 2 });
 const INK = '#231f1a', MUTED = '#6b6257', RED = '#b3261e', LINE = '#cfc5b1';
 
 // ---------------------------------------------------------------- Fichier PDF minimal (images JPEG + traits)
@@ -132,9 +138,19 @@ function recapSVGs(recap) {
   });
 }
 
+// Quart de tour (sens horaire) d'une carte large pour la placer debout sur la page
+function rotated(src) {
+  const c = document.createElement('canvas');
+  c.width = src.height; c.height = src.width;
+  const g = c.getContext('2d');
+  g.translate(c.width, 0); g.rotate(Math.PI / 2); g.drawImage(src, 0, 0);
+  return c;
+}
+
 // ---------------------------------------------------------------- Export
 // cards = [{ u, D, cost, photo }]
-export async function exportListPDF({ filename, recap, cards = [], includeCards = true, onProgress = () => {} }) {
+export async function exportListPDF({ filename, recap, cards = [], includeCards = true, format = 'square', onProgress = () => {} }) {
+  const G = gridOf(LAYOUTS[format] || LAYOUTS.square);
   await cardFontsReady();
   const pages = [];
   const recapSvgs = recapSVGs(recap);
@@ -146,27 +162,27 @@ export async function exportListPDF({ filename, recap, cards = [], includeCards 
     pages.push({ images: [{ img: await jpeg(c, 0.9), x: 0, y: 0, W: A4.w, H: A4.h }] });
     onProgress(++done, steps);
   }
-  const per = GRID.cols * GRID.rows;
+  const per = G.cols * G.rows;
   for (let i = 0; i < list.length; i += per) {
     const images = [];
     const chunk = list.slice(i, i + per);
     for (const [k, card] of chunk.entries()) {
-      const svg = generatedCardSVG(card.u, card.D, { cost: card.cost, photo: card.photo || null });
-      const c = await svgCanvas(svg, { scale: 1, bg: '#fff' });
-      const col = k % GRID.cols, row = Math.floor(k / GRID.cols);
-      // Carte carrée ; une carte très chargée (plus haute que large) est réduite pour tenir dans le carré
-      const ratio = c.height / c.width;
-      let W = CARD, H = CARD * ratio;
-      if (H > CARD) { H = CARD; W = CARD / ratio; }
-      images.push({ img: await jpeg(c), x: GRID.x + col * CARD + (CARD - W) / 2, y: GRID.y + row * CARD + (CARD - H) / 2, W, H });
+      const svg = generatedCardSVG(card.u, card.D, { cost: card.cost, photo: card.photo || null, format });
+      let c = await svgCanvas(svg, { scale: 1, bg: '#fff' });
+      if (G.rotate) c = rotated(c);
+      const col = k % G.cols, row = Math.floor(k / G.cols);
+      // Une carte très chargée (plus haute que prévu) est réduite pour tenir dans son emplacement
+      const sc = Math.min(G.cw / c.width, G.ch / c.height);
+      const W = c.width * sc, H = c.height * sc;
+      images.push({ img: await jpeg(c), x: G.x + col * G.cw + (G.cw - W) / 2, y: G.y + row * G.ch + (G.ch - H) / 2, W, H });
       onProgress(++done, steps);
     }
     // Traits de coupe dans les marges, dans le prolongement des bords des cartes
-    const rows = Math.ceil(chunk.length / GRID.cols), cols = Math.min(GRID.cols, chunk.length);
+    const rows = Math.ceil(chunk.length / G.cols), cols = Math.min(G.cols, chunk.length);
     const lines = [];
-    const x0 = GRID.x, y0 = GRID.y, x1 = GRID.x + cols * CARD, y1 = GRID.y + rows * CARD, m = 3, L = 8;
-    for (let c = 0; c <= cols; c++) { const x = x0 + c * CARD; lines.push([x, y0 - m - L, x, y0 - m], [x, y1 + m, x, y1 + m + L]); }
-    for (let r = 0; r <= rows; r++) { const y = y0 + r * CARD; lines.push([x0 - m - L, y, x0 - m, y], [x1 + m, y, x1 + m + L, y]); }
+    const x0 = G.x, y0 = G.y, x1 = G.x + cols * G.cw, y1 = G.y + rows * G.ch, m = 3, L = 8;
+    for (let c = 0; c <= cols; c++) { const x = x0 + c * G.cw; lines.push([x, y0 - m - L, x, y0 - m], [x, y1 + m, x, y1 + m + L]); }
+    for (let r = 0; r <= rows; r++) { const y = y0 + r * G.ch; lines.push([x0 - m - L, y, x0 - m, y], [x1 + m, y, x1 + m + L, y]); }
     pages.push({ images, lines });
   }
   const blob = buildPDF(pages, recap.title);
@@ -180,20 +196,29 @@ export async function exportListPDF({ filename, recap, cards = [], includeCards 
 
 // Fenêtre d'options commune au builder et au Shot Format
 export function pdfDialogHTML(nCards) {
+  const fmt = store.get(FORMAT_KEY, 'square') === 'wide' ? 'wide' : 'square';
   return `<div class="modal-h"><div><div class="eyebrow">${t('Export')}</div><h2>${t('Exporter en PDF')}</h2></div><button class="btn icon" data-close-btn aria-label="${t('Fermer')}">✕</button></div>
     <div class="modal-b pdf-dlg">
       <p class="hint" style="margin:0">${t('Le PDF contient le récapitulatif de la liste. Vous pouvez y ajouter les cartes des unités, prêtes à imprimer et découper.')}</p>
       <label class="check"><input type="checkbox" id="pdf-cards" checked> ${t('Inclure les cartes des unités ({n})', { n: nCards })}</label>
-      <p class="hint" style="margin:0">${t('Cartes de 80 × 80 mm, 6 par page A4, avec traits de coupe. Imprimez à 100 % (taille réelle), sans « ajuster à la page ».')}</p>
+      <label class="field"><span>${t('Format des cartes')}</span><select id="pdf-format">
+        <option value="square" ${fmt === 'square' ? 'selected' : ''}>${t('80 × 80 mm (carrée), 6 par page')}</option>
+        <option value="wide" ${fmt === 'wide' ? 'selected' : ''}>${t('120 × 70 mm (format tarot, texte complet des compétences), 4 par page')}</option>
+      </select></label>
+      <p class="hint" style="margin:0">${t('Pages A4 avec traits de coupe. Imprimez à 100 % (taille réelle), sans « ajuster à la page ».')}</p>
       <div class="pdf-acts"><button class="btn primary" id="pdf-go">${t('Télécharger le PDF')}</button><span class="hint" id="pdf-status" role="status"></span></div>
     </div>`;
 }
 export function bindPdfDialog(root, run) {
   const go = root.querySelector('#pdf-go'), st = root.querySelector('#pdf-status');
+  const cb = root.querySelector('#pdf-cards'), sel = root.querySelector('#pdf-format');
+  cb.addEventListener('change', () => { sel.disabled = !cb.checked; });
   go.addEventListener('click', async () => {
     go.disabled = true;
     try {
-      await run(root.querySelector('#pdf-cards').checked, (d, n) => { st.textContent = t('Création du PDF… {d}/{n}', { d, n }); });
+      const format = root.querySelector('#pdf-format').value;
+      store.set(FORMAT_KEY, format);
+      await run({ includeCards: root.querySelector('#pdf-cards').checked, format }, (d, n) => { st.textContent = t('Création du PDF… {d}/{n}', { d, n }); });
       st.textContent = t('PDF téléchargé.');
     } catch (e) {
       console.error(e);

@@ -473,7 +473,7 @@ function openPdf() {
   const D = S.data, F = S.F, L = S.list, R = analyze(L);
   const filled = SLOTS.filter((s) => D.unitsById.get(L.slots[s]?.u));
   const cards = filled.map((s) => { const u = D.unitsById.get(L.slots[s].u); return { u, D, cost: unitCost(u), photo: D.photos?.[u.id]?.[0]?.file || null }; });
-  openModal(pdfDialogHTML(cards.length), (root) => bindPdfDialog(root, (includeCards, onProgress) => {
+  openModal(pdfDialogHTML(cards.length), (root) => bindPdfDialog(root, ({ includeCards, format }, onProgress) => {
     const rows = filled.map((s) => {
       const u = D.unitsById.get(L.slots[s].u);
       const stats = [`${t('Arm')} ${u.armor ?? '-'}`, `${t('Santé')} ${u.health ?? '-'}`, `${t('Mv')} ${u.move ?? '-'}/${u.march ?? '-'}`];
@@ -486,7 +486,7 @@ function openPdf() {
       notes: [...F.settings, ...F.reminders], notesTitle: t('Rappels'),
     };
     const slugName = String(L.name || 'liste').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'liste';
-    return exportListPDF({ filename: `${slugName}.pdf`, recap, cards, includeCards, onProgress });
+    return exportListPDF({ filename: `${slugName}.pdf`, recap, cards, includeCards, format, onProgress });
   }));
 }
 

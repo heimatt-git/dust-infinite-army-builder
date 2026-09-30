@@ -3,7 +3,9 @@
 // et à l'export PDF : ce qu'on voit est exactement ce qu'on télécharge.
 import { t } from './i18n.js';
 
-const W = 1000;                    // largeur logique de la carte (format carré, comme la carte mono-face)
+// Largeur logique : 1000 pour la carte carrée (80 × 80 mm), 1500 pour la carte large (120 × 70 mm),
+// soit la même échelle (12,5 unités par mm) : les textes ont la même taille imprimée dans les deux formats.
+export const CARD_FORMATS = { square: { w: 1000, mm: [80, 80] }, wide: { w: 1500, mm: [120, 70] } };
 // Nom et sous-titre de l'unité : même police pochoir que le titre du site
 const FONT_NAME = "'Saira Stencil One', Oswald, 'DejaVu Sans Condensed', Impact, sans-serif";
 // Police étroite et grasse (Oswald sur le site ; équivalents étroits en secours)
@@ -33,7 +35,7 @@ function rng(seed) {
   for (const c of String(seed)) h = Math.imul(h ^ c.charCodeAt(0), 16777619);
   return () => ((h = Math.imul(h ^ (h >>> 15), 2246822507) ^ Math.imul(h ^ (h >>> 13), 3266489909)) >>> 0) / 4294967296;
 }
-function tornEdge(y, amp, r, reverse = false) {
+function tornEdge(y, amp, r, reverse = false, W = 1000) {
   const pts = [];
   for (let x = 0; x <= W; x += 14 + r() * 16) pts.push([x, y + (r() - .5) * amp]);
   pts.push([W, y + (r() - .5) * amp]);
@@ -82,7 +84,9 @@ export function skillSummary(text, max = 130) {
   return s;
 }
 
-export function generatedCardSVG(u, D, { cost, photo } = {}) {
+export function generatedCardSVG(u, D, { cost, photo, format = 'square' } = {}) {
+  const wide = format === 'wide';
+  const W = wide ? CARD_FORMATS.wide.w : CARD_FORMATS.square.w;
   const id = `gc${++uid}`;
   const bloc = D.blocsById.get(u.bloc);
   const color = bloc?.color || '#6c7347';
@@ -97,16 +101,23 @@ export function generatedCardSVG(u, D, { cost, photo } = {}) {
   // Carte carrée (80 × 80 mm à l'impression) : les lignes d'armes et le haut de la carte
   // se partagent la hauteur disponible (peu d'armes → grande photo ; beaucoup → lignes serrées)
   const nW = Math.max(1, ws.length);
-  const ROW = Math.max(44, Math.min(66, 204 / nW));
-  const T = Math.max(-160, 204 - nW * ROW);            // hauteur ajoutée (ou retirée) au haut de la carte
+  const HEAD = 80;
+  let ROW, T;
+  if (wide) {
+    // Carte large 120 × 70 mm (hauteur logique 875) : même disposition, étalée en largeur
+    ROW = Math.max(40, Math.min(62, 173 / nW));
+    T = Math.max(-234, 653 - nW * ROW - 574);          // bas de carte à 875 ; carte plus haute si trop d'armes
+  } else {
+    ROW = Math.max(44, Math.min(66, 204 / nW));
+    T = Math.max(-160, 204 - nW * ROW);                // hauteur ajoutée (ou retirée) au haut de la carte
+  }
   const PX = 42, PY = 60, PW = 466, PH = 404 + T;      // photo
   const SX = 524, SY = 60, SW = W - 24 - SX, SH = 490 + T; // encadré des compétences
   const TY = 574 + T;                                   // tableau d'armes
   const x0 = 22, x1 = W - 22;
-  const NAME_W = 300, RANGE_W = 64, NAME_X = x0, RANGE_X = x0 + NAME_W, VAL_X = RANGE_X + RANGE_W;
+  const NAME_W = wide ? 430 : 300, RANGE_W = wide ? 76 : 64, NAME_X = x0, RANGE_X = x0 + NAME_W, VAL_X = RANGE_X + RANGE_W;
   const VAL_W = (x1 - VAL_X) / 14;
-  const HEAD = 80;
-  const footY = TY + HEAD + Math.max(1, ws.length) * ROW + 26;
+  const footY = TY + HEAD + nW * ROW + 26;
   const H = footY + 116;
 
   out.push(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" class="gcard-svg" role="img" aria-label="${xe(u.name)}">`);
@@ -120,8 +131,8 @@ export function generatedCardSVG(u, D, { cost, photo } = {}) {
   // ---- Fond parchemin, bandeaux déchirés couleur du bloc
   out.push(`<rect width="${W}" height="${H}" fill="url(#${id}-paper)"/>`);
   for (let i = 0; i < 7; i++) out.push(`<circle cx="${(r() * W).toFixed(0)}" cy="${(r() * H).toFixed(0)}" r="${(40 + r() * 120).toFixed(0)}" fill="#b89a60" opacity="${(.04 + r() * .05).toFixed(2)}"/>`);
-  out.push(`<path d="M0 0H${W}V34${tornEdge(34, 12, r, true).replace(/^L/, 'L')}L0 34Z" fill="${color}"/>`);
-  out.push(`<path d="M0 ${H}H${W}V${footY + 8}${tornEdge(footY + 8, 14, r, true)}L0 ${footY + 8}Z" fill="${color}"/>`);
+  out.push(`<path d="M0 0H${W}V34${tornEdge(34, 12, r, true, W).replace(/^L/, 'L')}L0 34Z" fill="${color}"/>`);
+  out.push(`<path d="M0 ${H}H${W}V${footY + 8}${tornEdge(footY + 8, 14, r, true, W)}L0 ${footY + 8}Z" fill="${color}"/>`);
 
   // ---- Photo (communauté) ou image générique
   out.push(`<rect x="${PX}" y="${PY}" width="${PW}" height="${PH}" rx="34" fill="${PAPER}"/>`);
@@ -129,7 +140,8 @@ export function generatedCardSVG(u, D, { cost, photo } = {}) {
   else {
     out.push(`<rect x="${PX}" y="${PY}" width="${PW}" height="${PH}" rx="34" fill="url(#${id}-gen)"/>`);
     for (let i = 0; i < 9; i++) out.push(`<rect x="${PX}" y="${PY + 30 + i * 44}" width="${PW}" height="2" fill="${color}" opacity=".12" clip-path="url(#${id}-ph)"/>`);
-    out.push(icon(TYPE_ICON[u.type] || P.inf, PX + PW / 2 - 110, PY + PH / 2 - 130, 220, color, 'opacity=".55"'));
+    const isz = Math.min(220, PH * .62);
+    out.push(icon(TYPE_ICON[u.type] || P.inf, PX + PW / 2 - isz / 2, PY + PH / 2 - isz * .59, isz, color, 'opacity=".55"'));
   }
   out.push(`<rect x="${PX}" y="${PY}" width="${PW}" height="${PH}" rx="34" fill="none" stroke="${INK}" stroke-width="4"/>`);
 
@@ -169,7 +181,7 @@ export function generatedCardSVG(u, D, { cost, photo } = {}) {
     const e = wsk.get(sp); if (!e.weapons.includes(w.name)) e.weapons.push(w.name);
   }
   for (const e of wsk.values()) skills.push({ ...e, weapon: e.weapons.join(', ') });
-  const blocks = layoutSkills(skills, SW - 44, SH - 36);
+  const blocks = layoutSkills(skills, SW - 44, SH - 36, wide);
   let ly = SY + 20;
   for (const b of blocks.items) {
     b.head.forEach((l) => { ly += b.hs; out.push(txt(SX + 22, ly, b.hs, xe(l), { anchor: 'start' })); });
@@ -294,15 +306,17 @@ function subtitleLines(text, width) {
 }
 
 // Compétences : on cherche la plus grande taille de texte qui tient dans l'encadré
-function layoutSkills(skills, width, height) {
+// Carte large : texte complet des compétences si tout tient, sinon résumés (comme la carte carrée)
+const fullText = (s) => dice(String(s || '').replace(/\s+/g, ' ').trim());
+function layoutSkills(skills, width, height, full = false) {
   if (!skills.length) return { items: [], height: 0 };
-  for (const max of [130, 90, 60]) {
+  for (const max of full ? [0, 130, 90, 60] : [130, 90, 60]) {
     for (let ds = 17; ds >= 13; ds--) {
       const hs = Math.round(ds * 1.18), gap = Math.round(ds * .75);
       const items = skills.map((s) => ({
         hs, ds, gap,
         head: wrap(`• ${s.head.toUpperCase()} •${s.weapon ? ` (${s.weapon})` : ''}`, `700 ${hs}px ${FONT}`, width),
-        desc: s.desc ? wrap(skillSummary(s.desc, max), `400 ${ds}px ${FONT}`, width) : [],
+        desc: s.desc ? wrap(max ? skillSummary(s.desc, max) : fullText(s.desc), `400 ${ds}px ${FONT}`, width) : [],
       }));
       const h = items.reduce((a, b) => a + b.head.length * hs + b.desc.length * ds * 1.2 + gap, -gap + 6);
       if (h <= height) return { items, height: h };
