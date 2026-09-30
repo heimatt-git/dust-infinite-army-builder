@@ -13,7 +13,7 @@
 .at-proj-acts { display: flex; gap: 8px; flex-wrap: wrap; }
 .at-tpl { display: grid; gap: 6px; padding: 10px; border: 1px dashed var(--line); border-radius: 8px; }
 .at-unit { display: grid; gap: 18px; grid-template-columns: minmax(0, 1fr); }
-@media (min-width: 1280px) { .at-unit { grid-template-columns: minmax(0, 1fr) minmax(0, 460px); align-items: start; } .at-prev-col { position: sticky; top: 70px; } }
+/* Aperçu de la carte toujours sous le formulaire (plus lisible que sur le côté) */
 .at-prev-col { display: grid; gap: 6px; }
 .at-card.modal { width: auto; max-height: none; box-shadow: none; overflow: visible; }
 .at-card [data-close-btn] { display: none; }
