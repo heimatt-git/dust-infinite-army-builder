@@ -55,7 +55,8 @@ export function analyzeArmy(list, data) {
 
   // --- Héros uniques
   const seen = new Map();
-  for (const r of rows.filter((r) => r.u.type === 'hero')) {
+  // « Clone » : plusieurs exemplaires du même héros sont autorisés
+  for (const r of rows.filter((r) => r.u.type === 'hero' && !(r.u.skills || []).includes('Clone'))) {
     const k = heroBaseName(r.u.name);
     if (seen.has(k)) errors.push(t('Héros en double : {a} et {b}. Un héros est unique dans une armée.', { a: seen.get(k), b: r.u.name }));
     else seen.set(k, r.u.name);
