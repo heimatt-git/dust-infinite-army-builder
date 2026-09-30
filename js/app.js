@@ -774,12 +774,14 @@ function communitySectionHTML(u) {
     ? `https://github.com/${repo.owner}/${repo.repo}/issues/new?template=photo.yml&title=${encodeURIComponent('Photo : ' + u.name)}&unit=${encodeURIComponent(u.name + ' (' + u.id + ')')}`
     : null;
   if (!ph.length && !propose) return '';
-  return `<div class="community">
-    ${ph.length ? `<div class="eyebrow">${t('Photos de la communauté')}</div>
-    <div class="ph-grid">${ph.map((p) => `<figure><button class="img-view" data-zoomc aria-label="${t('Agrandir')}"><img src="${esc(p.file)}" alt="${esc(t('Figurine {n} peinte par {a}', { n: u.name, a: p.author }))}" loading="lazy"></button>
+  // Section repliée par défaut, comme « Mes images de la carte officielle »
+  return `<details class="img-box community-box">
+    <summary>${t('Photos de la communauté')} ${ph.length ? `<span class="hint">${t('({n} image(s))', { n: ph.length })}</span>` : ''}</summary>
+    <div class="community">
+    ${ph.length ? `<div class="ph-grid">${ph.map((p) => `<figure><button class="img-view" data-zoomc aria-label="${t('Agrandir')}"><img src="${esc(p.file)}" alt="${esc(t('Figurine {n} peinte par {a}', { n: u.name, a: p.author }))}" loading="lazy"></button>
       <figcaption>${t('Photo :')} ${esc(p.author)}${p.license ? ' · ' + esc(p.license) : ''}</figcaption></figure>`).join('')}</div>` : ''}
     ${propose ? `<p class="hint" style="margin:0">${t('Vous avez peint cette unité ?')} <a href="${propose}" target="_blank" rel="noopener">${t('Proposez une photo de votre figurine')}</a>.</p>` : ''}
-  </div>`;
+  </div></details>`;
 }
 
 // Carte générée (format mono-face) à partir des données, avec export PNG
