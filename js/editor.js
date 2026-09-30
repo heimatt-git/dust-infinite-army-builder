@@ -624,7 +624,7 @@ function renderPhotos(body) {
       ${entries.length ? `<div class="ph-grid">${entries.map(({ id, i, p, u }) => `<figure>
         <img src="${esc(src(p))}" alt="" style="width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:6px;border:1px solid var(--line)">
         <figcaption><b>${esc(u?.name || id)}</b><br>${esc(p.author)} · ${esc(p.license || '')}${E.pending.has(p.file) ? ` · <i>${t('à envoyer')}</i>` : ''}</figcaption>
-        <div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn sm" data-frph="${esc(id)}|${i}">${t('Cadrer')}${p.focus ? ' ✓' : ''}</button>
+        <div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn sm" data-frph="${esc(id)}|${i}">${t('Crédit et cadrage')}${p.focus ? ' ✓' : ''}</button>
         <button class="btn sm danger" data-rmph="${esc(id)}|${i}">${t('Retirer')}</button></div></figure>`).join('')}</div>` : `<p class="hint" style="margin:0">${t('Aucune photo pour le moment.')}</p>`}
     </div>
   </div>`;
@@ -669,17 +669,25 @@ function openFraming(id, i) {
   const u = D.unitsById.get(id);
   let focus = p.focus || null;
   const card = () => (u ? generatedCardSVG(u, D, { photo: src, focus }) : '');
-  openModal(`<div class="modal-h"><div><div class="eyebrow">${t('Photo de la communauté')}</div><h2>${t('Cadrer la photo')} · ${esc(u?.name || id)}</h2></div><button class="btn icon" data-close-btn aria-label="${t('Fermer')}">✕</button></div>
+  openModal(`<div class="modal-h"><div><div class="eyebrow">${t('Photo de la communauté')}</div><h2>${t('Crédit et cadrage')} · ${esc(u?.name || id)}</h2></div><button class="btn icon" data-close-btn aria-label="${t('Fermer')}">✕</button></div>
     <div class="modal-b fr-dlg">
+      <div class="row2">
+        <label class="field"><span>${t('Crédit (pseudo)')}</span><input type="text" id="fr-author" maxlength="60" value="${esc(p.author || '')}"></label>
+        <label class="field"><span>${t('Licence')}</span><input type="text" id="fr-license" maxlength="60" value="${esc(p.license || '')}"></label>
+      </div>
       <div class="fr-cols"><div>${framingHTML()}</div><div class="gcard-wrap fr-card">${card()}</div></div>
-      <div class="pdf-acts"><button class="btn primary" id="fr-save">${t('Enregistrer le cadrage')}</button><span class="hint">${t('Publiez ensuite depuis l\'onglet Publier.')}</span></div>
+      <div class="pdf-acts"><button class="btn primary" id="fr-save">${t('Enregistrer')}</button><span class="hint">${t('Publiez ensuite depuis l\'onglet Publier.')}</span></div>
     </div>`, (root, close) => {
     const cardEl = root.querySelector('.fr-card');
     mountFraming(root.querySelector('.framing'), src, focus, (f) => { focus = f; cardEl.innerHTML = card(); });
     cardFontsReady().then(() => { cardEl.innerHTML = card(); });
     root.querySelector('#fr-save').addEventListener('click', () => {
+      const author = root.querySelector('#fr-author').value.trim();
+      if (!author) { toast(t('Indiquez le nom à créditer.')); return; }
+      p.author = author;
+      p.license = root.querySelector('#fr-license').value.trim() || 'CC BY 4.0';
       if (focus) p.focus = focus; else delete p.focus;
-      saveDraft(); close(); render(); toast(t('Cadrage enregistré dans le brouillon'));
+      saveDraft(); close(); render(); toast(t('Photo modifiée dans le brouillon'));
     });
   });
 }

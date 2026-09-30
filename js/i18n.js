@@ -667,4 +667,6 @@ const EN = {
   "Zoom": "Zoom",
   "Recentrer": "Reset",
   "Faites glisser la photo pour choisir ce qui reste visible sur la carte.": "Drag the photo to choose what stays visible on the card.",
+  "Crédit et cadrage": "Credit and framing",
+  "Photo modifiée dans le brouillon": "Photo updated in the draft",
 };
