@@ -2,9 +2,15 @@
  "ssu--winter-child": [
   {
    "file": "photos/ssu--winter-child-heure-du-loir-1.jpg",
-   "author": "Heure du loir",
+   "author": "L'Heure du Loir",
    "license": "CC BY 4.0",
-   "added": "2026-09-30"
+   "added": "2026-09-30",
+   "focus": {
+    "x": 0.4167,
+    "y": 0.3102,
+    "zoom": 1.2,
+    "ar": 0.6683
+   }
   }
  ]
 }
