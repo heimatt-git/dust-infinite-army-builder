@@ -167,7 +167,7 @@ export async function exportListPDF({ filename, recap, cards = [], includeCards 
     const images = [];
     const chunk = list.slice(i, i + per);
     for (const [k, card] of chunk.entries()) {
-      const svg = generatedCardSVG(card.u, card.D, { cost: card.cost, photo: card.photo || null, format });
+      const svg = generatedCardSVG(card.u, card.D, { cost: card.cost, photo: card.photo || null, focus: card.focus || null, format });
       let c = await svgCanvas(svg, { scale: 1, bg: '#fff' });
       if (G.rotate) c = rotated(c);
       const col = k % G.cols, row = Math.floor(k / G.cols);

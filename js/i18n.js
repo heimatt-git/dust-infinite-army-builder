@@ -656,4 +656,15 @@ const EN = {
   "80 × 80 mm (carrée), 6 par page": "80 × 80 mm (square), 6 per page",
   "120 × 70 mm (format tarot, texte complet des compétences), 4 par page": "120 × 70 mm (tarot size, full skill text), 4 per page",
   "Pages A4 avec traits de coupe. Imprimez à 100 % (taille réelle), sans « ajuster à la page ».": "A4 pages with cut marks. Print at 100 % (actual size), without “fit to page”.",
+  // Cadrage des photos
+  "Cadrer": "Frame",
+  "Photo de la communauté": "Community photo",
+  "Cadrer la photo": "Frame the photo",
+  "Enregistrer le cadrage": "Save framing",
+  "Publiez ensuite depuis l'onglet Publier.": "Then publish from the Publish tab.",
+  "Cadrage enregistré dans le brouillon": "Framing saved in the draft",
+  "Faites glisser la photo pour la cadrer": "Drag the photo to frame it",
+  "Zoom": "Zoom",
+  "Recentrer": "Reset",
+  "Faites glisser la photo pour choisir ce qui reste visible sur la carte.": "Drag the photo to choose what stays visible on the card.",
 };

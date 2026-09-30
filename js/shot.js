@@ -472,7 +472,7 @@ function listText() {
 function openPdf() {
   const D = S.data, F = S.F, L = S.list, R = analyze(L);
   const filled = SLOTS.filter((s) => D.unitsById.get(L.slots[s]?.u));
-  const cards = filled.map((s) => { const u = D.unitsById.get(L.slots[s].u); return { u, D, cost: unitCost(u), photo: D.photos?.[u.id]?.[0]?.file || null }; });
+  const cards = filled.map((s) => { const u = D.unitsById.get(L.slots[s].u); const p = D.photos?.[u.id]?.[0]; return { u, D, cost: unitCost(u), photo: p?.file || null, focus: p?.focus || null }; });
   openModal(pdfDialogHTML(cards.length), (root) => bindPdfDialog(root, ({ includeCards, format }, onProgress) => {
     const rows = filled.map((s) => {
       const u = D.unitsById.get(L.slots[s].u);

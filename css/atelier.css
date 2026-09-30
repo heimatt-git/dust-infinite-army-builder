@@ -29,3 +29,4 @@
 .at-card .wtable-wrap { overflow-x: auto; }
 .at-card .modal-b, .at-card .modal-h { grid-template-columns: minmax(0, 1fr); }
 .at-card .modal-h { grid-template-columns: minmax(0, 1fr) auto; }
+.at-gcard { max-width: 460px; cursor: default; }

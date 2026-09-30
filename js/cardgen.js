@@ -84,7 +84,7 @@ export function skillSummary(text, max = 130) {
   return s;
 }
 
-export function generatedCardSVG(u, D, { cost, photo, format = 'square' } = {}) {
+export function generatedCardSVG(u, D, { cost, photo, focus = null, format = 'square' } = {}) {
   const wide = format === 'wide';
   const W = wide ? CARD_FORMATS.wide.w : CARD_FORMATS.square.w;
   const id = `gc${++uid}`;
@@ -136,7 +136,11 @@ export function generatedCardSVG(u, D, { cost, photo, format = 'square' } = {}) 
 
   // ---- Photo (communauté) ou image générique
   out.push(`<rect x="${PX}" y="${PY}" width="${PW}" height="${PH}" rx="34" fill="${PAPER}"/>`);
-  if (photo) out.push(`<image href="${xe(photo)}" x="${PX}" y="${PY}" width="${PW}" height="${PH}" preserveAspectRatio="xMidYMid slice" clip-path="url(#${id}-ph)"/>`);
+  if (photo && focus?.ar) {
+    // Cadrage choisi : point de visée + zoom (gardés quel que soit le format de la zone photo)
+    const pl = photoPlacement({ x: PX, y: PY, w: PW, h: PH }, focus);
+    out.push(`<image href="${xe(photo)}" x="${pl.x.toFixed(1)}" y="${pl.y.toFixed(1)}" width="${pl.w.toFixed(1)}" height="${pl.h.toFixed(1)}" preserveAspectRatio="none" clip-path="url(#${id}-ph)"/>`);
+  } else if (photo) out.push(`<image href="${xe(photo)}" x="${PX}" y="${PY}" width="${PW}" height="${PH}" preserveAspectRatio="xMidYMid slice" clip-path="url(#${id}-ph)"/>`);
   else {
     out.push(`<rect x="${PX}" y="${PY}" width="${PW}" height="${PH}" rx="34" fill="url(#${id}-gen)"/>`);
     for (let i = 0; i < 9; i++) out.push(`<rect x="${PX}" y="${PY + 30 + i * 44}" width="${PW}" height="2" fill="${color}" opacity=".12" clip-path="url(#${id}-ph)"/>`);
@@ -411,6 +415,19 @@ export async function svgCanvas(svg, { scale = 2, bg = null } = {}) {
 export async function cardPNG(svg, { scale = 2 } = {}) {
   const c = await svgCanvas(svg, { scale });
   return new Promise((res) => c.toBlob(res, 'image/png'));
+}
+
+// Cadrage d'une photo dans une zone : l'image couvre la zone (zoom ≥ 1), le point de visée (x, y en fraction
+// de l'image) est placé au centre de la zone autant que possible, sans laisser de bord vide.
+// focus = { x, y, zoom, ar } ; ar = largeur / hauteur de l'image.
+export function photoPlacement(box, focus) {
+  const ar = focus.ar || 1, zoom = Math.max(1, Math.min(3, focus.zoom || 1));
+  let w, h;
+  if (ar > box.w / box.h) { h = box.h * zoom; w = h * ar; } else { w = box.w * zoom; h = w / ar; }
+  const fx = focus.x ?? .5, fy = focus.y ?? .5;
+  const x = Math.min(box.x, Math.max(box.x + box.w - w, box.x + box.w / 2 - fx * w));
+  const y = Math.min(box.y, Math.max(box.y + box.h - h, box.y + box.h / 2 - fy * h));
+  return { x, y, w, h };
 }
 
 // Outils de mise en page réutilisés par l'export PDF

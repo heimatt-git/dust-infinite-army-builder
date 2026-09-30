@@ -136,7 +136,8 @@ async function accept(sub, it, silent) {
     if (dep.status === 'refused') { toast(t('Impossible : « {n} » dépend de « {d} », qui est refusé.', { n: it.data.name, d: dep.data.name })); return false; }
     if (dep.status !== 'accepted' && !(await accept(sub, dep, true))) return false;
   }
-  const rec = { ...X.clone(it.data), author: it.data.author || sub.author || null };
+  const { photoFocus, ...unitData } = X.clone(it.data);
+  const rec = { ...unitData, author: it.data.author || sub.author || null };
   if (it.kind === 'unit') rec.approved = today();
   const prev = findRec(E.d.custom, it.kind, it.id);
   it.prev = prev ? JSON.stringify(prev) : null;
@@ -151,7 +152,7 @@ async function accept(sub, it, silent) {
       while (taken(path)) path = `${base}-${k++}.${ext}`;
       E.pending.set(path, blob);
       await blobs.set('pending:' + path, blob).catch(() => {});
-      (E.d.photos[it.id] ||= []).push({ file: path, author: rec.author || '', license: PHOTO_LICENSE, added: today() });
+      (E.d.photos[it.id] ||= []).push({ file: path, author: rec.author || '', license: PHOTO_LICENSE, added: today(), ...(photoFocus?.ar ? { focus: photoFocus } : {}) });
       it.photoPath = path;
     }
   }
@@ -253,7 +254,7 @@ export function renderProposals(body) {
       const u = D.unitsById.get(it.id);
       const key = propKey(sub, it);
       if (it.hasPhoto && !photoURLs.has(key)) missing.push(key);
-      visual = u ? `<button type="button" class="gcard-wrap pr-card" data-prview="${esc(sub.key)}|${esc(it.id)}" title="${t('Voir la fiche')}">${generatedCardSVG(u, D, { photo: photoURLs.get(key) || null })}</button>` : '';
+      visual = u ? `<button type="button" class="gcard-wrap pr-card" data-prview="${esc(sub.key)}|${esc(it.id)}" title="${t('Voir la fiche')}">${generatedCardSVG(u, D, { photo: photoURLs.get(key) || null, focus: it.data.photoFocus || null })}</button>` : '';
     } else {
       visual = `<div class="pr-chip" style="--c:${esc(it.kind === 'bloc' ? it.data.color || '#777' : (D.blocsById.get(it.data.bloc)?.color || '#777'))}"><b>${esc(it.data.name)}</b><small>${esc(t(KIND[it.kind]))}</small></div>`;
     }
@@ -376,7 +377,7 @@ export function renderProposals(body) {
     const [sub, it] = find(key, id, 'unit'); if (!it) return;
     const D = withCustom(off, withSub(sub));
     const u = D.unitsById.get(id);
-    const card = `<div class="gcard-box"><button type="button" class="gcard-wrap" data-zoomc>${generatedCardSVG(u, D, { photo: photoURLs.get(propKey(sub, it)) || null })}</button></div>`;
+    const card = `<div class="gcard-box"><button type="button" class="gcard-wrap" data-zoomc>${generatedCardSVG(u, D, { photo: photoURLs.get(propKey(sub, it)) || null, focus: it.data.photoFocus || null })}</button></div>`;
     openModal(unitCardHTML(u, D, { topHTML: card }), (root) => root.querySelectorAll('[data-zoomc]').forEach((z) => z.addEventListener('click', () => z.classList.toggle('zoomed'))));
   }));
   body.querySelectorAll('[data-prcopy]').forEach((b) => b.addEventListener('click', () => {
@@ -418,7 +419,7 @@ export function renderProposals(body) {
         preview: () => {
           const D2 = withCustom(off, withSub(sub));
           const u = D2.unitsById.get(it.id);
-          openModal(unitCardHTML(u, D2, { topHTML: `<div class="gcard-box"><div class="gcard-wrap zoomed">${generatedCardSVG(u, D2, { photo: photoURLs.get(propKey(sub, it)) || null })}</div></div>` }));
+          openModal(unitCardHTML(u, D2, { topHTML: `<div class="gcard-box"><div class="gcard-wrap zoomed">${generatedCardSVG(u, D2, { photo: photoURLs.get(propKey(sub, it)) || null, focus: it.data.photoFocus || null })}</div></div>` }));
         },
       });
     }

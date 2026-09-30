@@ -694,7 +694,7 @@ function listOrder(L) {
 function openPdf(A) {
   const D = S.data, L = S.list;
   const cards = listOrder(L).map((e) => ({ e, u: D.unitsById.get(e.u) })).filter((x) => x.u)
-    .map(({ e, u }) => ({ u, D, cost: entryCost(e, D), photo: communityPhotos(u.id)[0]?.file || null }));
+    .map(({ e, u }) => ({ u, D, cost: entryCost(e, D), photo: communityPhotos(u.id)[0]?.file || null, focus: communityPhotos(u.id)[0]?.focus || null }));
   openModal(pdfDialogHTML(cards.length), (root) => bindPdfDialog(root, ({ includeCards, format }, onProgress) => {
     const row = (e) => {
       const u = D.unitsById.get(e.u);
@@ -783,7 +783,7 @@ function communitySectionHTML(u) {
 }
 
 // Carte générée (format mono-face) à partir des données, avec export PNG
-const cardSVG = (u, cost) => generatedCardSVG(u, S.data, { cost, photo: communityPhotos(u.id)[0]?.file || null });
+const cardSVG = (u, cost) => { const p = communityPhotos(u.id)[0]; return generatedCardSVG(u, S.data, { cost, photo: p?.file || null, focus: p?.focus || null }); };
 function generatedCardSection(u, cost) {
   return `<div class="gcard-box"><button type="button" class="gcard-wrap" data-zoomc title="${t('Agrandir')}" aria-label="${t('Agrandir')}">${cardSVG(u, cost)}</button>
     <div class="gcard-acts"><button type="button" class="btn sm" data-png>${t('Télécharger la carte (PNG)')}</button>

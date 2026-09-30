@@ -1,7 +1,9 @@
 // Éditeur de base : corriger les unités, pelotons et compétences, puis publier
-import { indexData, typeLabel } from './data.js';
+import { indexData, typeLabel, withCustom } from './data.js';
 import { validateData, validateCustom, UNIT_TYPES } from './validate.js';
 import { initProposals, renderProposals, pendingCount, normCustom, blobs } from './proposals.js';
+import { framingHTML, mountFraming } from './framing.js';
+import { generatedCardSVG, cardFontsReady } from './cardgen.js';
 import { esc, store, toast, openModal, unitCardHTML, guessRepo, brandLogo, mountCredit } from './ui.js';
 import { shrink } from './images.js';
 import { t, LANG, initLang, setLang } from './i18n.js';
@@ -622,7 +624,8 @@ function renderPhotos(body) {
       ${entries.length ? `<div class="ph-grid">${entries.map(({ id, i, p, u }) => `<figure>
         <img src="${esc(src(p))}" alt="" style="width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:6px;border:1px solid var(--line)">
         <figcaption><b>${esc(u?.name || id)}</b><br>${esc(p.author)} · ${esc(p.license || '')}${E.pending.has(p.file) ? ` · <i>${t('à envoyer')}</i>` : ''}</figcaption>
-        <button class="btn sm danger" data-rmph="${esc(id)}|${i}">${t('Retirer')}</button></figure>`).join('')}</div>` : `<p class="hint" style="margin:0">${t('Aucune photo pour le moment.')}</p>`}
+        <div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn sm" data-frph="${esc(id)}|${i}">${t('Cadrer')}${p.focus ? ' ✓' : ''}</button>
+        <button class="btn sm danger" data-rmph="${esc(id)}|${i}">${t('Retirer')}</button></div></figure>`).join('')}</div>` : `<p class="hint" style="margin:0">${t('Aucune photo pour le moment.')}</p>`}
     </div>
   </div>`;
   body.querySelector('#ph-add').addEventListener('click', async () => {
@@ -643,6 +646,10 @@ function renderPhotos(body) {
     (P[u.id] ||= []).push({ file: path, author, license: body.querySelector('#ph-license').value.trim() || 'CC BY 4.0', added: new Date().toISOString().slice(0, 10) });
     saveDraft(); render(); toast(t("Photo ajoutée au brouillon : publiez-la dans l'onglet Publier."));
   });
+  body.querySelectorAll('[data-frph]').forEach((b) => b.addEventListener('click', () => {
+    const [id, i] = b.dataset.frph.split('|');
+    openFraming(id, +i);
+  }));
   body.querySelectorAll('[data-rmph]').forEach((b) => b.addEventListener('click', () => {
     if (!b.classList.contains('armed')) { b.classList.add('armed'); b.textContent = t('Confirmer'); return; }
     const [id, i] = b.dataset.rmph.split('|');
@@ -651,4 +658,28 @@ function renderPhotos(body) {
     if (!P[id].length) delete P[id];
     saveDraft(); render();
   }));
+}
+
+// Cadrage d'une photo de la communauté : réglage + aperçu de la carte générée
+function openFraming(id, i) {
+  const p = E.d.photos[id]?.[i];
+  if (!p) return;
+  const src = E.pending.has(p.file) ? URL.createObjectURL(E.pending.get(p.file)) : p.file;
+  const D = withCustom(indexData(E.d.unitsFile, E.d.blocsFile, E.d.skills, E.d.photos), E.d.custom);
+  const u = D.unitsById.get(id);
+  let focus = p.focus || null;
+  const card = () => (u ? generatedCardSVG(u, D, { photo: src, focus }) : '');
+  openModal(`<div class="modal-h"><div><div class="eyebrow">${t('Photo de la communauté')}</div><h2>${t('Cadrer la photo')} · ${esc(u?.name || id)}</h2></div><button class="btn icon" data-close-btn aria-label="${t('Fermer')}">✕</button></div>
+    <div class="modal-b fr-dlg">
+      <div class="fr-cols"><div>${framingHTML()}</div><div class="gcard-wrap fr-card">${card()}</div></div>
+      <div class="pdf-acts"><button class="btn primary" id="fr-save">${t('Enregistrer le cadrage')}</button><span class="hint">${t('Publiez ensuite depuis l\'onglet Publier.')}</span></div>
+    </div>`, (root, close) => {
+    const cardEl = root.querySelector('.fr-card');
+    mountFraming(root.querySelector('.framing'), src, focus, (f) => { focus = f; cardEl.innerHTML = card(); });
+    cardFontsReady().then(() => { cardEl.innerHTML = card(); });
+    root.querySelector('#fr-save').addEventListener('click', () => {
+      if (focus) p.focus = focus; else delete p.focus;
+      saveDraft(); close(); render(); toast(t('Cadrage enregistré dans le brouillon'));
+    });
+  });
 }

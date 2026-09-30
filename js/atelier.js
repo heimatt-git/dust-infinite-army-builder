@@ -5,6 +5,8 @@ import { loadData, loadCustom, withCustom, typeLabel, CONF_PREFIX } from './data
 import { validateCustom, UNIT_TYPES } from './validate.js';
 import { esc, uid, store, toast, openModal, unitCardHTML, brandLogo, mountCredit } from './ui.js';
 import { shrink } from './images.js';
+import { framingHTML, mountFraming } from './framing.js';
+import { generatedCardSVG, cardFontsReady } from './cardgen.js';
 import { t, LANG, initLang, setLang } from './i18n.js';
 
 const KEY = 'dust1947.atelier';
@@ -285,7 +287,7 @@ function unitForm(u, D) {
     </div>
     <div class="ed-sec">
       <h2>${t('Photo de la figurine (facultatif)')}</h2>
-      ${photoURL(u) ? `<img class="at-photo" src="${photoURL(u)}" alt="">` : `<p class="hint" style="margin:0">${t('Une photo de votre figurine peinte. Elle est réduite automatiquement et jointe au fichier exporté.')}</p>`}
+      ${photoURL(u) ? framingHTML() : `<p class="hint" style="margin:0">${t('Une photo de votre figurine peinte. Elle est réduite automatiquement et jointe au fichier exporté.')}</p>`}
       <div style="display:flex;gap:6px;flex-wrap:wrap">
         <label class="btn sm">${photoURL(u) ? t('Remplacer') : t('Ajouter une photo')}<input type="file" id="u-photo" accept="image/*" hidden></label>
         ${photoURL(u) ? `<button type="button" class="btn sm danger" id="u-photo-rm">${t('Retirer')}</button>` : ''}
@@ -327,6 +329,7 @@ function readUnitForm(form, u) {
 }
 
 function showPreview() {
+  if (!A.fontsOk) cardFontsReady().then(() => { A.fontsOk = true; showPreview(); });
   const u = A.P.units.find((x) => x._k === A.sel);
   const box = document.getElementById('u-preview');
   if (!u || !box) return;
@@ -334,7 +337,8 @@ function showPreview() {
   const pu = D.unitsById.get(u.id);
   if (!pu) { box.innerHTML = ''; return; }
   const ph = photoURL(u);
-  box.innerHTML = `<div class="modal at-card">${unitCardHTML(pu, D, { cost: pu.cost, topHTML: ph ? `<img class="at-photo" src="${ph}" alt="">` : '' })}</div>`;
+  const card = `<div class="gcard-box"><div class="gcard-wrap at-gcard">${generatedCardSVG(pu, D, { cost: pu.cost, photo: ph, focus: u.photoFocus || null })}</div></div>`;
+  box.innerHTML = `<div class="modal at-card">${unitCardHTML(pu, D, { cost: pu.cost, topHTML: card })}</div>`;
 }
 
 function bindUnitForm(body, u) {
@@ -359,12 +363,15 @@ function bindUnitForm(body, u) {
       await IDB.set(u._k, blob);
       if (A.photos.has(u._k)) URL.revokeObjectURL(A.photos.get(u._k));
       A.photos.set(u._k, URL.createObjectURL(blob));
-      u.hasPhoto = true; save(); render(); toast(t('Photo ajoutée'));
+      u.hasPhoto = true; delete u.photoFocus; save(); render(); toast(t('Photo ajoutée'));
     } catch (err) { toast(err.message || t('Stockage d\'images indisponible dans ce navigateur.')); }
   });
   form.querySelector('#u-photo-rm')?.addEventListener('click', async () => {
-    await IDB.del(u._k).catch(() => {}); URL.revokeObjectURL(A.photos.get(u._k)); A.photos.delete(u._k); delete u.hasPhoto; save(); render();
+    await IDB.del(u._k).catch(() => {}); URL.revokeObjectURL(A.photos.get(u._k)); A.photos.delete(u._k); delete u.hasPhoto; delete u.photoFocus; save(); render();
   });
+  // Cadrage de la photo sur la carte
+  const fr = form.querySelector('.framing');
+  if (fr && photoURL(u)) mountFraming(fr, photoURL(u), u.photoFocus || null, (f) => { u.photoFocus = f; save(); showPreview(); });
   form.querySelector('#u-dup').addEventListener('click', () => {
     apply();
     const { _k, _idLocked, hasPhoto, ...rest } = clone(u);
