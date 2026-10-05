@@ -1,11 +1,16 @@
 {
- "version": "202610050857",
+ "version": "202610050932",
  "units": [
   "allies--flying-banana",
   "allies--recon-mickey",
   "axis--experiment-x-33",
   "axis--heinrich-tropical-bk",
+  "mercenaries--alex",
+  "mercenaries--mercenary-cleaning-team",
   "mercenaries--mercenary-railgun-team",
+  "mercenaries--obliterator",
+  "mercenaries--the-fire-scarab",
+  "mercenaries--tito",
   "ssu--steel-guards-sniper-squad",
   "ssu--winter-child"
  ],
@@ -33,6 +38,31 @@
   "allies--recon-mickey": {
    "x": 0.5,
    "y": 0.449,
+   "zoom": 1
+  },
+  "mercenaries--obliterator": {
+   "x": 0.5,
+   "y": 0.451,
+   "zoom": 1
+  },
+  "mercenaries--the-fire-scarab": {
+   "x": 0.5,
+   "y": 0.526,
+   "zoom": 1
+  },
+  "mercenaries--tito": {
+   "x": 0.5,
+   "y": 0.454,
+   "zoom": 1
+  },
+  "mercenaries--alex": {
+   "x": 0.5,
+   "y": 0.462,
+   "zoom": 1
+  },
+  "mercenaries--mercenary-cleaning-team": {
+   "x": 0.5,
+   "y": 0.543,
    "zoom": 1
   }
  }
