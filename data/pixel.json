@@ -1,4 +1,14 @@
 {
- "version": "",
- "units": []
+ "version": "202610050831",
+ "units": [
+  "allies--flying-banana",
+  "ssu--steel-guards-sniper-squad"
+ ],
+ "focus": {
+  "ssu--steel-guards-sniper-squad": {
+   "x": 0.5,
+   "y": 0.592,
+   "zoom": 1
+  }
+ }
 }
