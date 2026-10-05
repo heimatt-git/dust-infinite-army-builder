@@ -84,7 +84,8 @@ export function skillSummary(text, max = 130) {
   return s;
 }
 
-export function generatedCardSVG(u, D, { cost, photo, focus = null, format = 'square' } = {}) {
+// credit : ligne de crédit affichée sur la photo (licence CC BY)
+export function generatedCardSVG(u, D, { cost, photo, focus = null, format = 'square', credit = '' } = {}) {
   const wide = format === 'wide';
   const W = wide ? CARD_FORMATS.wide.w : CARD_FORMATS.square.w;
   const id = `gc${++uid}`;
@@ -148,6 +149,13 @@ export function generatedCardSVG(u, D, { cost, photo, focus = null, format = 'sq
     out.push(icon(TYPE_ICON[u.type] || P.inf, PX + PW / 2 - isz / 2, PY + PH / 2 - isz * .59, isz, color, 'opacity=".55"'));
   }
   out.push(`<rect x="${PX}" y="${PY}" width="${PW}" height="${PH}" rx="34" fill="none" stroke="${INK}" stroke-width="4"/>`);
+
+  // ---- Crédit de la photo (juste au-dessus du cartouche du nom, qui recouvre le bas de la photo)
+  if (credit) {
+    const cf = 20, cw = Math.min(PW - 20, measure(credit, f('500', cf)) + 22), cy = 432 + T - 34;
+    out.push(`<rect x="${PX + 10}" y="${cy}" width="${cw.toFixed(1)}" height="26" rx="6" fill="${CREAM}" fill-opacity=".85"/>`);
+    out.push(txt(PX + 21, cy + 19, cf, xe(credit), { w: 500, anchor: 'start' }));
+  }
 
   // ---- Coût (flèche à gauche de la photo)
   out.push(`<path d="M14 84h96l36 58-36 58H14z" fill="${CREAM}" stroke="${INK}" stroke-width="4" stroke-linejoin="round"/>`);

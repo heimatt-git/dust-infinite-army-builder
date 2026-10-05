@@ -71,3 +71,17 @@
 .fr-cols { display: grid; grid-template-columns: minmax(0, 360px) minmax(0, 1fr); gap: 16px; align-items: start; }
 @media (max-width: 700px) { .fr-cols { grid-template-columns: minmax(0, 1fr); } }
 .fr-card { max-width: 420px; cursor: default; }
+
+/* Illustrations */
+.px-drop { display: grid; gap: 2px; place-items: center; text-align: center; padding: 22px 16px; border: 2px dashed var(--line); border-radius: 8px; cursor: pointer; color: var(--muted); }
+.px-drop b { color: var(--ink, inherit); }
+.px-drop:hover, .px-drop.over { border-color: var(--accent, currentColor); background: color-mix(in srgb, var(--accent, #888) 8%, transparent); }
+.px-drop:focus-within { outline: 2px solid var(--accent, currentColor); outline-offset: 2px; }
+.px-queue { display: grid; gap: 10px; }
+.px-row { display: grid; grid-template-columns: 72px minmax(0, 1fr) auto; gap: 12px; align-items: start; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+.px-row img { width: 72px; height: 72px; object-fit: cover; border-radius: 6px; border: 1px solid var(--line); }
+.px-row-b { display: grid; gap: 6px; min-width: 0; }
+.px-fn { font-weight: 600; overflow-wrap: anywhere; }
+.px-grid img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 6px; border: 1px solid var(--line); }
+.px-cards { display: grid; gap: 12px; max-width: 460px; }
+.px-cards .gcard-wrap { max-width: none; cursor: default; }

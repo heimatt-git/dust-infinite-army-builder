@@ -6,9 +6,10 @@ import { t } from './i18n.js';
 
 export const PHOTO_BOX = { w: 466, h: 430 }; // proportions habituelles de la zone photo de la carte
 
-export function framingHTML() {
+// box : proportions de la zone de cadrage (par défaut, la zone photo habituelle de la carte)
+export function framingHTML(box = PHOTO_BOX) {
   return `<div class="framing">
-    <div class="fr-box" style="aspect-ratio:${PHOTO_BOX.w} / ${PHOTO_BOX.h}" title="${t('Faites glisser la photo pour la cadrer')}"><img alt="" draggable="false"></div>
+    <div class="fr-box" style="aspect-ratio:${box.w} / ${box.h}" title="${t('Faites glisser la photo pour la cadrer')}"><img alt="" draggable="false"></div>
     <div class="fr-ctl">
       <label class="field"><span>${t('Zoom')}</span><input type="range" class="fr-zoom" min="100" max="250" step="5"></label>
       <button type="button" class="btn sm fr-reset">${t('Recentrer')}</button>
@@ -32,6 +33,7 @@ export function mountFraming(el, src, value, onChange) {
   // Le point de visée est ramené dans la plage utile (au-delà, l'image ne bougerait plus)
   const clampFocus = () => {
     const bw = box.clientWidth, bh = box.clientHeight;
+    if (!bw || !bh) return; // zone pas encore affichée (section repliée) : rien à ramener
     const p = photoPlacement({ x: 0, y: 0, w: bw, h: bh }, f);
     const hx = bw / 2 / p.w, hy = bh / 2 / p.h;
     f.x = Math.min(1 - hx, Math.max(hx, f.x));

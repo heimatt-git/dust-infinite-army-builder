@@ -15,7 +15,7 @@ Army builder communautaire pour **DUST 194∞** (règles DUST 1947), qui remplac
 - **Français / anglais** (builder complet, Shot Format et éditeur) : la langue suit celle du navigateur ; le bouton EN/FR de l'en-tête permet de changer, et le choix vaut pour les trois pages. Les textes d'interface se traduisent dans `js/i18n.js`.
 - **Éditeur de base** intégré pour corriger une unité et publier la correction en un clic sur GitHub.
 - **Mes images de cartes** : chaque joueur peut ajouter ses propres scans ou photos de cartes (recto/verso). Ils restent dans son navigateur, ne sont ni envoyés ni partagés.
-- **Photos de la communauté** : photos de figurines peintes proposées par les joueurs, affichées avec leur crédit.
+- **Image de la carte générée** : une illustration carrée par unité, en pixel art (miniature de la liste et carte générée). En option, et uniquement dans leur navigateur, les joueurs peuvent utiliser une photo de la communauté (avec son crédit) ou leur propre photo de figurine.
 
 ## Shot Format (DUST 194∞)
 
@@ -42,7 +42,8 @@ Toute la base tient dans trois fichiers du dossier `data/` :
 | `units.json` | Unités : coût, armure, santé, mouvement, compétences, armes et tables d'attaque |
 | `blocs.json` | Blocs, factions et pelotons (TO&E, avantages) |
 | `skills.json` | Descriptions des compétences et règles d'armes |
-| `photos.json` | Photos de la communauté (unité, fichier, crédit, licence) |
+| `photos.json` | Photos de figurines proposées en option (unité, fichier, crédit, licence, cadrage) |
+| `pixel.json` | Unités illustrées dans `pixel/`, version (anti-cache) et cadrage éventuel par unité (mis à jour par l'onglet Illustrations de l'éditeur) |
 
 ### Méthode recommandée : l'éditeur intégré
 
@@ -113,17 +114,35 @@ Les unités, factions et blocs créés par la communauté (non officiels) sont r
 
 Sur l'accueil, **Importer des images** accepte plusieurs fichiers d'un coup. Nommez-les comme l'unité pour une association automatique : `Pounder.jpg`, `Bazooka Joe - verso.jpg` (suffixes reconnus pour le verso : `verso`, `back`, `dos`). Un écran permet de corriger avant d'enregistrer. Les images sont réduites (1 400 px max) et stockées dans le navigateur (IndexedDB) ; elles ne sont jamais publiées. Depuis une fiche d'unité, **Ma carte** permet aussi d'ajouter, remplacer ou retirer une image.
 
-## Photos de la communauté
+## Image de la carte générée
 
-Les joueurs proposent une photo de leur figurine peinte avec le formulaire **Issues → New issue → Proposer une photo de figurine** du dépôt (un lien direct apparaît sur chaque fiche d'unité du site). Le formulaire exige deux confirmations : photo prise par l'auteur (pas de scan de carte ni d'image officielle) et accord de publication sous licence **CC BY 4.0** avec crédit.
+Chaque carte générée (écran, PNG, PDF) et chaque miniature de la liste affichent, dans cet ordre de priorité :
 
-Pour valider une proposition :
+1. **la photo du joueur**, s'il en a ajouté une et coché « Utiliser ma photo » ;
+2. **la photo de la communauté** de l'unité, si elle existe et que le joueur a coché « Utiliser la photo de la communauté » (son crédit s'affiche alors sur la carte) ;
+3. **l'illustration pixel art** de l'unité (par défaut) ;
+4. **l'icône du type d'unité**, tant que l'unité n'a pas d'illustration.
 
-1. Ouvrez l'issue, vérifiez l'image et les deux cases cochées, enregistrez l'image (clic droit → enregistrer).
-2. **Éditeur de base → Photos** : choisissez l'unité, indiquez le crédit, sélectionnez l'image, **Ajouter au brouillon**.
-3. **Publier** : l'image est envoyée dans `photos/` et `data/photos.json` est mis à jour. Fermez l'issue avec un merci.
+La miniature de la liste montre toujours l'illustration. Les choix du joueur et sa photo restent dans son navigateur : rien n'est envoyé ni publié. Le Shot Format n'est pas concerné (il garde son affichage actuel).
 
-Pour activer les formulaires, vérifiez que le dossier `.github/ISSUE_TEMPLATE/` est bien présent dans le dépôt et que les **Issues** sont activées (Settings → General → Features). Un second formulaire, **Signaler une erreur d'unité**, sert aux corrections de la base.
+### Ajouter des illustrations (pixel art)
+
+Les illustrations sont des images **carrées** (le format de la carte, 80 × 80 mm), de n'importe quelle taille : 1 600 × 1 600 px convient très bien. Elles s'ajoutent dans l'**éditeur de base**, onglet **Illustrations** :
+
+1. Glissez vos images dans la zone prévue. Nommez chaque fichier comme l'unité (`Flying_Banana.jpg`) ou avec son id complet (`axis--kaori.jpg`, obligatoire quand plusieurs unités portent le même nom) : l'unité est retrouvée automatiquement, et vous pouvez la corriger dans la liste.
+2. Cliquez sur **Ajouter au brouillon**. Les images sont réduites dans le navigateur (vos originaux ne sont pas envoyés) :
+   - `pixel/<id>.jpg` : l'image de la carte (1 000 px maximum) ;
+   - `pixel/mini/<id>.jpg` : la miniature de la liste (160 px).
+3. Vérifiez le **cadrage** de chaque illustration (aperçu en format carré et large).
+4. Publiez depuis l'onglet **Publier** : les images et `data/pixel.json` sont envoyés sur GitHub.
+
+Sur la carte, l'illustration remplit la zone photo avec un rognage centré, plus ou moins important selon le format et le nombre d'armes (en format large avec beaucoup d'armes, un tiers à 40 % de la hauteur est coupé). Si le sujet n'est pas au centre de l'image, réglez le cadrage : il est enregistré dans `data/pixel.json` (`focus`, avec `x` et `y` de 0 à 1, 0,5 = centre, et `zoom` 1 ou plus).
+
+### Photos de figurines proposées en option
+
+Ces photos ne sont plus proposées par les joueurs : elles sont ajoutées par l'auteur du projet (ou viennent de l'Atelier, après relecture dans l'onglet Propositions). Dans l'éditeur de base, onglet **Photos** : choisissez l'unité, indiquez le crédit et la licence, sélectionnez l'image, **Ajouter au brouillon**, puis **Publier** (l'image est envoyée dans `photos/` et `data/photos.json` est mis à jour). Le bouton « Crédit et cadrage » règle la photo sur la carte.
+
+Le formulaire **Signaler une erreur d'unité** (`.github/ISSUE_TEMPLATE/`) sert toujours aux corrections de la base.
 
 ## Mettre à jour le code sans casser le cache
 
@@ -157,9 +176,11 @@ js/data.js          chargement de la base
 js/validate.js      vérification de la base (éditeur + GitHub)
 js/editor.js        éditeur
 js/shot.js          Shot Format
-data/*.json         la base (units, blocs, skills, photos)
-photos/             photos de la communauté
-js/images.js        images personnelles (stockage local)
+data/*.json         la base (units, blocs, skills, photos, pixel)
+pixel/              illustrations des unités (<id>.jpg) et miniatures (mini/<id>.jpg)
+photos/             photos de figurines proposées en option
+js/images.js        images de cartes personnelles (stockage local)
+js/cardart.js       image de la carte générée (pixel art, photo, choix du joueur)
 .github/            vérification automatique et formulaires de contribution
 scripts/validate.mjs
 ```
@@ -173,4 +194,4 @@ scripts/validate.mjs
 
 ## Mentions
 
-Outil de fan, non officiel et gratuit. DUST, DUST 1947, les noms, profils et règles appartiennent à leurs ayants droit. Les images officielles des cartes ne sont pas incluses. Les photos de la communauté restent la propriété de leurs auteurs et sont publiées sous licence CC BY 4.0.
+Outil de fan, non officiel et gratuit. DUST, DUST 1947, les noms, profils et règles appartiennent à leurs ayants droit. Les images officielles des cartes ne sont pas incluses. Les photos de figurines proposées en option restent la propriété de leurs auteurs et sont publiées sous licence CC BY 4.0.

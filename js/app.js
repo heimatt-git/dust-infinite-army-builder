@@ -5,6 +5,8 @@ import { esc, uid, store, toast, copyText, openModal, unitCardHTML, guessRepo, b
 import { t, LANG, initLang, setLang } from './i18n.js';
 import { generatedCardSVG, cardPNG, cardFontsReady } from './cardgen.js';
 import { exportListPDF, pdfDialogHTML, bindPdfDialog } from './pdf.js';
+import { initCardArt, pixelListed, pixelPath, pixelMini, resolveArt, getPrefs, setPrefs, ownPhotoAvailable, ownPhotoURL, saveOwnPhoto, deleteOwnPhoto } from './cardart.js';
+import { framingHTML, mountFraming } from './framing.js';
 import { initImages, imagesAvailable, imageURL, hasImage, imageCount, saveImage, deleteImage, clearImages, matchFiles, storageEstimate, SIDES } from './images.js';
 
 const LS_KEY = 'dust1947.lists';
@@ -43,6 +45,7 @@ async function init() {
   }
   S.lists = store.get(LS_KEY, []);
   await initImages();
+  await initCardArt();
   window.addEventListener('hashchange', route);
   route();
 }
@@ -147,7 +150,7 @@ function renderHome() {
       </section>
     </div>
     ${imagesPanelHTML()}
-    <p class="foot">${t("Outil de fan non officiel. DUST, DUST 1947 et les données de jeu appartiennent à leurs ayants droit. Les photos de la communauté appartiennent à leurs auteurs (CC BY 4.0). Données reprises de l'application DUST ENLIST 1.50 et corrigées par la communauté. Signalez une erreur via le dépôt GitHub (Issues → Signaler une erreur d'unité).")}</p>
+    <p class="foot">${t("Outil de fan non officiel. DUST, DUST 1947 et les données de jeu appartiennent à leurs ayants droit. Les photos de la communauté proposées en option appartiennent à leurs auteurs (CC BY 4.0). Données reprises de l'application DUST ENLIST 1.50 et corrigées par la communauté. Signalez une erreur via le dépôt GitHub (Issues → Signaler une erreur d'unité).")}</p>
   </main>`;
   bindTopbar();
   bindImagesPanel();
@@ -412,7 +415,7 @@ function unitRow(u, captured) {
     u.armor ? `<span class="tag">${t('Arm. {n}', { n: esc(u.armor) })}</span>` : '',
   ].join('');
   return `<div class="urow">
-    <div class="nm${hasImage(u.id) || communityPhotos(u.id).length ? ' wt' : ''}" data-card="${esc(u.id)}" data-cap="${captured ? 1 : ''}" tabindex="0" role="button" aria-label="${esc(t('Voir la carte {n}', { n: u.name }))}">
+    <div class="nm${pixelListed(u.id) ? ' wt' : ''}" data-card="${esc(u.id)}" data-cap="${captured ? 1 : ''}" tabindex="0" role="button" aria-label="${esc(t('Voir la carte {n}', { n: u.name }))}">
       ${thumb(u.id)}<b>${esc(u.name)}</b>${u.subtitle ? `<small>${esc(u.subtitle)}</small>` : ''}<div class="tags">${tags}</div>
     </div>
     <span class="cost">${cost}</span>
@@ -540,7 +543,7 @@ function entryRow(e, joined = false) {
     ctrls += `<button class="btn icon danger" data-rm="${e.k}" aria-label="${esc(t('Retirer {n}', { n: u.name }))}">✕</button>`;
   }
   return `<div class="erow ${joined ? 'joined' : ''}">
-    <div class="nm${hasImage(u.id) || communityPhotos(u.id).length ? ' wt' : ''}" data-card="${esc(u.id)}" data-cap="${e.cap ? 1 : ''}" tabindex="0" role="button">
+    <div class="nm${pixelListed(u.id) ? ' wt' : ''}" data-card="${esc(u.id)}" data-cap="${e.cap ? 1 : ''}" tabindex="0" role="button">
       ${thumb(u.id)}<b>${joined ? '↳ ' : ''}${esc(u.name)}</b><small>${esc(typeLabel(u.type))}${u.armor ? ' · ' + t('Armure') + ' ' + esc(u.armor) : ''}</small>${tags ? `<div class="tags">${tags}</div>` : ''}
     </div>
     <span class="cost">${cost}</span>
@@ -694,7 +697,7 @@ function listOrder(L) {
 function openPdf(A) {
   const D = S.data, L = S.list;
   const cards = listOrder(L).map((e) => ({ e, u: D.unitsById.get(e.u) })).filter((x) => x.u)
-    .map(({ e, u }) => ({ u, D, cost: entryCost(e, D), photo: communityPhotos(u.id)[0]?.file || null, focus: communityPhotos(u.id)[0]?.focus || null }));
+    .map(({ e, u }) => { const a = artOf(u); return { u, D, cost: entryCost(e, D), photo: a.photo, focus: a.focus, credit: a.credit }; });
   openModal(pdfDialogHTML(cards.length), (root) => bindPdfDialog(root, ({ includeCards, format }, onProgress) => {
     const row = (e) => {
       const u = D.unitsById.get(e.u);
@@ -737,9 +740,16 @@ function printHTML(A) {
 
 // ---------------------------------------------------------------- Images de cartes (locales)
 const communityPhotos = (id) => S.data.photos?.[id] || [];
+// Miniature de la liste : petite version (160 px) de l'illustration de l'unité, si elle en a une
 function thumb(id) {
-  const src = imageURL(id, 'front') || imageURL(id, 'back') || communityPhotos(id)[0]?.file;
-  return src ? `<img class="thumb" src="${src}" alt="" loading="lazy">` : '';
+  return pixelListed(id) ? `<img class="thumb" src="${esc(pixelMini(id))}" alt="" width="64" height="64" loading="lazy" onerror="this.onerror=null;this.src='${esc(pixelPath(id))}'">` : '';
+}
+// Image de la carte générée d'une unité (ma photo → photo de la communauté → pixel art → icône)
+function artOf(u) {
+  const a = resolveArt(u, communityPhotos(u.id));
+  const c = a.credit;
+  const credit = c ? `${t('Photo :')} ${c.author}${c.license && /^CC/i.test(c.license) ? ' · ' + c.license : ''}` : '';
+  return { photo: a.photo, focus: a.focus, credit };
 }
 
 function refreshView() {
@@ -767,25 +777,70 @@ function imagesSectionHTML(u) {
   </details>`;
 }
 
-function communitySectionHTML(u) {
-  const ph = communityPhotos(u.id);
-  const repo = guessRepo();
-  const propose = repo.owner
-    ? `https://github.com/${repo.owner}/${repo.repo}/issues/new?template=photo.yml&title=${encodeURIComponent('Photo : ' + u.name)}&unit=${encodeURIComponent(u.name + ' (' + u.id + ')')}`
-    : null;
-  if (!ph.length && !propose) return '';
-  // Section repliée par défaut, comme « Mes images de la carte officielle »
-  return `<details class="img-box community-box">
-    <summary>${t('Photos de la communauté')} ${ph.length ? `<span class="hint">${t('({n} image(s))', { n: ph.length })}</span>` : ''}</summary>
+// Image de la carte générée : pixel art par défaut ; photo de la communauté ou photo perso en option (choix local)
+const artLabel = (u) => ({ mine: t('Ma photo'), community: t('Photo de la communauté'), pixel: t('Pixel art'), none: t('Icône par défaut') })[resolveArt(u, communityPhotos(u.id)).kind];
+function cardArtSectionHTML(u, open = false) {
+  const ph = communityPhotos(u.id)[0];
+  const p = getPrefs(u.id);
+  const mineURL = ownPhotoURL(u.id);
+  const credit = ph ? `${t('Photo :')} ${esc(ph.author)}${ph.license ? ' · ' + esc(ph.license) : ''}` : '';
+  return `<details class="img-box art-box"${open ? ' open' : ''}>
+    <summary>${t('Image de la carte générée')} <span class="hint" data-art-state>${esc(artLabel(u))}</span></summary>
     <div class="community">
-    ${ph.length ? `<div class="ph-grid">${ph.map((p) => `<figure><button class="img-view" data-zoomc aria-label="${t('Agrandir')}"><img src="${esc(p.file)}" alt="${esc(t('Figurine {n} peinte par {a}', { n: u.name, a: p.author }))}" loading="lazy"></button>
-      <figcaption>${t('Photo :')} ${esc(p.author)}${p.license ? ' · ' + esc(p.license) : ''}</figcaption></figure>`).join('')}</div>` : ''}
-    ${propose ? `<p class="hint" style="margin:0">${t('Vous avez peint cette unité ?')} <a href="${propose}" target="_blank" rel="noopener">${t('Proposez une photo de votre figurine')}</a>.</p>` : ''}
-  </div></details>`;
+      <p class="hint" style="margin:0">${t("Par défaut, la carte affiche le pixel art de l'unité (ou une icône s'il n'existe pas encore). Vos choix restent dans ce navigateur.")}</p>
+      ${ph ? `<div class="art-opt">
+        <label class="check"><input type="checkbox" data-art="comm" ${p.comm && !(p.mine && mineURL) ? 'checked' : ''}> ${t('Utiliser la photo de la communauté')}</label>
+        <figure class="art-fig"><img src="${esc(ph.file)}" alt="${esc(t('Figurine {n} peinte par {a}', { n: u.name, a: ph.author }))}" loading="lazy"><figcaption>${credit}</figcaption></figure>
+      </div>` : ''}
+      ${ownPhotoAvailable() ? `<div class="art-opt">
+        <label class="check"><input type="checkbox" data-art="mine" ${p.mine && mineURL ? 'checked' : ''} ${mineURL ? '' : 'disabled'}> ${t('Utiliser ma photo')}</label>
+        <div class="img-acts">
+          <label class="btn sm">${mineURL ? t('Remplacer') : t('Ajouter ma photo')}<input type="file" accept="image/*" data-own hidden></label>
+          ${mineURL ? `<button type="button" class="btn sm danger" data-own-rm>${t('Retirer')}</button>` : ''}
+        </div>
+        ${mineURL ? framingHTML() : ''}
+        <p class="hint" style="margin:0">${t("Votre photo reste dans ce navigateur : elle n'est ni envoyée ni partagée, et ne s'affiche que sur votre carte générée.")}</p>
+      </div>` : ''}
+    </div>
+  </details>`;
+}
+function bindCardArt(root, u, cost, rerender) {
+  const box = root.querySelector('.art-box');
+  if (!box) return;
+  const redraw = () => {
+    const w = root.querySelector('.gcard-wrap'); if (w?.isConnected) w.innerHTML = cardSVG(u, cost);
+    const st = box.querySelector('[data-art-state]'); if (st) st.textContent = artLabel(u);
+  };
+  box.querySelectorAll('[data-art]').forEach((cb) => cb.addEventListener('change', () => {
+    const kind = cb.dataset.art;
+    if (cb.checked) {
+      setPrefs(u.id, kind === 'mine' ? { mine: true, comm: false } : { comm: true, mine: false });
+      box.querySelectorAll('[data-art]').forEach((o) => { if (o !== cb) o.checked = false; });
+    } else setPrefs(u.id, { [kind]: false });
+    redraw();
+  }));
+  box.querySelector('[data-own]')?.addEventListener('change', async (ev) => {
+    const f = ev.target.files[0];
+    if (!f) return;
+    try { await saveOwnPhoto(u.id, f); toast(t('Photo enregistrée')); rerender(box.open); }
+    catch (e) { toast(e.message === 'storage' ? t("Stockage d'images indisponible dans ce navigateur.") : e.message); }
+  });
+  box.querySelector('[data-own-rm]')?.addEventListener('click', async () => { await deleteOwnPhoto(u.id); rerender(box.open); });
+  // Le cadrage se règle sur la zone affichée : on ne le monte que lorsque la section est ouverte
+  const fr = box.querySelector('.framing');
+  let mounted = false;
+  const mountFr = () => {
+    if (mounted || !fr || !box.open) return;
+    mounted = true;
+    mountFraming(fr, ownPhotoURL(u.id), getPrefs(u.id).focus, (focus) => { setPrefs(u.id, { focus }); redraw(); });
+  };
+  box.addEventListener('toggle', mountFr);
+  mountFr();
+  return redraw;
 }
 
 // Carte générée (format mono-face) à partir des données, avec export PNG
-const cardSVG = (u, cost) => { const p = communityPhotos(u.id)[0]; return generatedCardSVG(u, S.data, { cost, photo: p?.file || null, focus: p?.focus || null }); };
+const cardSVG = (u, cost) => { const a = artOf(u); return generatedCardSVG(u, S.data, { cost, photo: a.photo || null, focus: a.focus, credit: a.credit }); };
 function generatedCardSection(u, cost) {
   return `<div class="gcard-box"><button type="button" class="gcard-wrap" data-zoomc title="${t('Agrandir')}" aria-label="${t('Agrandir')}">${cardSVG(u, cost)}</button>
     <div class="gcard-acts"><button type="button" class="btn sm" data-png>${t('Télécharger la carte (PNG)')}</button>
@@ -795,9 +850,12 @@ const fileSlug = (s) => String(s || 'carte').normalize('NFKD').replace(/[\u0300-
 
 function openUnitCard(u, cap) {
   const cost = unitCost(u) + (cap ? CAPTURED_SURCHARGE : 0);
-  openModal(unitCardHTML(u, S.data, { cost, captured: cap, topHTML: generatedCardSection(u, cost) + communitySectionHTML(u) + imagesSectionHTML(u) }), (root, close) => {
+  openModal(unitCardHTML(u, S.data, { cost, captured: cap, topHTML: generatedCardSection(u, cost) + cardArtSectionHTML(u) + imagesSectionHTML(u) }), (root, close) => {
     // Redessine la carte une fois ses polices chargées (les textes sont mesurés avec la bonne police)
-    cardFontsReady().then(() => { const w = root.querySelector('.gcard-wrap'); if (w?.isConnected) w.innerHTML = cardSVG(u, cost); });
+    const rerenderArt = (open) => { const b = root.querySelector('.art-box'); if (b) b.outerHTML = cardArtSectionHTML(u, open); bindCardArt(root, u, cost, rerenderArt)?.(); };
+    const redrawArt = bindCardArt(root, u, cost, rerenderArt);
+    // Redessine la carte une fois ses polices chargées (les textes sont mesurés avec la bonne police)
+    cardFontsReady().then(() => redrawArt?.());
     root.querySelector('[data-png]')?.addEventListener('click', async (ev) => {
       const b = ev.currentTarget; b.disabled = true;
       try {
