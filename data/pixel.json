@@ -1,13 +1,38 @@
 {
- "version": "202610050831",
+ "version": "202610050857",
  "units": [
   "allies--flying-banana",
-  "ssu--steel-guards-sniper-squad"
+  "allies--recon-mickey",
+  "axis--experiment-x-33",
+  "axis--heinrich-tropical-bk",
+  "mercenaries--mercenary-railgun-team",
+  "ssu--steel-guards-sniper-squad",
+  "ssu--winter-child"
  ],
  "focus": {
   "ssu--steel-guards-sniper-squad": {
    "x": 0.5,
    "y": 0.592,
+   "zoom": 1
+  },
+  "mercenaries--mercenary-railgun-team": {
+   "x": 0.5,
+   "y": 0.549,
+   "zoom": 1
+  },
+  "axis--heinrich-tropical-bk": {
+   "x": 0.5,
+   "y": 0.567,
+   "zoom": 1
+  },
+  "axis--experiment-x-33": {
+   "x": 0.5,
+   "y": 0.533,
+   "zoom": 1
+  },
+  "allies--recon-mickey": {
+   "x": 0.5,
+   "y": 0.449,
    "zoom": 1
   }
  }
