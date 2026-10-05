@@ -85,3 +85,20 @@
 .px-grid img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 6px; border: 1px solid var(--line); }
 .px-cards { display: grid; gap: 12px; max-width: 460px; }
 .px-cards .gcard-wrap { max-width: none; cursor: default; }
+
+/* Sélecteur de compétences à pastilles */
+.skp { display: grid; gap: 6px; }
+.skp-chips { display: flex; gap: 6px; flex-wrap: wrap; min-height: 6px; }
+.skp-chip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 4px 2px 10px; border: 1px solid var(--line); border-radius: 99px; background: var(--panel-2); font-size: 13px; font-weight: 600; max-width: 100%; overflow-wrap: anywhere; }
+.skp-chip.custom { border-style: dashed; border-color: var(--accent); }
+.skp-chip.unknown { color: var(--warn); background: var(--warn-bg); border-color: transparent; }
+.skp-chip button { border: 0; background: transparent; color: var(--muted); cursor: pointer; width: 22px; height: 22px; border-radius: 50%; font-size: 12px; line-height: 1; }
+.skp-chip button:hover, .skp-chip button:focus-visible { background: var(--bad-bg); color: var(--bad); }
+.skp-add { position: relative; }
+.skp-list { position: absolute; z-index: 20; left: 0; right: 0; top: calc(100% + 2px); margin: 0; padding: 4px; list-style: none; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; box-shadow: var(--shadow, 0 6px 20px rgba(0,0,0,.18)); max-height: 280px; overflow-y: auto; }
+.skp-list li { display: grid; gap: 1px; padding: 6px 8px; border-radius: 6px; cursor: pointer; }
+.skp-list li small { color: var(--muted); font-size: 12px; }
+.skp-list li.on, .skp-list li:hover { background: var(--panel-2); box-shadow: inset 2px 0 0 var(--accent); }
+.skp-sugg { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.skp-s { border: 1px dashed var(--line); background: transparent; border-radius: 99px; padding: 1px 10px; font-size: 12.5px; cursor: pointer; color: var(--ink); }
+.skp-s:hover, .skp-s:focus-visible { border-color: var(--accent); background: var(--panel-2); }

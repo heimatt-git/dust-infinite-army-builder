@@ -184,7 +184,7 @@ export function generatedCardSVG(u, D, { cost, photo, focus = null, format = 'sq
   // ---- Compétences : « • NOM • » centré, puis le résumé
   out.push(`<rect x="${SX}" y="${SY}" width="${SW}" height="${SH}" rx="34" fill="#fffdf7" stroke="${INK}" stroke-width="4"/>`);
   const skills = [
-    ...(u.skills || []).map((s) => ({ head: s, desc: D.skills[s] || '' })),
+    ...(u.skills || []).filter((s) => !(u.customSkills || []).some((c) => c.name === s)).map((s) => ({ head: s, desc: D.skills[s] || '' })),
     ...(u.customSkills || []).map((c) => ({ head: c.name, desc: c.description || '' })),
   ];
   const wsk = new Map();

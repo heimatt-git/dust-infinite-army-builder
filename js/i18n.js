@@ -766,4 +766,13 @@ const EN = {
   "Remplacer ma collection": "Replace my collection",
   "Votre collection actuelle est remplacée par celle du fichier.": "Your current collection is replaced by the file's.",
   "Annuler": "Cancel",
+  "Compétences officielles": "Official skills",
+  "Règles spéciales": "Special rules",
+  "Ajouter une compétence…": "Add a skill…",
+  "Fréquentes pour ce type :": "Common for this type:",
+  "Créer « {n} » comme règle inédite": "Create “{n}” as a new rule",
+  "Règle inédite": "New rule",
+  "Compétence inconnue : ce n'est pas une compétence officielle.": "Unknown skill: not an official skill.",
+  "Tapez quelques lettres pour chercher dans les compétences officielles. Une règle qui n'existe pas sur les cartes se crée avec « Créer comme règle inédite ».": "Type a few letters to search the official skills. A rule that does not exist on the cards is created with “Create as a new rule”.",
+  "Règle inédite ajoutée : décrivez-la ci-dessous.": "New rule added: describe it below.",
 };

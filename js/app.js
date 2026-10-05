@@ -718,7 +718,7 @@ function openPdf(A) {
       const u = D.unitsById.get(e.u);
       if (!u) return null;
       const stats = [`${t('Arm')} ${u.armor ?? '-'}`, `${t('Santé')} ${u.health ?? '-'}`, `${t('Mv')} ${u.move ?? '-'}/${u.march ?? '-'}`];
-      const extra = [...(u.skills || []), ...(u.customSkills || []).map((c) => c.name)];
+      const extra = [...new Set([...(u.skills || []), ...(u.customSkills || []).map((c) => c.name)])];
       return { name: u.name + (e.cap ? ` (${t('capturé')})` : '') + (u.confidential ? ' · CONFIDENTIAL' : ''), cost: `${entryCost(e, D)} pts`, detail: [stats.join(' · '), extra.join(', ')].filter(Boolean).join(' · ') };
     };
     const sections = L.platoons.map((pi) => {

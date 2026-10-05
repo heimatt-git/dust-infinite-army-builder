@@ -89,7 +89,7 @@ export function unitCardHTML(u, data, { cost, captured, extraChips = '', topHTML
   const head = (n, label) => n ? `<th colspan="${n}" class="grp">${label}</th>` : '';
   const sub = (n) => Array.from({ length: n }, (_, i) => `<th${i === 0 ? ' class="grp"' : ''}>${i + 1}</th>`).join('');
   const skills = [
-    ...(u.skills || []).map((s) => ({ name: s, description: data.skills[s] || '' })),
+    ...(u.skills || []).filter((s) => !(u.customSkills || []).some((c) => c.name === s)).map((s) => ({ name: s, description: data.skills[s] || '' })),
     ...(u.customSkills || []),
   ];
   const wSpecials = [...new Set(ws.flatMap((w) => w.specials || []))];

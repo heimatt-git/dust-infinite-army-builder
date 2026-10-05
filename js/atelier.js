@@ -6,6 +6,7 @@ import { validateCustom, UNIT_TYPES } from './validate.js';
 import { esc, uid, store, toast, openModal, unitCardHTML, brandLogo, mountCredit } from './ui.js';
 import { shrink } from './images.js';
 import { framingHTML, mountFraming } from './framing.js';
+import { skillPickerHTML, bindSkillPickers } from './skillpicker.js';
 import { generatedCardSVG, cardFontsReady } from './cardgen.js';
 import { t, LANG, initLang, setLang } from './i18n.js';
 
@@ -231,7 +232,13 @@ function renderUnits(body) {
 
 function unitForm(u, D) {
   const bloc = D.blocsById.get(u.bloc);
-  const skills = Object.keys(D.skills).sort((a, b) => a.localeCompare(b));
+  // Suggestions : compétences les plus fréquentes chez les unités de la base du même type, et règles d'armes les plus fréquentes
+  const top = (counts, n = 8) => [...counts].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).slice(0, n).map(([k]) => k);
+  const tally = (arrs) => { const m = new Map(); for (const a of arrs) for (const k of new Set(a)) if (D.skills[k]) m.set(k, (m.get(k) || 0) + 1); return m; };
+  const official = D.units.filter((x) => !x.confidential);
+  const skillSugg = top(tally(official.filter((x) => x.type === u.type).map((x) => x.skills || [])));
+  const specialSugg = top(tally(official.flatMap((x) => (x.weapons || []).map((w) => w.specials || []))));
+  const customNames = (u.customSkills || []).map((c) => c.name).filter(Boolean);
   return `<form class="ed-form" id="u-form" autocomplete="off">
     <div class="ed-sec">
       <h2>${t('Identité')}</h2>
@@ -252,8 +259,7 @@ function unitForm(u, D) {
         ${[['cost', t('Points')], ['armor', t('Armure')], ['health', t('Santé')], ['move', t('Mouvement')], ['march', t('Marche')]].map(([k, l]) => `<label class="field"><span>${l}</span><input type="text" inputmode="numeric" name="${k}" value="${esc(u[k] ?? '')}"></label>`).join('')}
       </div>
       <label class="check"><input type="checkbox" name="capturable" ${u.capturable ? 'checked' : ''}> ${t('Peut être aligné comme véhicule capturé par un autre bloc')}</label>
-      <label class="field"><span>${t('Compétences officielles (séparées par des virgules)')}</span><input type="text" name="skills" list="skills-dl" value="${esc((u.skills || []).join(', '))}"></label>
-      <datalist id="skills-dl">${skills.map((s) => `<option value="${esc(s)}">`).join('')}</datalist>
+      ${skillPickerHTML({ name: 'skills', label: t('Compétences officielles'), values: u.skills || [], skills: D.skills, custom: customNames, sugg: skillSugg, hint: t('Tapez quelques lettres pour chercher dans les compétences officielles. Une règle qui n\'existe pas sur les cartes se crée avec « Créer comme règle inédite ».') })}
     </div>
     <div class="ed-sec">
       <h2>${t('Règles inédites')}</h2>
@@ -276,7 +282,7 @@ function unitForm(u, D) {
           <label class="field"><span>${t('Munitions')}</span><input type="text" name="w-ammo-${i}" value="${esc(w.ammo ?? '')}"></label>
           <label class="field"><span>${t('Montage')}</span><input type="text" name="w-mount-${i}" value="${esc(w.mount ?? '')}" placeholder="Turret, Front…"></label>
         </div>
-        <label class="field"><span>${t('Règles spéciales (virgules)')}</span><input type="text" name="w-specials-${i}" list="skills-dl" value="${esc((w.specials || []).join(', '))}"></label>
+        ${skillPickerHTML({ name: `w-specials-${i}`, label: t('Règles spéciales'), values: w.specials || [], skills: D.skills, custom: customNames, sugg: specialSugg })}
         <div class="row2">
           <label class="field"><span>${t('vs Infanterie (1→4)')}</span><input type="text" name="w-inf-${i}" value="${esc((w.vsInfantry || []).join(' '))}"></label>
           <label class="field"><span>${t('vs Véhicule (1→7)')}</span><input type="text" name="w-veh-${i}" value="${esc((w.vsVehicle || []).join(' '))}"></label>
@@ -351,6 +357,20 @@ function bindUnitForm(body, u) {
     if (['bloc', 'name', 'cost', 'type'].includes(e.target.name)) render(); else showPreview();
   });
   form.addEventListener('submit', (e) => e.preventDefault());
+  // Sélecteurs de compétences : « Créer comme règle inédite » ouvre la section Règles inédites avec le nom déjà rempli
+  bindSkillPickers(form, {
+    skills: preview().skills,
+    onCreate: (name) => {
+      apply();
+      u.customSkills ||= [];
+      if (!u.customSkills.some((c) => c.name === name)) u.customSkills.push({ name, description: '' });
+      save(); render();
+      const i = u.customSkills.findIndex((c) => c.name === name);
+      const ta = document.querySelector(`[name="cs-desc-${i}"]`);
+      ta?.scrollIntoView({ block: 'center' }); ta?.focus();
+      toast(t('Règle inédite ajoutée : décrivez-la ci-dessous.'));
+    },
+  });
   form.querySelector('#add-w').addEventListener('click', () => { apply(); u.weapons.push({ name: t('Nouvelle arme'), count: 1, range: 1, specials: [], vsInfantry: [], vsVehicle: [], vsAircraft: [] }); save(); render(); });
   form.querySelector('#add-cs').addEventListener('click', () => { apply(); (u.customSkills ||= []).push({ name: '', description: '' }); save(); render(); });
   form.querySelectorAll('[data-rmw]').forEach((b) => b.addEventListener('click', () => { apply(); u.weapons.splice(+b.dataset.rmw, 1); save(); render(); }));
