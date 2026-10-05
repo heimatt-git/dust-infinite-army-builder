@@ -7,6 +7,8 @@ import { generatedCardSVG, cardPNG, cardFontsReady } from './cardgen.js';
 import { exportListPDF, pdfDialogHTML, bindPdfDialog } from './pdf.js';
 import { initCardArt, pixelListed, pixelPath, pixelMini, resolveArt, getPrefs, setPrefs, ownPhotoAvailable, ownPhotoURL, saveOwnPhoto, deleteOwnPhoto } from './cardart.js';
 import { framingHTML, mountFraming } from './framing.js';
+import { getQty, hasCollection, usageOf, missingFor, overEntryKeys } from './collection.js';
+import { renderCollectionPage } from './collectionpage.js';
 import { initImages, imagesAvailable, imageURL, hasImage, imageCount, saveImage, deleteImage, clearImages, matchFiles, storageEstimate, SIDES } from './images.js';
 
 const LS_KEY = 'dust1947.lists';
@@ -18,7 +20,7 @@ const S = {
   lists: [],
   list: null,
   undo: null,
-  ui: { catTab: 'units', type: 'all', faction: 'all', q: '', mtab: 'catalog', newBloc: 'Allies', newLimit: 100, newConf: false, newName: '' },
+  ui: { catTab: 'units', type: 'all', faction: 'all', q: '', onlyOwned: false, mtab: 'catalog', newBloc: 'Allies', newLimit: 100, newConf: false, newName: '' },
   official: null, // base officielle
   all: null,      // base officielle + créations CONFIDENTIAL
 };
@@ -62,6 +64,7 @@ function saveLists() {
 function route() {
   const h = location.hash;
   if (h.startsWith('#l=')) return importFromCode(h.slice(3));
+  if (h === '#/collection') { S.list = null; S.data = S.all; return renderCollectionPage(colCtx()); }
   const m = h.match(/^#\/liste\/([\w-]+)/);
   if (m) {
     const l = S.lists.find((x) => x.id === m[1]);
@@ -83,6 +86,7 @@ function topbar(active) {
     <a class="brand with-logo" href="#/">${brandLogo()}<b>DUST 194∞</b><small>Builder</small></a>
     <nav class="topnav">
       <a href="#/" class="${active === 'home' ? 'on' : ''}">${t('Mes listes')}</a>
+      <a href="#/collection" class="${active === 'collection' ? 'on' : ''}">${t('Ma collection')}</a>
       <a href="shot.html">Shot Format</a>
       <a href="atelier.html">${t('Atelier')}</a>
       <button id="lang-btn" type="button" lang="${LANG === 'fr' ? 'en' : 'fr'}" title="${LANG === 'fr' ? 'English version' : 'Version française'}">${LANG === 'fr' ? 'EN' : 'FR'}</button>
@@ -301,6 +305,8 @@ function renderBuilder() {
   const A = analyzeArmy(L, D);
   const bloc = D.blocsById.get(L.bloc);
   const over = A.counted > A.limit;
+  // Ma collection : n'a d'effet que si le joueur l'a activée pour cette liste (et qu'il a une collection)
+  S.col = colOn() ? { usage: usageOf(L), missing: missingFor(L), over: overEntryKeys(L) } : null;
   const pct = (v) => Math.min(100, (v / Math.max(1, A.limit)) * 100);
 
   app.innerHTML = `${topbar('build')}
@@ -312,6 +318,7 @@ function renderBuilder() {
         <span class="chip bloc" style="--bc:${esc(bloc?.color)}"><span class="swatch"></span>${esc(blocName(L.bloc, D))}</span>
         ${L.confidential ? `<span class="chip conf" title="${esc(t('Cette armée peut contenir des créations de la communauté, non officielles.'))}">CONFIDENTIAL</span>` : ''}
         <label class="chip">${t('Format')} <input type="number" id="army-limit" value="${L.limit}" min="1" max="2000" style="width:70px;padding:0 4px;border:0;background:transparent" aria-label="${t('Limite de points')}"> pts</label>
+        ${hasCollection() ? `<label class="chip" title="${esc(t("Voir vos unités et être averti quand la liste en demande plus que vous n'en possédez."))}"><input type="checkbox" id="army-col" ${L.useCollection ? 'checked' : ''}> ${t('Ma collection')}</label>` : ''}
       </div>
     </div>
     <section class="summary" aria-label="${t("Résumé de l'armée")}">
@@ -325,6 +332,7 @@ function renderBuilder() {
           ${A.kind !== 'none' ? `<span class="chip">${t('Bonus héros')} <b class="num">${A.covered}/${A.pool}</b></span>` : ''}
           <span class="chip">${t('Total dépensé')} <b class="num">${A.total}</b></span>
           ${A.errors.length ? `<span class="chip bad">${t(A.errors.length > 1 ? '{n} erreurs' : '{n} erreur', { n: A.errors.length })}</span>` : `<span class="chip ok">${t('Liste valide')}</span>`}
+          ${S.col ? (S.col.missing.length ? `<span class="chip warn">${t('Collection : {n} manquant(s)', { n: S.col.missing.reduce((x, m) => x + m.short, 0) })}</span>` : `<span class="chip ok">${t('Collection : complète')}</span>`) : ''}
           ${A.warnings.length ? `<span class="chip warn">${t(A.warnings.length > 1 ? '{n} avertissements' : '{n} avertissement', { n: A.warnings.length })}</span>` : ''}
         </div>
       </div>
@@ -359,6 +367,7 @@ function catalogUnits() {
   else pool = D.units.filter((u) => u.bloc === L.bloc);
   if (U.type !== 'all' && tab !== 'captured') pool = pool.filter((u) => u.type === U.type);
   if (tab === 'units' && U.faction !== 'all') pool = pool.filter((u) => (U.faction === 'none' ? !u.faction : u.faction === U.faction));
+  if (S.col && U.onlyOwned) pool = pool.filter((u) => getQty(u.id) > 0);
   if (U.q) {
     const q = U.q.toLowerCase();
     pool = pool.filter((u) => (u.name + ' ' + u.subtitle + ' ' + (u.skills || []).join(' ')).toLowerCase().includes(q));
@@ -397,6 +406,7 @@ function catalogHTML() {
           ${bloc.factions.map((f) => `<option value="${esc(f.id)}" ${U.faction === f.id ? 'selected' : ''}>${esc(f.name)}${f.confidential ? ' · CONFIDENTIAL' : ''}</option>`).join('')}
         </select>` : ''}
       </div>
+      ${S.col ? `<label class="check"><input type="checkbox" id="cat-owned" ${U.onlyOwned ? 'checked' : ''}> ${t('Seulement mes unités')}</label>` : ''}
       <div class="cat-list">
         ${groups.map(([g, arr]) => `<div class="cat-group">${esc(g)} · ${arr.length}</div>${arr.map((u) => unitRow(u, cap)).join('')}`).join('') || `<p class="empty">${t('Aucune unité ne correspond.')}</p>`}
       </div>`;
@@ -413,6 +423,7 @@ function unitRow(u, captured) {
     captured ? `<span class="tag cap">${t('Capturé')}</span>` : '',
     u.confidential ? '<span class="tag conf">CONFIDENTIAL</span>' : '',
     u.armor ? `<span class="tag">${t('Arm. {n}', { n: esc(u.armor) })}</span>` : '',
+    colTag(u.id),
   ].join('');
   return `<div class="urow">
     <div class="nm${pixelListed(u.id) ? ' wt' : ''}" data-card="${esc(u.id)}" data-cap="${captured ? 1 : ''}" tabindex="0" role="button" aria-label="${esc(t('Voir la carte {n}', { n: u.name }))}">
@@ -430,6 +441,7 @@ function rosterHTML(A) {
     ...A.errors.map((m) => `<div class="issue bad"><b>✕</b><span>${esc(m)}</span></div>`),
     ...A.warnings.map((m) => `<div class="issue warn"><b>!</b><span>${esc(m)}</span></div>`),
     ...(A.reason ? [`<div class="issue info"><b>i</b><span>${esc(A.reason)}</span></div>`] : []),
+    ...(S.col?.missing.length ? [`<div class="issue warn"><b>!</b><span>${esc(t('Collection : il vous manque {l}.', { l: S.col.missing.map((m) => `${m.short} × ${D.unitsById.get(m.id)?.name || m.id}`).join(', ') }))}</span></div>`] : []),
   ].join('');
   const joinedMap = new Map();
   for (const e of L.entries) if (e.join) { const a = joinedMap.get(e.join) || []; a.push(e); joinedMap.set(e.join, a); }
@@ -449,7 +461,7 @@ function rosterHTML(A) {
       const ids = inSlot.filter((e) => !e.merc).map((e) => e.u).sort().join('|');
       const mercE = inSlot.find((e) => e.merc);
       const selected = mercE ? 'm:' + mercE.u : options.findIndex((o) => [...o].sort().join('|') === ids);
-      const optLabel = (o) => o.map((id) => D.unitsById.get(id)?.name || id).join(' + ') + ` (${o.reduce((s, id) => s + unitCost(D.unitsById.get(id) || {}), 0)})`;
+      const optLabel = (o) => o.map((id) => D.unitsById.get(id)?.name || id).join(' + ') + ` (${o.reduce((s, id) => s + unitCost(D.unitsById.get(id) || {}), 0)})` + (S.col && o.some((id) => !getQty(id)) ? ' · ' + t('non possédé') : '');
       let mercOpts = '';
       if (role.startsWith('c') && !role.startsWith('cmd') && L.bloc !== MERC) {
         const types = new Set(options.flat().map((id) => D.unitsById.get(id)?.type).filter(Boolean));
@@ -520,6 +532,7 @@ function entryRow(e, joined = false) {
     u.bloc === MERC && L.bloc !== MERC ? `<span class="tag merc">${t('Mercenaire')}</span>` : '',
     e.cap ? `<span class="tag cap">${t('Capturé')}</span>` : '',
     u.confidential ? '<span class="tag conf">CONFIDENTIAL</span>' : '',
+    S.col?.over.has(e.k) ? `<span class="tag miss" title="${esc(t("Vous n'en possédez pas assez pour cette liste."))}">${t('À acquérir')}</span>` : '',
   ].join('');
   let ctrls = '';
   // Rattachement d'un héros
@@ -557,6 +570,7 @@ function bindBuilder(A) {
   const $ = (id) => document.getElementById(id);
 
   $('army-name').addEventListener('change', (e) => { L.name = e.target.value.trim() || L.name; saveLists(); });
+  $('army-col')?.addEventListener('change', (e) => { L.useCollection = e.target.checked; if (!L.useCollection) U.onlyOwned = false; commit(); });
   $('army-limit').addEventListener('change', (e) => { L.limit = Math.max(1, +e.target.value || L.limit); commit(); });
 
   app.querySelectorAll('[data-mtab]').forEach((b) => b.addEventListener('click', () => { U.mtab = b.dataset.mtab; renderBuilder(); }));
@@ -574,6 +588,7 @@ function bindBuilder(A) {
       const q2 = $('cat-q'); q2.focus(); q2.setSelectionRange(pos, pos);
     });
     $('cat-fac')?.addEventListener('change', (e) => { U.faction = e.target.value; rerenderCatalog(); });
+    $('cat-owned')?.addEventListener('change', (e) => { U.onlyOwned = e.target.checked; rerenderCatalog(); });
     cat.querySelectorAll('[data-add]').forEach((b) => b.addEventListener('click', () => {
       const u = D.unitsById.get(b.dataset.add);
       addEntry(u.id, b.dataset.cap ? { cap: 1 } : {});
@@ -741,6 +756,18 @@ function printHTML(A) {
 // ---------------------------------------------------------------- Images de cartes (locales)
 const communityPhotos = (id) => S.data.photos?.[id] || [];
 // Miniature de la liste : petite version (160 px) de l'illustration de l'unité, si elle en a une
+// Contexte transmis à la page « Ma collection » (le clic sur une unité ouvre sa carte, comme dans le catalogue)
+const colCtx = () => ({ S, app, topbar, bindTopbar, thumb, openCard: (u) => openUnitCard(u, false) });
+// Ma collection : active pour la liste ouverte ?
+const colOn = () => !!S.list?.useCollection && hasCollection();
+// Pastille « possédé » d'une ligne du catalogue
+function colTag(id) {
+  if (!S.col) return '';
+  const own = getQty(id), used = S.col.usage.get(id) || 0;
+  if (!own) return `<span class="tag nown">${t('Non possédé')}</span>`;
+  return `<span class="tag own">${t('Possédé ×{n}', { n: own })}${used ? t(' · {u} en liste', { u: used }) : ''}</span>`;
+}
+
 function thumb(id) {
   return pixelListed(id) ? `<img class="thumb" src="${esc(pixelMini(id))}" alt="" width="64" height="64" loading="lazy" onerror="this.onerror=null;this.src='${esc(pixelPath(id))}'">` : '';
 }
@@ -753,7 +780,7 @@ function artOf(u) {
 }
 
 function refreshView() {
-  if (S.list) renderBuilder(); else renderHome();
+  if (S.list) renderBuilder(); else if (location.hash === '#/collection') renderCollectionPage(colCtx()); else renderHome();
 }
 
 function imagesSectionHTML(u) {
