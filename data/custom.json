@@ -1,10 +1,25 @@
 {
  "meta": {
-  "version": "2026.10.01",
-  "updated": "2026-10-01",
+  "version": "2026.10.05",
+  "updated": "2026-10-05",
   "note": "Créations de la communauté (CONFIDENTIAL), non officielles. Visibles uniquement dans les armées où la case CONFIDENTIAL est cochée."
  },
- "blocs": [],
+ "blocs": [
+  {
+   "id": "conf-vrill",
+   "name": "Vrill",
+   "nameEn": "Vrill",
+   "color": "#3d6e85",
+   "author": "L'Heure du Loir",
+   "factions": [
+    {
+     "id": "conf-vrill-faction",
+     "name": "Vrill",
+     "author": "L'Heure du Loir"
+    }
+   ]
+  }
+ ],
  "factions": [
   {
    "bloc": "Allies",
@@ -100,8 +115,337 @@
    ],
    "author": "L'Heure du Loir",
    "approved": "2026-09-29"
+  },
+  {
+   "id": "conf--vrill--adissa",
+   "name": "Adissa",
+   "subtitle": "Vrill Agent",
+   "bloc": "conf-vrill",
+   "type": "hero",
+   "faction": "conf-vrill-faction",
+   "cost": 7,
+   "health": 4,
+   "move": 3,
+   "march": 5,
+   "armor": 2,
+   "capturable": false,
+   "skills": [
+    "Refractor Shield",
+    "Loner",
+    "Lucky"
+   ],
+   "customSkills": [],
+   "weapons": [
+    {
+     "name": "Zapper (close combat)",
+     "count": 2,
+     "range": "C",
+     "specials": [],
+     "vsInfantry": [
+      "B/1",
+      "B/1",
+      "B/1",
+      "B/1"
+     ],
+     "vsVehicle": [
+      "3/1",
+      "3/1",
+      "3/1",
+      "3/1",
+      "3/1",
+      "3/1",
+      "3/1"
+     ],
+     "vsAircraft": []
+    },
+    {
+     "name": "Zapper",
+     "count": 2,
+     "range": 4,
+     "specials": [],
+     "vsInfantry": [
+      "4/1",
+      "4/1",
+      "4/1",
+      "4/1"
+     ],
+     "vsVehicle": [
+      "2/1",
+      "2/1",
+      "2/1",
+      "2/1",
+      "2/1",
+      "2/1",
+      "2/1"
+     ],
+     "vsAircraft": []
+    },
+    {
+     "name": "Zapper (overcharged)",
+     "count": 2,
+     "range": 3,
+     "ammo": 2,
+     "specials": [
+      "Grenade"
+     ],
+     "vsInfantry": [
+      "B/1",
+      "B/1",
+      "B/1",
+      "B/1"
+     ],
+     "vsVehicle": [
+      "1/5",
+      "1/5",
+      "1/5",
+      "1/5",
+      "1/5",
+      "1/4",
+      "1/4"
+     ],
+     "vsAircraft": []
+    }
+   ],
+   "author": "L'Heure du Loir",
+   "approved": "2026-09-30"
+  },
+  {
+   "id": "conf--vrill--vrill-automata",
+   "name": "Vrill Automata",
+   "subtitle": "",
+   "bloc": "conf-vrill",
+   "type": "vehicle",
+   "faction": "conf-vrill-faction",
+   "cost": 12,
+   "health": 6,
+   "move": 3,
+   "march": 5,
+   "armor": 4,
+   "capturable": false,
+   "skills": [],
+   "customSkills": [],
+   "weapons": [
+    {
+     "name": "Tentacles",
+     "count": 6,
+     "range": "C",
+     "specials": [],
+     "vsInfantry": [
+      "1/2",
+      "1/2",
+      "1/2",
+      "1/2"
+     ],
+     "vsVehicle": [
+      "1/3",
+      "1/3",
+      "1/3",
+      "1/3",
+      "1/2",
+      "1/2",
+      "1/1"
+     ],
+     "vsAircraft": []
+    },
+    {
+     "name": "Tentacles Rays",
+     "count": 6,
+     "range": 6,
+     "specials": [
+      "Laser"
+     ],
+     "vsInfantry": [
+      "1/1",
+      "1/1",
+      "1/1",
+      "1/1"
+     ],
+     "vsVehicle": [
+      "1/1",
+      "1/1",
+      "1/1",
+      "1/1",
+      "1/1",
+      "1/1",
+      "1/1"
+     ],
+     "vsAircraft": [
+      "1/1",
+      "1/1",
+      "1/1"
+     ]
+    },
+    {
+     "name": "Death Ray",
+     "count": 1,
+     "range": "U",
+     "ammo": 1,
+     "specials": [],
+     "vsInfantry": [
+      "B/1",
+      "B/1",
+      "B/1",
+      "B/1"
+     ],
+     "vsVehicle": [
+      "B/AK",
+      "B/AK",
+      "B/6",
+      "B/5",
+      "B/5",
+      "B/4",
+      "B/3"
+     ],
+     "vsAircraft": [
+      "1/6",
+      "1/5",
+      "1/4"
+     ]
+    }
+   ],
+   "author": "L'Heure du Loir",
+   "approved": "2026-09-30"
+  },
+  {
+   "id": "conf--vrill--vrill-grays",
+   "name": "Vrill Grays",
+   "subtitle": "",
+   "bloc": "conf-vrill",
+   "type": "infantry",
+   "faction": "conf-vrill-faction",
+   "cost": 8,
+   "health": null,
+   "move": 3,
+   "march": 5,
+   "armor": 2,
+   "capturable": false,
+   "skills": [
+    "Refractor Shield"
+   ],
+   "customSkills": [],
+   "weapons": [
+    {
+     "name": "Zapper (close combat)",
+     "count": 3,
+     "range": "C",
+     "specials": [],
+     "vsInfantry": [
+      "B/1",
+      "B/1",
+      "B/1",
+      "B/1"
+     ],
+     "vsVehicle": [
+      "4/1",
+      "4/1",
+      "4/1",
+      "4/1",
+      "4/1",
+      "4/1",
+      "4/1"
+     ],
+     "vsAircraft": []
+    },
+    {
+     "name": "Zapper",
+     "count": 3,
+     "range": 4,
+     "specials": [],
+     "vsInfantry": [
+      "4/1",
+      "4/1",
+      "4/1",
+      "4/1"
+     ],
+     "vsVehicle": [
+      "2/1",
+      "2/1",
+      "2/1",
+      "2/1",
+      "2/1",
+      "2/1",
+      "2/1"
+     ],
+     "vsAircraft": []
+    },
+    {
+     "name": "Zapper (overcharged)",
+     "count": 3,
+     "range": 3,
+     "ammo": 3,
+     "specials": [
+      "Grenade"
+     ],
+     "vsInfantry": [
+      "B/1",
+      "B/1",
+      "B/1",
+      "B/1"
+     ],
+     "vsVehicle": [
+      "1/5",
+      "1/5",
+      "1/5",
+      "1/5",
+      "1/5",
+      "1/4",
+      "1/4"
+     ],
+     "vsAircraft": []
+    }
+   ],
+   "author": "L'Heure du Loir",
+   "approved": "2026-09-30"
+  },
+  {
+   "id": "conf--vrill--vrill-heavy-grays",
+   "name": "Vrill Heavy Grays",
+   "subtitle": "",
+   "bloc": "conf-vrill",
+   "type": "infantry",
+   "faction": "conf-vrill-faction",
+   "cost": 9,
+   "health": null,
+   "move": 3,
+   "march": 5,
+   "armor": 2,
+   "capturable": false,
+   "skills": [
+    "Refractor Shield"
+   ],
+   "customSkills": [],
+   "weapons": [
+    {
+     "name": "Heavy Zapper",
+     "count": 2,
+     "range": 6,
+     "specials": [
+      "Grenade"
+     ],
+     "vsInfantry": [
+      "B/1",
+      "B/1",
+      "B/1",
+      "B/1"
+     ],
+     "vsVehicle": [
+      "1/AK",
+      "1/AK",
+      "1/AK",
+      "1/4",
+      "1/4",
+      "1/4",
+      "1/3"
+     ],
+     "vsAircraft": []
+    }
+   ],
+   "author": "L'Heure du Loir",
+   "approved": "2026-09-30"
   }
  ],
  "platoons": [],
- "skills": {}
+ "skills": {
+  "Refractor Shield": "A Unit with this Skill always passes Infantry Saves on dice_shield as well as dice_block. Roll one die for each point of Damage the Unit takes in Close Combat, negating one point for each dice_block rolled."
+ }
 }

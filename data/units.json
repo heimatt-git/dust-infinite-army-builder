@@ -1,8 +1,8 @@
 {
  "meta": {
-  "version": "2026.10.01",
+  "version": "2026.10.05",
   "source": "DUST ENLIST 1.50 (Android) — données extraites",
-  "updated": "2026-10-01"
+  "updated": "2026-10-05"
  },
  "units": [
   {
@@ -37504,6 +37504,392 @@
    ],
    "weapons": [],
    "image": "vk_stash_temp"
+  },
+  {
+   "id": "axis--experiment-x-33",
+   "name": "Experiment X-33",
+   "subtitle": "",
+   "bloc": "Axis",
+   "type": "hero",
+   "faction": "blutkreuz-korps",
+   "cost": 16,
+   "health": 4,
+   "move": 2,
+   "march": 4,
+   "armor": 4,
+   "capturable": false,
+   "skills": [
+    "Loner",
+    "Zombie",
+    "Clone",
+    "Cheat Death",
+    "Super Human"
+   ],
+   "customSkills": [],
+   "weapons": [
+    {
+     "name": "X-33 Ray (1-3)",
+     "count": 1,
+     "range": 3,
+     "specials": [
+      "Radiation",
+      "Plasma Gun"
+     ],
+     "vsInfantry": [
+      "5/1",
+      "5/1",
+      "5/1",
+      "5/1"
+     ],
+     "vsVehicle": [
+      "1/AK",
+      "1/AK",
+      "1/5",
+      "1/4",
+      "1/4",
+      "1/3",
+      "1/3"
+     ],
+     "vsAircraft": []
+    },
+    {
+     "name": "X-33 Ray (4-5)",
+     "count": 1,
+     "range": 5,
+     "specials": [
+      "Radiation",
+      "Plasma Gun"
+     ],
+     "vsInfantry": [
+      "B/1",
+      "B/1",
+      "B/1",
+      "B/1"
+     ],
+     "vsVehicle": [
+      "B/1",
+      "B/1",
+      "B/1",
+      "B/1",
+      "B/1",
+      "B/1",
+      "B/1"
+     ],
+     "vsAircraft": []
+    },
+    {
+     "name": "Panzerfaust X",
+     "count": 1,
+     "range": 3,
+     "specials": [
+      "Grenade"
+     ],
+     "vsInfantry": [
+      "1/1",
+      "1/1",
+      "1/1",
+      "1/1"
+     ],
+     "vsVehicle": [
+      "1/AK",
+      "1/AK",
+      "1/AK",
+      "1/5",
+      "1/4",
+      "1/4",
+      "1/3"
+     ],
+     "vsAircraft": []
+    },
+    {
+     "name": "Hydraulic Claw",
+     "count": 1,
+     "range": "C",
+     "specials": [
+      "Grapple"
+     ],
+     "vsInfantry": [
+      "4/1",
+      "4/1",
+      "4/1",
+      "4/1"
+     ],
+     "vsVehicle": [
+      "4/1",
+      "3/1",
+      "3/1",
+      "2/1",
+      "2/1",
+      "1/1",
+      "1/1"
+     ],
+     "vsAircraft": []
+    },
+    {
+     "name": "Grabklinge",
+     "count": 1,
+     "range": "C",
+     "specials": [],
+     "vsInfantry": [
+      "2/1",
+      "2/1",
+      "2/1",
+      "2/1"
+     ],
+     "vsVehicle": [
+      "1/2",
+      "1/2",
+      "1/1",
+      "1/1",
+      "1/1",
+      "1/1",
+      "1/1"
+     ],
+     "vsAircraft": []
+    }
+   ],
+   "image": null
+  },
+  {
+   "id": "axis--experiment-x-34",
+   "name": "Experiment X-34",
+   "subtitle": "",
+   "bloc": "Axis",
+   "type": "hero",
+   "faction": "blutkreuz-korps",
+   "cost": 19,
+   "health": 4,
+   "move": 2,
+   "march": 4,
+   "armor": 4,
+   "capturable": false,
+   "skills": [
+    "Loner",
+    "Zombie",
+    "Clone",
+    "Cheat Death",
+    "Super Human"
+   ],
+   "customSkills": [],
+   "weapons": [
+    {
+     "name": "X-33 Ray (1-3)",
+     "count": 2,
+     "range": 3,
+     "specials": [
+      "Radiation",
+      "Plasma Gun"
+     ],
+     "vsInfantry": [
+      "5/1",
+      "5/1",
+      "5/1",
+      "5/1"
+     ],
+     "vsVehicle": [
+      "1/AK",
+      "1/AK",
+      "1/5",
+      "1/4",
+      "1/4",
+      "1/3",
+      "1/3"
+     ],
+     "vsAircraft": []
+    },
+    {
+     "name": "X-33 Ray (4-5)",
+     "count": 2,
+     "range": 5,
+     "specials": [
+      "Radiation",
+      "Plasma Gun"
+     ],
+     "vsInfantry": [
+      "B/1",
+      "B/1",
+      "B/1",
+      "B/1"
+     ],
+     "vsVehicle": [
+      "B/1",
+      "B/1",
+      "B/1",
+      "B/1",
+      "B/1",
+      "B/1",
+      "B/1"
+     ],
+     "vsAircraft": []
+    },
+    {
+     "name": "Dual Grabklinge",
+     "count": 1,
+     "range": "C",
+     "specials": [],
+     "vsInfantry": [
+      "3/1",
+      "3/1",
+      "3/1",
+      "3/1"
+     ],
+     "vsVehicle": [
+      "3/2",
+      "3/2",
+      "2/1",
+      "1/1",
+      "1/1",
+      "1/1",
+      "1/1"
+     ],
+     "vsAircraft": []
+    }
+   ],
+   "image": null
+  },
+  {
+   "id": "axis--experiment-x-35-koloss",
+   "name": "Experiment X-35-Koloss",
+   "subtitle": "",
+   "bloc": "Axis",
+   "type": "hero",
+   "faction": "blutkreuz-korps",
+   "cost": 16,
+   "health": 6,
+   "move": 2,
+   "march": 4,
+   "armor": 4,
+   "capturable": false,
+   "skills": [
+    "Loner",
+    "Zombie",
+    "Cheat Death",
+    "Charge",
+    "Super Human"
+   ],
+   "customSkills": [],
+   "weapons": [
+    {
+     "name": "Koloss Glove",
+     "count": 1,
+     "range": "C",
+     "specials": [
+      "Grapple"
+     ],
+     "vsInfantry": [
+      "5/1",
+      "5/1",
+      "5/1",
+      "5/1"
+     ],
+     "vsVehicle": [
+      "2/AK",
+      "2/AK",
+      "2/5",
+      "2/5",
+      "2/4",
+      "2/4",
+      "2/4"
+     ],
+     "vsAircraft": []
+    },
+    {
+     "name": "Dual Grabklinge",
+     "count": 1,
+     "range": "C",
+     "specials": [],
+     "vsInfantry": [
+      "3/1",
+      "3/1",
+      "3/1",
+      "3/1"
+     ],
+     "vsVehicle": [
+      "3/2",
+      "3/2",
+      "2/1",
+      "1/1",
+      "1/1",
+      "1/1",
+      "1/1"
+     ],
+     "vsAircraft": []
+    }
+   ],
+   "image": null
+  },
+  {
+   "id": "axis--experiment-x-66-krampus-krieger",
+   "name": "Experiment X-66 Krampus Krieger",
+   "subtitle": "",
+   "bloc": "Axis",
+   "type": "hero",
+   "faction": "blutkreuz-korps",
+   "cost": 16,
+   "health": 5,
+   "move": 2,
+   "march": 4,
+   "armor": 4,
+   "capturable": false,
+   "skills": [
+    "Zombie",
+    "Cheat Death",
+    "Charge",
+    "Super Human"
+   ],
+   "customSkills": [
+    {
+     "name": "Höllensack",
+     "description": "When it eliminates enemy infantry in Close Combat, up to 5 infantry are trapped in the sack. Starting the Turn after it is full, spend 2 actions to generate 5 Mindless Zombies in its Square. Trapped Infantry cannot return to play. The sack empties after use."
+    }
+   ],
+   "weapons": [
+    {
+     "name": "Grabekeule",
+     "count": 1,
+     "range": "C",
+     "specials": [],
+     "vsInfantry": [
+      "4/1",
+      "4/1",
+      "4/1",
+      "4/1"
+     ],
+     "vsVehicle": [
+      "4/1",
+      "3/1",
+      "3/1",
+      "2/1",
+      "2/1",
+      "1/1",
+      "1/1"
+     ],
+     "vsAircraft": []
+    },
+    {
+     "name": "Grabklinge",
+     "count": 1,
+     "range": "C",
+     "specials": [],
+     "vsInfantry": [
+      "2/1",
+      "2/1",
+      "2/1",
+      "2/1"
+     ],
+     "vsVehicle": [
+      "1/2",
+      "1/2",
+      "1/1",
+      "1/1",
+      "1/1",
+      "1/1",
+      "1/1"
+     ],
+     "vsAircraft": []
+    }
+   ],
+   "image": null
   }
  ]
 }
