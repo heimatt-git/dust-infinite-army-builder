@@ -1,8 +1,14 @@
 {
- "version": "202610050932",
+ "version": "202610060618",
  "units": [
+  "allies--bazooka-joe",
   "allies--flying-banana",
   "allies--recon-mickey",
+  "allies--rosie-sgt-major-i",
+  "allies--sergeant-victory",
+  "allies--the-chef",
+  "allies--the-priest",
+  "allies--usmc-war-dogs-recon-squad",
   "axis--experiment-x-33",
   "axis--heinrich-tropical-bk",
   "mercenaries--alex",
@@ -11,7 +17,26 @@
   "mercenaries--obliterator",
   "mercenaries--the-fire-scarab",
   "mercenaries--tito",
+  "mythos--avatar-of-cthulhu",
+  "mythos--avatar-of-nyarlathotep",
+  "mythos--cultist-command-squad",
+  "mythos--cultist-fire-squad",
+  "mythos--cultist-saboteur-squad",
+  "mythos--ekaterina-and-sabertooth",
+  "mythos--farouk-the-turk",
+  "mythos--mi-go-assault-squad",
+  "mythos--mi-go-raiders-squad",
+  "mythos--nadir",
+  "mythos--nadir-the-exalted",
+  "mythos--rasputin",
+  "mythos--spawn-of-cthulhu",
+  "ssu--guai-lo",
+  "ssu--invader",
+  "ssu--pla-steel-guards-anti-infantry-squad",
+  "ssu--red-ace",
+  "ssu--steel-guards-command-squad",
   "ssu--steel-guards-sniper-squad",
+  "ssu--steel-guards-tesla-squad",
   "ssu--winter-child"
  ],
  "focus": {
@@ -63,6 +88,101 @@
   "mercenaries--mercenary-cleaning-team": {
    "x": 0.5,
    "y": 0.543,
+   "zoom": 1
+  },
+  "ssu--steel-guards-tesla-squad": {
+   "x": 0.5,
+   "y": 0.587,
+   "zoom": 1
+  },
+  "ssu--steel-guards-command-squad": {
+   "x": 0.5,
+   "y": 0.664,
+   "zoom": 1
+  },
+  "ssu--red-ace": {
+   "x": 0.5,
+   "y": 0.572,
+   "zoom": 1
+  },
+  "ssu--pla-steel-guards-anti-infantry-squad": {
+   "x": 0.5,
+   "y": 0.587,
+   "zoom": 1
+  },
+  "ssu--invader": {
+   "x": 0.5,
+   "y": 0.572,
+   "zoom": 1
+  },
+  "ssu--guai-lo": {
+   "x": 0.5,
+   "y": 0.564,
+   "zoom": 1
+  },
+  "mythos--spawn-of-cthulhu": {
+   "x": 0.5,
+   "y": 0.541,
+   "zoom": 1
+  },
+  "mythos--rasputin": {
+   "x": 0.5,
+   "y": 0.423,
+   "zoom": 1
+  },
+  "mythos--nadir-the-exalted": {
+   "x": 0.5,
+   "y": 0.492,
+   "zoom": 1
+  },
+  "mythos--nadir": {
+   "x": 0.5,
+   "y": 0.505,
+   "zoom": 1
+  },
+  "mythos--cultist-saboteur-squad": {
+   "x": 0.5,
+   "y": 0.536,
+   "zoom": 1
+  },
+  "mythos--cultist-fire-squad": {
+   "x": 0.5,
+   "y": 0.523,
+   "zoom": 1
+  },
+  "mythos--cultist-command-squad": {
+   "x": 0.5,
+   "y": 0.7,
+   "zoom": 1
+  },
+  "mythos--avatar-of-nyarlathotep": {
+   "x": 0.5,
+   "y": 0.433,
+   "zoom": 1
+  },
+  "allies--usmc-war-dogs-recon-squad": {
+   "x": 0.5,
+   "y": 0.585,
+   "zoom": 1
+  },
+  "allies--the-priest": {
+   "x": 0.5,
+   "y": 0.464,
+   "zoom": 1
+  },
+  "allies--bazooka-joe": {
+   "x": 0.5,
+   "y": 0.441,
+   "zoom": 1
+  },
+  "allies--rosie-sgt-major-i": {
+   "x": 0.5,
+   "y": 0.462,
+   "zoom": 1
+  },
+  "allies--sergeant-victory": {
+   "x": 0.5,
+   "y": 0.462,
    "zoom": 1
   }
  }
