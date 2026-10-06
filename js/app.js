@@ -88,6 +88,7 @@ function topbar(active) {
       <a href="#/collection" class="${active === 'collection' ? 'on' : ''}">${t('Ma collection')}</a>
       <a href="shot.html">Shot Format</a>
       <a href="atelier.html">${t('Atelier')}</a>
+      <a href="aide.html">${t('Aide')}</a>
       <button id="lang-btn" type="button" lang="${LANG === 'fr' ? 'en' : 'fr'}" title="${LANG === 'fr' ? 'English version' : 'Version française'}">${LANG === 'fr' ? 'EN' : 'FR'}</button>
       <button id="theme-btn" title="${t('Changer de thème')}">${t('Thème')}</button>
     </nav>

@@ -85,6 +85,7 @@ function topbar() {
   <nav class="topnav">
     <a href="index.html">${t('Builder')}</a>
     <a href="atelier.html" class="on">${t('Atelier')}</a>
+    <a href="aide.html#atelier">${t('Aide')}</a>
     <button id="lang-btn" type="button" lang="${LANG === 'fr' ? 'en' : 'fr'}" title="${LANG === 'fr' ? 'English version' : 'Version française'}">${LANG === 'fr' ? 'EN' : 'FR'}</button>
     <button id="theme-btn" type="button">${t('Thème')}</button>
   </nav>`;

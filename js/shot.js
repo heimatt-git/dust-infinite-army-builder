@@ -143,7 +143,7 @@ function header(back) {
   return `<header class="sf-top">
     ${back ? `<a class="sf-back" href="#/" aria-label="${t('Retour aux listes')}">←</a>` : ''}
     <a class="sf-brand with-logo" href="#/">${brandLogo()}<b>${esc(S.F.game)}</b><span>${esc(S.F.name)}</span></a>
-    <nav>${S.F.showFullBuilderLink ? `<a href="index.html">${t('Builder complet')}</a>` : ''}${feedbackLink('sf-fb-top')}<button id="lang-btn" type="button" lang="${LANG === 'fr' ? 'en' : 'fr'}" title="${LANG === 'fr' ? 'English version' : 'Version française'}">${LANG === 'fr' ? 'EN' : 'FR'}</button><button id="theme-btn" type="button">${t('Thème')}</button></nav>
+    <nav>${S.F.showFullBuilderLink ? `<a href="index.html">${t('Builder complet')}</a>` : ''}<a href="aide.html#shot">${t('Aide')}</a>${feedbackLink('sf-fb-top')}<button id="lang-btn" type="button" lang="${LANG === 'fr' ? 'en' : 'fr'}" title="${LANG === 'fr' ? 'English version' : 'Version française'}">${LANG === 'fr' ? 'EN' : 'FR'}</button><button id="theme-btn" type="button">${t('Thème')}</button></nav>
   </header>`;
 }
 function bindHeader() {

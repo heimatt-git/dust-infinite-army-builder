@@ -436,3 +436,15 @@ table.wt { border-collapse: collapse; width: 100%; font-size: 13px; }
 .col-fold span { display: inline-block; width: 1.2em; }
 .col-fac { font-size: 13px; font-weight: 600; color: var(--ink); padding: 8px 2px 3px; border-bottom: 1px dashed var(--line); }
 .facbar[hidden] { display: none; }
+
+/* Page Aide */
+.help-page { display: grid; gap: 14px; }
+.help-toc { display: flex; flex-wrap: wrap; gap: 6px; }
+.help-toc a { border: 1px solid var(--line); background: var(--panel); border-radius: 99px; padding: 4px 12px; font-size: 14px; text-decoration: none; color: var(--ink); }
+.help-toc a:hover, .help-toc a:focus-visible { border-color: var(--accent, #d69a2d); }
+.help-sec summary { cursor: pointer; list-style-position: outside; }
+.help-sec summary h2 { display: inline; margin: 0; }
+.help-sec h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin: 16px 0 6px; }
+.help-sec p, .help-sec li { max-width: 75ch; line-height: 1.55; }
+.help-sec ol, .help-sec ul { margin: 0; padding-left: 22px; display: grid; gap: 6px; }
+.help-what { margin: 10px 0 0; font-weight: 500; }
