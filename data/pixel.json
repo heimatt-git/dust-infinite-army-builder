@@ -1,5 +1,5 @@
 {
- "version": "202610060621",
+ "version": "202610060653",
  "units": [
   "allies--bazooka-joe",
   "allies--flying-banana",
@@ -13,6 +13,7 @@
   "axis--heinrich-tropical-bk",
   "mercenaries--alex",
   "mercenaries--mercenary-cleaning-team",
+  "mercenaries--mercenary-command-squad",
   "mercenaries--mercenary-railgun-team",
   "mercenaries--obliterator",
   "mercenaries--the-fire-scarab",
@@ -183,6 +184,11 @@
   "allies--bazooka-joe": {
    "x": 0.5,
    "y": 0.469,
+   "zoom": 1
+  },
+  "mercenaries--mercenary-command-squad": {
+   "x": 0.5,
+   "y": 0.549,
    "zoom": 1
   }
  }
