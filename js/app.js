@@ -705,6 +705,8 @@ function openShare() {
   });
 }
 
+const fileSlug = (s) => String(s || 'liste').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
 // Export PDF : récapitulatif + cartes des unités (une carte par unité de la liste)
 function listOrder(L) {
   return [...L.platoons.flatMap((pi) => L.entries.filter((e) => e.pl === pi.k)), ...L.entries.filter((e) => !e.pl)];
