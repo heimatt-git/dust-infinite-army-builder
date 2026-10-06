@@ -327,6 +327,7 @@ const EN = {
   "id : {id} (identifiant stable utilisé par les listes sauvegardées : il ne change pas si vous renommez l'unité)": "id: {id} (stable identifier used by saved lists: it does not change if you rename the unit)",
   "Sous-titre": "Subtitle",
   "Type": "Type",
+  "Grouper par": "Group by", "Sous-faction": "Sub-faction", "Tout replier": "Collapse all", "Tout déplier": "Expand all", "Sans sous-faction": "No sub-faction",
   "Faction": "Faction",
   "— Bloc (aucune) —": "— Bloc (none) —",
   "Caractéristiques": "Characteristics",

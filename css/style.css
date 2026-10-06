@@ -426,3 +426,13 @@ table.wt { border-collapse: collapse; width: 100%; font-size: 13px; }
 .qty-in::-webkit-outer-spin-button, .qty-in::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 .qty-in { -moz-appearance: textfield; appearance: textfield; }
 .col-page .check, .catalog .check { display: flex; gap: 8px; align-items: center; font-size: 14px; }
+
+/* Ma collection : filtres de sous-faction, regroupement et groupes repliables */
+.facbar button small { font-family: var(--f-mono); opacity: .7; }
+.facbar button:disabled { opacity: .45; cursor: default; }
+.col-grp { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.col-fold { display: block; width: 100%; text-align: left; background: none; border: 0; cursor: pointer; font-family: inherit; }
+.col-fold:hover, .col-fold:focus-visible { color: var(--ink); }
+.col-fold span { display: inline-block; width: 1.2em; }
+.col-fac { font-size: 13px; font-weight: 600; color: var(--ink); padding: 8px 2px 3px; border-bottom: 1px dashed var(--line); }
+.facbar[hidden] { display: none; }

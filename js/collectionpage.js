@@ -1,12 +1,16 @@
 // Page « Ma collection » du builder : liste des figurines possédées, ajout, export / import JSON.
-import { esc, toast, openModal } from './ui.js';
+import { esc, toast, openModal, store } from './ui.js';
 import { t, LANG } from './i18n.js';
 import { typeLabel } from './data.js';
 import { blocName, factionName } from './rules.js';
 import * as C from './collection.js';
 
 const TYPE_ORDER = ['hero', 'infantry', 'vehicle', 'aircraft', 'token'];
-const V = { view: 'owned', bloc: 'Allies', type: 'all', q: '', conf: false, listId: '' };
+const PREF = 'dust1947.collectionView';
+const V = { view: 'owned', bloc: 'Allies', type: 'all', q: '', conf: false, listId: '',
+  fac: 'all', obloc: 'all', ofac: 'all',                  // filtres bloc / sous-faction (ajout : bloc, fac ; possédé : obloc, ofac)
+  group: store.get(PREF, {}).group === 'type' ? 'type' : 'fac', // regroupement : par sous-faction (défaut) ou par type
+  fold: new Set() };                                       // groupes repliés
 const dateStr = (ts) => new Date(ts).toLocaleDateString(LANG === 'en' ? 'en-GB' : 'fr-FR');
 
 // ctx : { S, app, topbar, bindTopbar, thumb } fournis par app.js
@@ -57,7 +61,18 @@ export function renderCollectionPage(ctx) {
           </div>
           <div class="typebar">${[['all', t('Tous')], ...TYPE_ORDER.map((ty) => [ty, typeLabel(ty)])].map(([k, l]) => `<button data-type="${k}" class="${V.type === k ? 'on' : ''}">${l}</button>`).join('')}</div>
           ${hasCustom ? `<label class="check"><input type="checkbox" id="col-conf" ${V.conf ? 'checked' : ''}> <b class="conf-stamp">CONFIDENTIAL</b> ${t('Proposer aussi les unités custom')}</label>` : ''}`
-        : `<input type="search" id="col-q" class="full" placeholder="${t('Rechercher dans ma collection')}" value="${esc(V.q)}">`}
+        : `<div class="filters">
+            <select id="col-bloc" aria-label="${t('Bloc')}">
+              <option value="all" ${V.obloc === 'all' ? 'selected' : ''}>${t('Tous les blocs')}</option>
+              ${DA.blocs.map((b) => `<option value="${esc(b.id)}" ${V.obloc === b.id ? 'selected' : ''}>${esc(blocName(b.id, DA))}${b.confidential ? ' · CONFIDENTIAL' : ''}</option>`).join('')}
+            </select>
+            <input type="search" id="col-q" placeholder="${t('Rechercher dans ma collection')}" value="${esc(V.q)}">
+          </div>`}
+        <div class="typebar facbar" id="col-facs"></div>
+        <div class="col-grp"><span class="hint">${t('Grouper par')}</span>
+          <div class="typebar"><button type="button" data-group="fac" class="${V.group === 'fac' ? 'on' : ''}">${t('Sous-faction')}</button><button type="button" data-group="type" class="${V.group === 'type' ? 'on' : ''}">${t('Type')}</button></div>
+          <button type="button" class="btn sm" id="col-fold-all">${t('Tout replier')}</button><button type="button" class="btn sm" id="col-unfold-all">${t('Tout déplier')}</button>
+        </div>
       </div>
       <div id="col-body"></div>
     </section>
@@ -98,34 +113,90 @@ export function renderCollectionPage(ctx) {
         : `<div class="issue info"><b>✓</b><span>${t('Dernière sauvegarde : {d}.', { d: dateStr(exported || updated) })}</span></div>`;
   }
 
+  // Filtres de la vue en cours : bloc et sous-faction (le reste vient de V)
+  const owned = () => V.view === 'owned';
+  const curBloc = () => (owned() ? V.obloc : V.bloc);
+  const curFac = () => (owned() ? V.ofac : V.fac);
+  const curDB = () => (owned() ? DA : DB);
+  // Unités de la vue avant le filtre de sous-faction
+  const basePool = () => {
+    let pool = owned() ? C.ownedIds().map((id) => DA.unitsById.get(id)).filter(Boolean) : DB.units;
+    if (curBloc() !== 'all') pool = pool.filter((u) => u.bloc === curBloc());
+    if (!owned() && V.type !== 'all') pool = pool.filter((u) => u.type === V.type);
+    return pool.filter(matches);
+  };
+  const facKey = (u) => u.faction || '';
+  // Rangée de boutons « sous-faction » : seulement quand un bloc est choisi
+  function facs() {
+    const el = $('col-facs'); if (!el) return;
+    const D = curDB(), bloc = D.blocsById.get(curBloc());
+    const pool = bloc ? basePool() : [];
+    const list = bloc ? bloc.factions.filter((f) => pool.some((u) => u.faction === f.id)) : [];
+    if (!bloc || !list.length) { el.hidden = true; el.innerHTML = ''; return; }
+    if (curFac() !== 'all' && curFac() !== 'none' && !list.some((f) => f.id === curFac())) setFac('all');
+    const count = (k) => pool.filter((u) => k === 'all' || (k === 'none' ? !u.faction : u.faction === k)).length;
+    const chips = [['all', t('Toutes')], ['none', t('Sans sous-faction')], ...list.map((f) => [f.id, f.name])];
+    el.hidden = false;
+    el.setAttribute('role', 'group'); el.setAttribute('aria-label', t('Filtrer par sous-faction'));
+    el.innerHTML = chips.map(([k, l]) => `<button type="button" data-fac="${esc(k)}" class="${curFac() === k ? 'on' : ''}" ${count(k) ? '' : 'disabled'}>${esc(l)} <small>${count(k)}</small></button>`).join('');
+  }
+  const setFac = (k) => { if (owned()) V.ofac = k; else V.fac = k; };
+
+  // Groupes repliables : un titre = un bouton
+  let foldKeys = [];
+  const head = (key, cls, label, n) => {
+    foldKeys.push(key);
+    const open = !V.fold.has(key);
+    return `<button type="button" class="${cls} col-fold" data-fold="${esc(key)}" aria-expanded="${open}"><span aria-hidden="true">${open ? '▾' : '▸'}</span> ${esc(label)} · ${n}</button>`;
+  };
+  const rows = (arr, D) => arr.map((u) => row(u, D)).join('');
+  const typed = (arr, D, key) => byType(arr).map(([ty, a]) => `<div class="col-type">${esc(ty)}</div>${rows(a, D)}`).join('');
+  const total = (arr) => (owned() ? arr.reduce((s, u) => s + C.getQty(u.id), 0) : arr.length);
+
+  // Un bloc : par sous-faction (puis type), ou par type
+  function blocHTML(arr, D, b) {
+    if (V.group === 'type') return byType(arr).map(([ty, a]) => `<div class="col-type">${esc(ty)}</div>${rows(a, D)}`).join('');
+    const order = ['', ...(b?.factions || []).map((f) => f.id)];
+    const extra = [...new Set(arr.map(facKey))].filter((k) => !order.includes(k));
+    return [...order, ...extra].map((k) => [k, arr.filter((u) => facKey(u) === k)]).filter(([, a]) => a.length).map(([k, a]) => {
+      const key = `f:${b?.id}/${k}`;
+      const label = k ? factionName(k, D) : t('Sans sous-faction');
+      return head(key, 'col-fac', label, total(a)) + (V.fold.has(key) ? '' : typed(a, D));
+    }).join('');
+  }
+
   function body() {
+    foldKeys = [];
     let html = '';
-    if (V.view === 'owned') {
-      const ids = C.ownedIds();
-      const known = ids.map((id) => DA.unitsById.get(id)).filter(Boolean);
-      const unknown = ids.length - known.length;
-      const shown = known.filter(matches);
-      const groups = DA.blocs.map((b) => [blocName(b.id, DA), shown.filter((u) => u.bloc === b.id)]).filter(([, a]) => a.length);
-      html = groups.length
-        ? groups.map(([g, arr]) => `<div class="cat-group">${esc(g)} · ${arr.reduce((s, u) => s + C.getQty(u.id), 0)}</div>${byType(arr).map(([ty, a]) => `<div class="col-type">${esc(ty)}</div>${a.map((u) => row(u, DA)).join('')}`).join('')}`).join('')
-        : (ids.length && V.q) ? `<p class="empty">${t('Aucune unité ne correspond.')}</p>`
-          : `<p class="empty">${t("Votre collection est vide. Ouvrez l'onglet « Ajouter des unités », ou importez un fichier de sauvegarde.")}</p>`;
-      if (unknown) html += `<p class="hint">${t("{n} unité(s) de votre collection n'existent plus dans la base actuelle : elles sont conservées mais masquées.", { n: unknown })}</p>`;
+    const D = curDB();
+    facs();
+    const ids = C.ownedIds();
+    if (owned() && !C.hasCollection()) {
+      html = `<p class="empty">${t("Votre collection est vide. Ouvrez l'onglet « Ajouter des unités », ou importez un fichier de sauvegarde.")}</p>`;
     } else {
-      let pool = DB.units;
-      if (V.bloc !== 'all') pool = pool.filter((u) => u.bloc === V.bloc);
-      if (V.type !== 'all') pool = pool.filter((u) => u.type === V.type);
-      pool = pool.filter(matches);
-      if (V.bloc === 'all' && V.q.trim().length < 2) {
+      let pool = basePool();
+      if (curFac() !== 'all') pool = pool.filter((u) => (curFac() === 'none' ? !u.faction : u.faction === curFac()));
+      if (!owned() && V.bloc === 'all' && V.q.trim().length < 2) {
         html = `<p class="empty">${t('Choisissez un bloc, ou tapez le nom d\'une unité pour la chercher dans tous les blocs.')}</p>`;
       } else if (!pool.length) {
         html = `<p class="empty">${t('Aucune unité ne correspond.')}</p>`;
-      } else if (V.bloc === 'all') {
-        html = DB.blocs.map((b) => [blocName(b.id, DB), pool.filter((u) => u.bloc === b.id)]).filter(([, a]) => a.length)
-          .map(([g, arr]) => `<div class="cat-group">${esc(g)} · ${arr.length}</div>${arr.map((u) => row(u, DB)).join('')}`).join('');
+      } else if (curBloc() === 'all') {
+        html = D.blocs.map((b) => [b, pool.filter((u) => u.bloc === b.id)]).filter(([, a]) => a.length).map(([b, arr]) => {
+          const key = `b:${b.id}`;
+          return head(key, 'cat-group', blocName(b.id, D), total(arr)) + (V.fold.has(key) ? '' : blocHTML(arr, D, b));
+        }).join('');
+      } else if (V.group === 'type') {
+        html = byType(pool).map(([ty, a]) => {
+          const key = `t:${curBloc()}/${ty}`;
+          return head(key, 'cat-group', ty, total(a)) + (V.fold.has(key) ? '' : rows(a, D));
+        }).join('');
       } else {
-        html = byType(pool).map(([ty, a]) => `<div class="cat-group">${esc(ty)} · ${a.length}</div>${a.map((u) => row(u, DB)).join('')}`).join('');
+        html = blocHTML(pool, D, D.blocsById.get(curBloc()));
       }
+    }
+    if (owned()) {
+      const unknown = ids.length - ids.filter((id) => DA.unitsById.has(id)).length;
+      if (unknown) html += `<p class="hint">${t("{n} unité(s) de votre collection n'existent plus dans la base actuelle : elles sont conservées mais masquées.", { n: unknown })}</p>`;
     }
     $('col-body').innerHTML = html;
   }
@@ -166,7 +237,21 @@ export function renderCollectionPage(ctx) {
     app.querySelectorAll('[data-type]').forEach((x) => x.classList.toggle('on', x === b));
     body();
   }));
-  $('col-bloc')?.addEventListener('change', (e) => { V.bloc = e.target.value; body(); });
+  $('col-bloc')?.addEventListener('change', (e) => { if (owned()) { V.obloc = e.target.value; V.ofac = 'all'; } else { V.bloc = e.target.value; V.fac = 'all'; } body(); });
+  $('col-facs')?.addEventListener('click', (e) => { const b = e.target.closest('[data-fac]'); if (!b || b.disabled) return; setFac(b.dataset.fac); body(); });
+  app.querySelectorAll('[data-group]').forEach((b) => b.addEventListener('click', () => {
+    V.group = b.dataset.group; store.set(PREF, { group: V.group });
+    app.querySelectorAll('[data-group]').forEach((x) => x.classList.toggle('on', x === b));
+    body();
+  }));
+  $('col-body').addEventListener('click', (e) => {
+    const h = e.target.closest('[data-fold]'); if (!h) return;
+    const k = h.dataset.fold; if (V.fold.has(k)) V.fold.delete(k); else V.fold.add(k);
+    const y = window.scrollY; body(); window.scrollTo(0, y);
+    $('col-body').querySelector(`[data-fold="${CSS.escape(k)}"]`)?.focus({ preventScroll: true });
+  });
+  $('col-fold-all')?.addEventListener('click', () => { foldKeys.forEach((k) => V.fold.add(k)); body(); });
+  $('col-unfold-all')?.addEventListener('click', () => { V.fold.clear(); body(); });
   $('col-conf')?.addEventListener('change', (e) => { V.conf = e.target.checked; renderCollectionPage(ctx); });
   $('col-q').addEventListener('input', (e) => { V.q = e.target.value; body(); });
   $('col-list')?.addEventListener('change', (e) => { V.listId = e.target.value; });
