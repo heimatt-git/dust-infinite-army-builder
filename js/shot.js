@@ -4,6 +4,9 @@ import { t, LANG, initLang, setLang } from './i18n.js';
 import { analyzeArmy, blocName, factionName } from './rules.js';
 import { esc, uid, store, toast, copyText, openModal, unitCardHTML, brandLogo, mountCredit, printCredit } from './ui.js';
 import { exportListPDF, pdfDialogHTML, bindPdfDialog } from './pdf.js';
+import { initCardArt } from './cardart.js';
+import { initImages } from './images.js';
+import { openUnitCard, thumb, artOf } from './unitcard.js';
 
 const LS_KEY = 'dust1947.short.lists';
 const SLOTS = ['cmd', 'c1', 'c2', 'c3', 'c4', 'veh'];
@@ -32,6 +35,8 @@ async function init() {
   }
   S.lists = store.get(LS_KEY, []);
   S.lists.forEach(dropUnknown);
+  await initImages();
+  await initCardArt();
   { const t = store.get('dust1947.theme', null); if (t) document.documentElement.dataset.theme = t; }
   window.addEventListener('hashchange', route);
   route();
@@ -310,7 +315,7 @@ function slotHTML(slot) {
     <div class="sf-slot-h"><span class="sf-ico" aria-hidden="true">${icon}</span>
       <div><b>${esc(spec.label)}</b><small>${spec.required ? t('Obligatoire') : t('Facultative')} · ${esc(spec.hint)}</small></div></div>
     ${u ? `<div class="sf-unit">
-        <button class="sf-unit-n" data-card="${esc(u.id)}"><b>${esc(u.name)}</b><small>${esc(u.subtitle || typeLabel(u.type))}${u.armor ? ' · ' + t('Armure {n}', { n: u.armor }) : ''}${u.faction ? ' · ' + esc(factionName(u.faction, D)) : ''}</small></button>
+        <button class="sf-unit-n${thumb(u.id) ? ' wt' : ''}" data-card="${esc(u.id)}">${thumb(u.id, 44)}<b>${esc(u.name)}</b><small>${esc(u.subtitle || typeLabel(u.type))}${u.armor ? ' · ' + t('Armure {n}', { n: u.armor }) : ''}${u.faction ? ' · ' + esc(factionName(u.faction, D)) : ''}</small></button>
         <span class="sf-cost">${esc(costLabel(u, slot, R))}${slot === 'cmd' && hqBonus(R) ? `<small>${esc(t('bonus −{n}', { n: hqBonus(R) }))}</small>` : ''}</span>
         <button class="btn sm" data-pick="${slot}">${t('Changer')}</button>
         <button class="btn sm icon danger" data-clear="${slot}" aria-label="${t('Retirer')}">✕</button>
@@ -331,7 +336,8 @@ function bindArmy() {
   }));
   app.querySelector('[data-join]')?.addEventListener('change', (e) => { L.slots.cmd.join = e.target.value || undefined; save(); renderArmy(); });
   app.querySelectorAll('[data-card]').forEach((b) => b.addEventListener('click', () => {
-    openModal(unitCardHTML(S.data.unitsById.get(b.dataset.card), S.data));
+    const cu = S.data.unitsById.get(b.dataset.card);
+    openUnitCard(cu, S.data, { cost: unitCost(cu) });
   }));
   document.getElementById('btn-share').addEventListener('click', share);
   document.getElementById('btn-text').addEventListener('click', () => {
@@ -380,8 +386,8 @@ function openPicker(slot) {
   const chips = [['all', t('Toutes')], ['none', t('Bloc')], ...factions.map((f) => [f.id, f.name])];
   const count = (k) => all.filter((u) => k === 'all' || (k === 'none' ? !u.faction : u.faction === k)).length;
   let q = '';
-  const row = (u) => `<div class="sf-pick-row"><button class="sf-pick" data-u="${esc(u.id)}">
-      <span><b>${esc(u.name)}</b><small>${esc(u.subtitle || typeLabel(u.type))}${u.armor ? ' · ' + t('Arm. {n}', { n: u.armor }) : ''}${u.faction ? ' · ' + esc(factionName(u.faction, D)) : ''}</small></span>
+  const row = (u) => `<div class="sf-pick-row"><button class="sf-pick${thumb(u.id) ? ' wt' : ''}" data-u="${esc(u.id)}">
+      ${thumb(u.id, 44)}<span><b>${esc(u.name)}</b><small>${esc(u.subtitle || typeLabel(u.type))}${u.armor ? ' · ' + t('Arm. {n}', { n: u.armor }) : ''}${u.faction ? ' · ' + esc(factionName(u.faction, D)) : ''}</small></span>
       <span class="sf-cost ${unitCost(u) > left ? 'over' : ''}">${unitCost(u)}</span></button>
       <button type="button" class="sf-unit-info" data-info="${esc(u.id)}" title="${t('Voir la fiche')}" aria-label="${esc(t('Voir la fiche : {name}', { name: u.name }))}">i</button></div>`;
   const listHTML = () => {
@@ -472,7 +478,7 @@ function listText() {
 function openPdf() {
   const D = S.data, F = S.F, L = S.list, R = analyze(L);
   const filled = SLOTS.filter((s) => D.unitsById.get(L.slots[s]?.u));
-  const cards = filled.map((s) => { const u = D.unitsById.get(L.slots[s].u); const p = D.photos?.[u.id]?.[0]; return { u, D, cost: unitCost(u), photo: p?.file || null, focus: p?.focus || null }; });
+  const cards = filled.map((s) => { const u = D.unitsById.get(L.slots[s].u); const a = artOf(u, D); return { u, D, cost: unitCost(u), photo: a.photo, focus: a.focus, credit: a.credit }; });
   openModal(pdfDialogHTML(cards.length), (root) => bindPdfDialog(root, ({ includeCards, format }, onProgress) => {
     const rows = filled.map((s) => {
       const u = D.unitsById.get(L.slots[s].u);

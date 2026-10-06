@@ -86,6 +86,13 @@
 .sf-unit-n:hover b { text-decoration: underline; text-decoration-color: var(--rust); text-underline-offset: 3px; }
 .sf-cost { font-family: var(--f-mono); font-weight: 600; font-size: 16px; min-width: 2ch; text-align: right; }
 .sf-cost.over { color: var(--bad); }
+/* Miniatures pixel art */
+.sf-unit-n.wt { grid-template-columns: 44px minmax(0, 1fr); column-gap: 10px; align-items: center; }
+.sf-unit-n.wt > :not(.thumb) { grid-column: 2; }
+.sf-unit-n .thumb, .sf-pick .thumb { width: 44px; height: 44px; object-fit: cover; border-radius: 3px; border: 1px solid var(--line); background: var(--panel-2, var(--panel)); }
+.sf-unit-n .thumb { grid-row: 1 / span 2; }
+.sf-pick.wt { grid-template-columns: 44px minmax(0, 1fr) auto; }
+.sf-pick.wt span:not(.sf-cost) { display: grid; min-width: 0; }
 @media (max-width: 460px) { .sf-unit { grid-template-columns: minmax(0, 1fr) auto; } .sf-unit .btn { justify-self: start; } }
 .sf-add { justify-self: start; border-style: dashed; }
 .sf-join { display: grid; gap: 4px; }
