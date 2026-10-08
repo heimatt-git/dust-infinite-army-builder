@@ -1,5 +1,5 @@
 {
- "version": "202610060653",
+ "version": "202610081830",
  "units": [
   "allies--bazooka-joe",
   "allies--flying-banana",
@@ -9,8 +9,11 @@
   "allies--the-chef",
   "allies--the-priest",
   "allies--usmc-war-dogs-recon-squad",
+  "axis--bloody-blitz",
   "axis--experiment-x-33",
   "axis--heinrich-tropical-bk",
+  "axis--manfred",
+  "axis--stefan",
   "mercenaries--alex",
   "mercenaries--mercenary-cleaning-team",
   "mercenaries--mercenary-command-squad",
@@ -190,6 +193,21 @@
    "x": 0.5,
    "y": 0.549,
    "zoom": 1
+  },
+  "axis--bloody-blitz": {
+   "x": 0.5,
+   "y": 0.3,
+   "zoom": 1
+  },
+  "axis--manfred": {
+   "x": 0.5,
+   "y": 0.433,
+   "zoom": 1
+  },
+  "axis--stefan": {
+   "x": 0.49,
+   "y": 0.642,
+   "zoom": 1.05
   }
  }
 }
