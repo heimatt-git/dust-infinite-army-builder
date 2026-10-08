@@ -65,9 +65,18 @@ export function analyzeArmy(list, data) {
   // --- Héros rattachés (escouade / véhicule piloté)
   const byKey = new Map(rows.map((r) => [r.e.k, r]));
   const joinedBy = new Map();
+  const carriedBy = new Map();
   for (const r of rows.filter((r) => r.e.join)) {
     const tg = byKey.get(r.e.join);
     if (!tg) { warnings.push(t('{name} est rattaché à une unité absente de la liste.', { name: r.u.name })); continue; }
+    // Véhicule Airmobile / Air Assault transporté par un hélicoptère Airlifter
+    if (!isJoiner(r.u) && isCarriable(r.u)) {
+      if (!isAirlifter(tg.u)) errors.push(t("{name} ne peut pas être transporté par {target} : seul un Airlifter transporte des véhicules.", { name: r.u.name, target: tg.u.name }));
+      const c = carriedBy.get(tg.e.k) || [];
+      c.push(r);
+      carriedBy.set(tg.e.k, c);
+      continue;
+    }
     if (!isJoiner(r.u)) { warnings.push(t("{name} n'est ni un héros ni un commissaire et ne peut pas rejoindre une unité.", { name: r.u.name })); continue; }
     if (tg.u.type === 'infantry' || (tg.u.type === 'hero' && isCommissar(r.u))) {
       if (tg.u.armor !== r.u.armor) errors.push(t("{name} (armure {a}) ne peut rejoindre {target} (armure {b}) : les valeurs d'armure doivent être identiques.", { name: r.u.name, a: r.u.armor, target: tg.u.name, b: tg.u.armor }));
@@ -79,6 +88,10 @@ export function analyzeArmy(list, data) {
     const list2 = joinedBy.get(tg.e.k) || [];
     list2.push(r);
     joinedBy.set(tg.e.k, list2);
+  }
+  // Un Airlifter ne transporte qu'un seul véhicule
+  for (const [k, vs] of carriedBy) {
+    if (vs.length > 1) errors.push(t('{name} transporte {n} véhicules : un Airlifter n\'en transporte qu\'un seul.', { name: byKey.get(k).u.name, n: vs.length }));
   }
   // FAQ : une escouade rejointe par un commissaire de faction appartient à cette faction
   for (const r of rows.filter((r) => isCommissar(r.u) && r.u.faction && r.e.join)) {
@@ -187,6 +200,9 @@ export function analyzePlatoon(pi, list, rows, data) {
 
 export const isCommissar = (u) => (u.skills || []).includes('Commissar');
 export const isJoiner = (u) => u.type === 'hero' || isCommissar(u);
+// Hélicoptère de transport et véhicules transportables
+export const isAirlifter = (u) => (u.skills || []).includes('Airlifter');
+export const isCarriable = (u) => u.type === 'vehicle' && ((u.skills || []).includes('Airmobile') || (u.skills || []).includes('Air Assault'));
 
 export function blocName(id, data) {
   const b = data.blocsById.get(id);

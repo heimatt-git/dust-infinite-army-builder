@@ -19,6 +19,8 @@ const SECTIONS = () => [
         'In the “Add units” tab, filter by faction or type a name or skill, then add units. The card button opens a unit’s sheet.'),
       L("L'onglet « Ma liste » range vos unités par peloton. Le bandeau du haut montre les points dépensés et dit si la liste est valide ; une alerte « À corriger » explique ce qui manque.",
         'The “My list” tab arranges your units by platoon. The banner at the top shows the points spent and whether the list is valid; a “Fix” alert explains what is missing.'),
+      L("Un héros se rattache à une escouade ou pilote un véhicule avec le menu qui affiche « Seul ». De même, un véhicule Airmobile ou Air Assault (un Walker, par exemple) se place sur un hélicoptère Airlifter avec le menu qui affiche « Non transporté » : il s'affiche sous l'hélicoptère, et un Airlifter ne transporte qu'un seul véhicule.",
+        'A hero joins a squad or pilots a vehicle with the menu that shows “Alone”. In the same way, an Airmobile or Air Assault vehicle (a Walker, for example) goes onto an Airlifter helicopter with the menu that shows “Not carried”: it appears under the helicopter, and an Airlifter carries only one vehicle.'),
       L("« Partager » donne un lien : la personne qui l'ouvre reçoit une copie de votre liste. « Texte » la copie en texte, « PDF » crée un récapitulatif avec les cartes.",
         '“Share” gives a link: whoever opens it gets a copy of your list. “Text” copies it as text, “PDF” builds a summary with the cards.'),
     ],

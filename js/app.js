@@ -1,6 +1,6 @@
 // DUST 194∞ Builder — application principale (français / anglais)
 import { loadData, loadCustom, withCustom, typeLabel, MERC, unitCost, canPilot } from './data.js';
-import { analyzeArmy, entryCost, blocName, factionName, CAPTURED_SURCHARGE, isJoiner, isCommissar } from './rules.js';
+import { analyzeArmy, entryCost, blocName, factionName, CAPTURED_SURCHARGE, isJoiner, isCommissar, isAirlifter, isCarriable } from './rules.js';
 import { esc, uid, store, toast, copyText, openModal, unitCardHTML, guessRepo, brandLogo, mountCredit, printCredit } from './ui.js';
 import { t, LANG, initLang, setLang } from './i18n.js';
 import { exportListPDF, pdfDialogHTML, bindPdfDialog } from './pdf.js';
@@ -448,7 +448,11 @@ function rosterHTML(A) {
   const entryKeys = new Set(L.entries.map((e) => e.k));
   const isShownUnder = (e) => e.join && entryKeys.has(e.join);
 
-  const renderWithJoined = (e) => entryRow(e) + (joinedMap.get(e.k) || []).map((h) => entryRow(h, true)).join('');
+  // Une unité, puis ce qui lui est rattaché (héros, véhicule transporté), et ce qui est rattaché à ces unités
+  const renderWithJoined = (e, depth = 0, seen = new Set()) => {
+    seen.add(e.k);
+    return entryRow(e, depth) + (joinedMap.get(e.k) || []).filter((h) => !seen.has(h.k)).map((h) => renderWithJoined(h, depth + 1, seen)).join('');
+  };
 
   const platoonBlocks = L.platoons.map((pi) => {
     const P = D.platoonsById.get(pi.p);
@@ -478,7 +482,7 @@ function rosterHTML(A) {
             ${options.map((o, i) => `<option value="${i}" ${selected === i ? 'selected' : ''}>${esc(optLabel(o))}</option>`).join('')}
             ${mercOpts}
           </select>
-          ${shown.map(renderWithJoined).join('')}
+          ${shown.map((e) => renderWithJoined(e)).join('')}
         </div>
       </div>`;
     };
@@ -497,7 +501,7 @@ function rosterHTML(A) {
         ${P.command.map((opts, i) => slotRow('cmd' + i, P.command.length > 1 ? t('Commandement {n}', { n: i + 1 }) : t('Commandement'), opts, i)).join('')}
         ${P.combat.map((opts, i) => slotRow('c' + i, t('Combat {n}', { n: i + 1 }), opts, i)).join('')}
         <div class="slot"><div class="slot-l">${t('Soutien')}</div><div class="slot-body">
-          ${support.map(renderWithJoined).join('') || `<p class="hint" style="margin:6px 0 0">${t('Ajoutez une unité depuis le catalogue puis affectez-la à ce peloton avec son menu « Peloton ».')}</p>`}
+          ${support.map((e) => renderWithJoined(e)).join('') || `<p class="hint" style="margin:6px 0 0">${t('Ajoutez une unité depuis le catalogue puis affectez-la à ce peloton avec son menu « Peloton ».')}</p>`}
         </div></div>
       </div>
     </div>`;
@@ -505,7 +509,8 @@ function rosterHTML(A) {
 
   const loose = L.entries.filter((e) => !e.pl && !isShownUnder(e));
   const looseSorted = [...loose].sort((a, b) => TYPE_ORDER.indexOf(D.unitsById.get(a.u)?.type) - TYPE_ORDER.indexOf(D.unitsById.get(b.u)?.type));
-  const looseSum = loose.reduce((s, e) => s + entryCost(e, D) + (joinedMap.get(e.k) || []).filter((h) => !h.pl).reduce((x, h) => x + entryCost(h, D), 0), 0);
+  const treeCost = (e, seen = new Set()) => { seen.add(e.k); return entryCost(e, D) + (joinedMap.get(e.k) || []).filter((h) => !h.pl && !seen.has(h.k)).reduce((x, h) => x + treeCost(h, seen), 0); };
+  const looseSum = loose.reduce((s, e) => s + treeCost(e), 0);
 
   if (!L.entries.length && !L.platoons.length) {
     return `<div class="block"><div class="block-b">
@@ -518,11 +523,12 @@ function rosterHTML(A) {
     ${platoonBlocks}
     <div class="block">
       <div class="block-h"><div><h3>${t('Unités indépendantes')}</h3><div class="sub">${t('Hors peloton')}</div></div><span class="chip"><b class="num">${looseSum}</b> pts</span></div>
-      <div class="block-b">${looseSorted.map(renderWithJoined).join('') || `<p class="hint" style="margin:0">${t('Aucune unité hors peloton.')}</p>`}</div>
+      <div class="block-b">${looseSorted.map((e) => renderWithJoined(e)).join('') || `<p class="hint" style="margin:0">${t('Aucune unité hors peloton.')}</p>`}</div>
     </div>`;
 }
 
-function entryRow(e, joined = false) {
+function entryRow(e, level = 0) {
+  const joined = level > 0;
   const D = S.data, L = S.list;
   const u = D.unitsById.get(e.u);
   if (!u) return `<div class="erow"><div class="nm"><b>${t('Unité inconnue')}</b><small>${esc(e.u)}</small></div><span></span><div class="ctrl"><button class="btn icon danger" data-rm="${e.k}" aria-label="${t('Retirer')}">✕</button></div></div>`;
@@ -544,6 +550,16 @@ function entryRow(e, joined = false) {
       ${targets.map(({ x, t: tu }) => `<option value="${x.k}" ${e.join === x.k ? 'selected' : ''}>${tu.type === 'vehicle' || tu.type === 'aircraft' ? t('Pilote') : t('Rejoint')} : ${esc(tu.name)}</option>`).join('')}
     </select>`;
   }
+  // Transport d'un véhicule Airmobile / Air Assault par un hélicoptère Airlifter
+  if (isCarriable(u)) {
+    const lifters = L.entries.filter((x) => x.k !== e.k).map((x) => ({ x, t: D.unitsById.get(x.u) })).filter(({ t: tu }) => tu && isAirlifter(tu));
+    if (lifters.length || e.join) {
+      ctrls += `<select data-join="${e.k}" aria-label="${esc(t('Transporter {n}', { n: u.name }))}">
+      <option value="">${t('Non transporté')}</option>
+      ${lifters.map(({ x, t: tu }) => `<option value="${x.k}" ${e.join === x.k ? 'selected' : ''}>${t('Transporté par')} : ${esc(tu.name)}</option>`).join('')}
+    </select>`;
+    }
+  }
   // Affectation à un peloton (unités hors poste requis)
   if (!e.role || e.role === 'sup') {
     if (L.platoons.length) {
@@ -555,7 +571,7 @@ function entryRow(e, joined = false) {
     ctrls += `<button class="btn icon" data-clone="${e.k}" title="${t('Ajouter un exemplaire')}" aria-label="${t('Dupliquer')}">⧉</button>`;
     ctrls += `<button class="btn icon danger" data-rm="${e.k}" aria-label="${esc(t('Retirer {n}', { n: u.name }))}">✕</button>`;
   }
-  return `<div class="erow ${joined ? 'joined' : ''}">
+  return `<div class="erow ${joined ? 'joined' : ''}${level > 1 ? ' l2' : ''}">
     <div class="nm${pixelListed(u.id) ? ' wt' : ''}" data-card="${esc(u.id)}" data-cap="${e.cap ? 1 : ''}" tabindex="0" role="button">
       ${thumb(u.id)}<b>${joined ? '↳ ' : ''}${esc(u.name)}</b><small>${esc(typeLabel(u.type))}${u.armor ? ' · ' + t('Armure') + ' ' + esc(u.armor) : ''}</small>${tags ? `<div class="tags">${tags}</div>` : ''}
     </div>
@@ -669,7 +685,7 @@ function listText(A) {
     if (e.cap) bits.push(t('capturé'));
     if (e.merc) bits.push(t('mercenaire'));
     if (u.confidential) bits.push('CONFIDENTIAL');
-    if (e.join) { const tu = D.unitsById.get(L.entries.find((x) => x.k === e.join)?.u); if (tu) bits.push((tu.type === 'vehicle' || tu.type === 'aircraft' ? t('pilote') : t('rejoint')) + ' ' + tu.name); }
+    if (e.join) { const tu = D.unitsById.get(L.entries.find((x) => x.k === e.join)?.u); if (tu) bits.push((isCarriable(u) && !isJoiner(u) ? t('transporté par') : tu.type === 'vehicle' || tu.type === 'aircraft' ? t('pilote') : t('rejoint')) + ' ' + tu.name); }
     return `${ind}- ${u.name} (${entryCost(e, D)})${bits.length ? ' [' + bits.join(', ') + ']' : ''}`;
   };
   const out = [`${L.name}`, ...(L.confidential ? [t('CONFIDENTIAL : contient des créations de la communauté, non officielles')] : []), `${blocName(L.bloc, D)} · ${A.counted}/${L.limit} pts${A.covered ? t(' (+{n} pts de héros en bonus)', { n: A.covered }) : ''} · ${A.kindLabel}`, ''];

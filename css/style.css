@@ -448,3 +448,5 @@ table.wt { border-collapse: collapse; width: 100%; font-size: 13px; }
 .help-sec p, .help-sec li { max-width: 75ch; line-height: 1.55; }
 .help-sec ol, .help-sec ul { margin: 0; padding-left: 22px; display: grid; gap: 6px; }
 .help-what { margin: 10px 0 0; font-weight: 500; }
+
+.erow.joined.l2 { margin-left: 44px; }
