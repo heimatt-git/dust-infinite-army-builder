@@ -1,17 +1,22 @@
 {
- "version": "202610081830",
+ "version": "202610091006",
  "units": [
   "allies--bazooka-joe",
   "allies--flying-banana",
   "allies--recon-mickey",
   "allies--rosie-sgt-major-i",
   "allies--sergeant-victory",
+  "allies--storm",
   "allies--the-chef",
   "allies--the-priest",
+  "allies--thunder",
+  "allies--tornado",
   "allies--usmc-war-dogs-recon-squad",
+  "axis--adler",
   "axis--bloody-blitz",
   "axis--experiment-x-33",
   "axis--heinrich-tropical-bk",
+  "axis--hexe",
   "axis--manfred",
   "axis--stefan",
   "mercenaries--alex",
@@ -208,6 +213,26 @@
    "x": 0.49,
    "y": 0.642,
    "zoom": 1.05
+  },
+  "allies--storm": {
+   "x": 0.5,
+   "y": 0.513,
+   "zoom": 1
+  },
+  "axis--adler": {
+   "x": 0.5,
+   "y": 0.454,
+   "zoom": 1
+  },
+  "allies--thunder": {
+   "x": 0.5,
+   "y": 0.451,
+   "zoom": 1
+  },
+  "axis--hexe": {
+   "x": 0.5,
+   "y": 0.418,
+   "zoom": 1
   }
  }
 }
