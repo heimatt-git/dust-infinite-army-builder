@@ -1,5 +1,5 @@
 {
- "version": "202610091018",
+ "version": "202610091022",
  "units": [
   "allies--bazooka-joe",
   "allies--flying-banana",
@@ -19,6 +19,7 @@
   "axis--heinrich-tropical-bk",
   "axis--hexe",
   "axis--manfred",
+  "axis--moskito",
   "axis--stefan",
   "mercenaries--alex",
   "mercenaries--mercenary-cleaning-team",
@@ -238,6 +239,11 @@
   "axis--blitz": {
    "x": 0.5,
    "y": 0.413,
+   "zoom": 1
+  },
+  "axis--moskito": {
+   "x": 0.5,
+   "y": 0.3,
    "zoom": 1
   }
  }
