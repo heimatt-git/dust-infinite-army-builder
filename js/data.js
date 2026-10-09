@@ -87,9 +87,26 @@ export function heroBaseName(name) {
     .toLowerCase();
 }
 
+// Règles de pilotage propres à une carte : « Pilot: Sigrid » sur le véhicule (seule Sigrid le pilote),
+// « Pilot: Snow Lynx » sur le héros (ne pilote que ce véhicule), « Defensive Pilot (Luftwaffe) » (véhicules de cette faction).
+const pilotKey = (n) => heroBaseName(String(n || '')).replace(/^the\s+/, '');
+const customNames = (u) => (u.customSkills || []).map((c) => String(c.name || '').trim());
+const sameName = (a, b) => { a = pilotKey(a); b = pilotKey(b); return !!a && !!b && (a === b || a.startsWith(b + ' ') || b.startsWith(a + ' ')); };
+
 export function canPilot(hero, target) {
+  if (target.type !== 'vehicle' && target.type !== 'aircraft') return false;
+  const mine = customNames(hero);
+  // Le véhicule réserve son pilotage à un héros précis
+  const reserved = customNames(target).map((n) => n.match(/^Pilot\s*:\s*(.+)$/i)).filter(Boolean).map((m) => m[1]);
+  if (reserved.length) return reserved.some((r) => sameName(hero.name, r));
+  // Le héros ne pilote qu'un véhicule précis
+  const only = mine.map((n) => n.match(/^Pilot\s*:\s*(.+)$/i)).filter(Boolean).map((m) => m[1]);
+  if (only.length && only.some((o) => sameName(target.name, o))) return true;
+  // Pilotage limité à une faction : « Defensive Pilot (Luftwaffe) »
+  const fac = mine.map((n) => n.match(target.type === 'aircraft' ? /^(?:Ace )?Air Pilot\s*\((.+)\)$/i : /^(?:Ace |Defensive )?Pilot\s*\((.+)\)$/i)).filter(Boolean).map((m) => m[1].toLowerCase());
+  if (fac.some((f) => String(target.faction || '').toLowerCase().includes(f))) return true;
   const s = hero.skills || [];
+  if (only.length) return false;
   if (target.type === 'aircraft') return s.includes('Air Pilot') || s.includes('Ace Air Pilot');
-  if (target.type === 'vehicle') return s.some((x) => /^(Ace |Defensive )?Pilot$/.test(x));
-  return false;
+  return s.some((x) => /^(Ace |Defensive )?Pilot$/.test(x));
 }

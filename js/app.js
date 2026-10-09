@@ -13,6 +13,28 @@ import { initImages, imagesAvailable, imageURL, hasImage, imageCount, saveImage,
 const LS_KEY = 'dust1947.lists';
 const LIMITS = [25, 50, 100, 150, 200];
 const TYPE_ORDER = ['hero', 'infantry', 'vehicle', 'aircraft', 'token'];
+const NAME_COLLATOR = new Intl.Collator(undefined, { sensitivity: 'base', numeric: true });
+// Ordre d'affichage : type (héros, infanterie, véhicules…) puis ordre alphabétique du nom.
+// Un héros rattaché ou un véhicule transporté suit son unité d'accueil.
+function orderTree(entries, D) {
+  const keys = new Set(entries.map((e) => e.k));
+  const info = (e) => { const u = D.unitsById.get(e.u); return { type: TYPE_ORDER.indexOf(u?.type), name: u?.name || '' }; };
+  const cmp = (a, b) => { const x = info(a), y = info(b); return (x.type - y.type) || NAME_COLLATOR.compare(x.name, y.name); };
+  const kids = new Map();
+  for (const e of entries) if (e.join && keys.has(e.join) && e.join !== e.k) kids.set(e.join, [...(kids.get(e.join) || []), e]);
+  const out = [], seen = new Set();
+  const walk = (e) => { if (seen.has(e.k)) return; seen.add(e.k); out.push(e); (kids.get(e.k) || []).sort(cmp).forEach(walk); };
+  entries.filter((e) => !(e.join && keys.has(e.join) && e.join !== e.k)).sort(cmp).forEach(walk);
+  entries.forEach(walk); // sécurité : rattachements circulaires
+  return out;
+}
+// Entrées d'un peloton : emplacements Commandement/Combat dans leur ordre, puis Soutien trié
+function platoonOrder(L, pk, D) {
+  const mine = L.entries.filter((e) => e.pl === pk);
+  const sup = new Set(mine.filter((e) => e.role === 'sup').map((e) => e.k));
+  for (let n = 0; n < 4; n++) for (const e of mine) if (e.join && sup.has(e.join)) sup.add(e.k);
+  return [...mine.filter((e) => !sup.has(e.k)), ...orderTree(mine.filter((e) => sup.has(e.k)), D)];
+}
 
 const S = {
   data: null,
@@ -372,7 +394,7 @@ function catalogUnits() {
     const q = U.q.toLowerCase();
     pool = pool.filter((u) => (u.name + ' ' + u.subtitle + ' ' + (u.skills || []).join(' ')).toLowerCase().includes(q));
   }
-  return pool;
+  return [...pool].sort((a, b) => NAME_COLLATOR.compare(a.name, b.name));
 }
 
 function catalogHTML() {
@@ -486,7 +508,7 @@ function rosterHTML(A) {
         </div>
       </div>`;
     };
-    const support = mine.filter((e) => e.role === 'sup' && !isShownUnder(e));
+    const support = orderTree(mine.filter((e) => e.role === 'sup' && !isShownUnder(e)), D);
     return `<div class="block">
       <div class="block-h">
         <div><h3>${esc(P.name)}</h3><div class="sub">${esc(P.lore || '')}</div></div>
@@ -508,7 +530,7 @@ function rosterHTML(A) {
   }).join('');
 
   const loose = L.entries.filter((e) => !e.pl && !isShownUnder(e));
-  const looseSorted = [...loose].sort((a, b) => TYPE_ORDER.indexOf(D.unitsById.get(a.u)?.type) - TYPE_ORDER.indexOf(D.unitsById.get(b.u)?.type));
+  const looseSorted = orderTree(loose, D);
   const treeCost = (e, seen = new Set()) => { seen.add(e.k); return entryCost(e, D) + (joinedMap.get(e.k) || []).filter((h) => !h.pl && !seen.has(h.k)).reduce((x, h) => x + treeCost(h, seen), 0); };
   const looseSum = loose.reduce((s, e) => s + treeCost(e), 0);
 
@@ -693,10 +715,10 @@ function listText(A) {
     const P = D.platoonsById.get(pi.p);
     const st = A.platoonStatus.find((s) => s.key === pi.k);
     out.push(`${P?.name || t('Peloton')}${st?.complete ? '' : t(' (incomplet)')}`);
-    for (const e of L.entries.filter((e) => e.pl === pi.k)) out.push(line(e));
+    for (const e of platoonOrder(L, pi.k, D)) out.push(line(e));
     out.push('');
   }
-  const loose = L.entries.filter((e) => !e.pl);
+  const loose = orderTree(L.entries.filter((e) => !e.pl), D);
   if (loose.length) { out.push(t('Unités indépendantes')); for (const e of loose) out.push(line(e)); out.push(''); }
   if (A.errors.length) { out.push(t('À corriger :')); for (const m of A.errors) out.push('  ! ' + m); }
   out.push(t('Total dépensé : {n} pts', { n: A.total }));
@@ -725,7 +747,8 @@ const fileSlug = (s) => String(s || 'liste').normalize('NFKD').replace(/[\u0300-
 
 // Export PDF : récapitulatif + cartes des unités (une carte par unité de la liste)
 function listOrder(L) {
-  return [...L.platoons.flatMap((pi) => L.entries.filter((e) => e.pl === pi.k)), ...L.entries.filter((e) => !e.pl)];
+  const D = S.data;
+  return [...L.platoons.flatMap((pi) => platoonOrder(L, pi.k, D)), ...orderTree(L.entries.filter((e) => !e.pl), D)];
 }
 function openPdf(A) {
   const D = S.data, L = S.list;
@@ -741,9 +764,9 @@ function openPdf(A) {
     };
     const sections = L.platoons.map((pi) => {
       const P = D.platoonsById.get(pi.p);
-      return { title: P?.name || t('Peloton'), note: P?.advantage || '', rows: L.entries.filter((e) => e.pl === pi.k).map(row).filter(Boolean) };
+      return { title: P?.name || t('Peloton'), note: P?.advantage || '', rows: platoonOrder(L, pi.k, D).map(row).filter(Boolean) };
     });
-    const ind = L.entries.filter((e) => !e.pl).map(row).filter(Boolean);
+    const ind = orderTree(L.entries.filter((e) => !e.pl), D).map(row).filter(Boolean);
     if (ind.length) sections.push({ title: t('Unités indépendantes'), rows: ind });
     const recap = {
       title: L.name, confidential: !!L.confidential, sections,
@@ -766,8 +789,8 @@ function printHTML(A) {
     </div>`;
   };
   return `<h1>${esc(L.name)}</h1>${L.confidential ? `<p><b>${esc(t('CONFIDENTIAL : contient des créations de la communauté, non officielles'))}</b></p>` : ''}<p>${esc(blocName(L.bloc, D))} · ${A.counted}/${L.limit} pts · ${esc(A.kindLabel)}</p>
-    ${L.platoons.map((pi) => { const P = D.platoonsById.get(pi.p); return `<h3>${esc(P?.name || '')}</h3><p><i>${esc(P?.advantage || '')}</i></p>${L.entries.filter((e) => e.pl === pi.k).map(card).join('')}`; }).join('')}
-    ${L.entries.some((e) => !e.pl) ? `<h3>${t('Unités indépendantes')}</h3>${L.entries.filter((e) => !e.pl).map(card).join('')}` : ''}
+    ${L.platoons.map((pi) => { const P = D.platoonsById.get(pi.p); return `<h3>${esc(P?.name || '')}</h3><p><i>${esc(P?.advantage || '')}</i></p>${platoonOrder(L, pi.k, D).map(card).join('')}`; }).join('')}
+    ${L.entries.some((e) => !e.pl) ? `<h3>${t('Unités indépendantes')}</h3>${orderTree(L.entries.filter((e) => !e.pl), D).map(card).join('')}` : ''}
     ${printCredit()}`;
 }
 
