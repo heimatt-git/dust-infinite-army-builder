@@ -1,5 +1,5 @@
 {
- "version": "202610091006",
+ "version": "202610091018",
  "units": [
   "allies--bazooka-joe",
   "allies--flying-banana",
@@ -13,6 +13,7 @@
   "allies--tornado",
   "allies--usmc-war-dogs-recon-squad",
   "axis--adler",
+  "axis--blitz",
   "axis--bloody-blitz",
   "axis--experiment-x-33",
   "axis--heinrich-tropical-bk",
@@ -221,7 +222,7 @@
   },
   "axis--adler": {
    "x": 0.5,
-   "y": 0.454,
+   "y": 0.526,
    "zoom": 1
   },
   "allies--thunder": {
@@ -232,6 +233,11 @@
   "axis--hexe": {
    "x": 0.5,
    "y": 0.418,
+   "zoom": 1
+  },
+  "axis--blitz": {
+   "x": 0.5,
+   "y": 0.413,
    "zoom": 1
   }
  }
