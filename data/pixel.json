@@ -1,5 +1,5 @@
 {
- "version": "202610091123",
+ "version": "202610091132",
  "units": [
   "allies--bazooka-joe",
   "allies--flying-banana",
@@ -17,10 +17,13 @@
   "axis--bloody-blitz",
   "axis--experiment-x-33",
   "axis--falke",
+  "axis--galeazzo",
   "axis--heinrich-tropical-bk",
   "axis--hexe",
+  "axis--kurt",
   "axis--manfred",
   "axis--moskito",
+  "axis--rolf",
   "axis--stefan",
   "mercenaries--alex",
   "mercenaries--mercenary-cleaning-team",
@@ -250,6 +253,21 @@
   "axis--falke": {
    "x": 0.5,
    "y": 0.487,
+   "zoom": 1
+  },
+  "axis--rolf": {
+   "x": 0.5,
+   "y": 0.426,
+   "zoom": 1
+  },
+  "axis--galeazzo": {
+   "x": 0.5,
+   "y": 0.321,
+   "zoom": 1
+  },
+  "axis--kurt": {
+   "x": 0.5,
+   "y": 0.354,
    "zoom": 1
   }
  }
