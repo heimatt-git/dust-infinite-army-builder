@@ -1,7 +1,7 @@
 // Petits utilitaires d'interface partagés (constructeur + éditeur)
 import { typeLabel } from './data.js';
 import { t, LANG } from './i18n.js';
-import { diceSvg, diceTitle } from './dice.js';
+import { diceSvg, diceTitle, attackHtml } from './dice.js';
 
 // Signature de l'auteur du site (logo + crédit)
 export const LOGO = 'img/logo-loir.png';
@@ -74,7 +74,7 @@ function attackCells(arr, n) {
   let out = '';
   for (let i = 0; i < n; i++) {
     const v = arr[i];
-    out += `<td class="v${v ? '' : ' nil'}${i === 0 ? ' grp' : ''}">${v ? esc(v) : '–'}</td>`;
+    out += `<td class="v${v ? '' : ' nil'}${i === 0 ? ' grp' : ''}">${v ? attackHtml(v) : '–'}</td>`;
   }
   return out;
 }

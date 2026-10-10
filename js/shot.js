@@ -3,6 +3,7 @@ import { loadData, typeLabel, unitCost, heroBaseName, canPilot } from './data.js
 import { t, LANG, initLang, setLang } from './i18n.js';
 import { analyzeArmy, blocName, factionName } from './rules.js';
 import { esc, uid, store, toast, copyText, openModal, unitCardHTML, brandLogo, mountCredit, printCredit } from './ui.js';
+import { attackHtml } from './dice.js';
 import { exportListPDF, pdfDialogHTML, bindPdfDialog } from './pdf.js';
 import { initCardArt } from './cardart.js';
 import { initImages } from './images.js';
@@ -513,7 +514,7 @@ function sheetHTML() {
     const ws = u.weapons || [];
     return `<div class="pu"><b>${esc(slotSpec(s).short)} — ${esc(u.name)}</b> · ${esc(costLabel(u, s, R))} ${t('PA')} · Arm ${esc(u.armor ?? '-')} · ${esc(t('Santé {n}', { n: u.health ?? '-' }))} · Mv ${esc(u.move ?? '-')}/${esc(u.march ?? '-')}
       ${(u.skills || []).length ? `<div><i>${u.skills.map(esc).join(', ')}</i></div>` : ''}
-      ${ws.length ? `<table><tr><th>${t('Arme')}</th><th>${t('Nb')}</th><th>${t('Portée')}</th><th>Inf 1-4</th><th>${LANG === 'en' ? 'Veh' : 'Véh'} 1-7</th></tr>${ws.map((w) => `<tr><td class="wn">${esc(w.name)}${(w.specials || []).length ? ' (' + w.specials.map(esc).join(', ') + ')' : ''}</td><td>${esc(w.count ?? '')}</td><td>${esc(w.range ?? '')}</td><td>${(w.vsInfantry || []).map(esc).join(' ')}</td><td>${(w.vsVehicle || []).map(esc).join(' ')}</td></tr>`).join('')}</table>` : ''}</div>`;
+      ${ws.length ? `<table><tr><th>${t('Arme')}</th><th>${t('Nb')}</th><th>${t('Portée')}</th><th>Inf 1-4</th><th>${LANG === 'en' ? 'Veh' : 'Véh'} 1-7</th></tr>${ws.map((w) => `<tr><td class="wn">${esc(w.name)}${(w.specials || []).length ? ' (' + w.specials.map(esc).join(', ') + ')' : ''}</td><td>${esc(w.count ?? '')}</td><td>${esc(w.range ?? '')}</td><td>${(w.vsInfantry || []).map(attackHtml).join(' ')}</td><td>${(w.vsVehicle || []).map(attackHtml).join(' ')}</td></tr>`).join('')}</table>` : ''}</div>`;
   };
   return `<h1>${esc(L.name)}</h1><p>${esc(F.game)} · ${esc(F.name)} · ${esc(blocName(L.bloc, D))} · ${R.A.counted} / ${F.budget} ${t('PA')}${R.A.covered ? t(' ({s} dépensés, −{b} bonus HQ)', { s: R.A.total, b: R.A.covered }) : ''}</p>
     ${SLOTS.map(card).join('')}

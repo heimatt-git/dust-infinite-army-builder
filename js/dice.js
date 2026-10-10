@@ -47,3 +47,17 @@ export function attackParts(v) {
   if (!left && !right) return null;
   return { left: left ? { icon: left } : { text: m[1] }, right: right ? { icon: right } : { text: m[2] } };
 }
+// Case d'attaque en HTML (fiches d'unité, fiches de partie) : symboles à la place des lettres B / BB / DB / AK
+let atkN = 0;
+const escH = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+export function attackHtml(v) {
+  const sp = attackParts(v);
+  if (!sp) return escH(v ?? '');
+  const part = (p) => {
+    if (!p.icon) return escH(p.text);
+    const ic = ATTACK_ICONS[p.icon];
+    const inner = ic.inner.replace(/dbmB/g, 'dbmB' + (++atkN));
+    return `<svg class="atk-i" viewBox="0 0 ${ic.w} ${ic.h}" style="width:${(ic.w / 100 * 1.35).toFixed(2)}em" aria-hidden="true">${inner}</svg>`;
+  };
+  return `<span class="atk" title="${escH(v)}">${part(sp.left)}/${part(sp.right)}</span>`;
+}

@@ -2,6 +2,7 @@
 import { loadData, loadCustom, withCustom, typeLabel, MERC, unitCost, canPilot } from './data.js';
 import { analyzeArmy, entryCost, blocName, factionName, CAPTURED_SURCHARGE, isJoiner, isCommissar, isAirlifter, isCarriable } from './rules.js';
 import { esc, uid, store, toast, copyText, openModal, unitCardHTML, guessRepo, brandLogo, mountCredit, printCredit } from './ui.js';
+import { attackHtml } from './dice.js';
 import { t, LANG, initLang, setLang } from './i18n.js';
 import { exportListPDF, pdfDialogHTML, bindPdfDialog } from './pdf.js';
 import { initCardArt, pixelListed, pixelPath, pixelMini, resolveArt, getPrefs, setPrefs, ownPhotoAvailable, ownPhotoURL, saveOwnPhoto, deleteOwnPhoto } from './cardart.js';
@@ -785,7 +786,7 @@ function printHTML(A) {
     return `<div class="pu"><b>${esc(u.name)}</b> — ${entryCost(e, D)} pts · ${t('Arm')} ${esc(u.armor ?? '-')} · ${t('Santé')} ${esc(u.health ?? '-')} · ${t('Mv')} ${esc(u.move ?? '-')}/${esc(u.march ?? '-')}${e.cap ? ' · ' + t('capturé') : ''}${u.confidential ? ' · <b>CONFIDENTIAL</b>' : ''}
       ${(u.skills || []).length ? `<div><i>${u.skills.map(esc).join(', ')}</i></div>` : ''}
       ${ws.length ? `<table><tr><th>${t('Arme')}</th><th>${t('Nb')}</th><th>${t('Portée')}</th><th>${t('Inf 1-4')}</th><th>${t('Véh 1-7')}</th><th>${t('Aéro')}</th></tr>
-      ${ws.map((w) => `<tr><td class="wn">${esc(w.name)}${(w.specials || []).length ? ' (' + w.specials.map(esc).join(', ') + ')' : ''}</td><td>${esc(w.count ?? '')}</td><td>${esc(w.range ?? '')}</td><td>${(w.vsInfantry || []).map(esc).join(' ')}</td><td>${(w.vsVehicle || []).map(esc).join(' ')}</td><td>${(w.vsAircraft || []).map(esc).join(' ')}</td></tr>`).join('')}</table>` : ''}
+      ${ws.map((w) => `<tr><td class="wn">${esc(w.name)}${(w.specials || []).length ? ' (' + w.specials.map(esc).join(', ') + ')' : ''}</td><td>${esc(w.count ?? '')}</td><td>${esc(w.range ?? '')}</td><td>${(w.vsInfantry || []).map(attackHtml).join(' ')}</td><td>${(w.vsVehicle || []).map(attackHtml).join(' ')}</td><td>${(w.vsAircraft || []).map(attackHtml).join(' ')}</td></tr>`).join('')}</table>` : ''}
     </div>`;
   };
   return `<h1>${esc(L.name)}</h1>${L.confidential ? `<p><b>${esc(t('CONFIDENTIAL : contient des créations de la communauté, non officielles'))}</b></p>` : ''}<p>${esc(blocName(L.bloc, D))} · ${A.counted}/${L.limit} pts · ${esc(A.kindLabel)}</p>
