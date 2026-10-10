@@ -185,8 +185,6 @@ function renderHome() {
       }).join('')}</div>` : `<p class="hint" style="margin:0">${t("Aucune armée pour l'instant.")}</p>`}
     </section>
 
-    ${feedbackCard()}
-
     <details class="sf-card sf-rules">
       <summary>${t('Règles du format')}</summary>
       ${rulesHTML()}

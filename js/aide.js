@@ -73,8 +73,6 @@ const SECTIONS = () => [
     tips: [
       L("Pas d'aéronef, pas d'avantage de peloton, pas de héros « surhumain » (Super Human), pas d'unité Strong Point.",
         'No aircraft, no platoon advantage, no “Super Human” heroes, no Strong Point units.'),
-      L("Le Shot Format est en test : les retours sont les bienvenus sur le Discord.",
-        'The Shot Format is in testing: feedback is welcome on the Discord.'),
     ],
   },
   {
