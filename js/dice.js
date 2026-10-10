@@ -28,3 +28,22 @@ export const diceInner = (code, bloc) => PATHS[diceKey(code, bloc)];
 export const diceTitle = (code) => TITLES[String(code).startsWith('dice_') ? code : 'dice_' + code];
 export const diceSvg = (code, bloc) =>
   `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">${diceInner(code, bloc)}</svg>`;
+
+// Symboles des cases d'attaque (cartes) : B = explosion, BB / DB = double explosion, AK = mort instantanée.
+// BB et DB désignent la même chose (double blast) : on les affiche pareil, sans toucher à la base.
+export const ATTACK_ICONS = {
+  blast: { w: 100, h: 100, inner: '<path fill="currentColor" stroke="currentColor" stroke-width="3" stroke-linejoin="round" d="M56.7 7.5 60.1 31.9 76.5 25.1 73.2 40.0 94.4 44.6 72.2 55.4 83.8 68.9 68.6 70.3 70.7 91.9 53.7 74.2 44.4 89.4 38.3 75.3 18.4 84.0 30.0 62.4 12.7 58.2 24.2 48.1 9.8 31.9 34.0 36.2 32.6 18.4 45.7 26.3Z"/>' },
+  double: { w: 112, h: 100, inner: '<defs><mask id="dbmB" maskUnits="userSpaceOnUse" x="-10" y="-10" width="140" height="120"><rect x="-10" y="-10" width="140" height="120" fill="#fff"/><path d="M46.0 18.4 49.0 40.1 63.6 34.1 60.6 47.3 79.5 51.5 59.8 61.0 70.0 73.0 56.5 74.3 58.4 93.5 43.3 77.7 35.0 91.2 29.6 78.7 11.9 86.5 22.2 67.2 6.9 63.5 17.1 54.5 4.2 40.1 25.8 44.0 24.5 28.2 36.2 35.1Z" fill="#000" stroke="#000" stroke-width="9" stroke-linejoin="round"/></mask></defs><g fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M92.9 9.9 87.2 31.0 103.0 31.1 95.1 42.2 110.9 53.3 89.1 54.5 93.8 69.6 80.9 65.4 75.1 83.9 67.3 63.4 54.4 72.6 54.4 59.1 35.0 59.3 52.1 45.6 39.3 36.1 52.2 31.9 46.0 13.6 64.4 25.5 69.4 10.5 77.4 21.4Z" mask="url(#dbmB)"/><path d="M46.0 18.4 49.0 40.1 63.6 34.1 60.6 47.3 79.5 51.5 59.8 61.0 70.0 73.0 56.5 74.3 58.4 93.5 43.3 77.7 35.0 91.2 29.6 78.7 11.9 86.5 22.2 67.2 6.9 63.5 17.1 54.5 4.2 40.1 25.8 44.0 24.5 28.2 36.2 35.1Z"/></g>' },
+  kill: { w: 100, h: 100, inner: '<g fill="currentColor"><path fill-rule="evenodd" d="M50 6C29 6 17 20 17 37C17 47 21 54 28 59L28 69C28 72 30 74 33 74L67 74C70 74 72 72 72 69L72 59C79 54 83 47 83 37C83 20 71 6 50 6ZM37 31A8.5 8.5 0 1 0 37 48A8.5 8.5 0 1 0 37 31ZM63 31A8.5 8.5 0 1 0 63 48A8.5 8.5 0 1 0 63 31ZM50 48L44 60L56 60Z"/></g><g fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round"><path d="M17 70L83 92M83 70L17 92"/></g><g fill="currentColor"><circle cx="14" cy="68" r="7"/><circle cx="86" cy="68" r="7"/><circle cx="14" cy="94" r="7"/><circle cx="86" cy="94" r="7"/></g>' },
+};
+// Découpe « B/1 », « DB/1 », « 1/AK »… ; renvoie null si la case n'a rien de spécial
+export function attackParts(v) {
+  const m = String(v ?? '').trim().match(/^([^/]+)\/([^/]+)$/);
+  if (!m) return null;
+  const kind = (x) => (x === 'B' ? 'blast' : x === 'BB' || x === 'DB' ? 'double' : x === 'AK' ? 'kill' : null);
+  const a = kind(m[1].toUpperCase()), b = kind(m[2].toUpperCase());
+  // un symbole n'est accepté que du bon côté (gabarit à gauche, mort instantanée à droite)
+  const left = a === 'blast' || a === 'double' ? a : null, right = b === 'kill' ? b : null;
+  if (!left && !right) return null;
+  return { left: left ? { icon: left } : { text: m[1] }, right: right ? { icon: right } : { text: m[2] } };
+}

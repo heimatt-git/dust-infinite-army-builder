@@ -2,7 +2,7 @@
 // Aucune image officielle n'est utilisée. Le même SVG sert à l'affichage et à l'export PNG
 // et à l'export PDF : ce qu'on voit est exactement ce qu'on télécharge.
 import { t } from './i18n.js';
-import { diceInner } from './dice.js';
+import { diceInner, ATTACK_ICONS, attackParts } from './dice.js';
 
 // Largeur logique : 1000 pour la carte carrée (80 × 80 mm), 1500 pour la carte large (120 × 70 mm),
 // soit la même échelle (12,5 unités par mm) : les textes ont la même taille imprimée dans les deux formats.
@@ -243,6 +243,8 @@ export function generatedCardSVG(u, D, { cost, photo, focus = null, format = 'sq
     out.push(txt(RANGE_X + RANGE_W / 2, cy + 10, 28, xe(w.range ?? '-')));
     const vals = [...pad(w.vsInfantry, 4), ...pad(w.vsVehicle, 7), ...pad(w.vsAircraft, 3)];
     vals.forEach((v, k) => {
+      const sp = attackParts(v);
+      if (sp) { out.push(attackCell(sp, VAL_X + (k + .5) * VAL_W, cy, VAL_W - 6, txt)); return; }
       const vf = fit(v || '-', f(700, '{s}'), 26, VAL_W - 9, 12);
       out.push(txt(VAL_X + (k + .5) * VAL_W, cy + 9, vf.size, xe(vf.text)));
     });
@@ -285,6 +287,28 @@ export function generatedCardSVG(u, D, { cost, photo, focus = null, format = 'sq
 
   out.push('</g></svg>');
   return out.join('\n');
+}
+// Case d'attaque avec symbole(s) : « explosion / 1 », « double explosion / 1 », « 1 / tête de mort »
+function attackCell(sp, cx, cy, maxW, txt) {
+  const part = (p, s) => (p.icon ? { icon: ATTACK_ICONS[p.icon], w: ATTACK_ICONS[p.icon].w / 100 * s * .95 }
+    : { text: p.text, w: measure(p.text, `700 ${s}px ${FONT}`) });
+  let s = 26, items;
+  for (; s >= 11; s--) {
+    items = [part(sp.left, s), { text: '/', w: measure('/', `700 ${s}px ${FONT}`) }, part(sp.right, s)];
+    if (items.reduce((a, b) => a + b.w, 0) + 2 <= maxW) break;
+  }
+  const total = items.reduce((a, b) => a + b.w, 0);
+  let x = cx - total / 2;
+  const base = cy + s * .35;
+  let o = '';
+  for (const it of items) {
+    if (it.icon) {
+      const h = s * .95, k = h / it.icon.h;
+      o += `<g transform="translate(${x.toFixed(1)} ${(cy - h / 2 - s * .02).toFixed(1)}) scale(${k.toFixed(4)})" color="${INK}" fill="${INK}">${it.icon.inner}</g>`;
+    } else o += txt(x, base, s, xe(it.text), { anchor: 'start' });
+    x += it.w;
+  }
+  return o;
 }
 const pad = (arr, n) => Array.from({ length: n }, (_, i) => arr?.[i] || '');
 
