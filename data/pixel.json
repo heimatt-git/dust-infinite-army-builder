@@ -1,8 +1,10 @@
 {
- "version": "202610091132",
+ "version": "202610100721",
  "units": [
   "allies--bazooka-joe",
+  "allies--devastator",
   "allies--flying-banana",
+  "allies--hot-dog",
   "allies--recon-mickey",
   "allies--rosie-sgt-major-i",
   "allies--sergeant-victory",
@@ -20,12 +22,16 @@
   "axis--galeazzo",
   "axis--heinrich-tropical-bk",
   "axis--hexe",
+  "axis--jagdloki",
   "axis--kurt",
+  "axis--lothar",
+  "axis--luther",
   "axis--manfred",
   "axis--moskito",
   "axis--rolf",
   "axis--stefan",
   "mercenaries--alex",
+  "mercenaries--decimater",
   "mercenaries--mercenary-cleaning-team",
   "mercenaries--mercenary-command-squad",
   "mercenaries--mercenary-railgun-team",
@@ -45,8 +51,10 @@
   "mythos--nadir-the-exalted",
   "mythos--rasputin",
   "mythos--spawn-of-cthulhu",
+  "ssu--grand-ma",
   "ssu--guai-lo",
   "ssu--invader",
+  "ssu--nadya",
   "ssu--pla-steel-guards-anti-infantry-squad",
   "ssu--red-ace",
   "ssu--steel-guards-command-squad",
@@ -268,6 +276,41 @@
   "axis--kurt": {
    "x": 0.5,
    "y": 0.354,
+   "zoom": 1
+  },
+  "allies--devastator": {
+   "x": 0.5,
+   "y": 0.645,
+   "zoom": 1
+  },
+  "allies--hot-dog": {
+   "x": 0.5,
+   "y": 0.303,
+   "zoom": 1
+  },
+  "axis--jagdloki": {
+   "x": 0.5,
+   "y": 0.344,
+   "zoom": 1
+  },
+  "axis--lothar": {
+   "x": 0.5,
+   "y": 0.363,
+   "zoom": 1
+  },
+  "axis--luther": {
+   "x": 0.5,
+   "y": 0.449,
+   "zoom": 1
+  },
+  "ssu--grand-ma": {
+   "x": 0.5,
+   "y": 0.474,
+   "zoom": 1
+  },
+  "ssu--nadya": {
+   "x": 0.5,
+   "y": 0.589,
    "zoom": 1
   }
  }
