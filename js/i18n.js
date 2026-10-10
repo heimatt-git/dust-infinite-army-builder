@@ -122,7 +122,7 @@ const EN = {
   'Aucune unité ne correspond à ce filtre.': 'No unit matches this filter.',
   'Aucune unité autorisée pour ce poste dans ce bloc.': 'No unit allowed for this slot in this bloc.',
   'Il vous reste environ {n} PA': 'About {n} AP left', ' (bonus héros compris)': ' (hero bonus included)',
-  'Filtrer par sous-faction': 'Filter by sub-faction', 'Rechercher': 'Search', 'Rechercher une unité': 'Search for a unit',
+  'Filtrer par sous-faction': 'Filter by sub-faction', 'Rechercher': 'Search', 'Rechercher une unité': 'Search for a unit', 'Trier par': 'Sort by', 'Trier la liste': 'Sort the list', 'Ordre alphabétique': 'Alphabetical order', 'Coût en points': 'Point cost',
   '« {n} » importée': '“{n}” imported', 'Lien de liste invalide.': 'Invalid list link.',
   "Lien de l'armée": 'Army link', 'Votre adversaire reçoit une copie de votre armée.': 'Your opponent gets a copy of your army.',
   'Copier le lien': 'Copy link',

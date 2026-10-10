@@ -375,7 +375,12 @@ function compactOptional() {
 function openPicker(slot) {
   const D = S.data, L = S.list;
   const spec = slotSpec(slot);
-  const all = allowedFor(slot, L.bloc).sort((a, b) => a.cost - b.cost || a.name.localeCompare(b.name));
+  const all = allowedFor(slot, L.bloc);
+  // Tri de la liste : ordre alphabétique (par défaut) ou coût en points ; le choix est mémorisé
+  const SORT_KEY = 'dust1947.shotSort';
+  let sortBy = store.get(SORT_KEY, 'az') === 'cost' ? 'cost' : 'az';
+  const byName = (a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base', numeric: true });
+  const sorter = () => (sortBy === 'cost' ? (a, b) => unitCost(a) - unitCost(b) || byName(a, b) : byName);
   const R = analyze(L);
   const current = L.slots[slot]?.u ? unitCost(D.unitsById.get(L.slots[slot].u)) : 0;
   const left = S.F.budget + (slot === 'cmd' ? S.F.heroBonus : 0) - (R.A.counted - current);
@@ -393,12 +398,13 @@ function openPicker(slot) {
   const listHTML = () => {
     const shown = all.filter((u) => (L.fac === 'all' || (L.fac === 'none' ? !u.faction : u.faction === L.fac))
       && (!q || (u.name + ' ' + u.subtitle).toLowerCase().includes(q)));
-    return shown.map(row).join('') || `<p class="hint">${all.length ? t('Aucune unité ne correspond à ce filtre.') : t('Aucune unité autorisée pour ce poste dans ce bloc.')}</p>`;
+    return shown.sort(sorter()).map(row).join('') || `<p class="hint">${all.length ? t('Aucune unité ne correspond à ce filtre.') : t('Aucune unité autorisée pour ce poste dans ce bloc.')}</p>`;
   };
   openModal(`<div id="pk-main"><div class="modal-h"><div><div class="eyebrow">${esc(blocName(L.bloc, D))} · ${esc(spec.hint)}</div><h2>${esc(spec.label)}</h2>
       <p>${t('Il vous reste environ {n} PA', { n: left })}${slot === 'cmd' ? t(' (bonus héros compris)') : ''}.</p></div>
       <button class="btn icon" data-close-btn aria-label="${t('Fermer')}">✕</button></div>
     <div class="modal-b">
+      <div class="sf-fac sf-sort" role="group" aria-label="${t('Trier la liste')}"><span class="sf-sort-l">${t('Trier par')}</span>${[['az', t('Ordre alphabétique')], ['cost', t('Coût en points')]].map(([k, l]) => `<button type="button" data-sort="${k}" class="${sortBy === k ? 'on' : ''}">${l}</button>`).join('')}</div>
       ${factions.length ? `<div class="sf-fac" role="group" aria-label="${t('Filtrer par sous-faction')}">${chips.map(([k, l]) => `<button type="button" data-fac="${esc(k)}" class="${L.fac === k ? 'on' : ''}" ${count(k) ? '' : 'disabled'}>${esc(l)} <small>${count(k)}</small></button>`).join('')}</div>` : ''}
       <input type="search" id="pk-q" placeholder="${t('Rechercher')}" aria-label="${t('Rechercher une unité')}">
       <div class="sf-pick-list" id="pk-list">${listHTML()}</div>
@@ -426,6 +432,11 @@ function openPicker(slot) {
     root.querySelectorAll('[data-fac]').forEach((b) => b.addEventListener('click', () => {
       L.fac = b.dataset.fac; save();
       root.querySelectorAll('[data-fac]').forEach((x) => x.classList.toggle('on', x === b));
+      refresh();
+    }));
+    root.querySelectorAll('[data-sort]').forEach((b) => b.addEventListener('click', () => {
+      sortBy = b.dataset.sort; store.set(SORT_KEY, sortBy);
+      root.querySelectorAll('[data-sort]').forEach((x) => x.classList.toggle('on', x === b));
       refresh();
     }));
     root.querySelector('#pk-q').addEventListener('input', (e) => { q = e.target.value.toLowerCase(); refresh(); });
