@@ -1,8 +1,8 @@
 {
  "meta": {
-  "version": "2026.10.10",
+  "version": "2026.10.08",
   "source": "DUST ENLIST 1.50 (Android) — données extraites",
-  "updated": "2026-10-10"
+  "updated": "2026-10-08"
  },
  "units": [
   {
@@ -35704,7 +35704,7 @@
     {
      "name": "Demo Charge",
      "count": 1,
-     "range": "c",
+     "range": "C",
      "specials": [],
      "vsInfantry": [
       "1/1",
@@ -35766,7 +35766,7 @@
     {
      "name": "Demo Charge",
      "count": 1,
-     "range": "c",
+     "range": "C",
      "specials": [],
      "vsInfantry": [
       "1/1",
