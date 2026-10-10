@@ -2,6 +2,7 @@
 // Aucune image officielle n'est utilisée. Le même SVG sert à l'affichage et à l'export PNG
 // et à l'export PDF : ce qu'on voit est exactement ce qu'on télécharge.
 import { t } from './i18n.js';
+import { diceInner } from './dice.js';
 
 // Largeur logique : 1000 pour la carte carrée (80 × 80 mm), 1500 pour la carte large (120 × 70 mm),
 // soit la même échelle (12,5 unités par mm) : les textes ont la même taille imprimée dans les deux formats.
@@ -11,7 +12,10 @@ const FONT_NAME = "'Saira Stencil One', Oswald, 'DejaVu Sans Condensed', Impact,
 // Police étroite et grasse (Oswald sur le site ; équivalents étroits en secours)
 const FONT = "Oswald, 'Roboto Condensed', 'Arial Narrow', 'DejaVu Sans Condensed', 'Liberation Sans Narrow', Impact, sans-serif";
 const INK = '#231f1a', PAPER = '#f1e6c8', CREAM = '#f6ecd2', RED = '#b3261e', BROWN = '#7a4a32';
-const DICE = { dice_sight: '◎', dice_block: '■', dice_shield: '⛨' };
+// Les faces de dé sont des caractères réservés (largeur d'un cadratin) ; le dessin est posé dessus ensuite
+const DICE = { dice_block: '\uE000', dice_sight: '\uE001', dice_shield: '\uE002' };
+const DICE_RE = /[\uE000-\uE002]/g;
+const DICE_CODE = ['dice_block', 'dice_sight', 'dice_shield'];
 
 const xe = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const dice = (s) => String(s || '').replace(/dice_(sight|block|shield)/g, (m) => DICE[m]);
@@ -49,7 +53,7 @@ let ctx;
 function measure(text, font) {
   ctx ||= document.createElement('canvas').getContext('2d');
   ctx.font = font;
-  return ctx.measureText(text).width;
+  return ctx.measureText(String(text).replace(DICE_RE, '\u2003')).width;
 }
 function wrap(text, font, width) {
   const words = String(text).split(/\s+/).filter(Boolean);
@@ -71,6 +75,21 @@ function fit(text, font, size, width, min = 12) {
     out += '…';
   }
   return { text: out, size: s };
+}
+
+
+// Ligne de description : les faces de dé (caractères réservés) deviennent un cadratin,
+// et le dessin du symbole est posé à cet endroit (emblème du bloc pour la face « bloc »)
+function descLine(x, y, size, line, bloc, txt) {
+  let o = txt(x, y, size, xe(line.replace(DICE_RE, '\u2003')), { w: 400, anchor: 'start' });
+  const font = `400 ${size}px ${FONT}`;
+  for (let i = 0; i < line.length; i++) {
+    const k = line.charCodeAt(i) - 0xE000;
+    if (k < 0 || k > 2) continue;
+    const px = x + measure(line.slice(0, i), font) + size * .04;
+    o += `<g transform="translate(${px.toFixed(1)} ${(y - size * .84).toFixed(1)}) scale(${(size * .92 / 100).toFixed(4)})" color="${INK}" fill="${INK}">${diceInner(DICE_CODE[k], bloc)}</g>`;
+  }
+  return o;
 }
 
 // Résumé d'une compétence pour la carte : première phrase, coupée si elle reste trop longue
@@ -197,7 +216,7 @@ export function generatedCardSVG(u, D, { cost, photo, focus = null, format = 'sq
   let ly = SY + 20;
   for (const b of blocks.items) {
     b.head.forEach((l) => { ly += b.hs; out.push(txt(SX + 22, ly, b.hs, xe(l), { anchor: 'start' })); });
-    b.desc.forEach((l) => { ly += b.ds * 1.2; out.push(txt(SX + 22, ly, b.ds, xe(l), { w: 400, anchor: 'start' })); });
+    b.desc.forEach((l) => { ly += b.ds * 1.2; out.push(descLine(SX + 22, ly, b.ds, l, u.bloc, txt)); });
     ly += b.gap;
   }
 

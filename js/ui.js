@@ -1,6 +1,7 @@
 // Petits utilitaires d'interface partagés (constructeur + éditeur)
 import { typeLabel } from './data.js';
 import { t, LANG } from './i18n.js';
+import { diceSvg, diceTitle } from './dice.js';
 
 // Signature de l'auteur du site (logo + crédit)
 export const LOGO = 'img/logo-loir.png';
@@ -51,9 +52,9 @@ export async function copyText(text, fallbackEl) {
 }
 
 // Symboles de dés dans les descriptions ("dice_block", "dice_sight", "dice_shield")
-const DICE = { dice_block: ['■', 'Face « bloc »'], dice_sight: ['◎', 'Face « viseur »'], dice_shield: ['⛨', 'Face « bouclier »'] };
-export function richText(s) {
-  return esc(s).replace(/dice_(block|sight|shield)/g, (m) => `<span class="die" title="${t(DICE[m][1])}">${DICE[m][0]}</span>`);
+// bloc : bloc de l'unité affichée (la face « bloc » porte l'emblème de ce bloc)
+export function richText(s, bloc) {
+  return esc(s).replace(/dice_(block|sight|shield)/g, (m) => `<span class="die" role="img" aria-label="${esc(t(diceTitle(m)))}" title="${esc(t(diceTitle(m)))}">${diceSvg(m, bloc)}</span>`);
 }
 
 export function openModal(html, onMount) {
@@ -136,8 +137,8 @@ export function unitCardHTML(u, data, { cost, captured, extraChips = '', topHTML
     <div>
       <div class="eyebrow" style="margin-bottom:6px">${t('Compétences')}</div>
       <div class="skills">
-        ${skills.map((s) => `<div class="skill"><b>${esc(s.name)}</b>${s.description ? `<p>${richText(s.description)}</p>` : `<p>${t('Description absente de la base (voir le livre de règles).')}</p>`}</div>`).join('')}
-        ${wSpecials.map((s) => `<div class="skill"><b>${esc(s)}</b> <span class="tag">${t("règle d'arme")}</span>${data.skills[s] ? `<p>${richText(data.skills[s])}</p>` : `<p>${t("Règle d'arme spéciale : voir « Armes spéciales » dans le livre de règles.")}</p>`}</div>`).join('')}
+        ${skills.map((s) => `<div class="skill"><b>${esc(s.name)}</b>${s.description ? `<p>${richText(s.description, u.bloc)}</p>` : `<p>${t('Description absente de la base (voir le livre de règles).')}</p>`}</div>`).join('')}
+        ${wSpecials.map((s) => `<div class="skill"><b>${esc(s)}</b> <span class="tag">${t("règle d'arme")}</span>${data.skills[s] ? `<p>${richText(data.skills[s], u.bloc)}</p>` : `<p>${t("Règle d'arme spéciale : voir « Armes spéciales » dans le livre de règles.")}</p>`}</div>`).join('')}
       </div>
     </div>` : ''}
   </div>`;
