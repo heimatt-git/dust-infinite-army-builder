@@ -26,10 +26,6 @@ async function init() {
     // Version anglaise : textes du format et descriptions de compétences traduites
     S.F = LANG === 'en' && F.en ? { ...F, ...F.en, feedback: { ...F.feedback, ...(F.en.feedback || {}) } } : F;
     S.data = data;
-    if (LANG === 'en') {
-      const en = await fetch('data/skills.en.json', { cache: 'no-cache' }).then((r) => (r.ok ? r.json() : {})).catch(() => ({}));
-      Object.assign(S.data.skills, en);
-    }
   } catch (e) {
     app.innerHTML = `<div class="sf-wrap"><div class="issue bad"><b>!</b><span>${esc(t('Impossible de charger la base : {e}', { e: e.message }))}</span></div></div>`;
     return;

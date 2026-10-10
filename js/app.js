@@ -56,11 +56,6 @@ init();
 async function init() {
   try {
     S.data = await loadData();
-    if (LANG === 'en') {
-      // Descriptions de règles d'armes rédigées en français dans la base : version anglaise
-      const en = await fetch('data/skills.en.json', { cache: 'no-cache' }).then((r) => (r.ok ? r.json() : {})).catch(() => ({}));
-      Object.assign(S.data.skills, en);
-    }
     S.official = S.data;
     S.all = withCustom(S.official, await loadCustom());
   } catch (e) {

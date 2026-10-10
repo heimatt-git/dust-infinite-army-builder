@@ -1,6 +1,6 @@
 // Petits utilitaires d'interface partagés (constructeur + éditeur)
 import { typeLabel } from './data.js';
-import { t, LANG } from './i18n.js';
+import { t, LANG, skillDesc } from './i18n.js';
 import { diceSvg, diceTitle, attackHtml } from './dice.js';
 
 // Signature de l'auteur du site (logo + crédit)
@@ -91,7 +91,7 @@ export function unitCardHTML(u, data, { cost, captured, extraChips = '', topHTML
   const sub = (n) => Array.from({ length: n }, (_, i) => `<th${i === 0 ? ' class="grp"' : ''}>${i + 1}</th>`).join('');
   const skills = [
     ...(u.skills || []).filter((s) => !(u.customSkills || []).some((c) => c.name === s)).map((s) => ({ name: s, description: data.skills[s] || '' })),
-    ...(u.customSkills || []),
+    ...(u.customSkills || []).map((c) => ({ ...c, description: skillDesc(c) })),
   ];
   const wSpecials = [...new Set(ws.flatMap((w) => w.specials || []))];
   const shownCost = cost ?? u.cost;

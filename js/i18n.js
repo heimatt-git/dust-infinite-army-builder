@@ -17,6 +17,8 @@ export function setLang(l) {
 }
 
 // t('texte français avec {var}', { var }) → texte dans la langue courante
+// Description d'une compétence créée par la communauté : version dans la langue d'affichage si elle existe, sinon la description d'origine
+export const skillDesc = (c) => (LANG === 'fr' ? c.descriptionFr : c.descriptionEn) || c.description || '';
 export function t(fr, vars) {
   let s = LANG === 'en' && EN[fr] !== undefined ? EN[fr] : fr;
   if (vars) s = s.replace(/\{(\w+)\}/g, (m, k) => (vars[k] ?? m));
@@ -96,6 +98,7 @@ const EN = {
   "Aucune armée pour l'instant.": 'No army yet.',
   '« {n} » supprimée': '“{n}” deleted',
   'Règles du format': 'Format rules',
+  'Version française (facultative)': 'French version (optional)', 'Version anglaise (facultative)': 'English version (optional)',
   'Donner mon avis': 'Give feedback', 'Version de test': 'Test version',
   'Mise en place': 'Setup', 'Composition': 'Army composition', 'Restrictions': 'Restrictions',
   '1 unité de commandement obligatoire : un héros. Il peut rejoindre une escouade de même armure, ou piloter le véhicule si ses compétences le permettent.':

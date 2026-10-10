@@ -1,4 +1,4 @@
-import { t } from './i18n.js';
+import { t, LANG } from './i18n.js';
 // Chargement et indexation de la base (data/*.json)
 
 export const TYPE_LABELS = {
@@ -22,6 +22,12 @@ export async function loadData(base = 'data/') {
     get('units.json'), get('blocs.json'), get('skills.json'),
     get('photos.json').catch(() => ({})), // photos de la communauté (facultatif)
   ]);
+  // Descriptions de compétences : skills.json est en anglais ; en mode français, skills.fr.json prend le relais
+  // (une compétence sans version française garde sa description anglaise).
+  if (LANG === 'fr') {
+    const fr = await get('skills.fr.json').catch(() => ({}));
+    for (const [k, v] of Object.entries(fr)) if (v) skills[k] = v;
+  }
   return indexData(unitsFile, blocsFile, skills, photos);
 }
 

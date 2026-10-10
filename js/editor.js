@@ -48,8 +48,8 @@ async function init() {
   topbar();
   const get = (f) => fetch('data/' + f, { cache: 'no-cache' }).then((r) => { if (!r.ok) throw new Error(f + ' ' + r.status); return r.json(); });
   try {
-    const [unitsFile, blocsFile, skills, photos, custom, pixel] = await Promise.all([get('units.json'), get('blocs.json'), get('skills.json'), get('photos.json').catch(() => ({})), get('custom.json').catch(() => null), get('pixel.json').catch(() => null)]);
-    E.orig = { unitsFile, blocsFile, skills, photos, custom: normCustom(custom), pixel: normPixel(pixel), props: [] };
+    const [unitsFile, blocsFile, skills, photos, custom, pixel, skillsFr] = await Promise.all([get('units.json'), get('blocs.json'), get('skills.json'), get('photos.json').catch(() => ({})), get('custom.json').catch(() => null), get('pixel.json').catch(() => null), get('skills.fr.json').catch(() => ({}))]);
+    E.orig = { unitsFile, blocsFile, skills, skillsFr, photos, custom: normCustom(custom), pixel: normPixel(pixel), props: [] };
   } catch (e) {
     root.innerHTML = `<div class="issue bad"><b>!</b><span>${esc(t('Impossible de charger la base : {e}', { e: e.message }))}</span></div>`;
     return;
@@ -58,6 +58,7 @@ async function init() {
   if (draft && draft.base === E.orig.unitsFile.meta?.version) { E.d = draft.data; E.restored = true; }
   else E.d = clone(E.orig);
   E.d.custom = E.d.custom ? normCustom(E.d.custom) : clone(E.orig.custom);
+  E.d.skillsFr ||= clone(E.orig.skillsFr);
   E.d.props ||= [];
   // Les images en attente sont gardées dans ce navigateur (IndexedDB) jusqu'à leur publication
   E.pending = new Map();
@@ -108,13 +109,15 @@ function changes() {
   const sMod = [];
   const keys = new Set([...Object.keys(E.orig.skills), ...Object.keys(E.d.skills)]);
   for (const k of keys) if (E.orig.skills[k] !== E.d.skills[k]) sMod.push(k);
+  const sfMod = [...new Set([...Object.keys(E.orig.skillsFr), ...Object.keys(E.d.skillsFr)])].filter((k) => (E.orig.skillsFr[k] || '') !== (E.d.skillsFr[k] || ''));
+  for (const k of sfMod) if (!sMod.includes(k)) sMod.push(k);
   const phMod = JSON.stringify(E.orig.photos) !== JSON.stringify(E.d.photos);
   const blocsChanged = JSON.stringify(E.orig.blocsFile.blocs) !== JSON.stringify(E.d.blocsFile.blocs);
   const cMod = JSON.stringify(E.orig.custom) !== JSON.stringify(E.d.custom);
   const pxMod = (E.d.pixelPending || []).length > 0 || JSON.stringify(E.orig.pixel) !== JSON.stringify(E.d.pixel);
   const total = uMod.length + uAdd.length + uDel.length + pMod.length + pAdd.length + pDel.length + sMod.length + (blocsChanged ? 1 : 0) + (phMod ? 1 : 0) + (cMod ? 1 : 0) + (pxMod ? 1 : 0);
   return { uMod, uAdd, uDel, pMod, pAdd, pDel, sMod, blocsChanged, total, cMod, pxMod,
-    files: { units: uMod.length + uAdd.length + uDel.length > 0, blocs: pMod.length + pAdd.length + pDel.length > 0 || blocsChanged, skills: sMod.length > 0, photos: phMod, custom: cMod, pixel: pxMod }, phMod };
+    files: { units: uMod.length + uAdd.length + uDel.length > 0, blocs: pMod.length + pAdd.length + pDel.length > 0 || blocsChanged, skills: keys.size > 0 && [...keys].some((k) => E.orig.skills[k] !== E.d.skills[k]), 'skills.fr': sfMod.length > 0, photos: phMod, custom: cMod, pixel: pxMod }, phMod };
 }
 
 // ---------------------------------------------------------------- Rendu
@@ -429,9 +432,10 @@ function renderPlatoons(body, ch) {
 // ---------------------------------------------------------------- Compétences
 function renderSkills(body, ch) {
   const S = E.d.skills;
+  const SF = E.d.skillsFr;
   const changed = new Set(ch.sMod);
   let keys = Object.keys(S).sort((a, b) => a.localeCompare(b));
-  if (E.sq) { const q = E.sq.toLowerCase(); keys = keys.filter((k) => (k + ' ' + S[k]).toLowerCase().includes(q)); }
+  if (E.sq) { const q = E.sq.toLowerCase(); keys = keys.filter((k) => (k + ' ' + S[k] + ' ' + (SF[k] || '')).toLowerCase().includes(q)); }
   const missing = [...new Set(E.d.unitsFile.units.flatMap((u) => [...(u.skills || []), ...(u.weapons || []).flatMap((w) => w.specials || [])]))].filter((k) => !S[k]);
   body.innerHTML = `<div class="ed-sec">
     <div class="row2"><input type="search" id="s-q" placeholder="${t('Rechercher une compétence')}" value="${esc(E.sq)}">
@@ -439,28 +443,31 @@ function renderSkills(body, ch) {
     <datalist id="missing-dl">${missing.map((k) => `<option value="${esc(k)}">`).join('')}</datalist>
     ${missing.length ? `<div class="issue warn"><b>!</b><span>${t('Compétences utilisées sans description :')} ${missing.map(esc).join(', ')}</span></div>` : ''}
     <div>${keys.map((k) => `<div class="skill-ed"><b>${esc(k)}${changed.has(k) ? ' <span class="dot" style="width:7px;height:7px;border-radius:50%;background:var(--accent);display:inline-block"></span>' : ''}</b>
-      <textarea data-skill="${esc(k)}" rows="2">${esc(S[k])}</textarea>
+      <div class="skill-ed-t">
+      <label class="field"><span>EN</span><textarea data-skill="${esc(k)}" rows="2">${esc(S[k])}</textarea></label>
+      <label class="field"><span>FR${SF[k] ? '' : t(' (manquant : la version anglaise s\'affiche)')}</span><textarea data-skillfr="${esc(k)}" rows="2">${esc(SF[k] || '')}</textarea></label></div>
       <button class="btn sm danger" data-rmskill="${esc(k)}">${t('Supprimer')}</button></div>`).join('')}</div>
   </div>`;
   const q = body.querySelector('#s-q');
   q.addEventListener('input', () => { E.sq = q.value; const pos = q.selectionStart; render(); const q2 = document.getElementById('s-q'); q2.focus(); q2.setSelectionRange(pos, pos); });
   body.querySelectorAll('[data-skill]').forEach((ta) => ta.addEventListener('change', () => { S[ta.dataset.skill] = ta.value.trim(); saveDraft(); }));
+  body.querySelectorAll('[data-skillfr]').forEach((ta) => ta.addEventListener('change', () => { SF[ta.dataset.skillfr] = ta.value.trim(); saveDraft(); }));
   body.querySelectorAll('[data-rmskill]').forEach((b) => b.addEventListener('click', () => {
     if (!b.classList.contains('armed')) { b.classList.add('armed'); b.textContent = t('Confirmer'); return; }
-    delete S[b.dataset.rmskill]; saveDraft(); render();
+    delete S[b.dataset.rmskill]; delete SF[b.dataset.rmskill]; saveDraft(); render();
   }));
   body.querySelector('#s-add').addEventListener('click', () => {
     const n = body.querySelector('#s-new').value.trim();
     if (!n) return;
     if (S[n] !== undefined) { toast(t('Cette compétence existe déjà.')); return; }
-    S[n] = ''; E.sq = n; saveDraft(); render();
+    S[n] = ''; SF[n] = ''; E.sq = n; saveDraft(); render();
   });
 }
 
 // ---------------------------------------------------------------- Publication
 function fileText(which) {
   const d = prepared();
-  const obj = which === 'units' ? d.unitsFile : which === 'blocs' ? d.blocsFile : which === 'photos' ? d.photos : which === 'custom' ? d.custom : which === 'pixel' ? d.pixel : d.skills;
+  const obj = which === 'units' ? d.unitsFile : which === 'blocs' ? d.blocsFile : which === 'photos' ? d.photos : which === 'custom' ? d.custom : which === 'pixel' ? d.pixel : which === 'skills.fr' ? d.skillsFr : d.skills;
   return JSON.stringify(obj, null, 1) + '\n';
 }
 function prepared() {
@@ -473,6 +480,9 @@ function prepared() {
   const sorted = {};
   for (const k of Object.keys(d.skills).sort((a, b) => a.localeCompare(b))) sorted[k] = d.skills[k];
   d.skills = sorted;
+  const sortedFr = {};
+  for (const k of Object.keys(d.skillsFr || {}).sort((a, b) => a.localeCompare(b))) sortedFr[k] = d.skillsFr[k];
+  d.skillsFr = sortedFr;
   return d;
 }
 
@@ -524,7 +534,7 @@ function renderPublish(body, ch) {
       <ol class="pub-steps">
         <li>${t('Téléchargez les fichiers modifiés :')}
           <span style="display:inline-flex;gap:6px;flex-wrap:wrap">
-          ${['units', 'blocs', 'skills', 'photos', 'custom', 'pixel'].map((f) => `<button class="btn sm ${ch.files[f] ? 'primary' : ''}" data-dl="${f}">${f}.json${ch.files[f] ? t(' (modifié)') : ''}</button>`).join('')}
+          ${['units', 'blocs', 'skills', 'skills.fr', 'photos', 'custom', 'pixel'].map((f) => `<button class="btn sm ${ch.files[f] ? 'primary' : ''}" data-dl="${f}">${f}.json${ch.files[f] ? t(' (modifié)') : ''}</button>`).join('')}
           </span></li>
         ${E.pending.size ? `<li>${t('Téléchargez aussi les nouvelles images, à déposer dans le dossier indiqué :')} ${[...E.pending.keys()].map((k) => `<button class="btn sm" data-dlimg="${esc(k)}">${esc(k)}</button>`).join(' ')}</li>` : ''}
         <li>${t('Sur github.com, ouvrez le dossier <code>data/</code> de votre dépôt, puis <b>Add file → Upload files</b>.')}</li>
@@ -569,7 +579,7 @@ async function publishGitHub(ch) {
   store.set(GH_KEY, $('gh-remember').checked ? { owner, repo, branch, token } : { owner, repo, branch });
   const btn = $('gh-go'); btn.disabled = true;
   const H = { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' };
-  const files = ['units', 'blocs', 'skills', 'photos', 'custom', 'pixel'].filter((f) => ch.files[f]);
+  const files = ['units', 'blocs', 'skills', 'skills.fr', 'photos', 'custom', 'pixel'].filter((f) => ch.files[f]);
   // units.json change toujours (date de version) dès qu'autre chose change
   if (!files.includes('units')) files.unshift('units');
   const lines = [];

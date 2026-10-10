@@ -64,10 +64,6 @@ init();
 async function init() {
   try {
     A.off = await loadData();
-    if (LANG === 'en') {
-      const en = await fetch('data/skills.en.json', { cache: 'no-cache' }).then((r) => (r.ok ? r.json() : {})).catch(() => ({}));
-      Object.assign(A.off.skills, en);
-    }
     A.all = withCustom(A.off, await loadCustom());
   } catch (e) {
     root.innerHTML = `<div class="issue bad"><b>!</b><span>${esc(t('Impossible de charger la base : {e}', { e: e.message }))}</span></div>`;
@@ -266,7 +262,8 @@ function unitForm(u, D) {
       <h2>${t('Règles inédites')}</h2>
       <p class="hint" style="margin:0">${t('Une compétence qui n\'existe pas sur les cartes officielles : donnez-lui un nom et une description complète.')}</p>
       ${(u.customSkills || []).map((c, i) => `<div class="wedit"><div class="wedit-h"><b>${t('Compétence {n}', { n: i + 1 })}</b><button type="button" class="btn sm danger" data-rmcs="${i}">${t('Retirer')}</button></div>
-        <input type="text" name="cs-name-${i}" value="${esc(c.name)}" placeholder="${t('Nom')}"><textarea name="cs-desc-${i}" rows="2" placeholder="${t('Description')}">${esc(c.description)}</textarea></div>`).join('')}
+        <input type="text" name="cs-name-${i}" value="${esc(c.name)}" placeholder="${t('Nom')}"><textarea name="cs-desc-${i}" rows="2" placeholder="${t('Description')}">${esc(c.description)}</textarea>
+        <textarea name="cs-fr-${i}" rows="2" placeholder="${t('Version française (facultative)')}">${esc(c.descriptionFr || '')}</textarea><textarea name="cs-en-${i}" rows="2" placeholder="${t('Version anglaise (facultative)')}">${esc(c.descriptionEn || '')}</textarea></div>`).join('')}
       <div><button type="button" class="btn sm" id="add-cs">${t('+ Règle inédite')}</button></div>
     </div>
     <div class="ed-sec">
@@ -321,7 +318,13 @@ function readUnitForm(form, u) {
   if (u.cost === null) u.cost = 0;
   u.capturable = !!g('capturable');
   u.skills = list(g('skills'));
-  u.customSkills = (u.customSkills || []).map((_, i) => ({ name: String(g(`cs-name-${i}`) || '').trim(), description: String(g(`cs-desc-${i}`) || '').trim() }));
+  u.customSkills = (u.customSkills || []).map((_, i) => {
+    const c = { name: String(g(`cs-name-${i}`) || '').trim(), description: String(g(`cs-desc-${i}`) || '').trim() };
+    const fr = String(g(`cs-fr-${i}`) || '').trim(), en = String(g(`cs-en-${i}`) || '').trim();
+    if (fr) c.descriptionFr = fr;
+    if (en) c.descriptionEn = en;
+    return c;
+  });
   u.weapons = (u.weapons || []).map((w, i) => {
     const nw = { name: String(g(`w-name-${i}`) || '').trim(), count: numOrNull(g(`w-count-${i}`)), range: numOrNull(g(`w-range-${i}`)) };
     const ammo = numOrNull(g(`w-ammo-${i}`)); if (ammo !== null) nw.ammo = ammo;

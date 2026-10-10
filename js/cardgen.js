@@ -1,7 +1,7 @@
 // Carte d'unité générée (format mono-face), dessinée en SVG à partir des données de la base.
 // Aucune image officielle n'est utilisée. Le même SVG sert à l'affichage et à l'export PNG
 // et à l'export PDF : ce qu'on voit est exactement ce qu'on télécharge.
-import { t } from './i18n.js';
+import { t, skillDesc } from './i18n.js';
 import { diceInner, ATTACK_ICONS, attackParts } from './dice.js';
 
 // Largeur logique : 1000 pour la carte carrée (80 × 80 mm), 1500 pour la carte large (120 × 70 mm),
@@ -204,7 +204,7 @@ export function generatedCardSVG(u, D, { cost, photo, focus = null, format = 'sq
   out.push(`<rect x="${SX}" y="${SY}" width="${SW}" height="${SH}" rx="34" fill="#fffdf7" stroke="${INK}" stroke-width="4"/>`);
   const skills = [
     ...(u.skills || []).filter((s) => !(u.customSkills || []).some((c) => c.name === s)).map((s) => ({ head: s, desc: D.skills[s] || '' })),
-    ...(u.customSkills || []).map((c) => ({ head: c.name, desc: c.description || '' })),
+    ...(u.customSkills || []).map((c) => ({ head: c.name, desc: skillDesc(c) })),
   ];
   const wsk = new Map();
   for (const w of ws) for (const sp of w.specials || []) {
