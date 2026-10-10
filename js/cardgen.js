@@ -222,7 +222,7 @@ export function generatedCardSVG(u, D, { cost, photo, focus = null, format = 'sq
 
   // ---- Tableau d'armes
   // Plaque « DUST 194∞ »
-  out.push(dustLogo(x0 + 6, TY + 8, NAME_W - 20, HEAD - 16));
+  out.push(dustLogo(x0, TY + 8, NAME_W, HEAD - 16));
   const rg = fit(t('PORTÉE'), f(700, '{s}'), 15, RANGE_W - 10, 9);
   out.push(txt(RANGE_X + RANGE_W / 2, TY + HEAD - 14, rg.size, xe(rg.text)));
   const groups = [[P.inf, 0, 4], [P.veh, 4, 7], [P.air, 11, 3]];
@@ -288,17 +288,11 @@ export function generatedCardSVG(u, D, { cost, photo, focus = null, format = 'sq
 }
 const pad = (arr, n) => Array.from({ length: n }, (_, i) => arr?.[i] || '');
 
-// Logo « DUST 194∞ » dessiné (pas de logo officiel) : même rendu quelle que soit la police
+// Bandeau « DUST 194∞ » : patch de tissu pochoir dessiné pour le site (pas de logo officiel).
+// L'image est intégrée aux exports (PNG, PDF) par svgCanvas, comme les photos.
+export const DUST_BANNER = 'img/bandeau-dust.png';
 function dustLogo(x, y, w, h) {
-  const Y = '#e9b949', F = xe(FONT);
-  const cy = y + h / 2;
-  // Plaque jaune façon marquage militaire
-  return `<g><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="8" fill="${Y}" stroke="${INK}" stroke-width="3"/>
-    <rect x="${x + 6}" y="${y + 6}" width="${w - 12}" height="${h - 12}" rx="4" fill="none" stroke="${INK}" stroke-width="1.5"/>
-    ${icon(P.hero, x + 16, cy - 16, 32, INK)}
-    <text x="${x + 52}" y="${cy + 15}" font-family="${F}" font-weight="700" font-size="42" letter-spacing="1" fill="${INK}">DUST</text>
-    <rect x="${x + w - 92}" y="${cy - 17}" width="78" height="34" rx="4" fill="${INK}"/>
-    <text x="${x + w - 53}" y="${cy + 10}" text-anchor="middle" font-family="${F}" font-weight="700" font-size="26" fill="${Y}">194∞</text></g>`;
+  return `<image href="${DUST_BANNER}" x="${x}" y="${y}" width="${w}" height="${h}" preserveAspectRatio="xMidYMid meet"/>`;
 }
 
 // Nom de l'arme trop long : deux lignes plus petites
