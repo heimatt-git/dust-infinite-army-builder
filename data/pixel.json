@@ -1,5 +1,5 @@
 {
- "version": "202610110553",
+ "version": "202610110608",
  "units": [
   "allies--bazooka-joe",
   "allies--devastator",
@@ -19,6 +19,7 @@
   "axis--bloody-blitz",
   "axis--experiment-x-33",
   "axis--falke",
+  "axis--fallschirm-rso-flak-3",
   "axis--fallschirm-rso-laserkanone",
   "axis--fallschirmjager-missile-squad",
   "axis--galeazzo",
@@ -32,8 +33,11 @@
   "axis--manfred",
   "axis--moskito",
   "axis--rolf",
+  "axis--samson",
+  "axis--sigrid-iii",
   "axis--stefan",
   "axis--storch",
+  "axis--wilfried",
   "mercenaries--alex",
   "mercenaries--decimater",
   "mercenaries--mercenary-cleaning-team",
@@ -341,6 +345,21 @@
   "ssu--vk-stash": {
    "x": 0.5,
    "y": 0.528,
+   "zoom": 1
+  },
+  "axis--fallschirm-rso-flak-3": {
+   "x": 0.5,
+   "y": 0.545,
+   "zoom": 1
+  },
+  "axis--sigrid-iii": {
+   "x": 0.5,
+   "y": 0.539,
+   "zoom": 1
+  },
+  "axis--wilfried": {
+   "x": 0.5,
+   "y": 0.525,
    "zoom": 1
   }
  }
