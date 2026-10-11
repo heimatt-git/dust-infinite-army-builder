@@ -1,11 +1,15 @@
 {
- "version": "202610111828",
+ "version": "202610112053",
  "units": [
   "allies--bazooka-joe",
+  "allies--bulldog",
   "allies--devastator",
   "allies--flying-banana",
+  "allies--heavy-ranger-attack-squad",
+  "allies--heavy-ranger-tank-hunter-squad",
   "allies--hot-dog",
   "allies--humber-mk-v",
+  "allies--ranger-heavy-mortar-squad",
   "allies--recon-mickey",
   "allies--rosie-sgt-major-i",
   "allies--sergeant-victory",
@@ -14,6 +18,7 @@
   "allies--the-priest",
   "allies--thunder",
   "allies--tornado",
+  "allies--usmc-heavy-engineer-squad",
   "allies--usmc-war-dogs-recon-squad",
   "axis--adler",
   "axis--blitz",
@@ -31,6 +36,7 @@
   "axis--geist",
   "axis--gregor",
   "axis--heavy-grenadier-anti-aircraft-squad",
+  "axis--heavy-grenadier-command-squad",
   "axis--heavy-grenadier-engineer-squad",
   "axis--heinrich",
   "axis--heinrich-tropical-bk",
@@ -736,6 +742,36 @@
   "ssu--type-46": {
    "x": 0.5,
    "y": 0.573,
+   "zoom": 1
+  },
+  "axis--heavy-grenadier-command-squad": {
+   "x": 0.5,
+   "y": 0.551,
+   "zoom": 1
+  },
+  "allies--heavy-ranger-attack-squad": {
+   "x": 0.5,
+   "y": 0.489,
+   "zoom": 1
+  },
+  "allies--heavy-ranger-tank-hunter-squad": {
+   "x": 0.5,
+   "y": 0.461,
+   "zoom": 1
+  },
+  "allies--ranger-heavy-mortar-squad": {
+   "x": 0.5,
+   "y": 0.483,
+   "zoom": 1
+  },
+  "allies--usmc-heavy-engineer-squad": {
+   "x": 0.5,
+   "y": 0.511,
+   "zoom": 1
+  },
+  "axis--fallschirmjager-mortar-squad": {
+   "x": 0.5,
+   "y": 0.463,
    "zoom": 1
   }
  }
