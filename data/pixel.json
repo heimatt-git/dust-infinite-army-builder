@@ -1,5 +1,5 @@
 {
- "version": "202610110840",
+ "version": "202610111212",
  "units": [
   "allies--bazooka-joe",
   "allies--devastator",
@@ -61,8 +61,15 @@
   "mythos--nadir-the-exalted",
   "mythos--rasputin",
   "mythos--spawn-of-cthulhu",
+  "ssu--air-ambulance",
   "ssu--aleksei-tsh",
   "ssu--anatoly-tsh",
+  "ssu--assaulter",
+  "ssu--assaulter-pla",
+  "ssu--chinese-volunteer-assault-squad",
+  "ssu--chinese-volunteer-assault-squad-pla",
+  "ssu--controller",
+  "ssu--controller-pla",
   "ssu--evgeny",
   "ssu--grand-ma",
   "ssu--guai-lo",
@@ -444,6 +451,21 @@
   "ssu--koshka": {
    "x": 0.5,
    "y": 0.461,
+   "zoom": 1
+  },
+  "ssu--air-ambulance": {
+   "x": 0.5,
+   "y": 0.469,
+   "zoom": 1
+  },
+  "ssu--chinese-volunteer-assault-squad-pla": {
+   "x": 0.5,
+   "y": 0.534,
+   "zoom": 1
+  },
+  "ssu--chinese-volunteer-assault-squad": {
+   "x": 0.5,
+   "y": 0.565,
    "zoom": 1
   }
  }
