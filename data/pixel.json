@@ -1,5 +1,5 @@
 {
- "version": "202610111248",
+ "version": "202610111251",
  "units": [
   "allies--bazooka-joe",
   "allies--devastator",
@@ -79,7 +79,6 @@
   "ssu--ivan-the-butcher",
   "ssu--karl-the-hammer",
   "ssu--koshka",
-  "ssu--master-yuk",
   "ssu--matrioshka",
   "ssu--mikhail-tsh",
   "ssu--nadya",
@@ -534,11 +533,6 @@
    "y": 0.472,
    "zoom": 1
   },
-  "ssu--vasiliy": {
-   "x": 0.5,
-   "y": 0.427,
-   "zoom": 1
-  },
   "ssu--professor-sum": {
    "x": 0.5,
    "y": 0.387,
@@ -546,27 +540,17 @@
   },
   "ssu--commissar-poon": {
    "x": 0.5,
-   "y": 0.551,
-   "zoom": 1
-  },
-  "ssu--master-yuk": {
-   "x": 0.5,
-   "y": 0.469,
-   "zoom": 1
-  },
-  "ssu--red-lightning": {
-   "x": 0.5,
-   "y": 0.458,
+   "y": 0.508,
    "zoom": 1
   },
   "ssu--roza": {
    "x": 0.5,
-   "y": 0.475,
+   "y": 0.427,
    "zoom": 1
   },
-  "ssu--spetsnaz-command-squad": {
+  "ssu--vasiliy": {
    "x": 0.5,
-   "y": 0.514,
+   "y": 0.421,
    "zoom": 1
   }
  }
