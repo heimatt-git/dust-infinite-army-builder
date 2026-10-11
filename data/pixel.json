@@ -1,5 +1,5 @@
 {
- "version": "202610110726",
+ "version": "202610110728",
  "units": [
   "allies--bazooka-joe",
   "allies--devastator",
@@ -59,6 +59,7 @@
   "mythos--nadir-the-exalted",
   "mythos--rasputin",
   "mythos--spawn-of-cthulhu",
+  "ssu--aleksei-tsh",
   "ssu--anatoly-tsh",
   "ssu--evgeny",
   "ssu--grand-ma",
@@ -67,6 +68,7 @@
   "ssu--matrioshka",
   "ssu--mikhail-tsh",
   "ssu--nadya",
+  "ssu--nadya-tsh",
   "ssu--natasha-tsh",
   "ssu--nina-tsh",
   "ssu--pla-steel-guards-anti-infantry-squad",
@@ -424,6 +426,16 @@
   "ssu--nina-tsh": {
    "x": 0.5,
    "y": 0.489,
+   "zoom": 1
+  },
+  "ssu--nadya-tsh": {
+   "x": 0.5,
+   "y": 0.525,
+   "zoom": 1
+  },
+  "ssu--aleksei-tsh": {
+   "x": 0.5,
+   "y": 0.511,
    "zoom": 1
   }
  }
