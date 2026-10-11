@@ -1,5 +1,5 @@
 {
- "version": "202610111232",
+ "version": "202610111237",
  "units": [
   "allies--bazooka-joe",
   "allies--devastator",
@@ -83,6 +83,7 @@
   "ssu--nadya",
   "ssu--nadya-tsh",
   "ssu--natasha-tsh",
+  "ssu--nikolai",
   "ssu--nina-tsh",
   "ssu--pla-steel-guards-anti-infantry-squad",
   "ssu--red-ace",
@@ -93,6 +94,8 @@
   "ssu--red-guards-command-squad",
   "ssu--red-rain-pla",
   "ssu--red-rain-spetsnaz",
+  "ssu--red-yana",
+  "ssu--red-yana-spetsnaz",
   "ssu--sergei",
   "ssu--spetsnaz-kill-squad",
   "ssu--spetsnaz-saboteur-squad",
@@ -105,7 +108,8 @@
   "ssu--steel-guards-tesla-squad",
   "ssu--type-45",
   "ssu--vk-stash",
-  "ssu--winter-child"
+  "ssu--winter-child",
+  "ssu--yakov"
  ],
  "focus": {
   "ssu--steel-guards-sniper-squad": {
@@ -506,6 +510,21 @@
   "ssu--iron-joe": {
    "x": 0.5,
    "y": 0.444,
+   "zoom": 1
+  },
+  "ssu--nikolai": {
+   "x": 0.5,
+   "y": 0.528,
+   "zoom": 1
+  },
+  "ssu--red-yana-spetsnaz": {
+   "x": 0.5,
+   "y": 0.52,
+   "zoom": 1
+  },
+  "ssu--yakov": {
+   "x": 0.5,
+   "y": 0.472,
    "zoom": 1
   }
  }
