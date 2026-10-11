@@ -1,5 +1,5 @@
 {
- "version": "202610110712",
+ "version": "202610110714",
  "units": [
   "allies--bazooka-joe",
   "allies--devastator",
@@ -66,6 +66,7 @@
   "ssu--natasha-tsh",
   "ssu--pla-steel-guards-anti-infantry-squad",
   "ssu--red-ace",
+  "ssu--red-cossack",
   "ssu--red-fury-pla",
   "ssu--red-fury-spetsnaz",
   "ssu--red-rain-pla",
@@ -402,6 +403,11 @@
   "ssu--spetsnaz-saboteur-squad": {
    "x": 0.5,
    "y": 0.52,
+   "zoom": 1
+  },
+  "ssu--red-cossack": {
+   "x": 0.5,
+   "y": 0.455,
    "zoom": 1
   }
  }
