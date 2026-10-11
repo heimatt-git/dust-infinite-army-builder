@@ -1,5 +1,5 @@
 {
- "version": "202610111546",
+ "version": "202610111548",
  "units": [
   "allies--bazooka-joe",
   "allies--devastator",
@@ -22,6 +22,7 @@
   "axis--fallschirm-rso-flak-3",
   "axis--fallschirm-rso-laserkanone",
   "axis--fallschirmjager-anti-tank-squad",
+  "axis--fallschirmjager-laser-gun-squad",
   "axis--fallschirmjager-missile-squad",
   "axis--fallschirmjager-mortar-squad",
   "axis--flammpanzer-e-15-luft",
@@ -621,6 +622,11 @@
   "axis--fallschirmjager-anti-tank-squad": {
    "x": 0.5,
    "y": 0.596,
+   "zoom": 1
+  },
+  "axis--fallschirmjager-laser-gun-squad": {
+   "x": 0.5,
+   "y": 0.624,
    "zoom": 1
   }
  }
