@@ -1,5 +1,5 @@
 {
- "version": "202610111212",
+ "version": "202610111215",
  "units": [
   "allies--bazooka-joe",
   "allies--devastator",
@@ -91,7 +91,10 @@
   "ssu--sergei",
   "ssu--spetsnaz-kill-squad",
   "ssu--spetsnaz-saboteur-squad",
+  "ssu--steel-guards-anti-tank-squad",
+  "ssu--steel-guards-assault-squad",
   "ssu--steel-guards-command-squad",
+  "ssu--steel-guards-fire-support-squad",
   "ssu--steel-guards-sniper-squad",
   "ssu--steel-guards-tesla-squad",
   "ssu--vk-stash",
@@ -466,6 +469,21 @@
   "ssu--chinese-volunteer-assault-squad": {
    "x": 0.5,
    "y": 0.565,
+   "zoom": 1
+  },
+  "ssu--steel-guards-assault-squad": {
+   "x": 0.5,
+   "y": 0.497,
+   "zoom": 1
+  },
+  "ssu--steel-guards-anti-tank-squad": {
+   "x": 0.5,
+   "y": 0.511,
+   "zoom": 1
+  },
+  "ssu--steel-guards-fire-support-squad": {
+   "x": 0.5,
+   "y": 0.562,
    "zoom": 1
   }
  }
