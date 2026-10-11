@@ -1,5 +1,5 @@
 {
- "version": "202610110718",
+ "version": "202610110723",
  "units": [
   "allies--bazooka-joe",
   "allies--devastator",
@@ -59,6 +59,7 @@
   "mythos--nadir-the-exalted",
   "mythos--rasputin",
   "mythos--spawn-of-cthulhu",
+  "ssu--anatoly-tsh",
   "ssu--evgeny",
   "ssu--grand-ma",
   "ssu--guai-lo",
@@ -66,6 +67,7 @@
   "ssu--matrioshka",
   "ssu--nadya",
   "ssu--natasha-tsh",
+  "ssu--nina-tsh",
   "ssu--pla-steel-guards-anti-infantry-squad",
   "ssu--red-ace",
   "ssu--red-cossack",
@@ -416,6 +418,11 @@
   "ssu--evgeny": {
    "x": 0.5,
    "y": 0.503,
+   "zoom": 1
+  },
+  "ssu--nina-tsh": {
+   "x": 0.5,
+   "y": 0.489,
    "zoom": 1
   }
  }
