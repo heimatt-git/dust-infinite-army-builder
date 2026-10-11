@@ -1,5 +1,5 @@
 {
- "version": "202610111548",
+ "version": "202610111555",
  "units": [
   "allies--bazooka-joe",
   "allies--devastator",
@@ -29,6 +29,8 @@
   "axis--galeazzo",
   "axis--geist",
   "axis--gregor",
+  "axis--heavy-grenadier-anti-aircraft-squad",
+  "axis--heavy-grenadier-engineer-squad",
   "axis--heinrich",
   "axis--heinrich-tropical-bk",
   "axis--hermann",
@@ -42,6 +44,8 @@
   "axis--luther",
   "axis--manfred",
   "axis--moskito",
+  "axis--raketentruppe-command-squad",
+  "axis--raketentruppe-tank-hunter-squad",
   "axis--rolf",
   "axis--samson",
   "axis--sigrid-iii",
@@ -627,6 +631,21 @@
   "axis--fallschirmjager-laser-gun-squad": {
    "x": 0.5,
    "y": 0.624,
+   "zoom": 1
+  },
+  "axis--raketentruppe-command-squad": {
+   "x": 0.5,
+   "y": 0.466,
+   "zoom": 1
+  },
+  "axis--heavy-grenadier-engineer-squad": {
+   "x": 0.5,
+   "y": 0.551,
+   "zoom": 1
+  },
+  "axis--heavy-grenadier-anti-aircraft-squad": {
+   "x": 0.5,
+   "y": 0.528,
    "zoom": 1
   }
  }
