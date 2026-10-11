@@ -1,5 +1,5 @@
 {
- "version": "202610111237",
+ "version": "202610111248",
  "units": [
   "allies--bazooka-joe",
   "allies--devastator",
@@ -68,6 +68,7 @@
   "ssu--assaulter-pla",
   "ssu--chinese-volunteer-assault-squad",
   "ssu--chinese-volunteer-assault-squad-pla",
+  "ssu--commissar-poon",
   "ssu--controller",
   "ssu--controller-pla",
   "ssu--evgeny",
@@ -78,6 +79,7 @@
   "ssu--ivan-the-butcher",
   "ssu--karl-the-hammer",
   "ssu--koshka",
+  "ssu--master-yuk",
   "ssu--matrioshka",
   "ssu--mikhail-tsh",
   "ssu--nadya",
@@ -86,17 +88,21 @@
   "ssu--nikolai",
   "ssu--nina-tsh",
   "ssu--pla-steel-guards-anti-infantry-squad",
+  "ssu--professor-sum",
   "ssu--red-ace",
   "ssu--red-cossack",
   "ssu--red-fury-pla",
   "ssu--red-fury-spetsnaz",
   "ssu--red-guards-assault-squad",
   "ssu--red-guards-command-squad",
+  "ssu--red-lightning",
   "ssu--red-rain-pla",
   "ssu--red-rain-spetsnaz",
   "ssu--red-yana",
   "ssu--red-yana-spetsnaz",
+  "ssu--roza",
   "ssu--sergei",
+  "ssu--spetsnaz-command-squad",
   "ssu--spetsnaz-kill-squad",
   "ssu--spetsnaz-saboteur-squad",
   "ssu--steel-guards-anti-tank-squad",
@@ -107,6 +113,7 @@
   "ssu--steel-guards-sniper-squad",
   "ssu--steel-guards-tesla-squad",
   "ssu--type-45",
+  "ssu--vasiliy",
   "ssu--vk-stash",
   "ssu--winter-child",
   "ssu--yakov"
@@ -525,6 +532,41 @@
   "ssu--yakov": {
    "x": 0.5,
    "y": 0.472,
+   "zoom": 1
+  },
+  "ssu--vasiliy": {
+   "x": 0.5,
+   "y": 0.427,
+   "zoom": 1
+  },
+  "ssu--professor-sum": {
+   "x": 0.5,
+   "y": 0.387,
+   "zoom": 1
+  },
+  "ssu--commissar-poon": {
+   "x": 0.5,
+   "y": 0.551,
+   "zoom": 1
+  },
+  "ssu--master-yuk": {
+   "x": 0.5,
+   "y": 0.469,
+   "zoom": 1
+  },
+  "ssu--red-lightning": {
+   "x": 0.5,
+   "y": 0.458,
+   "zoom": 1
+  },
+  "ssu--roza": {
+   "x": 0.5,
+   "y": 0.475,
+   "zoom": 1
+  },
+  "ssu--spetsnaz-command-squad": {
+   "x": 0.5,
+   "y": 0.514,
    "zoom": 1
   }
  }
