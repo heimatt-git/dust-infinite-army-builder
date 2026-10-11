@@ -1,5 +1,5 @@
 {
- "version": "202610111630",
+ "version": "202610111811",
  "units": [
   "allies--bazooka-joe",
   "allies--devastator",
@@ -78,6 +78,7 @@
   "mythos--eradicator",
   "mythos--farouk-the-turk",
   "mythos--lilith",
+  "mythos--lilith-possessed",
   "mythos--mi-go-assault-squad",
   "mythos--mi-go-raiders-squad",
   "mythos--nadir",
@@ -712,6 +713,11 @@
   "mythos--cultist-fire-support-squad": {
    "x": 0.5,
    "y": 0.641,
+   "zoom": 1
+  },
+  "mythos--lilith-possessed": {
+   "x": 0.5,
+   "y": 0.461,
    "zoom": 1
   }
  }
