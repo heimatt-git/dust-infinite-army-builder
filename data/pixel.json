@@ -1,5 +1,5 @@
 {
- "version": "202610111426",
+ "version": "202610111434",
  "units": [
   "allies--bazooka-joe",
   "allies--devastator",
@@ -79,6 +79,7 @@
   "ssu--ivan-the-butcher",
   "ssu--karl-the-hammer",
   "ssu--koshka",
+  "ssu--master-yuk",
   "ssu--matrioshka",
   "ssu--mikhail-tsh",
   "ssu--nadya",
@@ -112,6 +113,8 @@
   "ssu--steel-guards-fire-support-squad",
   "ssu--steel-guards-sniper-squad",
   "ssu--steel-guards-tesla-squad",
+  "ssu--the-dragon",
+  "ssu--the-phoenix",
   "ssu--type-45",
   "ssu--vasiliy",
   "ssu--vk-stash",
@@ -552,6 +555,21 @@
   "ssu--vasiliy": {
    "x": 0.5,
    "y": 0.421,
+   "zoom": 1
+  },
+  "ssu--master-yuk": {
+   "x": 0.5,
+   "y": 0.466,
+   "zoom": 1
+  },
+  "ssu--the-phoenix": {
+   "x": 0.5,
+   "y": 0.472,
+   "zoom": 1
+  },
+  "ssu--the-dragon": {
+   "x": 0.5,
+   "y": 0.427,
    "zoom": 1
   }
  }
