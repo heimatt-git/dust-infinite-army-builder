@@ -1,10 +1,11 @@
 {
- "version": "202610111555",
+ "version": "202610111610",
  "units": [
   "allies--bazooka-joe",
   "allies--devastator",
   "allies--flying-banana",
   "allies--hot-dog",
+  "allies--humber-mk-v",
   "allies--recon-mickey",
   "allies--rosie-sgt-major-i",
   "allies--sergeant-victory",
@@ -62,20 +63,24 @@
   "mercenaries--obliterator",
   "mercenaries--the-fire-scarab",
   "mercenaries--tito",
+  "mythos--annihilator",
   "mythos--avatar-of-cthulhu",
   "mythos--avatar-of-nyarlathotep",
   "mythos--cultist-command-squad",
   "mythos--cultist-fire-squad",
   "mythos--cultist-saboteur-squad",
   "mythos--ekaterina-and-sabertooth",
+  "mythos--eradicator",
   "mythos--farouk-the-turk",
   "mythos--lilith",
   "mythos--mi-go-assault-squad",
   "mythos--mi-go-raiders-squad",
   "mythos--nadir",
   "mythos--nadir-the-exalted",
+  "mythos--purifier",
   "mythos--rasputin",
   "mythos--spawn-of-cthulhu",
+  "mythos--spawn-of-shub-niggurath",
   "ssu--air-ambulance",
   "ssu--aleksei-tsh",
   "ssu--anatoly-tsh",
@@ -646,6 +651,31 @@
   "axis--heavy-grenadier-anti-aircraft-squad": {
    "x": 0.5,
    "y": 0.528,
+   "zoom": 1
+  },
+  "allies--humber-mk-v": {
+   "x": 0.5,
+   "y": 0.554,
+   "zoom": 1
+  },
+  "mythos--annihilator": {
+   "x": 0.5,
+   "y": 0.539,
+   "zoom": 1
+  },
+  "mythos--eradicator": {
+   "x": 0.5,
+   "y": 0.528,
+   "zoom": 1
+  },
+  "mythos--purifier": {
+   "x": 0.5,
+   "y": 0.593,
+   "zoom": 1
+  },
+  "mythos--spawn-of-shub-niggurath": {
+   "x": 0.5,
+   "y": 0.551,
    "zoom": 1
   }
  }
