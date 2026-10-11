@@ -1,5 +1,5 @@
 {
- "version": "202610111434",
+ "version": "202610111528",
  "units": [
   "allies--bazooka-joe",
   "allies--devastator",
@@ -25,11 +25,15 @@
   "axis--galeazzo",
   "axis--geist",
   "axis--gregor",
+  "axis--heinrich",
   "axis--heinrich-tropical-bk",
+  "axis--hermann",
   "axis--hexe",
   "axis--jagdloki",
   "axis--kurt",
+  "axis--lara",
   "axis--lothar",
+  "axis--luft-hermann-trop",
   "axis--luther",
   "axis--manfred",
   "axis--moskito",
@@ -38,6 +42,7 @@
   "axis--sigrid-iii",
   "axis--stefan",
   "axis--storch",
+  "axis--sturmluther",
   "axis--wilfried",
   "mercenaries--alex",
   "mercenaries--decimater",
@@ -55,6 +60,7 @@
   "mythos--cultist-saboteur-squad",
   "mythos--ekaterina-and-sabertooth",
   "mythos--farouk-the-turk",
+  "mythos--lilith",
   "mythos--mi-go-assault-squad",
   "mythos--mi-go-raiders-squad",
   "mythos--nadir",
@@ -87,6 +93,7 @@
   "ssu--natasha-tsh",
   "ssu--nikolai",
   "ssu--nina-tsh",
+  "ssu--nina-tsh-pla",
   "ssu--pla-steel-guards-anti-infantry-squad",
   "ssu--professor-sum",
   "ssu--red-ace",
@@ -570,6 +577,31 @@
   "ssu--the-dragon": {
    "x": 0.5,
    "y": 0.427,
+   "zoom": 1
+  },
+  "mythos--lilith": {
+   "x": 0.5,
+   "y": 0.353,
+   "zoom": 1
+  },
+  "ssu--nina-tsh-pla": {
+   "x": 0.5,
+   "y": 0.568,
+   "zoom": 1
+  },
+  "axis--luft-hermann-trop": {
+   "x": 0.5,
+   "y": 0.686,
+   "zoom": 1
+  },
+  "axis--heinrich": {
+   "x": 0.5,
+   "y": 0.472,
+   "zoom": 1
+  },
+  "axis--sturmluther": {
+   "x": 0.5,
+   "y": 0.585,
    "zoom": 1
   }
  }
