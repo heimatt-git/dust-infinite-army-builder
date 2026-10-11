@@ -1,5 +1,5 @@
 {
- "version": "202610110608",
+ "version": "202610110712",
  "units": [
   "allies--bazooka-joe",
   "allies--devastator",
@@ -63,8 +63,15 @@
   "ssu--guai-lo",
   "ssu--invader",
   "ssu--nadya",
+  "ssu--natasha-tsh",
   "ssu--pla-steel-guards-anti-infantry-squad",
   "ssu--red-ace",
+  "ssu--red-fury-pla",
+  "ssu--red-fury-spetsnaz",
+  "ssu--red-rain-pla",
+  "ssu--red-rain-spetsnaz",
+  "ssu--spetsnaz-kill-squad",
+  "ssu--spetsnaz-saboteur-squad",
   "ssu--steel-guards-command-squad",
   "ssu--steel-guards-sniper-squad",
   "ssu--steel-guards-tesla-squad",
@@ -360,6 +367,41 @@
   "axis--wilfried": {
    "x": 0.5,
    "y": 0.525,
+   "zoom": 1
+  },
+  "ssu--red-rain-pla": {
+   "x": 0.5,
+   "y": 0.441,
+   "zoom": 1
+  },
+  "ssu--red-fury-pla": {
+   "x": 0.5,
+   "y": 0.466,
+   "zoom": 1
+  },
+  "ssu--red-rain-spetsnaz": {
+   "x": 0.5,
+   "y": 0.571,
+   "zoom": 1
+  },
+  "ssu--red-fury-spetsnaz": {
+   "x": 0.5,
+   "y": 0.469,
+   "zoom": 1
+  },
+  "ssu--natasha-tsh": {
+   "x": 0.5,
+   "y": 0.551,
+   "zoom": 1
+  },
+  "ssu--spetsnaz-kill-squad": {
+   "x": 0.5,
+   "y": 0.48,
+   "zoom": 1
+  },
+  "ssu--spetsnaz-saboteur-squad": {
+   "x": 0.5,
+   "y": 0.52,
    "zoom": 1
   }
  }
