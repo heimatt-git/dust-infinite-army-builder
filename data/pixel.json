@@ -1,5 +1,5 @@
 {
- "version": "202610111528",
+ "version": "202610111536",
  "units": [
   "allies--bazooka-joe",
   "allies--devastator",
@@ -22,6 +22,7 @@
   "axis--fallschirm-rso-flak-3",
   "axis--fallschirm-rso-laserkanone",
   "axis--fallschirmjager-missile-squad",
+  "axis--flammpanzer-e-15-luft",
   "axis--galeazzo",
   "axis--geist",
   "axis--gregor",
@@ -34,6 +35,7 @@
   "axis--lara",
   "axis--lothar",
   "axis--luft-hermann-trop",
+  "axis--luft-horst-trop",
   "axis--luther",
   "axis--manfred",
   "axis--moskito",
@@ -602,6 +604,16 @@
   "axis--sturmluther": {
    "x": 0.5,
    "y": 0.585,
+   "zoom": 1
+  },
+  "axis--luft-horst-trop": {
+   "x": 0.5,
+   "y": 0.551,
+   "zoom": 1
+  },
+  "axis--flammpanzer-e-15-luft": {
+   "x": 0.5,
+   "y": 0.655,
    "zoom": 1
   }
  }
