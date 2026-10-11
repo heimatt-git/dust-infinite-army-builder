@@ -1,5 +1,5 @@
 {
- "version": "202610111251",
+ "version": "202610111426",
  "units": [
   "allies--bazooka-joe",
   "allies--devastator",
@@ -101,6 +101,7 @@
   "ssu--red-yana-spetsnaz",
   "ssu--roza",
   "ssu--sergei",
+  "ssu--spetsnaz-anti-tank-squad",
   "ssu--spetsnaz-command-squad",
   "ssu--spetsnaz-kill-squad",
   "ssu--spetsnaz-saboteur-squad",
