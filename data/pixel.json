@@ -1,5 +1,5 @@
 {
- "version": "202610110728",
+ "version": "202610110840",
  "units": [
   "allies--bazooka-joe",
   "allies--devastator",
@@ -24,6 +24,7 @@
   "axis--fallschirmjager-missile-squad",
   "axis--galeazzo",
   "axis--geist",
+  "axis--gregor",
   "axis--heinrich-tropical-bk",
   "axis--hexe",
   "axis--jagdloki",
@@ -40,6 +41,7 @@
   "axis--wilfried",
   "mercenaries--alex",
   "mercenaries--decimater",
+  "mercenaries--gregor-the-defector",
   "mercenaries--mercenary-cleaning-team",
   "mercenaries--mercenary-command-squad",
   "mercenaries--mercenary-railgun-team",
@@ -65,6 +67,7 @@
   "ssu--grand-ma",
   "ssu--guai-lo",
   "ssu--invader",
+  "ssu--koshka",
   "ssu--matrioshka",
   "ssu--mikhail-tsh",
   "ssu--nadya",
@@ -436,6 +439,11 @@
   "ssu--aleksei-tsh": {
    "x": 0.5,
    "y": 0.511,
+   "zoom": 1
+  },
+  "ssu--koshka": {
+   "x": 0.5,
+   "y": 0.461,
    "zoom": 1
   }
  }
