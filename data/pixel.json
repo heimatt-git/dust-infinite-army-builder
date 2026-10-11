@@ -1,5 +1,5 @@
 {
- "version": "202610111222",
+ "version": "202610111224",
  "units": [
   "allies--bazooka-joe",
   "allies--devastator",
@@ -94,6 +94,7 @@
   "ssu--spetsnaz-saboteur-squad",
   "ssu--steel-guards-anti-tank-squad",
   "ssu--steel-guards-assault-squad",
+  "ssu--steel-guards-close-combat-squad",
   "ssu--steel-guards-command-squad",
   "ssu--steel-guards-fire-support-squad",
   "ssu--steel-guards-sniper-squad",
