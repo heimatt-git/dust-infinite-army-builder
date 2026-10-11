@@ -1,6 +1,7 @@
 {
- "version": "202610112053",
+ "version": "202610112101",
  "units": [
+  "allies--barking-dog-light",
   "allies--bazooka-joe",
   "allies--bulldog",
   "allies--devastator",
@@ -18,6 +19,7 @@
   "allies--the-priest",
   "allies--thunder",
   "allies--tornado",
+  "allies--usmc-anti-tank-squad",
   "allies--usmc-heavy-engineer-squad",
   "allies--usmc-war-dogs-recon-squad",
   "axis--adler",
@@ -772,6 +774,21 @@
   "axis--fallschirmjager-mortar-squad": {
    "x": 0.5,
    "y": 0.463,
+   "zoom": 1
+  },
+  "allies--barking-dog-light": {
+   "x": 0.5,
+   "y": 0.347,
+   "zoom": 1
+  },
+  "allies--bulldog": {
+   "x": 0.5,
+   "y": 0.466,
+   "zoom": 1
+  },
+  "allies--usmc-anti-tank-squad": {
+   "x": 0.5,
+   "y": 0.528,
    "zoom": 1
   }
  }
