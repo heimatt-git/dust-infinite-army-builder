@@ -1,5 +1,5 @@
 {
- "version": "202610111610",
+ "version": "202610111618",
  "units": [
   "allies--bazooka-joe",
   "allies--devastator",
@@ -68,7 +68,9 @@
   "mythos--avatar-of-nyarlathotep",
   "mythos--cultist-command-squad",
   "mythos--cultist-fire-squad",
+  "mythos--cultist-raiders",
   "mythos--cultist-saboteur-squad",
+  "mythos--deadly-tilly",
   "mythos--ekaterina-and-sabertooth",
   "mythos--eradicator",
   "mythos--farouk-the-turk",
@@ -81,6 +83,7 @@
   "mythos--rasputin",
   "mythos--spawn-of-cthulhu",
   "mythos--spawn-of-shub-niggurath",
+  "mythos--the-euphrates-crocodile",
   "ssu--air-ambulance",
   "ssu--aleksei-tsh",
   "ssu--anatoly-tsh",
@@ -676,6 +679,21 @@
   "mythos--spawn-of-shub-niggurath": {
    "x": 0.5,
    "y": 0.551,
+   "zoom": 1
+  },
+  "mythos--the-euphrates-crocodile": {
+   "x": 0.5,
+   "y": 0.568,
+   "zoom": 1
+  },
+  "mythos--deadly-tilly": {
+   "x": 0.5,
+   "y": 0.571,
+   "zoom": 1
+  },
+  "mythos--cultist-raiders": {
+   "x": 0.5,
+   "y": 0.571,
    "zoom": 1
   }
  }
