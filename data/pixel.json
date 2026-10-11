@@ -1,5 +1,5 @@
 {
- "version": "202610111811",
+ "version": "202610111828",
  "units": [
   "allies--bazooka-joe",
   "allies--devastator",
@@ -93,6 +93,7 @@
   "ssu--anatoly-tsh",
   "ssu--assaulter",
   "ssu--assaulter-pla",
+  "ssu--babushka",
   "ssu--chinese-volunteer-assault-squad",
   "ssu--chinese-volunteer-assault-squad-pla",
   "ssu--commissar-poon",
@@ -106,6 +107,7 @@
   "ssu--ivan-the-butcher",
   "ssu--karl-the-hammer",
   "ssu--koshka",
+  "ssu--kv-152",
   "ssu--master-yuk",
   "ssu--matrioshka",
   "ssu--mikhail-tsh",
@@ -144,6 +146,7 @@
   "ssu--the-dragon",
   "ssu--the-phoenix",
   "ssu--type-45",
+  "ssu--type-46",
   "ssu--vasiliy",
   "ssu--vk-stash",
   "ssu--winter-child",
@@ -718,6 +721,21 @@
   "mythos--lilith-possessed": {
    "x": 0.5,
    "y": 0.461,
+   "zoom": 1
+  },
+  "ssu--kv-152": {
+   "x": 0.5,
+   "y": 0.534,
+   "zoom": 1
+  },
+  "ssu--babushka": {
+   "x": 0.5,
+   "y": 0.461,
+   "zoom": 1
+  },
+  "ssu--type-46": {
+   "x": 0.5,
+   "y": 0.573,
    "zoom": 1
   }
  }
