@@ -1,5 +1,5 @@
 {
- "version": "202610100721",
+ "version": "202610110553",
  "units": [
   "allies--bazooka-joe",
   "allies--devastator",
@@ -19,7 +19,10 @@
   "axis--bloody-blitz",
   "axis--experiment-x-33",
   "axis--falke",
+  "axis--fallschirm-rso-laserkanone",
+  "axis--fallschirmjager-missile-squad",
   "axis--galeazzo",
+  "axis--geist",
   "axis--heinrich-tropical-bk",
   "axis--hexe",
   "axis--jagdloki",
@@ -30,6 +33,7 @@
   "axis--moskito",
   "axis--rolf",
   "axis--stefan",
+  "axis--storch",
   "mercenaries--alex",
   "mercenaries--decimater",
   "mercenaries--mercenary-cleaning-team",
@@ -60,6 +64,7 @@
   "ssu--steel-guards-command-squad",
   "ssu--steel-guards-sniper-squad",
   "ssu--steel-guards-tesla-squad",
+  "ssu--vk-stash",
   "ssu--winter-child"
  ],
  "focus": {
@@ -311,6 +316,31 @@
   "ssu--nadya": {
    "x": 0.5,
    "y": 0.589,
+   "zoom": 1
+  },
+  "axis--fallschirm-rso-laserkanone": {
+   "x": 0.5,
+   "y": 0.424,
+   "zoom": 1
+  },
+  "axis--fallschirmjager-missile-squad": {
+   "x": 0.5,
+   "y": 0.568,
+   "zoom": 1
+  },
+  "axis--geist": {
+   "x": 0.5,
+   "y": 0.469,
+   "zoom": 1
+  },
+  "axis--storch": {
+   "x": 0.5,
+   "y": 0.472,
+   "zoom": 1
+  },
+  "ssu--vk-stash": {
+   "x": 0.5,
+   "y": 0.528,
    "zoom": 1
   }
  }
