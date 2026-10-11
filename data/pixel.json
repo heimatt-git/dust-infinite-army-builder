@@ -1,5 +1,5 @@
 {
- "version": "202610111618",
+ "version": "202610111630",
  "units": [
   "allies--bazooka-joe",
   "allies--devastator",
@@ -68,6 +68,9 @@
   "mythos--avatar-of-nyarlathotep",
   "mythos--cultist-command-squad",
   "mythos--cultist-fire-squad",
+  "mythos--cultist-fire-support-squad",
+  "mythos--cultist-heavy-fire-support-squad",
+  "mythos--cultist-kill-squad",
   "mythos--cultist-raiders",
   "mythos--cultist-saboteur-squad",
   "mythos--deadly-tilly",
@@ -694,6 +697,21 @@
   "mythos--cultist-raiders": {
    "x": 0.5,
    "y": 0.571,
+   "zoom": 1
+  },
+  "mythos--cultist-kill-squad": {
+   "x": 0.5,
+   "y": 0.556,
+   "zoom": 1
+  },
+  "mythos--cultist-heavy-fire-support-squad": {
+   "x": 0.5,
+   "y": 0.582,
+   "zoom": 1
+  },
+  "mythos--cultist-fire-support-squad": {
+   "x": 0.5,
+   "y": 0.641,
    "zoom": 1
   }
  }
