@@ -1,5 +1,5 @@
 {
- "version": "202610110723",
+ "version": "202610110726",
  "units": [
   "allies--bazooka-joe",
   "allies--devastator",
@@ -65,6 +65,7 @@
   "ssu--guai-lo",
   "ssu--invader",
   "ssu--matrioshka",
+  "ssu--mikhail-tsh",
   "ssu--nadya",
   "ssu--natasha-tsh",
   "ssu--nina-tsh",
