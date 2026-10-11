@@ -1,5 +1,5 @@
 {
- "version": "202610111224",
+ "version": "202610111232",
  "units": [
   "allies--bazooka-joe",
   "allies--devastator",
@@ -74,6 +74,8 @@
   "ssu--grand-ma",
   "ssu--guai-lo",
   "ssu--invader",
+  "ssu--iron-joe",
+  "ssu--ivan-the-butcher",
   "ssu--karl-the-hammer",
   "ssu--koshka",
   "ssu--matrioshka",
@@ -87,6 +89,8 @@
   "ssu--red-cossack",
   "ssu--red-fury-pla",
   "ssu--red-fury-spetsnaz",
+  "ssu--red-guards-assault-squad",
+  "ssu--red-guards-command-squad",
   "ssu--red-rain-pla",
   "ssu--red-rain-spetsnaz",
   "ssu--sergei",
@@ -492,6 +496,16 @@
   "ssu--type-45": {
    "x": 0.5,
    "y": 0.362,
+   "zoom": 1
+  },
+  "ssu--ivan-the-butcher": {
+   "x": 0.5,
+   "y": 0.339,
+   "zoom": 1
+  },
+  "ssu--iron-joe": {
+   "x": 0.5,
+   "y": 0.444,
    "zoom": 1
   }
  }
