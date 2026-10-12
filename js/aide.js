@@ -1,6 +1,6 @@
 // Page « Aide » : une courte notice par onglet (builder, Shot Format, Ma collection, Atelier), en français et en anglais.
 import { LANG, initLang, setLang } from './i18n.js';
-import { esc, store, brandLogo, mountCredit } from './ui.js';
+import { esc, store, brandLogo, mountCredit, mountFeedback } from './ui.js';
 
 const L = (fr, en) => (LANG === 'en' ? en : fr);
 
@@ -181,6 +181,7 @@ function render() {
       ${s.qa ? s.qa.map(([q, a]) => `<h3>${esc(q)}</h3><p>${esc(a)}</p>`).join('') : ''}
     </details>`).join('')}
   </main>`;
+  mountFeedback();
   document.getElementById('lang-btn').addEventListener('click', () => { setLang(LANG === 'fr' ? 'en' : 'fr'); location.reload(); });
   document.getElementById('theme-btn').addEventListener('click', () => {
     const r = document.documentElement;

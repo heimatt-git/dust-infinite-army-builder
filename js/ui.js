@@ -151,3 +151,19 @@ export function guessRepo() {
   const repo = location.pathname.split('/').filter(Boolean)[0];
   return { owner: m[1], repo: repo && !repo.endsWith('.html') ? repo : `${m[1]}.github.io` };
 }
+
+// Bouton « Donner mon avis » dans la barre du haut (builder, Atelier, Aide) : le lien Discord vient de data/short-format.json → feedback
+export async function mountFeedback() {
+  try {
+    const nav = document.querySelector('.topnav');
+    const anchor = nav?.querySelector('#lang-btn');
+    if (!nav || !anchor || nav.querySelector('.fb-top')) return;
+    const F = await fetch('data/short-format.json', { cache: 'no-cache' }).then((r) => (r.ok ? r.json() : null));
+    const fb = F?.feedback;
+    if (!fb?.url || nav.querySelector('.fb-top')) return;
+    const label = (LANG === 'en' && F.en?.feedback?.label) || (LANG === 'en' ? t('Donner mon avis') : fb.label) || t('Donner mon avis');
+    const a = document.createElement('a');
+    a.className = 'fb-top'; a.href = fb.url; a.target = '_blank'; a.rel = 'noopener'; a.textContent = label;
+    anchor.before(a);
+  } catch { /* hors ligne ou fichier absent : pas de bouton */ }
+}

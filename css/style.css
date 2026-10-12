@@ -78,6 +78,11 @@ a { color: var(--accent-ink); }
 }
 .topnav a:hover, .topnav button:hover { border-color: rgba(255,255,255,.25); }
 .topnav .on { border-color: var(--accent); }
+/* « Aide » sur fond vert, « Donner mon avis » en orange : même style que le Shot Format */
+.topnav a[href^="aide.html"] { background: #3d7447; color: #f4f8ee; border-color: #3d7447; font-weight: 600; }
+.topnav a[href^="aide.html"]:hover { filter: brightness(1.1); border-color: #3d7447; }
+.topnav a.fb-top { background: #c1442a; color: #fff6f0; border-color: #c1442a; font-weight: 600; }
+.topnav a.fb-top:hover { filter: brightness(1.08); border-color: #c1442a; }
 
 .wrap { max-width: 1280px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 60px; }
 .boot { padding: 40px 16px; text-align: center; color: var(--muted); }

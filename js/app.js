@@ -1,7 +1,7 @@
 // DUST 194∞ Builder — application principale (français / anglais)
 import { loadData, loadCustom, withCustom, typeLabel, MERC, unitCost, canPilot } from './data.js';
 import { analyzeArmy, entryCost, blocName, factionName, CAPTURED_SURCHARGE, isJoiner, isCommissar, isAirlifter, isCarriable } from './rules.js';
-import { esc, uid, store, toast, copyText, openModal, unitCardHTML, guessRepo, brandLogo, mountCredit, printCredit } from './ui.js';
+import { esc, uid, store, toast, copyText, openModal, unitCardHTML, guessRepo, brandLogo, mountCredit, printCredit, mountFeedback } from './ui.js';
 import { attackHtml } from './dice.js';
 import { t, LANG, initLang, setLang } from './i18n.js';
 import { exportListPDF, pdfDialogHTML, bindPdfDialog } from './pdf.js';
@@ -114,6 +114,7 @@ function topbar(active) {
 }
 
 function bindTopbar() {
+  mountFeedback();
   document.getElementById('lang-btn')?.addEventListener('click', () => { setLang(LANG === 'fr' ? 'en' : 'fr'); location.reload(); });
   document.getElementById('theme-btn')?.addEventListener('click', () => {
     const r = document.documentElement;
