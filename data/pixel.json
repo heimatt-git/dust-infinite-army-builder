@@ -1,5 +1,5 @@
 {
- "version": "202610121242",
+ "version": "202610121324",
  "units": [
   "allies--barking-dog-light",
   "allies--bazooka-joe",
@@ -65,13 +65,22 @@
   "axis--sturmluther",
   "axis--wilfried",
   "mercenaries--alex",
+  "mercenaries--barking-luther",
   "mercenaries--decimater",
+  "mercenaries--demolisher",
+  "mercenaries--emma",
   "mercenaries--gregor-the-defector",
+  "mercenaries--justine",
+  "mercenaries--luisa",
+  "mercenaries--magda",
   "mercenaries--mercenary-cleaning-team",
   "mercenaries--mercenary-command-squad",
   "mercenaries--mercenary-heavy-mortar-squad",
   "mercenaries--mercenary-railgun-team",
+  "mercenaries--nathalia",
   "mercenaries--obliterator",
+  "mercenaries--silence",
+  "mercenaries--tanya",
   "mercenaries--the-fire-scarab",
   "mercenaries--tito",
   "mythos--annihilator",
@@ -807,6 +816,41 @@
   "mercenaries--mercenary-heavy-mortar-squad": {
    "x": 0.5,
    "y": 0.301,
+   "zoom": 1
+  },
+  "mercenaries--emma": {
+   "x": 0.5,
+   "y": 0.301,
+   "zoom": 1
+  },
+  "mercenaries--luisa": {
+   "x": 0.5,
+   "y": 0.486,
+   "zoom": 1
+  },
+  "mercenaries--nathalia": {
+   "x": 0.5,
+   "y": 0.475,
+   "zoom": 1
+  },
+  "mercenaries--justine": {
+   "x": 0.5,
+   "y": 0.466,
+   "zoom": 1
+  },
+  "mercenaries--demolisher": {
+   "x": 0.5,
+   "y": 0.415,
+   "zoom": 1
+  },
+  "mercenaries--barking-luther": {
+   "x": 0.5,
+   "y": 0.449,
+   "zoom": 1
+  },
+  "mercenaries--silence": {
+   "x": 0.5,
+   "y": 0.362,
    "zoom": 1
   }
  }
