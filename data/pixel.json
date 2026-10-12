@@ -1,5 +1,5 @@
 {
- "version": "202610121630",
+ "version": "202610121648",
  "units": [
   "allies--barking-dog-light",
   "allies--bazooka-joe",
@@ -64,6 +64,11 @@
   "axis--storch",
   "axis--sturmluther",
   "axis--wilfried",
+  "ijn--akiko",
+  "ijn--kaori",
+  "ijn--shadow-of-death",
+  "ijn--shadow-of-the-serpent",
+  "ijn--yukiko",
   "mercenaries--alex",
   "mercenaries--anti-tank-squadron",
   "mercenaries--barking-luther",
@@ -947,6 +952,31 @@
   "mercenaries--wrecker": {
    "x": 0.5,
    "y": 0.441,
+   "zoom": 1
+  },
+  "ijn--shadow-of-death": {
+   "x": 0.5,
+   "y": 0.602,
+   "zoom": 1
+  },
+  "ijn--shadow-of-the-serpent": {
+   "x": 0.5,
+   "y": 0.427,
+   "zoom": 1
+  },
+  "ijn--yukiko": {
+   "x": 0.5,
+   "y": 0.427,
+   "zoom": 1
+  },
+  "ijn--kaori": {
+   "x": 0.5,
+   "y": 0.444,
+   "zoom": 1
+  },
+  "ijn--akiko": {
+   "x": 0.5,
+   "y": 0.376,
    "zoom": 1
   }
  }
