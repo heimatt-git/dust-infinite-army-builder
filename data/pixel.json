@@ -1,9 +1,10 @@
 {
- "version": "202610112120",
+ "version": "202610121242",
  "units": [
   "allies--barking-dog-light",
   "allies--bazooka-joe",
   "allies--bulldog",
+  "allies--command-truck-ds",
   "allies--devastator",
   "allies--flying-banana",
   "allies--gregory-and-izzy",
@@ -68,6 +69,7 @@
   "mercenaries--gregor-the-defector",
   "mercenaries--mercenary-cleaning-team",
   "mercenaries--mercenary-command-squad",
+  "mercenaries--mercenary-heavy-mortar-squad",
   "mercenaries--mercenary-railgun-team",
   "mercenaries--obliterator",
   "mercenaries--the-fire-scarab",
@@ -795,6 +797,16 @@
   "allies--gregory-and-izzy": {
    "x": 0.5,
    "y": 0.48,
+   "zoom": 1
+  },
+  "allies--command-truck-ds": {
+   "x": 0.5,
+   "y": 0.517,
+   "zoom": 1
+  },
+  "mercenaries--mercenary-heavy-mortar-squad": {
+   "x": 0.5,
+   "y": 0.301,
    "zoom": 1
   }
  }
