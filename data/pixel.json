@@ -1,5 +1,5 @@
 {
- "version": "202610121338",
+ "version": "202610121346",
  "units": [
   "allies--barking-dog-light",
   "allies--bazooka-joe",
@@ -65,20 +65,33 @@
   "axis--sturmluther",
   "axis--wilfried",
   "mercenaries--alex",
+  "mercenaries--anti-tank-squadron",
   "mercenaries--barking-luther",
   "mercenaries--decimater",
   "mercenaries--demolisher",
   "mercenaries--emma",
   "mercenaries--gregor-the-defector",
   "mercenaries--justine",
+  "mercenaries--justine-and-co-ii",
+  "mercenaries--justine-and-co-iii",
+  "mercenaries--justine-and-co-vi",
+  "mercenaries--justine-and-co-vii",
+  "mercenaries--justine-s-crew",
   "mercenaries--luisa",
   "mercenaries--magda",
+  "mercenaries--meatgrinder",
+  "mercenaries--mercenary-antitank-squad",
   "mercenaries--mercenary-cleaning-team",
   "mercenaries--mercenary-command-squad",
+  "mercenaries--mercenary-heavy-machinegun-squad",
+  "mercenaries--mercenary-heavy-machinegun-squad-iii",
   "mercenaries--mercenary-heavy-mortar-squad",
   "mercenaries--mercenary-railgun-team",
   "mercenaries--nathalia",
   "mercenaries--obliterator",
+  "mercenaries--pink-flamingo",
+  "mercenaries--pulverizer",
+  "mercenaries--shredder",
   "mercenaries--silence",
   "mercenaries--tanya",
   "mercenaries--the-fire-scarab",
@@ -851,6 +864,71 @@
   "mercenaries--silence": {
    "x": 0.5,
    "y": 0.362,
+   "zoom": 1
+  },
+  "mercenaries--shredder": {
+   "x": 0.5,
+   "y": 0.35,
+   "zoom": 1
+  },
+  "mercenaries--meatgrinder": {
+   "x": 0.5,
+   "y": 0.377,
+   "zoom": 1
+  },
+  "mercenaries--pink-flamingo": {
+   "x": 0.5,
+   "y": 0.446,
+   "zoom": 1
+  },
+  "mercenaries--anti-tank-squadron": {
+   "x": 0.5,
+   "y": 0.556,
+   "zoom": 1
+  },
+  "mercenaries--pulverizer": {
+   "x": 0.5,
+   "y": 0.412,
+   "zoom": 1
+  },
+  "mercenaries--mercenary-antitank-squad": {
+   "x": 0.5,
+   "y": 0.449,
+   "zoom": 1
+  },
+  "mercenaries--justine-and-co-ii": {
+   "x": 0.5,
+   "y": 0.534,
+   "zoom": 1
+  },
+  "mercenaries--justine-s-crew": {
+   "x": 0.5,
+   "y": 0.534,
+   "zoom": 1
+  },
+  "mercenaries--justine-and-co-vii": {
+   "x": 0.5,
+   "y": 0.486,
+   "zoom": 1
+  },
+  "mercenaries--mercenary-heavy-machinegun-squad-iii": {
+   "x": 0.5,
+   "y": 0.444,
+   "zoom": 1
+  },
+  "mercenaries--mercenary-heavy-machinegun-squad": {
+   "x": 0.5,
+   "y": 0.424,
+   "zoom": 1
+  },
+  "mercenaries--justine-and-co-iii": {
+   "x": 0.5,
+   "y": 0.531,
+   "zoom": 1
+  },
+  "mercenaries--justine-and-co-vi": {
+   "x": 0.5,
+   "y": 0.477,
    "zoom": 1
   }
  }
