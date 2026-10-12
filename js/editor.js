@@ -781,7 +781,18 @@ function renderIllus(body) {
   E.illusQueue ||= [];
   const Q = E.illusQueue;
   const iq = (E.illusQ || '').trim();
-  const shown = X.units.filter((id) => !iq || pnorm((byId.get(id)?.name || '') + id).includes(pnorm(iq)));
+  const found = X.units.filter((id) => !iq || pnorm((byId.get(id)?.name || '') + id).includes(pnorm(iq)));
+  // Ordre d'affichage : « récentes d'abord » (les illustrations à envoyer en tête, la dernière ajoutée en premier, puis A à Z),
+  // « A à Z » (par nom d'unité) ou « par bloc ». Le choix est gardé dans le navigateur.
+  const SORTS = ['recent', 'az', 'bloc'];
+  const sortKey = SORTS.includes(E.illusSort) ? E.illusSort : (SORTS.includes(store.get('dust1947.illusSort', '')) ? store.get('dust1947.illusSort', '') : 'recent');
+  const nm = (id) => byId.get(id)?.name || id;
+  const bl = (id) => byId.get(id)?.bloc || id.split('--')[0];
+  const cmp = (a, b) => nm(a).localeCompare(nm(b), LANG, { sensitivity: 'base', numeric: true });
+  const pend = E.d.pixelPending;
+  const shown = sortKey === 'bloc' ? [...found].sort((a, b) => bl(a).localeCompare(bl(b)) || cmp(a, b))
+    : sortKey === 'az' ? [...found].sort(cmp)
+    : [...found.filter((id) => pend.includes(id)).sort((a, b) => pend.indexOf(b) - pend.indexOf(a)), ...found.filter((id) => !pend.includes(id)).sort(cmp)];
   body.innerHTML = `<div class="ed-form">
     <div class="ed-sec">
       <h2>${t('Ajouter des illustrations')}</h2>
@@ -808,8 +819,9 @@ function renderIllus(body) {
     </div>
     <div class="ed-sec">
       <h2>${t('Illustrations ({n})', { n: X.units.length })}</h2>
-      ${X.units.length > 8 ? `<input type="search" id="px-q" placeholder="${t('Rechercher une unité')}" value="${esc(E.illusQ || '')}">` : ''}
-      ${shown.length ? `<div class="ph-grid px-grid">${shown.map((id) => `<figure>
+      ${X.units.length > 8 ? `<div class="px-tools"><input type="search" id="px-q" placeholder="${t('Rechercher une unité')}" value="${esc(E.illusQ || '')}">
+        <label class="px-sort">${t('Trier')} <select id="px-sort">${[['recent', t("Récentes d'abord")], ['az', t('A à Z')], ['bloc', t('Par bloc')]].map(([k, l]) => `<option value="${k}"${k === sortKey ? ' selected' : ''}>${l}</option>`).join('')}</select></label></div>` : ''}
+      ${shown.length ? `<div class="ph-grid px-grid">${shown.map((id) => `<figure${pend.includes(id) ? ' class="px-new"' : ''}>
         <img src="${esc(pixelSrc(id, true))}" alt="" loading="lazy">
         <figcaption><b>${esc(byId.get(id)?.name || id)}</b><br>${esc(byId.get(id)?.bloc || id)}${E.d.pixelPending.includes(id) ? ` · <i>${t('à envoyer')}</i>` : ''}</figcaption>
         <div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn sm" data-pxfr="${esc(id)}">${t('Cadrage')}${X.focus[id] ? ' ✓' : ''}</button>
@@ -859,13 +871,15 @@ function renderIllus(body) {
           await blobs.set('pending:' + path, blob).catch(() => {});
         }
         if (!X.units.includes(id)) { X.units.push(id); X.units.sort(); }
-        if (!E.d.pixelPending.includes(id)) E.d.pixelPending.push(id);
+        E.d.pixelPending = E.d.pixelPending.filter((x) => x !== id); E.d.pixelPending.push(id); // la plus récente en dernier
         Q.splice(Q.indexOf(q), 1); URL.revokeObjectURL(q.url); n++;
       } catch { toast(t("{f} n'est pas une image lisible.", { f: q.file.name })); }
     }
-    saveDraft(); render();
+    E.illusScroll = n > 0; saveDraft(); render();
     if (n) toast(t('{n} illustration(s) ajoutée(s) au brouillon : vérifiez le cadrage, puis publiez dans l\'onglet Publier.', { n }));
   });
+  body.querySelector('#px-sort')?.addEventListener('change', (e) => { E.illusSort = e.target.value; store.set('dust1947.illusSort', E.illusSort); render(); });
+  if (E.illusScroll) { E.illusScroll = false; body.querySelector('.px-grid')?.closest('.ed-sec')?.scrollIntoView({ block: 'start' }); }
   body.querySelector('#px-q')?.addEventListener('input', (e) => {
     E.illusQ = e.target.value; const pos = e.target.selectionStart; render();
     const q = root.querySelector('#px-q'); if (q) { q.focus(); q.setSelectionRange(pos, pos); }

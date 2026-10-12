@@ -98,6 +98,7 @@ const EN = {
   "Aucune armée pour l'instant.": 'No army yet.',
   '« {n} » supprimée': '“{n}” deleted',
   'Règles du format': 'Format rules',
+  'Trier': 'Sort', "Récentes d'abord": 'Newest first', 'A à Z': 'A to Z', 'Par bloc': 'By bloc',
   'Version française (facultative)': 'French version (optional)', 'Version anglaise (facultative)': 'English version (optional)',
   'Donner mon avis': 'Give feedback', 'Version de test': 'Test version',
   'Mise en place': 'Setup', 'Composition': 'Army composition', 'Restrictions': 'Restrictions',
