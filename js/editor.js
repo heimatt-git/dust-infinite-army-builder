@@ -363,7 +363,7 @@ function renderPlatoons(body, ch) {
         <div class="idline">id : ${esc(p.id)}</div>
         <div class="row2">
           <label class="field"><span>${t('Nom')}</span><input type="text" name="name" value="${esc(p.name)}"></label>
-          <label class="field"><span>${t('Bloc')}</span><select name="bloc">${blocs.map((b) => `<option value="${esc(b.id)}" ${b.id === p.bloc ? 'selected' : ''}>${esc(bn(b))}</option>`).join('')}</select></label>
+          <label class="field"><span>${t('Bloc')}</span><select name="bloc">${E.d.blocsFile.blocs.map((b) => `<option value="${esc(b.id)}" ${b.id === p.bloc ? 'selected' : ''}>${esc(bn(b))}</option>`).join('')}</select></label>
         </div>
         <label class="field"><span>${t('Devise')}</span><input type="text" name="lore" value="${esc(p.lore)}"></label>
         <label class="field"><span>${t('Avantage de peloton')}</span><textarea name="advantage" rows="3" style="font-family:var(--f-body);font-size:14px">${esc(p.advantage)}</textarea></label>
