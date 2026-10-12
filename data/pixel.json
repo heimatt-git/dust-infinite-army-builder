@@ -1,5 +1,5 @@
 {
- "version": "202610121346",
+ "version": "202610121630",
  "units": [
   "allies--barking-dog-light",
   "allies--bazooka-joe",
@@ -70,6 +70,7 @@
   "mercenaries--decimater",
   "mercenaries--demolisher",
   "mercenaries--emma",
+  "mercenaries--fire-lizard",
   "mercenaries--gregor-the-defector",
   "mercenaries--justine",
   "mercenaries--justine-and-co-ii",
@@ -91,11 +92,13 @@
   "mercenaries--obliterator",
   "mercenaries--pink-flamingo",
   "mercenaries--pulverizer",
+  "mercenaries--recon-squadron",
   "mercenaries--shredder",
   "mercenaries--silence",
   "mercenaries--tanya",
   "mercenaries--the-fire-scarab",
   "mercenaries--tito",
+  "mercenaries--wrecker",
   "mythos--annihilator",
   "mythos--avatar-of-cthulhu",
   "mythos--avatar-of-nyarlathotep",
@@ -929,6 +932,21 @@
   "mercenaries--justine-and-co-vi": {
    "x": 0.5,
    "y": 0.477,
+   "zoom": 1
+  },
+  "mercenaries--recon-squadron": {
+   "x": 0.5,
+   "y": 0.652,
+   "zoom": 1
+  },
+  "mercenaries--fire-lizard": {
+   "x": 0.5,
+   "y": 0.364,
+   "zoom": 1
+  },
+  "mercenaries--wrecker": {
+   "x": 0.5,
+   "y": 0.441,
    "zoom": 1
   }
  }
