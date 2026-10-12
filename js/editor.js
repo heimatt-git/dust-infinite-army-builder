@@ -366,7 +366,10 @@ function renderPlatoons(body, ch) {
           <label class="field"><span>${t('Bloc')}</span><select name="bloc">${E.d.blocsFile.blocs.map((b) => `<option value="${esc(b.id)}" ${b.id === p.bloc ? 'selected' : ''}>${esc(bn(b))}</option>`).join('')}</select></label>
         </div>
         <label class="field"><span>${t('Devise')}</span><input type="text" name="lore" value="${esc(p.lore)}"></label>
+        <label class="field"><span>${t('Histoire du peloton')}</span><textarea name="story" rows="4" style="font-family:var(--f-body);font-size:14px">${esc(p.story || '')}</textarea></label>
+        <label class="field"><span>${t("Nom de l'avantage")}</span><input type="text" name="advantageName" value="${esc(p.advantageName || '')}"></label>
         <label class="field"><span>${t('Avantage de peloton')}</span><textarea name="advantage" rows="3" style="font-family:var(--f-body);font-size:14px">${esc(p.advantage)}</textarea></label>
+        <label class="field"><span>${t('Unités de soutien (texte)')}</span><textarea name="supportText" rows="3" style="font-family:var(--f-body);font-size:14px">${esc(p.supportText || '')}</textarea></label>
         <label class="check"><input type="checkbox" name="onlyCombat" ${p.onlyCombatUnitsAsSupport ? 'checked' : ''}> ${t('Seules les unités de combat du peloton peuvent être en soutien')}</label>
       </div>
       <div class="ed-sec">
@@ -408,6 +411,7 @@ function renderPlatoons(body, ch) {
     p.bloc = f.get('bloc');
     p.lore = String(f.get('lore') || '').trim();
     p.advantage = String(f.get('advantage') || '').trim();
+    for (const k of ['story', 'advantageName', 'supportText']) { const v = String(f.get(k) || '').trim(); if (v) p[k] = v; else delete p[k]; }
     p.onlyCombatUnitsAsSupport = !!f.get('onlyCombat');
     p.command = p.command.map((_, i) => parse(f.get(`cmd-${i}`)));
     p.combat = p.combat.map((_, i) => parse(f.get(`cb-${i}`)));

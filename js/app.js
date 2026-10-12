@@ -403,7 +403,7 @@ function catalogHTML() {
     const own = D.platoons.filter((p) => p.bloc === L.bloc);
     const merc = L.bloc !== MERC ? D.platoons.filter((p) => p.bloc === MERC) : [];
     const row = (p) => `<div class="prow">
-        <div class="row"><b>${esc(p.name)}</b><button class="btn sm primary" data-addpl="${esc(p.id)}">${t('Ajouter')}</button></div>
+        <div class="row"><b>${esc(p.name)}${p.confidential ? ' <span class="tag conf">CONFIDENTIAL</span>' : ''}</b><button class="btn sm primary" data-addpl="${esc(p.id)}">${t('Ajouter')}</button></div>
         ${p.lore ? `<p><i>${esc(p.lore)}</i></p>` : ''}
         <p>${esc(p.advantage)}</p>
         <p class="num" style="font-size:12px">${t('{a} commandement · {b} combat requis', { a: p.command.length, b: p.combat.length })}</p>

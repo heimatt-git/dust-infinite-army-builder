@@ -30,3 +30,11 @@
 .at-card .modal-b, .at-card .modal-h { grid-template-columns: minmax(0, 1fr); }
 .at-card .modal-h { grid-template-columns: minmax(0, 1fr) auto; }
 .at-gcard { max-width: 460px; cursor: default; }
+/* Pelotons : postes, options, aperçu de la page */
+.slot-ed { display: grid; gap: 6px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; }
+.slot-h { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.opt-row { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.opt-row input[type=text] { flex: 1 1 200px; min-width: 0; }
+.opt-row .or { font-size: 12px; color: var(--muted); font-style: italic; }
+.pl-page { max-width: 560px; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; background: #fff; }
+.pl-page svg { display: block; width: 100%; height: auto; }

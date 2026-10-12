@@ -194,6 +194,24 @@ export async function exportListPDF({ filename, recap, cards = [], includeCards 
   return blob;
 }
 
+// Pages de pelotons (SVG A4 déjà dessinés) : une page A4 par peloton
+export async function exportPagesPDF({ filename, title, svgs, onProgress = () => {} }) {
+  await cardFontsReady();
+  const pages = [];
+  for (const svg of svgs) {
+    const c = await svgCanvas(svg, { scale: 1.6, bg: '#fff' });
+    pages.push({ images: [{ img: await jpeg(c, 0.9), x: 0, y: 0, W: A4.w, H: A4.h }] });
+    onProgress(pages.length, svgs.length);
+  }
+  const blob = buildPDF(pages, title);
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  return blob;
+}
+
 // Fenêtre d'options commune au builder et au Shot Format
 export function pdfDialogHTML(nCards) {
   const fmt = store.get(FORMAT_KEY, 'square') === 'wide' ? 'wide' : 'square';

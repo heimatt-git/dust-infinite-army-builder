@@ -7,7 +7,9 @@ import { esc, uid, store, toast, openModal, unitCardHTML, brandLogo, mountCredit
 import { shrink } from './images.js';
 import { framingHTML, mountFraming } from './framing.js';
 import { skillPickerHTML, bindSkillPickers } from './skillpicker.js';
-import { generatedCardSVG, cardFontsReady } from './cardgen.js';
+import { generatedCardSVG, cardFontsReady, svgCanvas } from './cardgen.js';
+import { platoonPageSVG } from './platoonpage.js';
+import { exportPagesPDF } from './pdf.js';
 import { t, LANG, initLang, setLang } from './i18n.js';
 
 const KEY = 'dust1947.atelier';
@@ -18,9 +20,9 @@ const PALETTE = ['#6b7a8f', '#8a5a44', '#4f7d5c', '#9a7b2f', '#7b5b8f', '#3f7f86
 const MAX_FILE = 8 * 1024 * 1024; // marge sous la limite des pièces jointes Discord
 
 const root = document.getElementById('at');
-const A = { off: null, all: null, P: null, tab: 'units', sel: null, fsel: null, bsel: null, photos: new Map() };
+const A = { off: null, all: null, P: null, tab: 'units', sel: null, fsel: null, bsel: null, plsel: null, photos: new Map() };
 
-const emptyProject = () => ({ v: 1, author: '', project: '', charter: false, blocs: [], factions: [], units: [] });
+const emptyProject = () => ({ v: 1, author: '', project: '', charter: false, blocs: [], factions: [], units: [], platoons: [] });
 const clone = (x) => structuredClone(x);
 const slug = (s) => String(s || '').normalize('NFKD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'x';
 const numOrNull = (v) => { v = String(v ?? '').trim(); if (v === '') return null; return /^-?\d+$/.test(v) ? parseInt(v, 10) : v; };
@@ -53,6 +55,15 @@ async function loadPhotos() {
     if (blob) A.photos.set(u._k, URL.createObjectURL(blob)); else delete u.hasPhoto;
   }
 }
+async function loadPlatoonImages() {
+  for (const p of A.P.platoons || []) {
+    for (const [flag, key] of [['hasBg', 'bg'], ['hasEm', 'em']]) {
+      if (!p[flag]) continue;
+      const blob = await IDB.get(`${p._k}:${key}`).catch(() => null);
+      if (blob) A.photos.set(`${p._k}:${key}`, URL.createObjectURL(blob)); else delete p[flag];
+    }
+  }
+}
 const blobToDataURL = (blob) => new Promise((res, rej) => { const fr = new FileReader(); fr.onload = () => res(fr.result); fr.onerror = rej; fr.readAsDataURL(blob); });
 const dataURLToBlob = (d) => fetch(d).then((r) => r.blob());
 
@@ -70,7 +81,9 @@ async function init() {
     return;
   }
   A.P = { ...emptyProject(), ...store.get(KEY, {}) };
+  A.P.platoons ||= [];
   await loadPhotos();
+  await loadPlatoonImages();
   render();
 }
 const save = () => { if (!store.set(KEY, A.P)) toast(t('Projet non sauvegardé (stockage local indisponible).')); };
@@ -102,6 +115,13 @@ function cleanUnit(u) {
   const { _k, _idLocked, hasPhoto, ...rest } = u;
   return rest;
 }
+function cleanPlatoon(p, author) {
+  const { _k, _idLocked, hasBg, hasEm, ...rest } = p;
+  const slots = (arr) => (arr || []).map((slot) => slot.map((opt) => opt.filter(Boolean)).filter((opt) => opt.length));
+  const out = { ...rest, command: slots(p.command), combat: slots(p.combat), image: null, author };
+  for (const k of ['lore', 'advantageName', 'advantage', 'story', 'supportText']) if (!String(out[k] || '').trim()) delete out[k]; else out[k] = String(out[k]).trim();
+  return out;
+}
 function asCustom(P = A.P) {
   const projBlocs = new Set(P.blocs.map((b) => b.id));
   const author = P.author.trim() || null;
@@ -109,7 +129,7 @@ function asCustom(P = A.P) {
     blocs: P.blocs.map((b) => ({ id: b.id, name: b.name, color: b.color, author, factions: P.factions.filter((f) => f.bloc === b.id).map((f) => ({ id: f.id, name: f.name, author })) })),
     factions: P.factions.filter((f) => !projBlocs.has(f.bloc)).map((f) => ({ bloc: f.bloc, id: f.id, name: f.name, author })),
     units: P.units.map((u) => ({ ...cleanUnit(u), author })),
-    platoons: [],
+    platoons: (P.platoons || []).map((p) => cleanPlatoon(p, author)),
     skills: {},
   };
 }
@@ -127,6 +147,9 @@ function unitIdFor(u) {
 function factionIdFor(name, self) {
   return uniqueId(`conf-${slug(name)}`, (id) => A.all.factionsById.has(id) || A.P.factions.some((f) => f !== self && f.id === id));
 }
+function platoonIdFor(p) {
+  return uniqueId(`${CONF_PREFIX}pl--${slug(p.bloc)}--${slug(p.name)}`, (id) => A.all.platoonsById.has(id) || A.P.platoons.some((x) => x !== p && x.id === id));
+}
 function blocIdFor(name, self) {
   return uniqueId(`conf-${slug(name)}`, (id) => A.all.blocsById.has(id) || A.P.blocs.some((b) => b !== self && b.id === id));
 }
@@ -134,7 +157,7 @@ function blocIdFor(name, self) {
 // ---------------------------------------------------------------- Rendu
 function render() {
   const P = A.P;
-  const counts = { units: P.units.length, factions: P.factions.length, blocs: P.blocs.length };
+  const counts = { units: P.units.length, factions: P.factions.length, platoons: (P.platoons || []).length, blocs: P.blocs.length };
   root.innerHTML = `
   <div class="ed-head at-head">
     <div>
@@ -153,12 +176,12 @@ function render() {
     </div>
     <div class="at-proj-acts">
       <label class="btn sm">${t('Reprendre un projet (.json)')}<input type="file" id="p-import" accept=".json,application/json" hidden></label>
-      <button type="button" class="btn sm danger" id="p-reset" ${counts.units + counts.factions + counts.blocs ? '' : 'disabled'}>${t('Nouveau projet')}</button>
+      <button type="button" class="btn sm danger" id="p-reset" ${counts.units + counts.factions + counts.platoons + counts.blocs ? '' : 'disabled'}>${t('Nouveau projet')}</button>
     </div>
     <p class="hint" style="margin:0">${t('Recharge un fichier exporté depuis cet atelier (<code>confidential-….json</code>) pour continuer ou corriger votre création. Les images se joignent unité par unité, dans l\'onglet Unités.')}</p>
   </section>
   <div class="ed-tabs" role="tablist">
-    ${[['units', t('Unités')], ['factions', t('Factions')], ['blocs', t('Blocs inédits')], ['send', t('Envoyer')]].map(([k, l]) =>
+    ${[['units', t('Unités')], ['factions', t('Factions')], ['platoons', t('Pelotons')], ['blocs', t('Blocs inédits')], ['send', t('Envoyer')]].map(([k, l]) =>
       `<button role="tab" data-tab="${k}" class="${A.tab === k ? 'on' : ''}">${l}${counts[k] ? `<span class="count">${counts[k]}</span>` : ''}</button>`).join('')}
   </div>
   <div id="at-body"></div>`;
@@ -172,7 +195,7 @@ function render() {
   });
   root.querySelectorAll('[data-tab]').forEach((b) => b.addEventListener('click', () => { A.tab = b.dataset.tab; render(); }));
   const body = root.querySelector('#at-body');
-  ({ units: renderUnits, factions: renderFactions, blocs: renderBlocs, send: renderSend })[A.tab](body);
+  ({ units: renderUnits, factions: renderFactions, platoons: renderPlatoons, blocs: renderBlocs, send: renderSend })[A.tab](body);
 }
 
 function charterHTML(inSend) {
@@ -460,6 +483,170 @@ function renderFactions(body) {
   });
 }
 
+// ---------------------------------------------------------------- Pelotons
+const plImg = (p, k) => A.photos.get(`${p._k}:${k}`) || null;
+async function plImgSave(p, k, file) {
+  const blob = await shrink(file, k === 'bg' ? 1754 : 400, k === 'bg' ? 'image/jpeg' : 'image/png');
+  const key = `${p._k}:${k}`;
+  await IDB.set(key, blob);
+  if (A.photos.has(key)) URL.revokeObjectURL(A.photos.get(key));
+  A.photos.set(key, URL.createObjectURL(blob));
+  p[k === 'bg' ? 'hasBg' : 'hasEm'] = true; save();
+}
+async function plImgDel(p, k) {
+  const key = `${p._k}:${k}`;
+  await IDB.del(key).catch(() => {});
+  if (A.photos.has(key)) { URL.revokeObjectURL(A.photos.get(key)); A.photos.delete(key); }
+  delete p[k === 'bg' ? 'hasBg' : 'hasEm']; save();
+}
+const platoonSVG = (p, D) => platoonPageSVG(cleanPlatoon(p, A.P.author.trim()), D, { bg: plImg(p, 'bg'), emblem: plImg(p, 'em'), credit: A.P.author.trim() ? t('Créé par {a}', { a: A.P.author.trim() }) : '' });
+const fileSlug = (p) => slug(p.name) || 'peloton';
+function download(blob, name) {
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name;
+  document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 3000);
+}
+
+function renderPlatoons(body) {
+  const P = A.P, D = preview();
+  const p = P.platoons.find((x) => x._k === A.plsel);
+  const units = [...D.units].sort((a, b) => a.name.localeCompare(b.name));
+  const labels = new Map(), byLabel = new Map();
+  for (const u of units) {
+    let l = `${u.name} — ${bn(D.blocsById.get(u.bloc)) || u.bloc}`;
+    if (byLabel.has(l)) l += ` [${u.id}]`;
+    labels.set(u.id, l); byLabel.set(l, u.id);
+  }
+  const label = (id) => (id ? labels.get(id) || id : '');
+  const slotHTML = (kind, slots) => slots.map((s, i) => `<div class="slot-ed"><div class="slot-h"><b>${kind === 'command' ? t('Commandement {n}', { n: i + 1 }) : t('Combat {n}', { n: i + 1 })}</b>
+      <button type="button" class="btn sm danger" data-rmslot="${kind}:${i}">${t('Retirer ce poste')}</button></div>
+      ${s.map((opt, o) => `<div class="opt-row">${o ? `<span class="or">${t('ou')}</span>` : ''}${opt.map((id, k) => `${k ? '<span class="or">+</span>' : ''}<input type="text" list="pl-units" data-u="${kind}:${i}:${o}:${k}" value="${esc(label(id))}" placeholder="${t('Nom de l\'unité…')}">`).join('')}
+        <button type="button" class="btn sm" data-addu="${kind}:${i}:${o}" title="${t('Une unité jouée avec celle-ci (ex. héros + véhicule)')}">+ ${t('avec')}</button>
+        <button type="button" class="btn sm" data-rmopt="${kind}:${i}:${o}" aria-label="${t('Retirer')}">✕</button></div>`).join('')}
+      <div><button type="button" class="btn sm" data-addopt="${kind}:${i}">${t('+ Option (« ou »)')}</button></div></div>`).join('');
+  body.innerHTML = `<div class="ed-grid">
+    <aside class="ed-side">
+      <div class="ed-list">${P.platoons.map((x) => `<button class="ed-item ${x._k === A.plsel ? 'on' : ''}" data-plsel="${esc(x._k)}"><span>${esc(x.name)}</span><small>${esc(bn(D.blocsById.get(x.bloc)))}</small></button>`).join('') || `<p class="empty" style="padding:8px">${t('Aucun peloton pour le moment.')}</p>`}</div>
+      <button class="btn primary" id="pl-new">${t('+ Nouveau peloton')}</button>
+    </aside>
+    <section>${p ? `<form class="ed-form" id="pl-form" autocomplete="off">
+      <datalist id="pl-units">${[...byLabel.keys()].map((l) => `<option value="${esc(l)}">`).join('')}</datalist>
+      <div class="ed-sec">
+        <h2>${t('Peloton')}</h2>
+        <div class="idline">id : ${esc(p.id)}</div>
+        <div class="row2">
+          <label class="field"><span>${t('Nom')}</span><input type="text" name="name" maxlength="80" value="${esc(p.name)}"></label>
+          <label class="field"><span>${t('Bloc')}</span><select name="bloc">${D.blocs.map((b) => `<option value="${esc(b.id)}" ${b.id === p.bloc ? 'selected' : ''}>${esc(bn(b))}${b.confidential ? ' · CONFIDENTIAL' : ''}</option>`).join('')}</select></label>
+        </div>
+        <label class="field"><span>${t('Devise (facultatif)')}</span><input type="text" name="lore" maxlength="120" value="${esc(p.lore || '')}"></label>
+        <label class="field"><span>${t('Histoire du peloton (facultatif)')}</span><textarea name="story" rows="5" style="font-family:var(--f-body);font-size:14px">${esc(p.story || '')}</textarea></label>
+        <div class="row2">
+          <label class="field"><span>${t('Nom de l\'avantage')}</span><input type="text" name="advantageName" maxlength="80" value="${esc(p.advantageName || '')}"></label>
+        </div>
+        <label class="field"><span>${t('Avantage de peloton')}</span><textarea name="advantage" rows="4" style="font-family:var(--f-body);font-size:14px">${esc(p.advantage || '')}</textarea></label>
+        <label class="field"><span>${t('Unités de soutien (texte, facultatif)')}</span><textarea name="supportText" rows="3" style="font-family:var(--f-body);font-size:14px">${esc(p.supportText || '')}</textarea></label>
+        <label class="check"><input type="checkbox" name="onlyCombat" ${p.onlyCombatUnitsAsSupport ? 'checked' : ''}> ${t('Seules les unités de combat du peloton peuvent être en soutien')}</label>
+      </div>
+      <div class="ed-sec">
+        <h2>${t('Postes requis')}</h2>
+        <p class="hint" style="margin:0">${t('Chaque poste propose une ou plusieurs options (« ou »). Une option peut regrouper plusieurs unités jouées ensemble. Choisissez les unités dans la liste (officielles ou créées dans l\'onglet Unités).')}</p>
+        ${slotHTML('command', p.command)}
+        ${slotHTML('combat', p.combat)}
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <button type="button" class="btn sm" data-addslot="combat">${t('+ Poste de combat')}</button>
+          <button type="button" class="btn sm" data-addslot="command">${t('+ Poste de commandement')}</button>
+        </div>
+      </div>
+      <div class="ed-sec">
+        <h2>${t('Page du peloton : images (facultatif)')}</h2>
+        <p class="hint" style="margin:0">${t('Votre fond de page et votre emblème servent à la page PDF/PNG. Ils restent dans ce navigateur et ne sont pas joints au fichier envoyé. Sans emblème, celui du bloc est utilisé.')}</p>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <label class="btn sm">${plImg(p, 'bg') ? t('Remplacer le fond') : t('Ajouter un fond de page')}<input type="file" id="pl-bg" accept="image/*" hidden></label>
+          ${plImg(p, 'bg') ? `<button type="button" class="btn sm danger" id="pl-bg-rm">${t('Retirer le fond')}</button>` : ''}
+          <label class="btn sm">${plImg(p, 'em') ? t('Remplacer l\'emblème') : t('Ajouter un emblème')}<input type="file" id="pl-em" accept="image/*" hidden></label>
+          ${plImg(p, 'em') ? `<button type="button" class="btn sm danger" id="pl-em-rm">${t('Retirer l\'emblème')}</button>` : ''}
+        </div>
+      </div>
+      <div class="ed-sec">
+        <h2>${t('Aperçu et export')}</h2>
+        <div class="pl-page" id="pl-prev"></div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+          <button type="button" class="btn sm primary" id="pl-pdf">${t('Télécharger la page (PDF)')}</button>
+          <button type="button" class="btn sm" id="pl-png">${t('Télécharger la page (PNG)')}</button>
+          ${P.platoons.length > 1 ? `<button type="button" class="btn sm" id="pl-pdf-all">${t('Tous les pelotons (PDF, {n} pages)', { n: P.platoons.length })}</button>` : ''}
+          <span class="hint" id="pl-status" role="status"></span>
+        </div>
+      </div>
+      <div class="ed-actions"><span class="spacer"></span><button type="button" class="btn danger" id="pl-del">${t('Supprimer le peloton')}</button></div>
+    </form>` : `<div class="ed-sec"><p class="hint" style="margin:0">${t('Un peloton regroupe un poste de commandement, des postes de combat et des unités de soutien. Créez le vôtre : vous obtenez une page prête à imprimer ou à partager, et il peut ensuite rejoindre le builder comme vos autres créations.')}</p></div>`}</section>
+  </div>`;
+  body.querySelectorAll('[data-plsel]').forEach((b) => b.addEventListener('click', () => { A.plsel = b.dataset.plsel; render(); }));
+  body.querySelector('#pl-new').addEventListener('click', () => {
+    const np = { _k: uid() + uid(), id: '', bloc: P.blocs[0]?.id || 'Allies', name: t('Nouveau peloton'), lore: '', story: '', advantageName: '', advantage: '', supportText: '', onlyCombatUnitsAsSupport: false, command: [[['']]], combat: [[['']], [['']]], image: null };
+    np.id = platoonIdFor(np); P.platoons.push(np); A.plsel = np._k; save(); render();
+  });
+  if (!p) return;
+  const form = body.querySelector('#pl-form');
+  form.addEventListener('submit', (e) => e.preventDefault());
+  const prev = () => {
+    const box = form.querySelector('#pl-prev');
+    box.innerHTML = platoonSVG(p, preview());
+  };
+  const apply = () => {
+    const f = new FormData(form);
+    p.name = String(f.get('name') || '').trim() || p.name;
+    p.bloc = f.get('bloc');
+    for (const k of ['lore', 'story', 'advantageName', 'advantage', 'supportText']) p[k] = String(f.get(k) || '').trim();
+    p.onlyCombatUnitsAsSupport = !!f.get('onlyCombat');
+    if (!p._idLocked) p.id = platoonIdFor(p);
+    save();
+  };
+  form.addEventListener('change', (e) => {
+    if (e.target.matches('[data-u]')) {
+      const [kind, i, o, k] = e.target.dataset.u.split(':'); const v = e.target.value.trim();
+      const id = v ? byLabel.get(v) : '';
+      if (v && !id) { toast(t('Unité introuvable : choisissez-la dans la liste.')); render(); return; }
+      p[kind][+i][+o][+k] = id; save(); prev(); return;
+    }
+    if (e.target.type === 'file') return;
+    apply(); prev();
+    const it = body.querySelector(`[data-plsel="${p._k}"]`);
+    if (it) { it.querySelector('span').textContent = p.name; it.querySelector('small').textContent = bn(preview().blocsById.get(p.bloc)); }
+    form.querySelector('.idline').textContent = `id : ${p.id}`;
+  });
+  const at = (s) => s.split(':');
+  form.querySelectorAll('[data-addslot]').forEach((b) => b.addEventListener('click', () => { apply(); p[b.dataset.addslot].push([['']]); save(); render(); }));
+  form.querySelectorAll('[data-rmslot]').forEach((b) => b.addEventListener('click', () => { apply(); const [kind, i] = at(b.dataset.rmslot); p[kind].splice(+i, 1); save(); render(); }));
+  form.querySelectorAll('[data-addopt]').forEach((b) => b.addEventListener('click', () => { apply(); const [kind, i] = at(b.dataset.addopt); p[kind][+i].push(['']); save(); render(); }));
+  form.querySelectorAll('[data-rmopt]').forEach((b) => b.addEventListener('click', () => { apply(); const [kind, i, o] = at(b.dataset.rmopt); p[kind][+i].splice(+o, 1); if (!p[kind][+i].length) p[kind][+i].push(['']); save(); render(); }));
+  form.querySelectorAll('[data-addu]').forEach((b) => b.addEventListener('click', () => { apply(); const [kind, i, o] = at(b.dataset.addu); p[kind][+i][+o].push(''); save(); render(); }));
+  for (const [k, id] of [['bg', '#pl-bg'], ['em', '#pl-em']]) {
+    form.querySelector(id).addEventListener('change', async (e) => {
+      const file = e.target.files[0]; if (!file) return;
+      try { await plImgSave(p, k, file); render(); toast(t('Image ajoutée')); } catch (err) { toast(err.message || t('Stockage d\'images indisponible dans ce navigateur.')); }
+    });
+    form.querySelector(`${id}-rm`)?.addEventListener('click', async () => { await plImgDel(p, k); render(); });
+  }
+  const status = (m) => { form.querySelector('#pl-status').textContent = m; };
+  form.querySelector('#pl-png').addEventListener('click', async () => {
+    status(t('Création de l\'image…'));
+    try { await cardFontsReady(); const c = await svgCanvas(platoonSVG(p, preview()), { scale: 1.6 }); download(await new Promise((r) => c.toBlob(r, 'image/png')), `peloton-${fileSlug(p)}.png`); status(t('Image téléchargée.')); } catch (e) { console.error(e); status(t('Impossible de créer l\'image dans ce navigateur.')); }
+  });
+  const pdf = async (list, name) => {
+    status(t('Création du PDF…'));
+    try { const Dn = preview(); await exportPagesPDF({ filename: name, title: list.length === 1 ? list[0].name : (P.project || t('Pelotons')), svgs: list.map((x) => platoonSVG(x, Dn)), onProgress: (d, n) => status(t('Création du PDF… {d}/{n}', { d, n })) }); status(t('PDF téléchargé.')); } catch (e) { console.error(e); status(t('Impossible de créer le PDF dans ce navigateur.')); }
+  };
+  form.querySelector('#pl-pdf').addEventListener('click', () => pdf([p], `peloton-${fileSlug(p)}.pdf`));
+  form.querySelector('#pl-pdf-all')?.addEventListener('click', () => pdf(P.platoons, `pelotons-${slug(P.project) || 'projet'}.pdf`));
+  form.querySelector('#pl-del').addEventListener('click', async (ev) => {
+    const b = ev.currentTarget;
+    if (!b.classList.contains('armed')) { b.classList.add('armed'); b.textContent = t('Confirmer la suppression'); return; }
+    await plImgDel(p, 'bg'); await plImgDel(p, 'em');
+    P.platoons = P.platoons.filter((x) => x !== p); A.plsel = null; save(); render();
+  });
+  prev();
+  cardFontsReady().then(() => { if (document.body.contains(form)) prev(); });
+}
+
 // ---------------------------------------------------------------- Blocs inédits
 function renderBlocs(body) {
   const P = A.P;
@@ -515,7 +702,7 @@ function checks() {
   const errors = [], warnings = [];
   if (!P.author.trim()) errors.push(t('Indiquez votre pseudo (il servira de crédit).'));
   if (!P.project.trim()) errors.push(t('Donnez un nom à votre projet.'));
-  if (!P.units.length && !P.factions.length && !P.blocs.length) errors.push(t('Le projet est vide : créez au moins une unité, une faction ou un bloc.'));
+  if (!P.units.length && !P.factions.length && !P.blocs.length && !P.platoons.length) errors.push(t('Le projet est vide : créez au moins une unité, une faction, un peloton ou un bloc.'));
   for (const u of P.units) {
     if (!u.weapons?.length && u.type !== 'token') warnings.push(t('{n} : aucune arme.', { n: u.name }));
     for (const c of u.customSkills || []) if (!c.name || !c.description) errors.push(t('{n} : une règle inédite n\'a pas de nom ou de description.', { n: u.name }));
@@ -542,6 +729,7 @@ function renderSend(body) {
         <li><b>${t('Projet :')}</b> ${esc(P.project || '—')} · <b>${t('Créateur :')}</b> ${esc(P.author || '—')}</li>
         ${P.blocs.length ? `<li><b>${t('Blocs inédits ({n}) :', { n: P.blocs.length })}</b> ${P.blocs.map((b) => esc(b.name)).join(', ')}</li>` : ''}
         ${P.factions.length ? `<li><b>${t('Factions ({n}) :', { n: P.factions.length })}</b> ${P.factions.map((f) => esc(f.name)).join(', ')}</li>` : ''}
+        ${P.platoons.length ? `<li><b>${t('Pelotons ({n}) :', { n: P.platoons.length })}</b> ${P.platoons.map((p) => esc(p.name)).join(', ')}</li>` : ''}
         ${P.units.length ? `<li><b>${t('Unités ({n}) :', { n: P.units.length })}</b> ${P.units.map((u) => esc(u.name)).join(', ')}</li>` : ''}
         ${nPhotos ? `<li><b>${t('Photos :')}</b> ${nPhotos}</li>` : ''}
       </ul>
@@ -574,7 +762,7 @@ async function exportFile() {
   const P = A.P;
   if (checks().errors.length || !P.charter) return;
   // Les identifiants sont figés au premier export : une nouvelle version garde les mêmes
-  for (const x of [...P.units, ...P.factions, ...P.blocs]) x._idLocked = true;
+  for (const x of [...P.units, ...P.factions, ...P.blocs, ...P.platoons]) x._idLocked = true;
   save();
   const c = asCustom();
   for (const [i, u] of P.units.entries()) {
@@ -599,7 +787,7 @@ async function exportFile() {
 async function resetProject() {
   for (const url of A.photos.values()) URL.revokeObjectURL(url);
   A.photos.clear(); await IDB.clear().catch(() => {});
-  A.P = emptyProject(); A.sel = A.fsel = A.bsel = null; A.tab = 'units'; save(); render();
+  A.P = emptyProject(); A.sel = A.fsel = A.bsel = A.plsel = null; A.tab = 'units'; save(); render();
 }
 
 async function importFile(file) {
@@ -624,10 +812,11 @@ async function importFile(file) {
       }
       NP.units.push(nu);
     }
+    NP.platoons = (data.platoons || []).map(({ author, confidential, approved, ...p }) => ({ ...p, _k: uid() + uid(), _idLocked: true, command: p.command || [[]], combat: p.combat || [] }));
     A.P = NP; save(); render();
     toast(t('Projet « {n} » importé.', { n: NP.project || file.name }));
   };
-  if (!P.units.length && !P.factions.length && !P.blocs.length) return doImport();
+  if (!P.units.length && !P.factions.length && !P.blocs.length && !(P.platoons || []).length) return doImport();
   openModal(`<div class="modal-h"><div><div class="eyebrow">${t('Reprendre un projet (.json)')}</div><h2>${t('Remplacer le projet actuel ?')}</h2>
       <p>${t('Le projet en cours dans l\'atelier sera remplacé par le contenu du fichier.')}</p></div><button class="btn icon" data-close-btn aria-label="${t('Fermer')}">✕</button></div>
     <div class="modal-b"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn primary" id="imp-ok">${t('Remplacer')}</button><button class="btn" data-close-btn>${t('Annuler')}</button></div></div>`, (r, close) => {

@@ -115,6 +115,12 @@ export function validateCustom(custom, unitsFile, blocsFile, skills) {
     if (offIds.has(u.id)) errors.push(t('custom.json : l\'id « {id} » existe déjà dans la base officielle.', { id: u.id }));
     if (!u.author) warnings.push(t('custom.json : créateur non renseigné pour « {n} ».', { n: u.name || u.id }));
   }
+  const offPl = new Set(blocsFile.platoons.map((x) => x.id));
+  for (const pl of custom.platoons || []) {
+    if (!String(pl.id || '').startsWith('conf--')) errors.push(t('custom.json : l\'id du peloton « {id} » doit commencer par « conf-- ».', { id: pl.id }));
+    if (offPl.has(pl.id)) errors.push(t('custom.json : le peloton « {id} » existe déjà dans la base officielle.', { id: pl.id }));
+    if (!pl.author) warnings.push(t('custom.json : créateur non renseigné pour « {n} ».', { n: pl.name || pl.id }));
+  }
   // Mêmes contrôles que la base officielle, sur la base fusionnée ; on ne garde que les messages nouveaux
   const merged = {
     units: { units: [...unitsFile.units, ...cUnits] },

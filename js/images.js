@@ -43,7 +43,7 @@ export function hasImage(unitId) { return urls.has(`${unitId}|front`) || urls.ha
 export function imageCount() { return urls.size; }
 
 // Réduit l'image (max 1400 px) et la convertit en JPEG pour économiser l'espace
-export async function shrink(file, maxSide = MAX_SIDE) {
+export async function shrink(file, maxSide = MAX_SIDE, type = 'image/jpeg') {
   const bmp = await createImageBitmap(file).catch(() => null);
   if (!bmp) throw new Error(t("{f} n'est pas une image lisible.", { f: file.name }));
   const scale = Math.min(1, maxSide / Math.max(bmp.width, bmp.height));
@@ -52,7 +52,7 @@ export async function shrink(file, maxSide = MAX_SIDE) {
   c.width = w; c.height = h;
   c.getContext('2d').drawImage(bmp, 0, 0, w, h);
   bmp.close?.();
-  return new Promise((res) => c.toBlob((b) => res(b || file), 'image/jpeg', 0.86));
+  return new Promise((res) => c.toBlob((b) => res(b || file), type, 0.86));
 }
 
 export async function saveImage(unitId, side, file, { silent = false } = {}) {
