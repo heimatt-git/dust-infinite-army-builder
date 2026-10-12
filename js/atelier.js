@@ -116,7 +116,7 @@ function cleanUnit(u) {
   return rest;
 }
 function cleanPlatoon(p, author) {
-  const { _k, _idLocked, hasBg, hasEm, ...rest } = p;
+  const { _k, _idLocked, hasBg, hasEm, unitFilter, ...rest } = p;
   const slots = (arr) => (arr || []).map((slot) => slot.map((opt) => opt.filter(Boolean)).filter((opt) => opt.length));
   const out = { ...rest, command: slots(p.command), combat: slots(p.combat), image: null, author };
   for (const k of ['lore', 'advantageName', 'advantage', 'story', 'supportText']) if (!String(out[k] || '').trim()) delete out[k]; else out[k] = String(out[k]).trim();
@@ -517,6 +517,8 @@ function renderPlatoons(body) {
     labels.set(u.id, l); byLabel.set(l, u.id);
   }
   const label = (id) => (id ? labels.get(id) || id : '');
+  // Unités proposées : celles du bloc du peloton (+ Mercenaires, utilisables partout), ou toutes
+  const proposed = (pl) => units.filter((u) => pl?.unitFilter === 'all' || u.bloc === pl?.bloc || u.bloc === 'Mercenaries').map((u) => `<option value="${esc(labels.get(u.id))}">`).join('');
   const slotHTML = (kind, slots) => slots.map((s, i) => `<div class="slot-ed"><div class="slot-h"><b>${kind === 'command' ? t('Commandement {n}', { n: i + 1 }) : t('Combat {n}', { n: i + 1 })}</b>
       <button type="button" class="btn sm danger" data-rmslot="${kind}:${i}">${t('Retirer ce poste')}</button></div>
       ${s.map((opt, o) => `<div class="opt-row">${o ? `<span class="or">${t('ou')}</span>` : ''}${opt.map((id, k) => `${k ? '<span class="or">+</span>' : ''}<input type="text" list="pl-units" data-u="${kind}:${i}:${o}:${k}" value="${esc(label(id))}" placeholder="${t('Nom de l\'unité…')}">`).join('')}
@@ -529,7 +531,7 @@ function renderPlatoons(body) {
       <button class="btn primary" id="pl-new">${t('+ Nouveau peloton')}</button>
     </aside>
     <section>${p ? `<form class="ed-form" id="pl-form" autocomplete="off">
-      <datalist id="pl-units">${[...byLabel.keys()].map((l) => `<option value="${esc(l)}">`).join('')}</datalist>
+      <datalist id="pl-units">${proposed(p)}</datalist>
       <div class="ed-sec">
         <h2>${t('Peloton')}</h2>
         <div class="idline">id : ${esc(p.id)}</div>
@@ -548,6 +550,7 @@ function renderPlatoons(body) {
       </div>
       <div class="ed-sec">
         <h2>${t('Postes requis')}</h2>
+        <label class="field"><span>${t('Unités proposées dans les listes')}</span><select name="unitFilter"><option value="bloc" ${p.unitFilter === 'all' ? '' : 'selected'}>${t('Celles du bloc du peloton (+ Mercenaires)')}</option><option value="all" ${p.unitFilter === 'all' ? 'selected' : ''}>${t('Toutes les unités (tous les blocs)')}</option></select></label>
         <p class="hint" style="margin:0">${t('Chaque poste propose une ou plusieurs options (« ou »). Une option peut regrouper plusieurs unités jouées ensemble. Choisissez les unités dans la liste (officielles ou créées dans l\'onglet Unités).')}</p>
         ${slotHTML('command', p.command)}
         ${slotHTML('combat', p.combat)}
@@ -597,6 +600,7 @@ function renderPlatoons(body) {
     p.bloc = f.get('bloc');
     for (const k of ['lore', 'story', 'advantageName', 'advantage', 'supportText']) p[k] = String(f.get(k) || '').trim();
     p.onlyCombatUnitsAsSupport = !!f.get('onlyCombat');
+    p.unitFilter = f.get('unitFilter') === 'all' ? 'all' : 'bloc';
     if (!p._idLocked) p.id = platoonIdFor(p);
     save();
   };
@@ -609,6 +613,7 @@ function renderPlatoons(body) {
     }
     if (e.target.type === 'file') return;
     apply(); prev();
+    form.querySelector('#pl-units').innerHTML = proposed(p);
     const it = body.querySelector(`[data-plsel="${p._k}"]`);
     if (it) { it.querySelector('span').textContent = p.name; it.querySelector('small').textContent = bn(preview().blocsById.get(p.bloc)); }
     form.querySelector('.idline').textContent = `id : ${p.id}`;

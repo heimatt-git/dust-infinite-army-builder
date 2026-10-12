@@ -833,4 +833,7 @@ const EN = {
   "Création du PDF…": "Creating the PDF…",
   "Histoire du peloton": "Platoon story",
   "Unités de soutien (texte)": "Support units (text)",
+  "Unités proposées dans les listes": "Units offered in the lists",
+  "Celles du bloc du peloton (+ Mercenaires)": "Units of the platoon's block (+ Mercenaries)",
+  "Toutes les unités (tous les blocs)": "All units (all blocks)",
 };
