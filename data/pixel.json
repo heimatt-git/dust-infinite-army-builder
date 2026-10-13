@@ -1,5 +1,5 @@
 {
- "version": "202610130633",
+ "version": "202610130706",
  "units": [
   "allies--barking-dog-light",
   "allies--bazooka-joe",
@@ -82,6 +82,7 @@
   "ijn--tengu",
   "ijn--the-traitor",
   "ijn--yukiko",
+  "mercenaries--adelaide-ades-battaglia",
   "mercenaries--alex",
   "mercenaries--anti-tank-squadron",
   "mercenaries--barking-luther",
@@ -98,6 +99,7 @@
   "mercenaries--justine-s-crew",
   "mercenaries--luisa",
   "mercenaries--magda",
+  "mercenaries--martine",
   "mercenaries--meatgrinder",
   "mercenaries--mercenary-antitank-squad",
   "mercenaries--mercenary-cleaning-team",
@@ -1050,6 +1052,16 @@
   "ijn--ryu-iii": {
    "x": 0.5,
    "y": 0.497,
+   "zoom": 1
+  },
+  "mercenaries--adelaide-ades-battaglia": {
+   "x": 0.5,
+   "y": 0.415,
+   "zoom": 1
+  },
+  "mercenaries--martine": {
+   "x": 0.5,
+   "y": 0.381,
    "zoom": 1
   }
  }
