@@ -146,7 +146,7 @@ export function analyzeArmy(list, data) {
     const base = total - c;
     share = base > 0 ? fPts / base : 0;
     if (share >= FACTION_SHARE) { kind = 'faction'; kindLabel = t('Armée de faction {f}', { f: factionName(F, data) }); covered = c; }
-    else reason = t('Faction {f} : {p} % des points (75 % requis pour le bonus).', { f: factionName(F, data), p: Math.round(share * 100) });
+    else reason = t('Faction {f} : {p} % des points (75 % requis pour le bonus de {b} pts).', { f: factionName(F, data), p: pct1(share), b: pool }) + mercNote(rows);
   } else {
     const heroes = rows.filter((r) => r.u.type === 'hero' && r.cat === 'bloc');
     const { c } = cover(heroes);
@@ -154,7 +154,7 @@ export function analyzeArmy(list, data) {
     const base = total - c;
     share = base > 0 ? bPts / base : 0;
     if (rows.length && share >= FACTION_SHARE) { kind = 'bloc'; kindLabel = t('Armée de bloc {b}', { b: blocName(list.bloc, data) }); covered = c; }
-    else if (rows.length) reason = t('Unités du bloc : {p} % des points (75 % requis pour le bonus).', { p: Math.round(share * 100) });
+    else if (rows.length) reason = t('Unités du bloc : {p} % des points (75 % requis pour le bonus de {b} pts).', { p: pct1(share), b: pool }) + mercNote(rows);
   }
 
   const counted = total - covered;
@@ -170,10 +170,19 @@ export function analyzeArmy(list, data) {
   }
 
   return {
-    total, counted, limit, pool, covered, kind, kindLabel, share, reason,
+    total, counted, limit, pool, covered, kind, kindLabel, share, reason, sharePct: pct1(share),
+    bonusDenied: kind === 'none' && !!reason && pool > 0 && factions.size <= 1,
     factions: [...factions], errors, warnings, platoonStatus,
     ok: errors.length === 0, overLimit: counted > limit,
   };
+}
+
+// Pourcentage sur une décimale, arrondi vers le bas (74,96 % ne doit pas s'afficher « 75 % » alors que le seuil n'est pas atteint)
+const pct1 = (x) => { const v = Math.floor(x * 1000) / 10; return LANG === 'en' ? String(v) : String(v).replace('.', ','); };
+// Les mercenaires comptent hors faction/bloc dans le calcul des 75 %
+function mercNote(rows) {
+  const m = rows.filter((r) => r.cat === 'merc').reduce((s, r) => s + r.cost, 0);
+  return m > 0 ? ' ' + t('Les mercenaires ({n} pts) comptent hors faction.', { n: m }) : '';
 }
 
 export function analyzePlatoon(pi, list, rows, data) {

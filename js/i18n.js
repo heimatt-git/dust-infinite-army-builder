@@ -65,9 +65,11 @@ const EN = {
   'Aucun bonus': 'No bonus', 'Armée mercenaire': 'Mercenary army',
   'Plusieurs factions présentes ({list}) : pas de bonus.': 'Several factions present ({list}): no bonus.',
   'Armée de faction {f}': '{f} faction army',
-  'Faction {f} : {p} % des points (75 % requis pour le bonus).': '{f} faction: {p}% of points (75% required for the bonus).',
+  'Faction {f} : {p} % des points (75 % requis pour le bonus de {b} pts).': '{f} faction: {p}% of points (75% required for the {b}-pt bonus).',
+  'Les mercenaires ({n} pts) comptent hors faction.': 'Mercenaries ({n} pts) count outside the faction.',
+  'Bonus de {n} pts refusé : {p} % (75 % requis)': '{n}-pt bonus refused: {p}% (75% required)',
   'Armée de bloc {b}': '{b} bloc army',
-  'Unités du bloc : {p} % des points (75 % requis pour le bonus).': 'Bloc units: {p}% of points (75% required for the bonus).',
+  'Unités du bloc : {p} % des points (75 % requis pour le bonus de {b} pts).': 'Bloc units: {p}% of points (75% required for the {b}-pt bonus).',
   'Limite dépassée : {c} pts comptés pour {l} pts autorisés.': 'Limit exceeded: {c} pts counted for {l} pts allowed.',
 
   // Shot Format

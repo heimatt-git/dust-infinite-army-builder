@@ -348,6 +348,7 @@ function renderBuilder() {
         </div>
         <div class="sum-chips">
           <span class="chip ${A.kind === 'none' ? '' : 'ok'}">${esc(A.kindLabel)}</span>
+          ${A.bonusDenied ? `<span class="chip warn" title="${esc(A.reason)}">${t('Bonus de {n} pts refusé : {p} % (75 % requis)', { n: A.pool, p: A.sharePct })}</span>` : ''}
           ${A.kind !== 'none' ? `<span class="chip">${t('Bonus héros')} <b class="num">${A.covered}/${A.pool}</b></span>` : ''}
           <span class="chip">${t('Total dépensé')} <b class="num">${A.total}</b></span>
           ${A.errors.length ? `<span class="chip bad">${t(A.errors.length > 1 ? '{n} erreurs' : '{n} erreur', { n: A.errors.length })}</span>` : `<span class="chip ok">${t('Liste valide')}</span>`}
@@ -717,6 +718,7 @@ function listText(A) {
   }
   const loose = orderTree(L.entries.filter((e) => !e.pl), D);
   if (loose.length) { out.push(t('Unités indépendantes')); for (const e of loose) out.push(line(e)); out.push(''); }
+  if (A.reason) out.push(t('Pas de bonus : {r}', { r: A.reason }), '');
   if (A.errors.length) { out.push(t('À corriger :')); for (const m of A.errors) out.push('  ! ' + m); }
   out.push(t('Total dépensé : {n} pts', { n: A.total }));
   return out.join('\n');
