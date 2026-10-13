@@ -8632,6 +8632,54 @@
    "image": "magda"
   },
   {
+   "id": "mercenaries--martine",
+   "name": "Martine",
+   "subtitle": "Sister Martine Lefebvre, Mercenary",
+   "bloc": "Mercenaries",
+   "type": "hero",
+   "faction": null,
+   "cost": 7,
+   "health": 4,
+   "move": 3,
+   "march": 4,
+   "armor": 1,
+   "capturable": false,
+   "skills": [
+    "Camouflage",
+    "Mercenary",
+    "Spy",
+    "Take Aim"
+   ],
+   "customSkills": [],
+   "weapons": [
+    {
+     "name": "Recoilless Rifle",
+     "count": 1,
+     "range": 8,
+     "specials": [
+      "Grenade"
+     ],
+     "vsInfantry": [
+      "B/1",
+      "B/1",
+      "B/1",
+      "B/1"
+     ],
+     "vsVehicle": [
+      "1/AK",
+      "1/3",
+      "1/3",
+      "1/2",
+      "1/2",
+      "1/1",
+      "1/1"
+     ],
+     "vsAircraft": []
+    }
+   ],
+   "image": "martine"
+  },
+  {
    "id": "mercenaries--nathalia",
    "name": "Nathalia",
    "subtitle": "Sister Nathalia Ritz, Mercenary",
@@ -8772,6 +8820,140 @@
    "image": "tito_di_marino"
   },
   {
+   "id": "mercenaries--adelaide-ades-battaglia",
+   "name": "Adelaide \"Ades\" Battaglia",
+   "subtitle": "",
+   "bloc": "Mercenaries",
+   "type": "hero",
+   "faction": null,
+   "cost": 7,
+   "health": 4,
+   "move": 3,
+   "march": 4,
+   "armor": 1,
+   "capturable": false,
+   "skills": [
+    "Ammo Drop",
+    "Mercenary"
+   ],
+   "customSkills": [
+    {
+     "name": "Expert: Heavy Shotgun",
+     "description": "Hits on dice_sight as well as dice_block. Does not apply to Units Joined.",
+     "descriptionFr": "Touche sur dice_sight comme sur dice_block. Ne s'applique pas aux unités rejointes."
+    },
+    {
+     "name": "Addie's Call",
+     "description": "Can use Rally like an Officer, but on all friendly Units in Range and rolling three dice instead of two.",
+     "descriptionFr": "Peut utiliser Rallier comme un officier, mais sur toutes les unités amies à portée et en lançant trois dés au lieu de deux."
+    }
+   ],
+   "weapons": [
+    {
+     "name": "Heavy Shotgun",
+     "count": 1,
+     "range": 3,
+     "specials": [],
+     "vsInfantry": [
+      "9/1",
+      "8/1",
+      "5/1",
+      "3/1"
+     ],
+     "vsVehicle": [
+      "5/1",
+      "2/1"
+     ],
+     "vsAircraft": []
+    }
+   ],
+   "image": "adelaide_ades_battaglia"
+  },
+  {
+   "id": "mercenaries--louise-thelma",
+   "name": "Louise & Thelma",
+   "subtitle": "Sniper Sisters of Demolition",
+   "bloc": "Mercenaries",
+   "type": "hero",
+   "faction": null,
+   "cost": 10,
+   "health": 5,
+   "move": 3,
+   "march": 7,
+   "armor": 1,
+   "capturable": false,
+   "skills": [
+    "Hero Vehicle",
+    "Loner",
+    "Raid",
+    "Spotter"
+   ],
+   "customSkills": [],
+   "weapons": [
+    {
+     "name": "Recoilless Gun",
+     "count": 1,
+     "range": 8,
+     "mount": "Front",
+     "specials": [],
+     "vsInfantry": [
+      "B/1",
+      "B/1",
+      "B/1",
+      "B/1"
+     ],
+     "vsVehicle": [
+      "1/AK",
+      "1/AK",
+      "1/4",
+      "1/3",
+      "1/3",
+      "1/2",
+      "1/2"
+     ],
+     "vsAircraft": []
+    },
+    {
+     "name": "Sniper Rifle",
+     "count": 1,
+     "range": 8,
+     "mount": "Turret",
+     "specials": [
+      "Sniper"
+     ],
+     "vsInfantry": [
+      "1/1",
+      "1/1",
+      "1/1",
+      "1/1"
+     ],
+     "vsVehicle": [
+      "1/1",
+      "1/1"
+     ],
+     "vsAircraft": []
+    },
+    {
+     "name": "Thomson SMG",
+     "count": 1,
+     "range": 4,
+     "mount": "Turret",
+     "specials": [],
+     "vsInfantry": [
+      "5/1",
+      "4/1",
+      "3/1",
+      "2/1"
+     ],
+     "vsVehicle": [
+      "3/1"
+     ],
+     "vsAircraft": []
+    }
+   ],
+   "image": "louise_and_thelma"
+  },
+  {
    "id": "mercenaries--justine-s-crew",
    "name": "Justine's Crew",
    "subtitle": "",
@@ -8836,6 +9018,73 @@
     }
    ],
    "image": "justine_crew"
+  },
+  {
+   "id": "mercenaries--tito-s-crew",
+   "name": "Tito's Crew",
+   "subtitle": "",
+   "bloc": "Mercenaries",
+   "type": "infantry",
+   "faction": null,
+   "cost": 5,
+   "health": null,
+   "move": 2,
+   "march": 4,
+   "armor": 1,
+   "capturable": false,
+   "skills": [
+    "Mechanic Crew",
+    "Mercenary",
+    "Unique"
+   ],
+   "customSkills": [
+    {
+     "name": "Tito's Crew",
+     "description": "When this Squad is Joined by Tito, it succeeds Makeshift Repair rolls on dice_block and dice_sight. And Tito can perform either Juice it up! or Clean my Optics as a Free Action on the same Vehicle while the Squad performs Makeshift Repair.",
+     "descriptionFr": "Quand cette escouade est rejointe par Tito, elle réussit ses jets de Réparation de fortune sur dice_block et dice_sight. Et Tito peut effectuer Juice it up! ou Clean my Optics comme action gratuite sur le même véhicule pendant que l'escouade effectue une Réparation de fortune."
+    }
+   ],
+   "weapons": [
+    {
+     "name": "Thomson SMG",
+     "count": 4,
+     "range": 4,
+     "specials": [],
+     "vsInfantry": [
+      "5/1",
+      "4/1",
+      "3/1",
+      "2/1"
+     ],
+     "vsVehicle": [
+      "3/1"
+     ],
+     "vsAircraft": []
+    },
+    {
+     "name": "Wrench",
+     "count": 2,
+     "range": "C",
+     "specials": [],
+     "vsInfantry": [
+      "1/1",
+      "1/1",
+      "1/1",
+      "1/1"
+     ],
+     "vsVehicle": [
+      "1/2",
+      "1/2",
+      "1/2",
+      "1/2",
+      "1/2",
+      "1/2",
+      "1/2"
+     ],
+     "vsAircraft": []
+    }
+   ],
+   "image": "tito_crew"
   },
   {
    "id": "mercenaries--justine-and-co",
@@ -14399,6 +14648,94 @@
     }
    ],
    "image": "merc_recon_squad"
+  },
+  {
+   "id": "mercenaries--vk-powerlifter",
+   "name": "VK Powerlifter",
+   "subtitle": "VK Delivery Walker",
+   "bloc": "Mercenaries",
+   "type": "vehicle",
+   "faction": null,
+   "cost": 7,
+   "health": 6,
+   "move": 2,
+   "march": 4,
+   "armor": 4,
+   "capturable": false,
+   "skills": [
+    "Engineer Vehicle",
+    "Mercenary"
+   ],
+   "customSkills": [
+    {
+     "name": "Passengers: VK Stash (6)",
+     "description": "Carries six Barrels of VK from a VK Stash. The Stash is included with this Walker.",
+     "descriptionFr": "Transporte six barils de VK d'un VK Stash. Le Stash est inclus avec ce marcheur."
+    }
+   ],
+   "weapons": [
+    {
+     "name": "Machinegun",
+     "count": 1,
+     "range": 6,
+     "mount": "Turret",
+     "specials": [],
+     "vsInfantry": [
+      "7/1",
+      "6/1",
+      "4/1",
+      "3/1"
+     ],
+     "vsVehicle": [
+      "4/1",
+      "2/1"
+     ],
+     "vsAircraft": [
+      "2/1",
+      "2/1"
+     ]
+    }
+   ],
+   "image": "vk_powerlifter"
+  },
+  {
+   "id": "mercenaries--field-ammo-service",
+   "name": "Field Ammo Service",
+   "subtitle": "Vespa 150 Scooter, Ammo Carrier",
+   "bloc": "Mercenaries",
+   "type": "vehicle",
+   "faction": null,
+   "cost": 4,
+   "health": 2,
+   "move": 3,
+   "march": 7,
+   "armor": 1,
+   "capturable": false,
+   "skills": [
+    "Ammo Dump",
+    "Small"
+   ],
+   "customSkills": [],
+   "weapons": [
+    {
+     "name": "Thomson SMG",
+     "count": 1,
+     "range": 4,
+     "mount": "Turret",
+     "specials": [],
+     "vsInfantry": [
+      "5/1",
+      "4/1",
+      "3/1",
+      "2/1"
+     ],
+     "vsVehicle": [
+      "3/1"
+     ],
+     "vsAircraft": []
+    }
+   ],
+   "image": "field_ammo_service"
   },
   {
    "id": "ssu--winter-child",
@@ -35856,6 +36193,98 @@
     }
    ],
    "image": "Rasputin"
+  },
+  {
+   "id": "mythos--exalted-mi-go",
+   "name": "Exalted Mi-Go",
+   "subtitle": "",
+   "bloc": "Mythos",
+   "type": "hero",
+   "faction": null,
+   "cost": 11,
+   "health": 4,
+   "move": 3,
+   "march": 5,
+   "armor": 3,
+   "capturable": false,
+   "skills": [
+    "Flying",
+    "Infantry Ace",
+    "Lesser Mythos Creatures"
+   ],
+   "customSkills": [],
+   "weapons": [
+    {
+     "name": "Lesser Death Ray",
+     "count": 2,
+     "range": 4,
+     "specials": [
+      "Radiation"
+     ],
+     "vsInfantry": [
+      "B/1",
+      "B/1",
+      "B/1",
+      "B/1"
+     ],
+     "vsVehicle": [
+      "B/2",
+      "B/1",
+      "B/1",
+      "B/1",
+      "B/1"
+     ],
+     "vsAircraft": []
+    }
+   ],
+   "image": "exalted_mi_go"
+  },
+  {
+   "id": "mythos--herald-of-nyarlathotep",
+   "name": "Herald of Nyarlathotep",
+   "subtitle": "",
+   "bloc": "Mythos",
+   "type": "hero",
+   "faction": null,
+   "cost": 9,
+   "health": 4,
+   "move": 3,
+   "march": 5,
+   "armor": 3,
+   "capturable": false,
+   "skills": [
+    "Flying",
+    "Lesser Mythos Creatures",
+    "Tactician"
+   ],
+   "customSkills": [],
+   "weapons": [
+    {
+     "name": "Eldritch Bolt",
+     "count": 1,
+     "range": 4,
+     "specials": [
+      "Radiation"
+     ],
+     "vsInfantry": [
+      "B/1",
+      "B/1",
+      "B/1",
+      "B/1"
+     ],
+     "vsVehicle": [
+      "B/AK",
+      "B/AK",
+      "B/4",
+      "B/4",
+      "B/3",
+      "B/3",
+      "B/2"
+     ],
+     "vsAircraft": []
+    }
+   ],
+   "image": "herald_of_nyarlathotep"
   },
   {
    "id": "allies--flying-banana",
