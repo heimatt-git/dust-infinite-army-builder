@@ -1,5 +1,5 @@
 {
- "version": "202610131012",
+ "version": "202610131325",
  "units": [
   "allies--barking-dog-light",
   "allies--bazooka-joe",
@@ -39,6 +39,7 @@
   "axis--galeazzo",
   "axis--geist",
   "axis--gregor",
+  "axis--hans",
   "axis--heavy-grenadier-anti-aircraft-squad",
   "axis--heavy-grenadier-command-squad",
   "axis--heavy-grenadier-engineer-squad",
@@ -1081,6 +1082,11 @@
   "ijn--ninja-sniper-team": {
    "x": 0.5,
    "y": 0.573,
+   "zoom": 1
+  },
+  "axis--hans": {
+   "x": 0.5,
+   "y": 0.398,
    "zoom": 1
   }
  }
