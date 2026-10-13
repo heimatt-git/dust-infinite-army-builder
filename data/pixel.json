@@ -1,5 +1,5 @@
 {
- "version": "202610131325",
+ "version": "202610132017",
  "units": [
   "allies--barking-dog-light",
   "allies--bazooka-joe",
@@ -68,15 +68,18 @@
   "ijn--akiko",
   "ijn--basan",
   "ijn--byakko",
+  "ijn--command-squad",
   "ijn--enenra",
   "ijn--fumiko",
   "ijn--gashadokuro",
   "ijn--genbu",
   "ijn--hitomi",
+  "ijn--hmg-squad",
   "ijn--kachiko",
   "ijn--kaori",
   "ijn--kumiko",
   "ijn--niko",
+  "ijn--ninja-command-squad",
   "ijn--ninja-sniper-team",
   "ijn--railgun-team",
   "ijn--ryu",
@@ -1087,6 +1090,21 @@
   "axis--hans": {
    "x": 0.5,
    "y": 0.398,
+   "zoom": 1
+  },
+  "ijn--command-squad": {
+   "x": 0.5,
+   "y": 0.477,
+   "zoom": 1
+  },
+  "ijn--ninja-command-squad": {
+   "x": 0.5,
+   "y": 0.562,
+   "zoom": 1
+  },
+  "ijn--hmg-squad": {
+   "x": 0.5,
+   "y": 0.494,
    "zoom": 1
   }
  }
