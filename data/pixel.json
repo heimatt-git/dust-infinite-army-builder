@@ -1,5 +1,5 @@
 {
- "version": "202610140444",
+ "version": "202610140449",
  "units": [
   "allies--barking-dog-light",
   "allies--bazooka-joe",
@@ -77,15 +77,13 @@
   "ijn--hmg-squad",
   "ijn--kachiko",
   "ijn--kaori",
-  "ijn--kill-squad",
   "ijn--kumiko",
   "ijn--niko",
-  "ijn--ninja-battle-squad",
   "ijn--ninja-command-squad",
-  "ijn--ninja-execution-squad",
-  "ijn--ninja-infiltration-squad",
-  "ijn--ninja-mortar-squad",
+  "ijn--ninja-observer-team",
+  "ijn--ninja-railgun-team",
   "ijn--ninja-sniper-team",
+  "ijn--railgun-squad",
   "ijn--railgun-team",
   "ijn--ryu",
   "ijn--ryu-ii",
@@ -1112,29 +1110,19 @@
    "y": 0.494,
    "zoom": 1
   },
-  "ijn--ninja-infiltration-squad": {
+  "ijn--railgun-squad": {
    "x": 0.5,
-   "y": 0.585,
+   "y": 0.531,
    "zoom": 1
   },
-  "ijn--ninja-execution-squad": {
+  "ijn--ninja-railgun-team": {
    "x": 0.5,
-   "y": 0.511,
+   "y": 0.537,
    "zoom": 1
   },
-  "ijn--ninja-mortar-squad": {
+  "ijn--ninja-observer-team": {
    "x": 0.5,
-   "y": 0.596,
-   "zoom": 1
-  },
-  "ijn--ninja-battle-squad": {
-   "x": 0.5,
-   "y": 0.63,
-   "zoom": 1
-  },
-  "ijn--kill-squad": {
-   "x": 0.5,
-   "y": 0.528,
+   "y": 0.421,
    "zoom": 1
   }
  }
