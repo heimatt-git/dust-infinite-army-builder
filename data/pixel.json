@@ -1,5 +1,5 @@
 {
- "version": "202610140449",
+ "version": "202610140453",
  "units": [
   "allies--barking-dog-light",
   "allies--bazooka-joe",
@@ -77,6 +77,7 @@
   "ijn--hmg-squad",
   "ijn--kachiko",
   "ijn--kaori",
+  "ijn--kill-squad",
   "ijn--kumiko",
   "ijn--niko",
   "ijn--ninja-command-squad",
@@ -1123,6 +1124,11 @@
   "ijn--ninja-observer-team": {
    "x": 0.5,
    "y": 0.421,
+   "zoom": 1
+  },
+  "ijn--kill-squad": {
+   "x": 0.5,
+   "y": 0.539,
    "zoom": 1
   }
  }
