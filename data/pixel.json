@@ -1,5 +1,5 @@
 {
- "version": "202610140716",
+ "version": "202610141304",
  "units": [
   "allies--barking-dog-light",
   "allies--bazooka-joe",
@@ -39,6 +39,7 @@
   "axis--flammpanzer-e-15-luft",
   "axis--galeazzo",
   "axis--geist",
+  "axis--gorilla-squad",
   "axis--gregor",
   "axis--hans",
   "axis--heavy-grenadier-anti-aircraft-squad",
@@ -52,6 +53,7 @@
   "axis--kurt",
   "axis--lara",
   "axis--laser-grenadier-squad",
+  "axis--laser-tank-hunter-squad",
   "axis--lothar",
   "axis--luft-hermann-trop",
   "axis--luft-horst-trop",
@@ -1201,6 +1203,16 @@
   "axis--sturmgrenadier-tank-hunter-squad": {
    "x": 0.5,
    "y": 0.534,
+   "zoom": 1
+  },
+  "axis--laser-tank-hunter-squad": {
+   "x": 0.5,
+   "y": 0.537,
+   "zoom": 1
+  },
+  "axis--gorilla-squad": {
+   "x": 0.5,
+   "y": 0.52,
    "zoom": 1
   }
  }
