@@ -1,5 +1,5 @@
 {
- "version": "202610140519",
+ "version": "202610140523",
  "units": [
   "allies--barking-dog-light",
   "allies--bazooka-joe",
@@ -25,6 +25,7 @@
   "allies--usmc-heavy-engineer-squad",
   "allies--usmc-war-dogs-recon-squad",
   "axis--adler",
+  "axis--angela-iii",
   "axis--blitz",
   "axis--bloody-blitz",
   "axis--experiment-x-33",
@@ -56,6 +57,7 @@
   "axis--luther",
   "axis--manfred",
   "axis--moskito",
+  "axis--panzerprinz",
   "axis--raketentruppe-command-squad",
   "axis--raketentruppe-tank-hunter-squad",
   "axis--rolf",
@@ -1171,6 +1173,16 @@
   "axis--sturmgrenadier-observer-squad": {
    "x": 0.5,
    "y": 0.511,
+   "zoom": 1
+  },
+  "axis--panzerprinz": {
+   "x": 0.5,
+   "y": 0.525,
+   "zoom": 1
+  },
+  "axis--angela-iii": {
+   "x": 0.5,
+   "y": 0.528,
    "zoom": 1
   }
  }
