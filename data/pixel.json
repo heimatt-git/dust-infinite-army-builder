@@ -1,5 +1,5 @@
 {
- "version": "202610140457",
+ "version": "202610140519",
  "units": [
   "allies--barking-dog-light",
   "allies--bazooka-joe",
@@ -63,7 +63,10 @@
   "axis--sigrid-iii",
   "axis--stefan",
   "axis--storch",
+  "axis--sturmgrenadier-observer-squad",
+  "axis--sturmgrenadier-sniper-squad",
   "axis--sturmluther",
+  "axis--the-desert-fox",
   "axis--wilfried",
   "ijn--akiko",
   "ijn--basan",
@@ -1153,6 +1156,21 @@
   "ijn--ninja-execution-squad": {
    "x": 0.5,
    "y": 0.52,
+   "zoom": 1
+  },
+  "axis--sturmgrenadier-sniper-squad": {
+   "x": 0.5,
+   "y": 0.517,
+   "zoom": 1
+  },
+  "axis--the-desert-fox": {
+   "x": 0.5,
+   "y": 0.508,
+   "zoom": 1
+  },
+  "axis--sturmgrenadier-observer-squad": {
+   "x": 0.5,
+   "y": 0.511,
    "zoom": 1
   }
  }
