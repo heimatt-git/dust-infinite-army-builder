@@ -1,5 +1,5 @@
 {
- "version": "202610140523",
+ "version": "202610140716",
  "units": [
   "allies--barking-dog-light",
   "allies--bazooka-joe",
@@ -51,6 +51,7 @@
   "axis--jagdloki",
   "axis--kurt",
   "axis--lara",
+  "axis--laser-grenadier-squad",
   "axis--lothar",
   "axis--luft-hermann-trop",
   "axis--luft-horst-trop",
@@ -65,8 +66,10 @@
   "axis--sigrid-iii",
   "axis--stefan",
   "axis--storch",
+  "axis--sturmgrenadier-assault-engineer-squad",
   "axis--sturmgrenadier-observer-squad",
   "axis--sturmgrenadier-sniper-squad",
+  "axis--sturmgrenadier-tank-hunter-squad",
   "axis--sturmluther",
   "axis--the-desert-fox",
   "axis--wilfried",
@@ -1183,6 +1186,21 @@
   "axis--angela-iii": {
    "x": 0.5,
    "y": 0.528,
+   "zoom": 1
+  },
+  "axis--sturmgrenadier-assault-engineer-squad": {
+   "x": 0.5,
+   "y": 0.449,
+   "zoom": 1
+  },
+  "axis--laser-grenadier-squad": {
+   "x": 0.5,
+   "y": 0.444,
+   "zoom": 1
+  },
+  "axis--sturmgrenadier-tank-hunter-squad": {
+   "x": 0.5,
+   "y": 0.534,
    "zoom": 1
   }
  }
