@@ -1,5 +1,5 @@
 {
- "version": "202610140453",
+ "version": "202610140456",
  "units": [
   "allies--barking-dog-light",
   "allies--bazooka-joe",
@@ -80,7 +80,9 @@
   "ijn--kill-squad",
   "ijn--kumiko",
   "ijn--niko",
+  "ijn--ninja-battle-squad",
   "ijn--ninja-command-squad",
+  "ijn--ninja-infiltration-squad",
   "ijn--ninja-observer-team",
   "ijn--ninja-railgun-team",
   "ijn--ninja-sniper-team",
@@ -1129,6 +1131,16 @@
   "ijn--kill-squad": {
    "x": 0.5,
    "y": 0.539,
+   "zoom": 1
+  },
+  "ijn--ninja-infiltration-squad": {
+   "x": 0.5,
+   "y": 0.573,
+   "zoom": 1
+  },
+  "ijn--ninja-battle-squad": {
+   "x": 0.5,
+   "y": 0.599,
    "zoom": 1
   }
  }
