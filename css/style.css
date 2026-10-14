@@ -203,6 +203,8 @@ textarea { font-family: var(--f-mono); font-size: 13px; }
 .typebar { display: flex; gap: 4px; flex-wrap: wrap; }
 .typebar button { border: 1px solid var(--line); background: var(--panel); border-radius: 99px; padding: 2px 10px; font-size: 12px; cursor: pointer; }
 .typebar button.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.sortbar { align-items: center; }
+.sortbar-l { font-size: 11px; color: var(--muted, #6b6f66); text-transform: uppercase; letter-spacing: .06em; font-weight: 600; margin-right: 2px; }
 .cat-list { display: grid; gap: 4px; max-height: 70vh; overflow-y: auto; padding-right: 2px; }
 @media (max-width: 900px) { .cat-list { max-height: none; } }
 .cat-group { font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); font-weight: 600; padding: 10px 2px 2px; }

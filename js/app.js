@@ -392,8 +392,12 @@ function catalogUnits() {
     const q = U.q.toLowerCase();
     pool = pool.filter((u) => (u.name + ' ' + u.subtitle + ' ' + (u.skills || []).join(' ')).toLowerCase().includes(q));
   }
-  return [...pool].sort((a, b) => NAME_COLLATOR.compare(a.name, b.name));
+  // Tri choisi (alphabétique par défaut, ou coût croissant puis alphabétique) ; l'ordre des groupes (héros, infanterie…) ne change pas
+  const byName = (a, b) => NAME_COLLATOR.compare(a.name, b.name);
+  return [...pool].sort(catSort() === 'cost' ? (a, b) => unitCost(a) - unitCost(b) || byName(a, b) : byName);
 }
+const CAT_SORT_KEY = 'dust1947.catSort';
+const catSort = () => (store.get(CAT_SORT_KEY, 'az') === 'cost' ? 'cost' : 'az');
 
 function catalogHTML() {
   const D = S.data, L = S.list, U = S.ui;
@@ -419,6 +423,7 @@ function catalogHTML() {
     const cap = U.catTab === 'captured';
     body = `
       ${!cap ? `<div class="typebar">${[['all', t('Tous')], ...TYPE_ORDER.map((ty) => [ty, typeLabel(ty)])].map(([k, l]) => `<button data-type="${k}" class="${U.type === k ? 'on' : ''}">${l}</button>`).join('')}</div>` : `<p class="hint">${t('Un seul véhicule capturé par armée, coût +2 pts.')}</p>`}
+      ${!cap ? `<div class="typebar sortbar" role="group" aria-label="${t('Trier la liste')}"><span class="sortbar-l">${t('Trier par')}</span>${[['az', t('Ordre alphabétique')], ['cost', t('Coût en points')]].map(([k, l]) => `<button type="button" data-sort="${k}" class="${catSort() === k ? 'on' : ''}">${l}</button>`).join('')}</div>` : ''}
       <div class="filters">
         <input type="search" id="cat-q" class="${U.catTab === 'units' && bloc?.factions.length ? '' : 'full'}" placeholder="${t('Rechercher (nom, compétence…)')}" value="${esc(U.q)}">
         ${U.catTab === 'units' && bloc?.factions.length ? `<select id="cat-fac" aria-label="${t('Filtrer par faction')}">
@@ -615,6 +620,7 @@ function bindBuilder(A) {
   const rerenderCatalog = () => { cat.innerHTML = catalogHTML(); bindCatalog(); };
   function bindCatalog() {
     cat.querySelectorAll('[data-cattab]').forEach((b) => b.addEventListener('click', () => { U.catTab = b.dataset.cattab; rerenderCatalog(); }));
+    cat.querySelectorAll('[data-sort]').forEach((b) => b.addEventListener('click', () => { store.set(CAT_SORT_KEY, b.dataset.sort); rerenderCatalog(); }));
     cat.querySelectorAll('[data-type]').forEach((b) => b.addEventListener('click', () => { U.type = b.dataset.type; rerenderCatalog(); }));
     const q = $('cat-q');
     q?.addEventListener('input', () => {
