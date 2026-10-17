@@ -1,7 +1,7 @@
 {
  "meta": {
-  "version": "2026.10.05",
-  "updated": "2026-10-05",
+  "version": "2026.10.17",
+  "updated": "2026-10-17",
   "note": "Créations de la communauté (CONFIDENTIAL), non officielles. Visibles uniquement dans les armées où la case CONFIDENTIAL est cochée."
  },
  "blocs": [
@@ -442,6 +442,1204 @@
    ],
    "author": "L'Heure du Loir",
    "approved": "2026-09-30"
+  },
+  {
+   "id": "conf--axis--zombie-gorilla-squad",
+   "name": "Zombie Gorilla Squad",
+   "subtitle": "",
+   "bloc": "Axis",
+   "type": "infantry",
+   "faction": "blutkreuz-korps",
+   "cost": 7,
+   "health": null,
+   "move": 3,
+   "march": 5,
+   "armor": 2,
+   "capturable": false,
+   "skills": [
+    "Damage Resilient"
+   ],
+   "customSkills": [
+    {
+     "name": "Zombie Gorilla",
+     "description": "Zombie Gorillas always pass infantry saves on dice_shield as well as dice_block, but never receive Cover Saves. Only a Zombie Gorilla can join Zombie Gorillas, but are otherwise subject to all rules that apply to Zombies.",
+     "descriptionEn": "Zombie Gorillas always pass infantry saves on dice_shield as well as dice_block, but never receive Cover Saves. Only a Zombie Gorilla can join Zombie Gorillas, but are otherwise subject to all rules that apply to Zombies."
+    }
+   ],
+   "weapons": [
+    {
+     "name": "Paired Deadly Punch",
+     "count": 3,
+     "range": "C",
+     "specials": [],
+     "vsInfantry": [
+      "2/1",
+      "2/1",
+      "2/1",
+      "2/1"
+     ],
+     "vsVehicle": [
+      "2/2",
+      "2/2",
+      "2/1",
+      "2/1",
+      "2/1",
+      "2/1",
+      "2/1"
+     ],
+     "vsAircraft": []
+    },
+    {
+     "name": "Gorilla Bite",
+     "count": 3,
+     "range": "C",
+     "specials": [
+      "Savage Animal"
+     ],
+     "vsInfantry": [
+      "2/1",
+      "2/1",
+      "2/1",
+      "2/1"
+     ],
+     "vsVehicle": [],
+     "vsAircraft": []
+    }
+   ],
+   "author": "Hirtzel's Workshop",
+   "approved": "2026-10-17"
+  },
+  {
+   "id": "conf--allies--blackjack",
+   "name": "Blackjack",
+   "subtitle": "M5P Heavy Destroyer Walker, Anti-Tank",
+   "bloc": "Allies",
+   "type": "vehicle",
+   "faction": null,
+   "cost": 16,
+   "health": 7,
+   "move": 2,
+   "march": 4,
+   "armor": 6,
+   "capturable": false,
+   "skills": [
+    "Large"
+   ],
+   "customSkills": [],
+   "weapons": [
+    {
+     "name": "Anti-tank Gun",
+     "count": 1,
+     "range": 18,
+     "mount": "Turret",
+     "specials": [],
+     "vsInfantry": [
+      "B/1",
+      "B/1",
+      "B/1",
+      "B/1"
+     ],
+     "vsVehicle": [
+      "1/AK",
+      "1/AK",
+      "1/AK",
+      "1/5",
+      "1/4",
+      "1/4",
+      "1/3"
+     ],
+     "vsAircraft": []
+    },
+    {
+     "name": "Heavy Machinegun",
+     "count": 1,
+     "range": 8,
+     "mount": "Turret",
+     "specials": [],
+     "vsInfantry": [
+      "5/1",
+      "5/1",
+      "4/1",
+      "3/1"
+     ],
+     "vsVehicle": [
+      "3/2",
+      "2/1",
+      "1/1"
+     ],
+     "vsAircraft": [
+      "2/2",
+      "2/2",
+      "1/1"
+     ]
+    },
+    {
+     "name": "Machinegun",
+     "count": 1,
+     "range": 6,
+     "mount": "Turret",
+     "specials": [],
+     "vsInfantry": [
+      "7/1",
+      "6/1",
+      "4/1",
+      "3/1"
+     ],
+     "vsVehicle": [
+      "4/1",
+      "2/1"
+     ],
+     "vsAircraft": []
+    },
+    {
+     "name": "Machinegun",
+     "count": 1,
+     "range": 6,
+     "mount": "Front",
+     "specials": [],
+     "vsInfantry": [
+      "7/1",
+      "6/1",
+      "4/1",
+      "3/1"
+     ],
+     "vsVehicle": [
+      "4/1",
+      "2/1"
+     ],
+     "vsAircraft": []
+    }
+   ],
+   "author": "Hirtzel's Workshop",
+   "approved": "2026-10-17"
+  },
+  {
+   "id": "conf--allies--london-resistance-saboteur-squad",
+   "name": "London Resistance Saboteur Squad",
+   "subtitle": "",
+   "bloc": "Allies",
+   "type": "infantry",
+   "faction": null,
+   "cost": 9,
+   "health": null,
+   "move": 2,
+   "march": 4,
+   "armor": 1,
+   "capturable": false,
+   "skills": [
+    "Fighting Spirit",
+    "Unique"
+   ],
+   "customSkills": [],
+   "weapons": [
+    {
+     "name": "Machinegun",
+     "count": 1,
+     "range": 6,
+     "specials": [],
+     "vsInfantry": [
+      "9/1",
+      "8/1",
+      "6/1",
+      "3/1"
+     ],
+     "vsVehicle": [
+      "5/1",
+      "3/1"
+     ],
+     "vsAircraft": [
+      "3/1",
+      "2/1"
+     ]
+    },
+    {
+     "name": "Thompson SMG",
+     "count": 3,
+     "range": 4,
+     "specials": [],
+     "vsInfantry": [
+      "5/1",
+      "4/1",
+      "3/1",
+      "2/1"
+     ],
+     "vsVehicle": [
+      "3/1"
+     ],
+     "vsAircraft": []
+    },
+    {
+     "name": "Sten Gun",
+     "count": 1,
+     "range": 3,
+     "specials": [],
+     "vsInfantry": [
+      "5/1",
+      "4/1",
+      "3/1"
+     ],
+     "vsVehicle": [
+      "3/1"
+     ],
+     "vsAircraft": []
+    },
+    {
+     "name": "Panzerfaust",
+     "count": 1,
+     "range": 3,
+     "ammo": 1,
+     "specials": [
+      "Grenade"
+     ],
+     "vsInfantry": [
+      "1/1",
+      "1/1",
+      "1/1",
+      "1/1"
+     ],
+     "vsVehicle": [
+      "1/AK",
+      "1/AK",
+      "1/5",
+      "1/4",
+      "1/4",
+      "1/3",
+      "1/3"
+     ],
+     "vsAircraft": []
+    },
+    {
+     "name": "Demo Charge",
+     "count": 3,
+     "range": "C",
+     "ammo": 3,
+     "specials": [],
+     "vsInfantry": [
+      "1/1",
+      "1/1",
+      "1/1",
+      "1/1"
+     ],
+     "vsVehicle": [
+      "1/3",
+      "1/3",
+      "1/2",
+      "1/2",
+      "1/2",
+      "1/2",
+      "1/2"
+     ],
+     "vsAircraft": []
+    }
+   ],
+   "author": "Hirtzel's Workshop",
+   "approved": "2026-10-17"
+  },
+  {
+   "id": "conf--allies--wanda",
+   "name": "Wanda",
+   "subtitle": "Major Wanda Washington, London Resistance",
+   "bloc": "Allies",
+   "type": "hero",
+   "faction": null,
+   "cost": 7,
+   "health": 4,
+   "move": 2,
+   "march": 4,
+   "armor": 1,
+   "capturable": false,
+   "skills": [
+    "Black Ops",
+    "Take Aim"
+   ],
+   "customSkills": [],
+   "weapons": [
+    {
+     "name": "Silenced Carbine",
+     "count": 1,
+     "range": 4,
+     "specials": [
+      "Sniper"
+     ],
+     "vsInfantry": [
+      "1/1",
+      "1/1",
+      "1/1",
+      "1/1"
+     ],
+     "vsVehicle": [
+      "1/1"
+     ],
+     "vsAircraft": []
+    },
+    {
+     "name": "Dual Pistols",
+     "count": 1,
+     "range": 2,
+     "specials": [],
+     "vsInfantry": [
+      "5/1",
+      "4/1",
+      "2/1"
+     ],
+     "vsVehicle": [
+      "2/1"
+     ],
+     "vsAircraft": []
+    }
+   ],
+   "author": "Hirtzel's Workshop",
+   "approved": "2026-10-17"
+  },
+  {
+   "id": "conf--allies--eddie",
+   "name": "Eddie",
+   "subtitle": "Eddie Gambon, London Resistance",
+   "bloc": "Allies",
+   "type": "hero",
+   "faction": null,
+   "cost": 7,
+   "health": 4,
+   "move": 2,
+   "march": 4,
+   "armor": 1,
+   "capturable": false,
+   "skills": [
+    "Ammo Drop",
+    "Defensive Tactics"
+   ],
+   "customSkills": [],
+   "weapons": [
+    {
+     "name": "Thompson SMG",
+     "count": 1,
+     "range": 4,
+     "specials": [],
+     "vsInfantry": [
+      "5/1",
+      "4/1",
+      "3/1",
+      "2/1"
+     ],
+     "vsVehicle": [
+      "3/1"
+     ],
+     "vsAircraft": []
+    }
+   ],
+   "author": "Hirtzel's Workshop",
+   "approved": "2026-10-17"
+  },
+  {
+   "id": "conf--allies--hoffman",
+   "name": "Hoffman",
+   "subtitle": "Gerhardt Hoffman, London Resistance",
+   "bloc": "Allies",
+   "type": "hero",
+   "faction": null,
+   "cost": 8,
+   "health": 5,
+   "move": 2,
+   "march": 4,
+   "armor": 1,
+   "capturable": false,
+   "skills": [
+    "Brave"
+   ],
+   "customSkills": [],
+   "weapons": [
+    {
+     "name": "Machinegun",
+     "count": 1,
+     "range": 6,
+     "specials": [
+      "Expert"
+     ],
+     "vsInfantry": [
+      "9/1",
+      "8/1",
+      "6/1",
+      "3/1"
+     ],
+     "vsVehicle": [
+      "5/1",
+      "3/1"
+     ],
+     "vsAircraft": [
+      "3/1",
+      "2/1"
+     ]
+    },
+    {
+     "name": "Welrod Pistol",
+     "count": 1,
+     "range": 2,
+     "specials": [],
+     "vsInfantry": [
+      "1/1",
+      "1/1",
+      "1/1"
+     ],
+     "vsVehicle": [
+      "1/1"
+     ],
+     "vsAircraft": []
+    }
+   ],
+   "author": "Hirtzel's Workshop",
+   "approved": "2026-10-17"
+  },
+  {
+   "id": "conf--allies--jim",
+   "name": "Jim",
+   "subtitle": "Last Name Unknown, London Resistance",
+   "bloc": "Allies",
+   "type": "hero",
+   "faction": null,
+   "cost": 6,
+   "health": 4,
+   "move": 2,
+   "march": 4,
+   "armor": 1,
+   "capturable": false,
+   "skills": [
+    "At The Double",
+    "Trail Blazer"
+   ],
+   "customSkills": [],
+   "weapons": [
+    {
+     "name": "Sten Gun",
+     "count": 1,
+     "range": 3,
+     "specials": [],
+     "vsInfantry": [
+      "5/1",
+      "4/1",
+      "3/1"
+     ],
+     "vsVehicle": [
+      "3/1"
+     ],
+     "vsAircraft": []
+    },
+    {
+     "name": "Demo Charge",
+     "count": 1,
+     "range": "C",
+     "specials": [],
+     "vsInfantry": [
+      "1/1",
+      "1/1",
+      "1/1",
+      "1/1"
+     ],
+     "vsVehicle": [
+      "1/3",
+      "1/3",
+      "1/2",
+      "1/2",
+      "1/2",
+      "1/2",
+      "1/2"
+     ],
+     "vsAircraft": []
+    }
+   ],
+   "author": "Hirtzel's Workshop",
+   "approved": "2026-10-17"
+  },
+  {
+   "id": "conf--allies--sophie",
+   "name": "Sophie",
+   "subtitle": "Private Sophie Abernathy, London Resistance",
+   "bloc": "Allies",
+   "type": "hero",
+   "faction": null,
+   "cost": 9,
+   "health": 4,
+   "move": 2,
+   "march": 4,
+   "armor": 1,
+   "capturable": false,
+   "skills": [
+    "Assassin",
+    "Mechanic",
+    "Pilot"
+   ],
+   "customSkills": [],
+   "weapons": [
+    {
+     "name": "Thompson SMG",
+     "count": 1,
+     "range": 4,
+     "specials": [],
+     "vsInfantry": [
+      "5/1",
+      "4/1",
+      "3/1",
+      "2/1"
+     ],
+     "vsVehicle": [
+      "3/1"
+     ],
+     "vsAircraft": []
+    },
+    {
+     "name": "Panzerfaust",
+     "count": 1,
+     "range": 3,
+     "specials": [
+      "Grenade"
+     ],
+     "vsInfantry": [
+      "1/1",
+      "1/1",
+      "1/1",
+      "1/1"
+     ],
+     "vsVehicle": [
+      "1/AK",
+      "1/AK",
+      "1/5",
+      "1/4",
+      "1/4",
+      "1/3",
+      "1/3"
+     ],
+     "vsAircraft": []
+    },
+    {
+     "name": "Dual Knives",
+     "count": 1,
+     "range": "C",
+     "specials": [],
+     "vsInfantry": [
+      "2/1",
+      "2/1",
+      "1/1",
+      "1/1"
+     ],
+     "vsVehicle": [],
+     "vsAircraft": []
+    }
+   ],
+   "author": "Hirtzel's Workshop",
+   "approved": "2026-10-17"
+  },
+  {
+   "id": "conf--allies--rhys",
+   "name": "Rhys",
+   "subtitle": "Sergeant James Rhys, London Resistance",
+   "bloc": "Allies",
+   "type": "hero",
+   "faction": null,
+   "cost": 8,
+   "health": 4,
+   "move": 2,
+   "march": 4,
+   "armor": 1,
+   "capturable": false,
+   "skills": [
+    "Brave",
+    "Infantry Ace"
+   ],
+   "customSkills": [],
+   "weapons": [
+    {
+     "name": "Thompson SMG",
+     "count": 1,
+     "range": 4,
+     "specials": [],
+     "vsInfantry": [
+      "5/1",
+      "4/1",
+      "3/1",
+      "2/1"
+     ],
+     "vsVehicle": [
+      "3/1"
+     ],
+     "vsAircraft": []
+    },
+    {
+     "name": "Pistol",
+     "count": 1,
+     "range": 3,
+     "specials": [],
+     "vsInfantry": [
+      "3/1",
+      "3/1",
+      "2/1"
+     ],
+     "vsVehicle": [
+      "2/1"
+     ],
+     "vsAircraft": []
+    }
+   ],
+   "author": "Hirtzel's Workshop",
+   "approved": "2026-10-17"
+  },
+  {
+   "id": "conf--axis--elke",
+   "name": "Elke",
+   "subtitle": "Major Elke Volker, BLutkreuz Korps",
+   "bloc": "Axis",
+   "type": "hero",
+   "faction": "blutkreuz-korps",
+   "cost": 7,
+   "health": 4,
+   "move": 2,
+   "march": 4,
+   "armor": 2,
+   "capturable": false,
+   "skills": [
+    "Officer",
+    "Interrogate"
+   ],
+   "customSkills": [
+    {
+     "name": "Blutkreuz Trained",
+     "description": "May target a Zombie unit with Officer Special Actions.",
+     "descriptionEn": "May target a Zombie unit with Officer Special Actions."
+    }
+   ],
+   "weapons": [
+    {
+     "name": "Submachine Gun",
+     "count": 1,
+     "range": 3,
+     "specials": [],
+     "vsInfantry": [
+      "5/1",
+      "4/1",
+      "3/1"
+     ],
+     "vsVehicle": [
+      "3/1"
+     ],
+     "vsAircraft": []
+    },
+    {
+     "name": "Pistol",
+     "count": 1,
+     "range": 2,
+     "specials": [],
+     "vsInfantry": [
+      "3/1",
+      "2/1",
+      "1/1"
+     ],
+     "vsVehicle": [
+      "2/1"
+     ],
+     "vsAircraft": []
+    }
+   ],
+   "author": "Hirtzel's Workshop",
+   "approved": "2026-10-17"
+  },
+  {
+   "id": "conf--allies--priest-ii",
+   "name": "Priest II",
+   "subtitle": "M5C Medium Support Walker, Artillery",
+   "bloc": "Allies",
+   "type": "vehicle",
+   "faction": null,
+   "cost": 14,
+   "health": 6,
+   "move": 2,
+   "march": 4,
+   "armor": 4,
+   "capturable": false,
+   "skills": [
+    "Large"
+   ],
+   "customSkills": [],
+   "weapons": [
+    {
+     "name": "M2 Howitzer",
+     "count": 1,
+     "range": "4-16",
+     "mount": "Front",
+     "specials": [
+      "Artillery"
+     ],
+     "vsInfantry": [
+      "B/1",
+      "B/1",
+      "B/1",
+      "B/1"
+     ],
+     "vsVehicle": [
+      "B/3",
+      "B/2",
+      "B/2",
+      "B/1",
+      "B/1",
+      "B/1"
+     ],
+     "vsAircraft": []
+    },
+    {
+     "name": "Heavy Machinegun",
+     "count": 1,
+     "range": 8,
+     "mount": "Turret",
+     "specials": [],
+     "vsInfantry": [
+      "5/1",
+      "5/1",
+      "4/1",
+      "3/1"
+     ],
+     "vsVehicle": [
+      "3/2",
+      "2/1",
+      "1/1"
+     ],
+     "vsAircraft": [
+      "2/2",
+      "2/2",
+      "1/1"
+     ]
+    },
+    {
+     "name": "Submachine Gun",
+     "count": 2,
+     "range": 3,
+     "mount": "Turret",
+     "specials": [],
+     "vsInfantry": [
+      "5/1",
+      "4/1",
+      "3/1",
+      "2/1"
+     ],
+     "vsVehicle": [
+      "3/1"
+     ],
+     "vsAircraft": []
+    }
+   ],
+   "author": "Hirtzel's Workshop",
+   "approved": "2026-10-17"
+  },
+  {
+   "id": "conf--allies--pla-indochinese-kill-squad",
+   "name": "PLA Indochinese Kill Squad",
+   "subtitle": "",
+   "bloc": "SSU",
+   "type": "infantry",
+   "faction": "people-s-liberation-army",
+   "cost": 7,
+   "health": null,
+   "move": 2,
+   "march": 5,
+   "armor": 1,
+   "capturable": false,
+   "skills": [],
+   "customSkills": [],
+   "weapons": [
+    {
+     "name": "Rocket Launcher",
+     "count": 1,
+     "range": 3,
+     "specials": [
+      "Grenade"
+     ],
+     "vsInfantry": [
+      "B/1",
+      "B/1",
+      "B/1",
+      "B/1"
+     ],
+     "vsVehicle": [
+      "1/AK",
+      "1/AK",
+      "1/AK",
+      "1/5",
+      "1/4",
+      "1/4",
+      "1/3"
+     ],
+     "vsAircraft": []
+    },
+    {
+     "name": "Machinegun",
+     "count": 1,
+     "range": 6,
+     "specials": [],
+     "vsInfantry": [
+      "7/1",
+      "6/1",
+      "4/1",
+      "3/1"
+     ],
+     "vsVehicle": [
+      "4/1",
+      "2/1"
+     ],
+     "vsAircraft": [
+      "2/1",
+      "2/1"
+     ]
+    },
+    {
+     "name": "Assault Rifle",
+     "count": 2,
+     "range": 4,
+     "specials": [],
+     "vsInfantry": [
+      "4/1",
+      "3/1",
+      "2/1",
+      "1/1"
+     ],
+     "vsVehicle": [
+      "2/1"
+     ],
+     "vsAircraft": [
+      "2/1",
+      "1/1"
+     ]
+    },
+    {
+     "name": "Thompson SMG",
+     "count": 1,
+     "range": 4,
+     "specials": [],
+     "vsInfantry": [
+      "5/1",
+      "4/1",
+      "3/1",
+      "2/1"
+     ],
+     "vsVehicle": [
+      "3/1"
+     ],
+     "vsAircraft": []
+    }
+   ],
+   "author": "Hirtzel's Workshop",
+   "approved": "2026-10-17"
+  },
+  {
+   "id": "conf--ssu--pla-indochinese-infiltration-squad",
+   "name": "PLA Indochinese Infiltration Squad",
+   "subtitle": "",
+   "bloc": "SSU",
+   "type": "infantry",
+   "faction": "people-s-liberation-army",
+   "cost": 6,
+   "health": null,
+   "move": 2,
+   "march": 5,
+   "armor": 1,
+   "capturable": false,
+   "skills": [
+    "Camouflage",
+    "Scout"
+   ],
+   "customSkills": [],
+   "weapons": [
+    {
+     "name": "Sniper Rifle",
+     "count": 1,
+     "range": 8,
+     "specials": [
+      "Sniper"
+     ],
+     "vsInfantry": [
+      "1/1",
+      "1/1",
+      "1/1",
+      "1/1"
+     ],
+     "vsVehicle": [
+      "1/2",
+      "1/1",
+      "1/1"
+     ],
+     "vsAircraft": []
+    },
+    {
+     "name": "Assault Rifle",
+     "count": 3,
+     "range": 4,
+     "specials": [],
+     "vsInfantry": [
+      "4/1",
+      "3/1",
+      "2/1",
+      "1/1"
+     ],
+     "vsVehicle": [
+      "2/1"
+     ],
+     "vsAircraft": [
+      "2/1",
+      "1/1"
+     ]
+    },
+    {
+     "name": "Thompson SMG",
+     "count": 1,
+     "range": 4,
+     "specials": [],
+     "vsInfantry": [
+      "5/1",
+      "4/1",
+      "3/1",
+      "2/1"
+     ],
+     "vsVehicle": [
+      "3/1"
+     ],
+     "vsAircraft": []
+    }
+   ],
+   "author": "Hirtzel's Workshop",
+   "approved": "2026-10-17"
+  },
+  {
+   "id": "conf--ssu--pla-indochinese-rifle-squad",
+   "name": "PLA Indochinese Rifle Squad",
+   "subtitle": "",
+   "bloc": "SSU",
+   "type": "infantry",
+   "faction": "people-s-liberation-army",
+   "cost": 7,
+   "health": null,
+   "move": 3,
+   "march": 5,
+   "armor": 1,
+   "capturable": false,
+   "skills": [
+    "Move And Fire"
+   ],
+   "customSkills": [],
+   "weapons": [
+    {
+     "name": "Sniper Rifle",
+     "count": 2,
+     "range": 8,
+     "specials": [
+      "Sniper"
+     ],
+     "vsInfantry": [
+      "1/1",
+      "1/1",
+      "1/1",
+      "1/1"
+     ],
+     "vsVehicle": [
+      "1/2",
+      "1/1",
+      "1/1"
+     ],
+     "vsAircraft": []
+    },
+    {
+     "name": "Assault Rifle",
+     "count": 3,
+     "range": 4,
+     "specials": [],
+     "vsInfantry": [
+      "4/1",
+      "3/1",
+      "2/1",
+      "1/1"
+     ],
+     "vsVehicle": [
+      "2/1"
+     ],
+     "vsAircraft": [
+      "2/1",
+      "1/1"
+     ]
+    }
+   ],
+   "author": "Hirtzel's Workshop",
+   "approved": "2026-10-17"
+  },
+  {
+   "id": "conf--ssu--pla-indochinese-assault-squad",
+   "name": "PLA Indochinese Assault Squad",
+   "subtitle": "",
+   "bloc": "SSU",
+   "type": "infantry",
+   "faction": "people-s-liberation-army",
+   "cost": 6,
+   "health": null,
+   "move": 3,
+   "march": 5,
+   "armor": 1,
+   "capturable": false,
+   "skills": [],
+   "customSkills": [],
+   "weapons": [
+    {
+     "name": "Machinegun",
+     "count": 1,
+     "range": 6,
+     "specials": [],
+     "vsInfantry": [
+      "7/1",
+      "6/1",
+      "4/1",
+      "3/1"
+     ],
+     "vsVehicle": [
+      "4/1",
+      "2/1"
+     ],
+     "vsAircraft": [
+      "2/1",
+      "2/1"
+     ]
+    },
+    {
+     "name": "Assault Rifle",
+     "count": 3,
+     "range": 4,
+     "specials": [],
+     "vsInfantry": [
+      "4/1",
+      "3/1",
+      "2/1",
+      "1/1"
+     ],
+     "vsVehicle": [
+      "2/1"
+     ],
+     "vsAircraft": [
+      "2/1",
+      "1/1"
+     ]
+    },
+    {
+     "name": "Thompson SMG",
+     "count": 1,
+     "range": 4,
+     "specials": [],
+     "vsInfantry": [
+      "5/1",
+      "4/1",
+      "3/1",
+      "2/1"
+     ],
+     "vsVehicle": [
+      "3/1"
+     ],
+     "vsAircraft": []
+    },
+    {
+     "name": "Demo Charge",
+     "count": 5,
+     "range": "C",
+     "ammo": 5,
+     "specials": [],
+     "vsInfantry": [
+      "1/1",
+      "1/1",
+      "1/1",
+      "1/1"
+     ],
+     "vsVehicle": [
+      "1/3",
+      "1/3",
+      "1/2",
+      "1/2",
+      "1/2",
+      "1/2",
+      "1/2"
+     ],
+     "vsAircraft": []
+    }
+   ],
+   "author": "Hirtzel's Workshop",
+   "approved": "2026-10-17"
+  },
+  {
+   "id": "conf--ssu--pla-indochinese-anti-tank-squad",
+   "name": "PLA Indochinese Anti-Tank Squad",
+   "subtitle": "",
+   "bloc": "SSU",
+   "type": "infantry",
+   "faction": "people-s-liberation-army",
+   "cost": 9,
+   "health": null,
+   "move": 2,
+   "march": 5,
+   "armor": 1,
+   "capturable": false,
+   "skills": [],
+   "customSkills": [],
+   "weapons": [
+    {
+     "name": "Rocket Launcher",
+     "count": 2,
+     "range": 3,
+     "specials": [
+      "Grenade"
+     ],
+     "vsInfantry": [
+      "B/1",
+      "B/1",
+      "B/1",
+      "B/1"
+     ],
+     "vsVehicle": [
+      "1/AK",
+      "1/AK",
+      "1/AK",
+      "1/5",
+      "1/4",
+      "1/4",
+      "1/3"
+     ],
+     "vsAircraft": []
+    },
+    {
+     "name": "Assault Rifle",
+     "count": 2,
+     "range": 4,
+     "specials": [],
+     "vsInfantry": [
+      "4/1",
+      "3/1",
+      "2/1",
+      "1/1"
+     ],
+     "vsVehicle": [
+      "2/1"
+     ],
+     "vsAircraft": [
+      "2/1",
+      "1/1"
+     ]
+    },
+    {
+     "name": "Thompson SMG",
+     "count": 1,
+     "range": 4,
+     "specials": [],
+     "vsInfantry": [
+      "5/1",
+      "4/1",
+      "3/1",
+      "2/1"
+     ],
+     "vsVehicle": [
+      "3/1"
+     ],
+     "vsAircraft": []
+    }
+   ],
+   "author": "Hirtzel's Workshop",
+   "approved": "2026-10-17"
   }
  ],
  "platoons": [],
