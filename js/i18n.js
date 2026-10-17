@@ -838,4 +838,5 @@ const EN = {
   "Unités proposées dans les listes": "Units offered in the lists",
   "Celles du bloc du peloton (+ Mercenaires)": "Units of the platoon's block (+ Mercenaries)",
   "Toutes les unités (tous les blocs)": "All units (all blocks)",
+  'Pour insérer un symbole de dé dans une description, tapez <code>dice_block</code> (Bloc), <code>dice_sight</code> (Réticule) ou <code>dice_shield</code> (Bouclier).': 'To insert a die symbol in a description, type <code>dice_block</code> (Block), <code>dice_sight</code> (Sight) or <code>dice_shield</code> (Shield).',
 };

@@ -285,6 +285,7 @@ function unitForm(u, D) {
     <div class="ed-sec">
       <h2>${t('Règles inédites')}</h2>
       <p class="hint" style="margin:0">${t('Une compétence qui n\'existe pas sur les cartes officielles : donnez-lui un nom et une description complète.')}</p>
+      <p class="hint" style="margin:0">${t('Pour insérer un symbole de dé dans une description, tapez <code>dice_block</code> (Bloc), <code>dice_sight</code> (Réticule) ou <code>dice_shield</code> (Bouclier).')}</p>
       ${(u.customSkills || []).map((c, i) => `<div class="wedit"><div class="wedit-h"><b>${t('Compétence {n}', { n: i + 1 })}</b><button type="button" class="btn sm danger" data-rmcs="${i}">${t('Retirer')}</button></div>
         <input type="text" name="cs-name-${i}" value="${esc(c.name)}" placeholder="${t('Nom')}"><textarea name="cs-desc-${i}" rows="2" placeholder="${t('Description')}">${esc(c.description)}</textarea>
         <textarea name="cs-fr-${i}" rows="2" placeholder="${t('Version française (facultative)')}">${esc(c.descriptionFr || '')}</textarea><textarea name="cs-en-${i}" rows="2" placeholder="${t('Version anglaise (facultative)')}">${esc(c.descriptionEn || '')}</textarea></div>`).join('')}
