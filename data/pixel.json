@@ -1,13 +1,16 @@
 {
- "version": "202610171347",
+ "version": "202610171412",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
+  "allies--allied-heavy-commando-battle-squad",
   "allies--barking-dog-light",
   "allies--bazooka-joe",
   "allies--bull-s-eye",
   "allies--bulldog",
   "allies--command-truck-ds",
+  "allies--desert-scorpions-heavy-commando-battle-squad",
+  "allies--desert-scorpions-heavy-commando-kill-squad",
   "allies--devastator",
   "allies--flying-banana",
   "allies--gregory-and-izzy",
@@ -1249,6 +1252,21 @@
   "allies--shaun": {
    "x": 0.5,
    "y": 0.458,
+   "zoom": 1
+  },
+  "allies--allied-heavy-commando-battle-squad": {
+   "x": 0.5,
+   "y": 0.458,
+   "zoom": 1
+  },
+  "allies--desert-scorpions-heavy-commando-battle-squad": {
+   "x": 0.5,
+   "y": 0.429,
+   "zoom": 1
+  },
+  "allies--desert-scorpions-heavy-commando-kill-squad": {
+   "x": 0.5,
+   "y": 0.548,
    "zoom": 1
   }
  }
