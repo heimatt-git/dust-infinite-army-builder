@@ -1,5 +1,5 @@
 {
- "version": "202610171415",
+ "version": "202610171418",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -9,6 +9,7 @@
   "allies--bull-s-eye",
   "allies--bulldog",
   "allies--command-truck-ds",
+  "allies--desert-scorpions-assault-squad",
   "allies--desert-scorpions-heavy-commando-battle-squad",
   "allies--desert-scorpions-heavy-commando-kill-squad",
   "allies--desert-scorpions-heavy-engineer-squad",
@@ -1279,6 +1280,11 @@
   "allies--desert-scorpions-kill-squad": {
    "x": 0.5,
    "y": 0.497,
+   "zoom": 1
+  },
+  "allies--desert-scorpions-assault-squad": {
+   "x": 0.5,
+   "y": 0.52,
    "zoom": 1
   }
  }
