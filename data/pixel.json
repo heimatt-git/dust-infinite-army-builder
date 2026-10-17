@@ -1,8 +1,11 @@
 {
- "version": "202610141304",
+ "version": "202610171347",
  "units": [
+  "allies--action-jackson",
+  "allies--action-jackson-ds",
   "allies--barking-dog-light",
   "allies--bazooka-joe",
+  "allies--bull-s-eye",
   "allies--bulldog",
   "allies--command-truck-ds",
   "allies--devastator",
@@ -12,10 +15,13 @@
   "allies--heavy-ranger-tank-hunter-squad",
   "allies--hot-dog",
   "allies--humber-mk-v",
+  "allies--maggie",
+  "allies--marek",
   "allies--ranger-heavy-mortar-squad",
   "allies--recon-mickey",
   "allies--rosie-sgt-major-i",
   "allies--sergeant-victory",
+  "allies--shaun",
   "allies--storm",
   "allies--the-chef",
   "allies--the-priest",
@@ -1213,6 +1219,36 @@
   "axis--gorilla-squad": {
    "x": 0.5,
    "y": 0.52,
+   "zoom": 1
+  },
+  "allies--bull-s-eye": {
+   "x": 0.5,
+   "y": 0.438,
+   "zoom": 1
+  },
+  "allies--maggie": {
+   "x": 0.5,
+   "y": 0.466,
+   "zoom": 1
+  },
+  "allies--marek": {
+   "x": 0.5,
+   "y": 0.48,
+   "zoom": 1
+  },
+  "allies--action-jackson": {
+   "x": 0.5,
+   "y": 0.477,
+   "zoom": 1
+  },
+  "allies--action-jackson-ds": {
+   "x": 0.5,
+   "y": 0.455,
+   "zoom": 1
+  },
+  "allies--shaun": {
+   "x": 0.5,
+   "y": 0.458,
    "zoom": 1
   }
  }
