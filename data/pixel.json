@@ -1,5 +1,5 @@
 {
- "version": "202610171430",
+ "version": "202610171455",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -9,20 +9,28 @@
   "allies--bull-s-eye",
   "allies--bulldog",
   "allies--command-truck-ds",
+  "allies--costa",
+  "allies--crazy-jimmy",
   "allies--desert-scorpions-assault-squad",
   "allies--desert-scorpions-heavy-commando-battle-squad",
   "allies--desert-scorpions-heavy-commando-kill-squad",
   "allies--desert-scorpions-heavy-engineer-squad",
   "allies--desert-scorpions-kill-squad",
   "allies--devastator",
+  "allies--di-giorgio",
   "allies--diver-ds",
   "allies--diver-usmc",
   "allies--flying-banana",
+  "allies--frank",
+  "allies--gilmore",
   "allies--gregory-and-izzy",
   "allies--heavy-ranger-attack-squad",
   "allies--heavy-ranger-tank-hunter-squad",
   "allies--hot-dog",
   "allies--humber-mk-v",
+  "allies--jack",
+  "allies--johnny-one-eye",
+  "allies--machete-mack",
   "allies--maggie",
   "allies--marek",
   "allies--ozz-117",
@@ -36,6 +44,7 @@
   "allies--the-chef",
   "allies--the-priest",
   "allies--thunder",
+  "allies--tom",
   "allies--tornado",
   "allies--usmc-anti-tank-squad",
   "allies--usmc-heavy-engineer-squad",
@@ -1304,6 +1313,51 @@
   "allies--rhino": {
    "x": 0.5,
    "y": 0.418,
+   "zoom": 1
+  },
+  "allies--gilmore": {
+   "x": 0.5,
+   "y": 0.444,
+   "zoom": 1
+  },
+  "allies--machete-mack": {
+   "x": 0.5,
+   "y": 0.596,
+   "zoom": 1
+  },
+  "allies--frank": {
+   "x": 0.5,
+   "y": 0.418,
+   "zoom": 1
+  },
+  "allies--crazy-jimmy": {
+   "x": 0.5,
+   "y": 0.301,
+   "zoom": 1
+  },
+  "allies--tom": {
+   "x": 0.5,
+   "y": 0.472,
+   "zoom": 1
+  },
+  "allies--johnny-one-eye": {
+   "x": 0.5,
+   "y": 0.452,
+   "zoom": 1
+  },
+  "allies--di-giorgio": {
+   "x": 0.5,
+   "y": 0.469,
+   "zoom": 1
+  },
+  "allies--jack": {
+   "x": 0.5,
+   "y": 0.489,
+   "zoom": 1
+  },
+  "allies--costa": {
+   "x": 0.5,
+   "y": 0.475,
    "zoom": 1
   }
  }
