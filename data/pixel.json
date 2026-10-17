@@ -1,5 +1,5 @@
 {
- "version": "202610171412",
+ "version": "202610171415",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -11,6 +11,8 @@
   "allies--command-truck-ds",
   "allies--desert-scorpions-heavy-commando-battle-squad",
   "allies--desert-scorpions-heavy-commando-kill-squad",
+  "allies--desert-scorpions-heavy-engineer-squad",
+  "allies--desert-scorpions-kill-squad",
   "allies--devastator",
   "allies--flying-banana",
   "allies--gregory-and-izzy",
@@ -1267,6 +1269,16 @@
   "allies--desert-scorpions-heavy-commando-kill-squad": {
    "x": 0.5,
    "y": 0.548,
+   "zoom": 1
+  },
+  "allies--desert-scorpions-heavy-engineer-squad": {
+   "x": 0.5,
+   "y": 0.542,
+   "zoom": 1
+  },
+  "allies--desert-scorpions-kill-squad": {
+   "x": 0.5,
+   "y": 0.497,
    "zoom": 1
   }
  }
