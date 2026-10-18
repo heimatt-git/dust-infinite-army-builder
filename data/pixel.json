@@ -1,5 +1,5 @@
 {
- "version": "202610182056",
+ "version": "202610182132",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -196,12 +196,16 @@
   "mercenaries--meatgrinder",
   "mercenaries--mercenary-anti-aircraft-squad",
   "mercenaries--mercenary-antitank-squad",
+  "mercenaries--mercenary-battle-squad-with-recoilless-rifle",
+  "mercenaries--mercenary-battle-squad-with-rocket-launcher",
+  "mercenaries--mercenary-battle-squad-with-sniper-rifle",
   "mercenaries--mercenary-cleaning-team",
   "mercenaries--mercenary-command-squad",
   "mercenaries--mercenary-heavy-machinegun-squad",
   "mercenaries--mercenary-heavy-machinegun-squad-iii",
   "mercenaries--mercenary-heavy-mortar-squad",
   "mercenaries--mercenary-railgun-team",
+  "mercenaries--mercenary-sniper-squad",
   "mercenaries--nathalia",
   "mercenaries--obliterator",
   "mercenaries--pink-flamingo",
@@ -1593,6 +1597,26 @@
   "mercenaries--mercenary-anti-aircraft-squad": {
    "x": 0.5,
    "y": 0.542,
+   "zoom": 1
+  },
+  "mercenaries--mercenary-battle-squad-with-sniper-rifle": {
+   "x": 0.5,
+   "y": 0.573,
+   "zoom": 1
+  },
+  "mercenaries--mercenary-battle-squad-with-rocket-launcher": {
+   "x": 0.5,
+   "y": 0.599,
+   "zoom": 1
+  },
+  "mercenaries--mercenary-sniper-squad": {
+   "x": 0.5,
+   "y": 0.559,
+   "zoom": 1
+  },
+  "mercenaries--mercenary-battle-squad-with-recoilless-rifle": {
+   "x": 0.5,
+   "y": 0.571,
    "zoom": 1
   }
  }
