@@ -1,5 +1,5 @@
 {
- "version": "202610182027",
+ "version": "202610182034",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -35,6 +35,7 @@
   "allies--jack",
   "allies--johnny-one-eye",
   "allies--long-tom-ii",
+  "allies--m4a3e8-p-hvss",
   "allies--machete-mack",
   "allies--maggie",
   "allies--marek",
@@ -43,6 +44,8 @@
   "allies--mickey-arv",
   "allies--mobile-hq",
   "allies--ozz-117",
+  "allies--pershing-ii",
+  "allies--pershing-iii",
   "allies--pounder",
   "allies--pounder-light",
   "allies--punisher",
@@ -64,6 +67,7 @@
   "allies--skysweeper",
   "allies--steel-rain",
   "allies--storm",
+  "allies--super-pershing-ii",
   "allies--the-chef",
   "allies--the-priest",
   "allies--thunder",
@@ -79,7 +83,10 @@
   "allies--usmc-war-dogs-recon-squad",
   "allies--wildfire",
   "allies--wildfire-usmc",
+  "allies--wolverine-ii",
+  "allies--wolverine-iii",
   "axis--adler",
+  "axis--angela-ii",
   "axis--angela-iii",
   "axis--blitz",
   "axis--bloody-blitz",
@@ -1508,6 +1515,36 @@
   "allies--rattlesnake": {
    "x": 0.5,
    "y": 0.444,
+   "zoom": 1
+  },
+  "axis--angela-ii": {
+   "x": 0.5,
+   "y": 0.537,
+   "zoom": 1
+  },
+  "allies--wolverine-ii": {
+   "x": 0.5,
+   "y": 0.545,
+   "zoom": 1
+  },
+  "allies--m4a3e8-p-hvss": {
+   "x": 0.5,
+   "y": 0.539,
+   "zoom": 1
+  },
+  "allies--super-pershing-ii": {
+   "x": 0.5,
+   "y": 0.528,
+   "zoom": 1
+  },
+  "allies--pershing-iii": {
+   "x": 0.5,
+   "y": 0.588,
+   "zoom": 1
+  },
+  "allies--pershing-ii": {
+   "x": 0.5,
+   "y": 0.613,
    "zoom": 1
   }
  }
