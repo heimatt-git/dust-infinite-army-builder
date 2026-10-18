@@ -1,5 +1,5 @@
 {
- "version": "202610182044",
+ "version": "202610182047",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -180,6 +180,7 @@
   "mercenaries--decimater",
   "mercenaries--demolisher",
   "mercenaries--emma",
+  "mercenaries--field-ammo-service",
   "mercenaries--fire-lizard",
   "mercenaries--gregor-the-defector",
   "mercenaries--justine",
@@ -1569,6 +1570,11 @@
   "ijn--ninja-fire-support-squad": {
    "x": 0.5,
    "y": 0.571,
+   "zoom": 1
+  },
+  "mercenaries--field-ammo-service": {
+   "x": 0.5,
+   "y": 0.514,
    "zoom": 1
   }
  }
