@@ -1,5 +1,5 @@
 {
- "version": "202610182034",
+ "version": "202610182039",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -186,6 +186,7 @@
   "mercenaries--justine-and-co-vi",
   "mercenaries--justine-and-co-vii",
   "mercenaries--justine-s-crew",
+  "mercenaries--louise-thelma",
   "mercenaries--luisa",
   "mercenaries--magda",
   "mercenaries--meatgrinder",
@@ -1545,6 +1546,11 @@
   "allies--pershing-ii": {
    "x": 0.5,
    "y": 0.613,
+   "zoom": 1
+  },
+  "mercenaries--louise-thelma": {
+   "x": 0.5,
+   "y": 0.466,
    "zoom": 1
   }
  }
