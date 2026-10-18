@@ -7,11 +7,16 @@ import * as C from './collection.js';
 
 const TYPE_ORDER = ['hero', 'infantry', 'vehicle', 'aircraft', 'token'];
 const PREF = 'dust1947.collectionView';
+const LAY = 'dust1947.collectionLayout';
+const defLayout = () => { try { return window.matchMedia('(max-width: 700px)').matches ? 'grid' : 'list'; } catch { return 'list'; } };
 const V = { view: 'owned', bloc: 'Allies', type: 'all', q: '', conf: false, listId: '',
   fac: 'all', obloc: 'all', ofac: 'all',                  // filtres bloc / sous-faction (ajout : bloc, fac ; possédé : obloc, ofac)
   group: store.get(PREF, {}).group === 'type' ? 'type' : 'fac', // regroupement : par sous-faction (défaut) ou par type
+  layout: null,                                            // affichage : liste ou grille (défaut selon l'écran)
   fold: new Set() };                                       // groupes repliés
 const dateStr = (ts) => new Date(ts).toLocaleDateString(LANG === 'en' ? 'en-GB' : 'fr-FR');
+
+V.layout = V.layout || (store.get(LAY, {}).layout === 'grid' ? 'grid' : store.get(LAY, {}).layout === 'list' ? 'list' : defLayout());
 
 // ctx : { S, app, topbar, bindTopbar, thumb } fournis par app.js
 export function renderCollectionPage(ctx) {
@@ -32,18 +37,24 @@ export function renderCollectionPage(ctx) {
     </section>
     <section class="panel col-top">
       <div class="col-stats" id="col-stats"></div>
+      <div class="col-dash" id="col-dash"></div>
+      <div id="col-backup"></div>
+      <details class="col-save" id="col-save">
+      <summary>${t('Sauvegarde & import')}</summary>
+      <div class="col-save-b">
       <div class="col-acts">
         <button class="btn primary" id="col-export">${t('Exporter (fichier JSON)')}</button>
         ${canShare ? `<button class="btn" id="col-share">${t('Partager…')}</button>` : ''}
         <label class="btn">${t('Importer un fichier')}<input type="file" id="col-import" accept=".json,application/json" hidden></label>
       </div>
-      <div id="col-backup"></div>
       ${lists.length ? `<div class="col-fromlist">
         <label class="field"><span>${t("Ajouter les unités d'une liste")}</span>
           <select id="col-list">${lists.map((l) => `<option value="${esc(l.id)}" ${V.listId === l.id ? 'selected' : ''}>${esc(l.name)} · ${t('{n} unités', { n: l.entries.length })}</option>`).join('')}</select></label>
         <button class="btn" id="col-addlist">${t('Ajouter à ma collection')}</button>
         <p class="hint" style="margin:0;grid-column:1/-1">${t("Pour chaque unité, la collection prend le nombre d'exemplaires de la liste s'il est plus grand que le vôtre. Rien n'est jamais retiré.")}</p>
       </div>` : ''}
+      </div>
+      </details>
     </section>
     <div class="col-views" role="tablist">
       <button role="tab" class="btn ${V.view === 'owned' ? 'on' : ''}" data-view="owned" id="view-owned"></button>
@@ -71,6 +82,8 @@ export function renderCollectionPage(ctx) {
         <div class="typebar facbar" id="col-facs"></div>
         <div class="col-grp"><span class="hint">${t('Grouper par')}</span>
           <div class="typebar"><button type="button" data-group="fac" class="${V.group === 'fac' ? 'on' : ''}">${t('Sous-faction')}</button><button type="button" data-group="type" class="${V.group === 'type' ? 'on' : ''}">${t('Type')}</button></div>
+          <span class="hint">${t('Affichage')}</span>
+          <div class="typebar"><button type="button" data-layout="list" class="${V.layout === 'list' ? 'on' : ''}">${t('Liste')}</button><button type="button" data-layout="grid" class="${V.layout === 'grid' ? 'on' : ''}">${t('Grille')}</button></div>
           <button type="button" class="btn sm" id="col-fold-all">${t('Tout replier')}</button><button type="button" class="btn sm" id="col-unfold-all">${t('Tout déplier')}</button>
         </div>
       </div>
@@ -85,10 +98,13 @@ export function renderCollectionPage(ctx) {
     u.confidential ? '<span class="tag conf">CONFIDENTIAL</span>' : '',
     u.armor ? `<span class="tag">${t('Arm. {n}', { n: esc(u.armor) })}</span>` : '',
   ].join('');
+  const blocColor = (id, D) => D.blocsById.get(id)?.color || 'var(--line)';
+  const badgeText = (q) => (q ? (owned() ? `×${q}` : t('possédée ×{n}', { n: q })) : '');
   const row = (u, D) => {
     const q = C.getQty(u.id);
-    return `<div class="urow col-row ${q ? '' : 'zero'}" data-row="${esc(u.id)}">
+    return `<div class="urow col-row ${q ? '' : 'zero'}" style="--bc:${esc(blocColor(u.bloc, D))}" data-row="${esc(u.id)}">
       <div class="nm${ctx.thumb(u.id) ? ' wt' : ''}" data-card="${esc(u.id)}" tabindex="0" role="button" aria-label="${esc(t('Voir la carte {n}', { n: u.name }))}">${ctx.thumb(u.id)}<b>${esc(u.name)}</b>${u.subtitle ? `<small>${esc(u.subtitle)}</small>` : ''}<div class="tags">${unitTags(u, D)}</div></div>
+      <span class="qbadge" data-qb>${badgeText(q)}</span>
       <div class="qty" role="group" aria-label="${esc(t('Exemplaires de {n}', { n: u.name }))}">
         <button class="btn icon" data-qd="${esc(u.id)}" aria-label="${esc(t('Retirer un exemplaire de {n}', { n: u.name }))}" ${q ? '' : 'disabled'}>−</button>
         <input type="number" class="qty-in" min="0" max="${C.MAX_QTY}" value="${q}" data-qi="${esc(u.id)}" aria-label="${esc(t('Exemplaires de {n}', { n: u.name }))}">
@@ -105,6 +121,7 @@ export function renderCollectionPage(ctx) {
   function stats() {
     const n = C.totalCount(), d = C.distinctCount();
     $('col-stats').innerHTML = `<div><b class="num">${n}</b><small>${t(n > 1 ? 'figurines' : 'figurine')}</small></div><div><b class="num">${d}</b><small>${t(d > 1 ? 'unités différentes' : 'unité différente')}</small></div>`;
+    dash();
     $('view-owned').textContent = t('Ce que je possède ({n})', { n: d });
     const { updated, exported } = C.collectionDates();
     $('col-backup').innerHTML = !C.hasCollection() ? ''
@@ -144,10 +161,10 @@ export function renderCollectionPage(ctx) {
 
   // Groupes repliables : un titre = un bouton
   let foldKeys = [];
-  const head = (key, cls, label, n) => {
+  const head = (key, cls, label, n, color) => {
     foldKeys.push(key);
     const open = !V.fold.has(key);
-    return `<button type="button" class="${cls} col-fold" data-fold="${esc(key)}" aria-expanded="${open}"><span aria-hidden="true">${open ? '▾' : '▸'}</span> ${esc(label)} · ${n}</button>`;
+    return `<button type="button" class="${cls} col-fold" style="--bc:${esc(color || 'transparent')}" data-fold="${esc(key)}" aria-expanded="${open}"><span aria-hidden="true">${open ? '▾' : '▸'}</span> ${esc(label)} · ${n}</button>`;
   };
   const rows = (arr, D) => arr.map((u) => row(u, D)).join('');
   const typed = (arr, D, key) => byType(arr).map(([ty, a]) => `<div class="col-type">${esc(ty)}</div>${rows(a, D)}`).join('');
@@ -161,12 +178,30 @@ export function renderCollectionPage(ctx) {
     return [...order, ...extra].map((k) => [k, arr.filter((u) => facKey(u) === k)]).filter(([, a]) => a.length).map(([k, a]) => {
       const key = `f:${b?.id}/${k}`;
       const label = k ? factionName(k, D) : t('Sans sous-faction');
-      return head(key, 'col-fac', label, total(a)) + (V.fold.has(key) ? '' : typed(a, D));
+      return head(key, 'col-fac', label, total(a), b?.color) + (V.fold.has(key) ? '' : typed(a, D));
+    }).join('');
+  }
+
+  // Tableau de bord : une carte par bloc (figurines et unités possédées). Un clic filtre la vue en cours sur ce bloc.
+  function dash() {
+    const el = $('col-dash'); if (!el) return;
+    const ids = C.ownedIds().filter((id) => DA.unitsById.has(id));
+    if (!ids.length) { el.hidden = true; el.innerHTML = ''; return; }
+    el.hidden = false;
+    el.innerHTML = DA.blocs.map((b) => {
+      const mine = ids.filter((id) => DA.unitsById.get(id).bloc === b.id);
+      const fig = mine.reduce((x, id) => x + C.getQty(id), 0);
+      return `<button type="button" class="dcard ${mine.length ? '' : 'nil'} ${curBloc() === b.id ? 'on' : ''}" style="--bc:${esc(b.color || 'var(--line)')}" data-dbloc="${esc(b.id)}" aria-pressed="${curBloc() === b.id}">
+        <b>${esc(blocName(b.id, DA))}</b>
+        <span><i class="num">${fig}</i> ${t(fig > 1 ? 'figurines' : 'figurine')} · <i class="num">${mine.length}</i> ${t(mine.length > 1 ? 'unités' : 'unité')}</span>
+      </button>`;
     }).join('');
   }
 
   function body() {
     foldKeys = [];
+    $('col-body').classList.toggle('grid', V.layout === 'grid');
+    dash();
     let html = '';
     const D = curDB();
     facs();
@@ -183,12 +218,12 @@ export function renderCollectionPage(ctx) {
       } else if (curBloc() === 'all') {
         html = D.blocs.map((b) => [b, pool.filter((u) => u.bloc === b.id)]).filter(([, a]) => a.length).map(([b, arr]) => {
           const key = `b:${b.id}`;
-          return head(key, 'cat-group', blocName(b.id, D), total(arr)) + (V.fold.has(key) ? '' : blocHTML(arr, D, b));
+          return head(key, 'cat-group', blocName(b.id, D), total(arr), b.color) + (V.fold.has(key) ? '' : blocHTML(arr, D, b));
         }).join('');
       } else if (V.group === 'type') {
         html = byType(pool).map(([ty, a]) => {
           const key = `t:${curBloc()}/${ty}`;
-          return head(key, 'cat-group', ty, total(a)) + (V.fold.has(key) ? '' : rows(a, D));
+          return head(key, 'cat-group', ty, total(a), D.blocsById.get(curBloc())?.color) + (V.fold.has(key) ? '' : rows(a, D));
         }).join('');
       } else {
         html = blocHTML(pool, D, D.blocsById.get(curBloc()));
@@ -207,6 +242,7 @@ export function renderCollectionPage(ctx) {
     if (!r) return;
     const q = C.getQty(id);
     r.classList.toggle('zero', !q);
+    const qb = r.querySelector('[data-qb]'); if (qb) qb.textContent = badgeText(q);
     r.querySelector('[data-qd]').disabled = !q;
     const inp = r.querySelector('[data-qi]'); if (inp && document.activeElement !== inp) inp.value = q;
     if (inp && document.activeElement === inp && +inp.value !== q) inp.value = q;
@@ -239,6 +275,18 @@ export function renderCollectionPage(ctx) {
   }));
   $('col-bloc')?.addEventListener('change', (e) => { if (owned()) { V.obloc = e.target.value; V.ofac = 'all'; } else { V.bloc = e.target.value; V.fac = 'all'; } body(); });
   $('col-facs')?.addEventListener('click', (e) => { const b = e.target.closest('[data-fac]'); if (!b || b.disabled) return; setFac(b.dataset.fac); body(); });
+  $('col-dash')?.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-dbloc]'); if (!b) return;
+    const id = b.dataset.dbloc, v = curBloc() === id ? 'all' : id;
+    if (owned()) { V.obloc = v; V.ofac = 'all'; } else { V.bloc = v; V.fac = 'all'; }
+    const sel = $('col-bloc'); if (sel) sel.value = v;
+    body();
+  });
+  app.querySelectorAll('[data-layout]').forEach((b) => b.addEventListener('click', () => {
+    V.layout = b.dataset.layout; store.set(LAY, { layout: V.layout });
+    app.querySelectorAll('[data-layout]').forEach((x) => x.classList.toggle('on', x === b));
+    body();
+  }));
   app.querySelectorAll('[data-group]').forEach((b) => b.addEventListener('click', () => {
     V.group = b.dataset.group; store.set(PREF, { group: V.group });
     app.querySelectorAll('[data-group]').forEach((x) => x.classList.toggle('on', x === b));
