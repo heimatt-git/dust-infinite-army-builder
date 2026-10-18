@@ -1,5 +1,5 @@
 {
- "version": "202610181654",
+ "version": "202610181705",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -22,6 +22,7 @@
   "allies--di-giorgio",
   "allies--diver-ds",
   "allies--diver-usmc",
+  "allies--fireball",
   "allies--flying-banana",
   "allies--frank",
   "allies--gilmore",
@@ -33,6 +34,7 @@
   "allies--humber-mk-v",
   "allies--jack",
   "allies--johnny-one-eye",
+  "allies--long-tom-ii",
   "allies--machete-mack",
   "allies--maggie",
   "allies--marek",
@@ -42,6 +44,7 @@
   "allies--ozz-117",
   "allies--pounder",
   "allies--pounder-light",
+  "allies--punisher",
   "allies--ranger-combat-squad",
   "allies--ranger-command-squad",
   "allies--ranger-heavy-mortar-squad",
@@ -56,6 +59,7 @@
   "allies--seahorse",
   "allies--sergeant-victory",
   "allies--shaun",
+  "allies--skysweeper",
   "allies--steel-rain",
   "allies--storm",
   "allies--the-chef",
@@ -501,7 +505,7 @@
   },
   "allies--devastator": {
    "x": 0.5,
-   "y": 0.645,
+   "y": 0.591,
    "zoom": 1
   },
   "allies--hot-dog": {
@@ -1472,6 +1476,26 @@
   "allies--steel-rain": {
    "x": 0.5,
    "y": 0.475,
+   "zoom": 1
+  },
+  "allies--long-tom-ii": {
+   "x": 0.5,
+   "y": 0.41,
+   "zoom": 1
+  },
+  "allies--fireball": {
+   "x": 0.5,
+   "y": 0.511,
+   "zoom": 1
+  },
+  "allies--punisher": {
+   "x": 0.5,
+   "y": 0.537,
+   "zoom": 1
+  },
+  "allies--skysweeper": {
+   "x": 0.5,
+   "y": 0.362,
    "zoom": 1
   }
  }
