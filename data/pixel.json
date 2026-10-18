@@ -1,5 +1,5 @@
 {
- "version": "202610181434",
+ "version": "202610181437",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -8,6 +8,7 @@
   "allies--bazooka-joe",
   "allies--bull-s-eye",
   "allies--bulldog",
+  "allies--bushmaster",
   "allies--command-truck-ds",
   "allies--costa",
   "allies--crazy-jimmy",
@@ -1412,6 +1413,11 @@
   "allies--ranger-heavy-weapon-squad": {
    "x": 0.5,
    "y": 0.534,
+   "zoom": 1
+  },
+  "allies--bushmaster": {
+   "x": 0.5,
+   "y": 0.333,
    "zoom": 1
   }
  }
