@@ -1,5 +1,5 @@
 {
- "version": "202610182047",
+ "version": "202610182056",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -194,6 +194,7 @@
   "mercenaries--magda",
   "mercenaries--martine",
   "mercenaries--meatgrinder",
+  "mercenaries--mercenary-anti-aircraft-squad",
   "mercenaries--mercenary-antitank-squad",
   "mercenaries--mercenary-cleaning-team",
   "mercenaries--mercenary-command-squad",
@@ -211,6 +212,8 @@
   "mercenaries--tanya",
   "mercenaries--the-fire-scarab",
   "mercenaries--tito",
+  "mercenaries--tito-s-crew",
+  "mercenaries--vk-powerlifter",
   "mercenaries--wrecker",
   "mythos--annihilator",
   "mythos--avatar-of-cthulhu",
@@ -1019,7 +1022,7 @@
   },
   "mercenaries--justine-s-crew": {
    "x": 0.5,
-   "y": 0.534,
+   "y": 0.568,
    "zoom": 1
   },
   "mercenaries--justine-and-co-vii": {
@@ -1575,6 +1578,21 @@
   "mercenaries--field-ammo-service": {
    "x": 0.5,
    "y": 0.514,
+   "zoom": 1
+  },
+  "mercenaries--vk-powerlifter": {
+   "x": 0.5,
+   "y": 0.497,
+   "zoom": 1
+  },
+  "mercenaries--tito-s-crew": {
+   "x": 0.5,
+   "y": 0.506,
+   "zoom": 1
+  },
+  "mercenaries--mercenary-anti-aircraft-squad": {
+   "x": 0.5,
+   "y": 0.542,
    "zoom": 1
   }
  }
