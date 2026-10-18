@@ -1,5 +1,5 @@
 {
- "version": "202610181410",
+ "version": "202610181434",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -26,6 +26,7 @@
   "allies--gregory-and-izzy",
   "allies--heavy-ranger-attack-squad",
   "allies--heavy-ranger-tank-hunter-squad",
+  "allies--honey",
   "allies--hot-dog",
   "allies--humber-mk-v",
   "allies--jack",
@@ -60,6 +61,8 @@
   "allies--usmc-reconnaissance-squad",
   "allies--usmc-rifle-squad",
   "allies--usmc-war-dogs-recon-squad",
+  "allies--wildfire",
+  "allies--wildfire-usmc",
   "axis--adler",
   "axis--angela-iii",
   "axis--blitz",
