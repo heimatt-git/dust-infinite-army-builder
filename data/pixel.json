@@ -1,5 +1,5 @@
 {
- "version": "202610181003",
+ "version": "202610181410",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -34,7 +34,13 @@
   "allies--maggie",
   "allies--marek",
   "allies--ozz-117",
+  "allies--ranger-combat-squad",
+  "allies--ranger-command-squad",
   "allies--ranger-heavy-mortar-squad",
+  "allies--ranger-heavy-weapon-squad",
+  "allies--ranger-observer-squad",
+  "allies--ranger-recon-squad",
+  "allies--ranger-sniper-squad",
   "allies--recon-mickey",
   "allies--rhino",
   "allies--rosie-sgt-major-i",
@@ -1383,6 +1389,26 @@
   "allies--usmc-rifle-squad": {
    "x": 0.5,
    "y": 0.537,
+   "zoom": 1
+  },
+  "allies--ranger-observer-squad": {
+   "x": 0.286,
+   "y": 0.502,
+   "zoom": 1.75
+  },
+  "allies--ranger-command-squad": {
+   "x": 0.5,
+   "y": 0.545,
+   "zoom": 1
+  },
+  "allies--ranger-sniper-squad": {
+   "x": 0.722,
+   "y": 0.578,
+   "zoom": 1.8
+  },
+  "allies--ranger-heavy-weapon-squad": {
+   "x": 0.5,
+   "y": 0.534,
    "zoom": 1
   }
  }
