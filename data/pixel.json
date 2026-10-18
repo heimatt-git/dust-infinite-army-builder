@@ -1,5 +1,5 @@
 {
- "version": "202610181705",
+ "version": "202610181814",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -41,6 +41,7 @@
   "allies--mickey",
   "allies--mickey-a-v-r-e-light",
   "allies--mickey-arv",
+  "allies--mobile-hq",
   "allies--ozz-117",
   "allies--pounder",
   "allies--pounder-light",
@@ -1496,6 +1497,11 @@
   "allies--skysweeper": {
    "x": 0.5,
    "y": 0.362,
+   "zoom": 1
+  },
+  "allies--mobile-hq": {
+   "x": 0.5,
+   "y": 0.506,
    "zoom": 1
   }
  }
