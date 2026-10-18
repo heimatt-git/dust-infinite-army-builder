@@ -1,5 +1,5 @@
 {
- "version": "202610181437",
+ "version": "202610181449",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -35,7 +35,9 @@
   "allies--machete-mack",
   "allies--maggie",
   "allies--marek",
+  "allies--mickey-a-v-r-e-light",
   "allies--ozz-117",
+  "allies--pounder-light",
   "allies--ranger-combat-squad",
   "allies--ranger-command-squad",
   "allies--ranger-heavy-mortar-squad",
@@ -46,6 +48,7 @@
   "allies--recon-mickey",
   "allies--rhino",
   "allies--rosie-sgt-major-i",
+  "allies--seahorse",
   "allies--sergeant-victory",
   "allies--shaun",
   "allies--storm",
@@ -1418,6 +1421,21 @@
   "allies--bushmaster": {
    "x": 0.5,
    "y": 0.333,
+   "zoom": 1
+  },
+  "allies--pounder-light": {
+   "x": 0.5,
+   "y": 0.455,
+   "zoom": 1
+  },
+  "allies--seahorse": {
+   "x": 0.5,
+   "y": 0.571,
+   "zoom": 1
+  },
+  "allies--mickey-a-v-r-e-light": {
+   "x": 0.5,
+   "y": 0.427,
    "zoom": 1
   }
  }
