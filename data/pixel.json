@@ -1,5 +1,5 @@
 {
- "version": "202610171455",
+ "version": "202610181003",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -47,7 +47,12 @@
   "allies--tom",
   "allies--tornado",
   "allies--usmc-anti-tank-squad",
+  "allies--usmc-assault-squad",
+  "allies--usmc-demolition-squad",
+  "allies--usmc-fire-squad",
   "allies--usmc-heavy-engineer-squad",
+  "allies--usmc-reconnaissance-squad",
+  "allies--usmc-rifle-squad",
   "allies--usmc-war-dogs-recon-squad",
   "axis--adler",
   "axis--angela-iii",
@@ -1358,6 +1363,26 @@
   "allies--costa": {
    "x": 0.5,
    "y": 0.475,
+   "zoom": 1
+  },
+  "allies--usmc-fire-squad": {
+   "x": 0.5,
+   "y": 0.497,
+   "zoom": 1
+  },
+  "allies--usmc-reconnaissance-squad": {
+   "x": 0.5,
+   "y": 0.559,
+   "zoom": 1
+  },
+  "allies--usmc-assault-squad": {
+   "x": 0.5,
+   "y": 0.517,
+   "zoom": 1
+  },
+  "allies--usmc-rifle-squad": {
+   "x": 0.5,
+   "y": 0.537,
    "zoom": 1
   }
  }
