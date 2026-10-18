@@ -1,5 +1,5 @@
 {
- "version": "202610181449",
+ "version": "202610181654",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -9,6 +9,7 @@
   "allies--bull-s-eye",
   "allies--bulldog",
   "allies--bushmaster",
+  "allies--cobra",
   "allies--command-truck-ds",
   "allies--costa",
   "allies--crazy-jimmy",
@@ -35,8 +36,11 @@
   "allies--machete-mack",
   "allies--maggie",
   "allies--marek",
+  "allies--mickey",
   "allies--mickey-a-v-r-e-light",
+  "allies--mickey-arv",
   "allies--ozz-117",
+  "allies--pounder",
   "allies--pounder-light",
   "allies--ranger-combat-squad",
   "allies--ranger-command-squad",
@@ -45,12 +49,14 @@
   "allies--ranger-observer-squad",
   "allies--ranger-recon-squad",
   "allies--ranger-sniper-squad",
+  "allies--rattler",
   "allies--recon-mickey",
   "allies--rhino",
   "allies--rosie-sgt-major-i",
   "allies--seahorse",
   "allies--sergeant-victory",
   "allies--shaun",
+  "allies--steel-rain",
   "allies--storm",
   "allies--the-chef",
   "allies--the-priest",
@@ -300,7 +306,7 @@
   },
   "allies--recon-mickey": {
    "x": 0.5,
-   "y": 0.449,
+   "y": 0.463,
    "zoom": 1
   },
   "mercenaries--obliterator": {
@@ -500,7 +506,7 @@
   },
   "allies--hot-dog": {
    "x": 0.5,
-   "y": 0.303,
+   "y": 0.419,
    "zoom": 1
   },
   "axis--jagdloki": {
@@ -895,7 +901,7 @@
   },
   "allies--barking-dog-light": {
    "x": 0.5,
-   "y": 0.347,
+   "y": 0.389,
    "zoom": 1
   },
   "allies--bulldog": {
@@ -1436,6 +1442,36 @@
   "allies--mickey-a-v-r-e-light": {
    "x": 0.5,
    "y": 0.427,
+   "zoom": 1
+  },
+  "allies--mickey": {
+   "x": 0.5,
+   "y": 0.412,
+   "zoom": 1
+  },
+  "allies--pounder": {
+   "x": 0.5,
+   "y": 0.379,
+   "zoom": 1
+  },
+  "allies--rattler": {
+   "x": 0.5,
+   "y": 0.427,
+   "zoom": 1
+  },
+  "allies--cobra": {
+   "x": 0.5,
+   "y": 0.339,
+   "zoom": 1
+  },
+  "allies--mickey-arv": {
+   "x": 0.5,
+   "y": 0.491,
+   "zoom": 1
+  },
+  "allies--steel-rain": {
+   "x": 0.5,
+   "y": 0.475,
    "zoom": 1
   }
  }
