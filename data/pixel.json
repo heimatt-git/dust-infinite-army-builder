@@ -1,5 +1,5 @@
 {
- "version": "202610182039",
+ "version": "202610182044",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -155,6 +155,7 @@
   "ijn--ninja-battle-squad",
   "ijn--ninja-command-squad",
   "ijn--ninja-execution-squad",
+  "ijn--ninja-fire-support-squad",
   "ijn--ninja-infiltration-squad",
   "ijn--ninja-mortar-squad",
   "ijn--ninja-observer-team",
@@ -172,6 +173,7 @@
   "ijn--tengu",
   "ijn--the-traitor",
   "ijn--yukiko",
+  "mercenaries--adelaide-ades-battaglia",
   "mercenaries--alex",
   "mercenaries--anti-tank-squadron",
   "mercenaries--barking-luther",
@@ -189,6 +191,7 @@
   "mercenaries--louise-thelma",
   "mercenaries--luisa",
   "mercenaries--magda",
+  "mercenaries--martine",
   "mercenaries--meatgrinder",
   "mercenaries--mercenary-antitank-squad",
   "mercenaries--mercenary-cleaning-team",
@@ -1551,6 +1554,21 @@
   "mercenaries--louise-thelma": {
    "x": 0.5,
    "y": 0.466,
+   "zoom": 1
+  },
+  "mercenaries--martine": {
+   "x": 0.5,
+   "y": 0.449,
+   "zoom": 1
+  },
+  "mercenaries--adelaide-ades-battaglia": {
+   "x": 0.5,
+   "y": 0.486,
+   "zoom": 1
+  },
+  "ijn--ninja-fire-support-squad": {
+   "x": 0.5,
+   "y": 0.571,
    "zoom": 1
   }
  }
