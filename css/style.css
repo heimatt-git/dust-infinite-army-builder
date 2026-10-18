@@ -460,3 +460,33 @@ table.wt { border-collapse: collapse; width: 100%; font-size: 13px; }
 .help-what { margin: 10px 0 0; font-weight: 500; }
 
 .erow.joined.l2 { margin-left: 44px; }
+
+/* Ma collection : tableau de bord, sauvegarde repliable, badges, vue grille */
+.col-dash { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+.col-dash[hidden] { display: none; }
+.dcard { display: grid; gap: 2px; text-align: left; font-family: inherit; color: inherit; cursor: pointer; padding: 8px 10px; border: 1px solid var(--line); border-left: 4px solid var(--bc, var(--line)); border-radius: var(--r); background: var(--panel); }
+.dcard b { font-size: 14px; }
+.dcard span { font-size: 12px; color: var(--muted); }
+.dcard .num { font-style: normal; font-weight: 600; color: var(--ink); font-family: var(--f-mono); }
+.dcard.nil { opacity: .5; }
+.dcard:hover, .dcard:focus-visible { border-color: var(--bc, var(--accent)); }
+.dcard.on { background: color-mix(in srgb, var(--bc, var(--accent)) 14%, var(--panel)); box-shadow: inset 0 0 0 1px var(--bc, var(--accent)); }
+.col-save { border: 1px solid var(--line); border-radius: var(--r); background: var(--panel-2); }
+.col-save > summary { cursor: pointer; padding: 8px 12px; font-weight: 600; font-size: 14px; }
+.col-save-b { display: grid; gap: 14px; padding: 4px 12px 12px; }
+.qbadge { font-family: var(--f-mono); font-weight: 600; font-size: 12px; padding: 1px 8px; border-radius: 99px; background: color-mix(in srgb, var(--bc, var(--accent)) 18%, var(--panel)); border: 1px solid color-mix(in srgb, var(--bc, var(--accent)) 55%, transparent); white-space: nowrap; }
+.qbadge:empty { display: none; }
+.col-row { grid-template-columns: minmax(0, 1fr) auto auto; border-left: 4px solid var(--bc, var(--line)); }
+.col-fold { border-left: 4px solid var(--bc, transparent); padding-left: 8px; }
+#col-body.grid { grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); gap: 8px; align-items: start; }
+#col-body.grid > .col-fold, #col-body.grid > .col-type, #col-body.grid > .empty, #col-body.grid > .hint { grid-column: 1 / -1; }
+#col-body.grid .col-row { grid-template-columns: 1fr; gap: 6px; align-content: start; border-left-width: 1px; border-top: 4px solid var(--bc, var(--line)); padding: 8px; }
+#col-body.grid .col-row .nm.wt { --thumb-size: 100%; grid-template-columns: 1fr; }
+#col-body.grid .col-row .nm.wt > :not(.thumb) { grid-column: 1; }
+#col-body.grid .col-row .nm .thumb { grid-row: auto; width: 100%; height: auto; aspect-ratio: 1; margin-bottom: 4px; }
+#col-body.grid .col-row .nm small { white-space: normal; }
+#col-body.grid .col-row .qbadge { order: -1; justify-self: start; }
+#col-body.grid .col-row .qty { justify-content: space-between; }
+#col-body.grid .col-row .qty-in { flex: 1; width: auto; }
+#col-body.grid .col-row.zero { opacity: .55; }
+@media (max-width: 700px) { #col-body.grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } #col-body.grid .col-row .qty-in { min-width: 0; } }
