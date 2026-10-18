@@ -1,5 +1,5 @@
 {
- "version": "202610181814",
+ "version": "202610182027",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -54,6 +54,7 @@
   "allies--ranger-recon-squad",
   "allies--ranger-sniper-squad",
   "allies--rattler",
+  "allies--rattlesnake",
   "allies--recon-mickey",
   "allies--rhino",
   "allies--rosie-sgt-major-i",
@@ -1502,6 +1503,11 @@
   "allies--mobile-hq": {
    "x": 0.5,
    "y": 0.506,
+   "zoom": 1
+  },
+  "allies--rattlesnake": {
+   "x": 0.5,
+   "y": 0.444,
    "zoom": 1
   }
  }
