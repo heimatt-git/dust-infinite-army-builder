@@ -1,15 +1,17 @@
 {
- "version": "202610190630",
+ "version": "202610190651",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
   "allies--allied-heavy-commando-battle-squad",
+  "allies--allied-heavy-commando-kill-squad",
   "allies--assault-truck",
   "allies--assault-truck-ds",
   "allies--barking-dog",
   "allies--barking-dog-light",
   "allies--bazooka-joe",
   "allies--blackhawk",
+  "allies--bravo-company-ranger-command-squad",
   "allies--bull-s-eye",
   "allies--bulldog",
   "allies--bushmaster",
@@ -21,21 +23,29 @@
   "allies--costa",
   "allies--crazy-jimmy",
   "allies--desert-scorpions-assault-squad",
+  "allies--desert-scorpions-command-squad",
   "allies--desert-scorpions-heavy-commando-battle-squad",
   "allies--desert-scorpions-heavy-commando-kill-squad",
   "allies--desert-scorpions-heavy-engineer-squad",
   "allies--desert-scorpions-kill-squad",
+  "allies--desert-scorpions-sniper-squad",
   "allies--devastator",
   "allies--di-giorgio",
   "allies--diver-ds",
   "allies--diver-usmc",
+  "allies--dual-field-phaser",
+  "allies--dual-field-phaser-bunker",
+  "allies--field-phaser",
+  "allies--field-phaser-bunker",
   "allies--fireball",
   "allies--flying-banana",
   "allies--frank",
   "allies--gilmore",
   "allies--gregory-and-izzy",
   "allies--gun-truck",
+  "allies--heavy-ranger-assault-squad",
   "allies--heavy-ranger-attack-squad",
+  "allies--heavy-ranger-command-squad",
   "allies--heavy-ranger-tank-hunter-squad",
   "allies--honey",
   "allies--hot-dog",
@@ -1336,11 +1346,6 @@
    "y": 0.477,
    "zoom": 1
   },
-  "allies--action-jackson-ds": {
-   "x": 0.5,
-   "y": 0.455,
-   "zoom": 1
-  },
   "allies--shaun": {
    "x": 0.5,
    "y": 0.458,
@@ -1358,7 +1363,7 @@
   },
   "allies--desert-scorpions-heavy-commando-kill-squad": {
    "x": 0.5,
-   "y": 0.548,
+   "y": 0.593,
    "zoom": 1
   },
   "allies--desert-scorpions-heavy-engineer-squad": {
@@ -1744,6 +1749,56 @@
   "allies--six-shooter": {
    "x": 0.5,
    "y": 0.551,
+   "zoom": 1
+  },
+  "allies--allied-heavy-commando-kill-squad": {
+   "x": 0.5,
+   "y": 0.537,
+   "zoom": 1
+  },
+  "allies--bravo-company-ranger-command-squad": {
+   "x": 0.5,
+   "y": 0.593,
+   "zoom": 1
+  },
+  "allies--desert-scorpions-command-squad": {
+   "x": 0.5,
+   "y": 0.545,
+   "zoom": 1
+  },
+  "allies--dual-field-phaser-bunker": {
+   "x": 0.5,
+   "y": 0.545,
+   "zoom": 1
+  },
+  "allies--dual-field-phaser": {
+   "x": 0.5,
+   "y": 0.596,
+   "zoom": 1
+  },
+  "allies--field-phaser-bunker": {
+   "x": 0.5,
+   "y": 0.539,
+   "zoom": 1
+  },
+  "allies--field-phaser": {
+   "x": 0.5,
+   "y": 0.539,
+   "zoom": 1
+  },
+  "allies--desert-scorpions-sniper-squad": {
+   "x": 0.5,
+   "y": 0.582,
+   "zoom": 1
+  },
+  "allies--heavy-ranger-assault-squad": {
+   "x": 0.5,
+   "y": 0.559,
+   "zoom": 1
+  },
+  "allies--heavy-ranger-command-squad": {
+   "x": 0.5,
+   "y": 0.571,
    "zoom": 1
   }
  }
