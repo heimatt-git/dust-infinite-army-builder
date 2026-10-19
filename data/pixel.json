@@ -1,5 +1,5 @@
 {
- "version": "202610190736",
+ "version": "202610190738",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -91,6 +91,7 @@
   "allies--recon-mickey-iii-usmc",
   "allies--rhino",
   "allies--rosie",
+  "allies--rosie-s-crew",
   "allies--rosie-sgt-major-i",
   "allies--seahorse",
   "allies--sergeant-victory",
@@ -1859,6 +1860,11 @@
   "allies--desert-scorpions-heavy-kill-squad": {
    "x": 0.5,
    "y": 0.661,
+   "zoom": 1
+  },
+  "allies--rosie-s-crew": {
+   "x": 0.5,
+   "y": 0.531,
    "zoom": 1
   }
  }
