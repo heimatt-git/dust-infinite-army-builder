@@ -1,5 +1,5 @@
 {
- "version": "202610190938",
+ "version": "202610190955",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -310,6 +310,7 @@
   "ssu--anatoly-tsh",
   "ssu--assaulter",
   "ssu--assaulter-pla",
+  "ssu--ba-64-d",
   "ssu--babushka",
   "ssu--blaster",
   "ssu--burner",
@@ -1997,6 +1998,16 @@
   "ssu--mao": {
    "x": 0.5,
    "y": 0.381,
+   "zoom": 1
+  },
+  "ssu--ba-64-d": {
+   "x": 0.5,
+   "y": 0.517,
+   "zoom": 1
+  },
+  "allies--flying-banana": {
+   "x": 0.5,
+   "y": 0.548,
    "zoom": 1
   }
  }
