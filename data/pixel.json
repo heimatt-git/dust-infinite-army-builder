@@ -1,5 +1,5 @@
 {
- "version": "202610190651",
+ "version": "202610190705",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -73,6 +73,8 @@
   "allies--pounder-light",
   "allies--punisher",
   "allies--punisher-ii",
+  "allies--ranger-assault-squad",
+  "allies--ranger-attack-squad",
   "allies--ranger-combat-squad",
   "allies--ranger-command-squad",
   "allies--ranger-heavy-mortar-squad",
@@ -80,6 +82,7 @@
   "allies--ranger-observer-squad",
   "allies--ranger-recon-squad",
   "allies--ranger-sniper-squad",
+  "allies--ranger-weapon-squad",
   "allies--rattler",
   "allies--rattler-amp",
   "allies--rattlesnake",
@@ -106,6 +109,8 @@
   "allies--transport-truck",
   "allies--usmc-anti-tank-squad",
   "allies--usmc-assault-squad",
+  "allies--usmc-close-assault-squad",
+  "allies--usmc-command-squad",
   "allies--usmc-demolition-squad",
   "allies--usmc-fire-squad",
   "allies--usmc-heavy-engineer-squad",
@@ -1461,11 +1466,6 @@
    "y": 0.502,
    "zoom": 1.75
   },
-  "allies--ranger-command-squad": {
-   "x": 0.5,
-   "y": 0.545,
-   "zoom": 1
-  },
   "allies--ranger-sniper-squad": {
    "x": 0.722,
    "y": 0.578,
@@ -1799,6 +1799,26 @@
   "allies--heavy-ranger-command-squad": {
    "x": 0.5,
    "y": 0.571,
+   "zoom": 1
+  },
+  "allies--ranger-assault-squad": {
+   "x": 0.5,
+   "y": 0.489,
+   "zoom": 1
+  },
+  "allies--ranger-command-squad": {
+   "x": 0.5,
+   "y": 0.539,
+   "zoom": 1
+  },
+  "allies--ranger-weapon-squad": {
+   "x": 0.5,
+   "y": 0.483,
+   "zoom": 1
+  },
+  "allies--usmc-command-squad": {
+   "x": 0.5,
+   "y": 0.528,
    "zoom": 1
   }
  }
