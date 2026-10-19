@@ -1,5 +1,5 @@
 {
- "version": "202610190709",
+ "version": "202610190732",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -114,6 +114,7 @@
   "allies--usmc-demolition-squad",
   "allies--usmc-fire-squad",
   "allies--usmc-heavy-engineer-squad",
+  "allies--usmc-heavy-machinegun-squad",
   "allies--usmc-reconnaissance-squad",
   "allies--usmc-rifle-squad",
   "allies--usmc-war-dogs-recon-squad",
@@ -287,6 +288,7 @@
   "mythos--purifier",
   "mythos--rasputin",
   "mythos--spawn-of-cthulhu",
+  "mythos--spawn-of-cthulhu-alt",
   "mythos--spawn-of-shub-niggurath",
   "mythos--the-euphrates-crocodile",
   "mythos--vk-stash",
@@ -1823,6 +1825,16 @@
   "allies--usmc-command-squad": {
    "x": 0.5,
    "y": 0.528,
+   "zoom": 1
+  },
+  "mythos--spawn-of-cthulhu-alt": {
+   "x": 0.5,
+   "y": 0.539,
+   "zoom": 1
+  },
+  "allies--usmc-heavy-machinegun-squad": {
+   "x": 0.5,
+   "y": 0.477,
    "zoom": 1
   }
  }
