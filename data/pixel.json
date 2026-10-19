@@ -1,5 +1,5 @@
 {
- "version": "202610190933",
+ "version": "202610190935",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -333,6 +333,7 @@
   "ssu--koshka",
   "ssu--kv-152",
   "ssu--lavrentiy",
+  "ssu--mao",
   "ssu--master-yuk",
   "ssu--matrioshka",
   "ssu--mikhail-tsh",
@@ -2001,6 +2002,11 @@
   "ssu--iosef": {
    "x": 0.5,
    "y": 0.503,
+   "zoom": 1
+  },
+  "ssu--mao": {
+   "x": 0.5,
+   "y": 0.381,
    "zoom": 1
   }
  }
