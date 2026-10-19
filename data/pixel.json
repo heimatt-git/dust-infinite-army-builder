@@ -1,10 +1,11 @@
 {
- "version": "202610190740",
+ "version": "202610190756",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
   "allies--allied-heavy-commando-battle-squad",
   "allies--allied-heavy-commando-kill-squad",
+  "allies--alligator",
   "allies--assault-truck",
   "allies--assault-truck-ds",
   "allies--barking-dog",
@@ -88,6 +89,8 @@
   "allies--rattler-amp",
   "allies--rattlesnake",
   "allies--recon-mickey",
+  "allies--recon-mickey-ii",
+  "allies--recon-mickey-iii",
   "allies--recon-mickey-iii-usmc",
   "allies--rhino",
   "allies--rosie",
@@ -1877,6 +1880,21 @@
   "allies--thunder-usmc": {
    "x": 0.5,
    "y": 0.503,
+   "zoom": 1
+  },
+  "allies--recon-mickey-ii": {
+   "x": 0.5,
+   "y": 0.528,
+   "zoom": 1
+  },
+  "allies--recon-mickey-iii": {
+   "x": 0.5,
+   "y": 0.537,
+   "zoom": 1
+  },
+  "allies--alligator": {
+   "x": 0.5,
+   "y": 0.508,
    "zoom": 1
   }
  }
