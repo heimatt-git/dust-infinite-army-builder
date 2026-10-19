@@ -1,5 +1,5 @@
 {
- "version": "202610191139",
+ "version": "202610191155",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -371,10 +371,13 @@
   "ssu--pt-47e-pla",
   "ssu--pt-47e-spetsnaz",
   "ssu--red-ace",
+  "ssu--red-army-battle-squad",
+  "ssu--red-army-rifle-squad",
   "ssu--red-cossack",
   "ssu--red-fury",
   "ssu--red-fury-pla",
   "ssu--red-fury-spetsnaz",
+  "ssu--red-guards-anti-tank-squad",
   "ssu--red-guards-assault-squad",
   "ssu--red-guards-command-squad",
   "ssu--red-lightning",
@@ -2123,6 +2126,16 @@
   "ssu--spetsnaz-assault-squad": {
    "x": 0.5,
    "y": 0.562,
+   "zoom": 1
+  },
+  "ssu--red-army-rifle-squad": {
+   "x": 0.5,
+   "y": 0.565,
+   "zoom": 1
+  },
+  "ssu--red-guards-anti-tank-squad": {
+   "x": 0.5,
+   "y": 0.52,
    "zoom": 1
   }
  }
