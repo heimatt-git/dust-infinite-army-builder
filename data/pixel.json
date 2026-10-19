@@ -1,5 +1,5 @@
 {
- "version": "202610191217",
+ "version": "202610191224",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -353,6 +353,11 @@
   "ssu--nina-tsh",
   "ssu--nina-tsh-pla",
   "ssu--nkvd-political-commissar-squad",
+  "ssu--pla-antitank-squad",
+  "ssu--pla-demolition-squad",
+  "ssu--pla-fire-squad",
+  "ssu--pla-fire-support-squad",
+  "ssu--pla-kill-squad",
   "ssu--pla-steel-guards-anti-infantry-squad",
   "ssu--pla-steel-guards-assault-squad",
   "ssu--pla-steel-guards-attack-squad",
@@ -2159,6 +2164,31 @@
   "ssu--pla-steel-guards-fire-support-squad": {
    "x": 0.5,
    "y": 0.559,
+   "zoom": 1
+  },
+  "ssu--pla-kill-squad": {
+   "x": 0.5,
+   "y": 0.565,
+   "zoom": 1
+  },
+  "ssu--pla-fire-squad": {
+   "x": 0.5,
+   "y": 0.593,
+   "zoom": 1
+  },
+  "ssu--pla-antitank-squad": {
+   "x": 0.5,
+   "y": 0.542,
+   "zoom": 1
+  },
+  "ssu--pla-fire-support-squad": {
+   "x": 0.5,
+   "y": 0.565,
+   "zoom": 1
+  },
+  "ssu--pla-demolition-squad": {
+   "x": 0.5,
+   "y": 0.556,
    "zoom": 1
   }
  }
