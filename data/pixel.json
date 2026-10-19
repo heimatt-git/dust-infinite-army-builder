@@ -1,5 +1,5 @@
 {
- "version": "202610190528",
+ "version": "202610190541",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -9,6 +9,7 @@
   "allies--bull-s-eye",
   "allies--bulldog",
   "allies--bushmaster",
+  "allies--captain-ledger",
   "allies--cobra",
   "allies--command-truck-ds",
   "allies--costa",
@@ -37,6 +38,7 @@
   "allies--long-tom-ii",
   "allies--m4a3e8-p-hvss",
   "allies--machete-mack",
+  "allies--machete-mack-pistol",
   "allies--maggie",
   "allies--marek",
   "allies--mickey",
@@ -60,6 +62,7 @@
   "allies--rattlesnake",
   "allies--recon-mickey",
   "allies--rhino",
+  "allies--rosie",
   "allies--rosie-sgt-major-i",
   "allies--seahorse",
   "allies--sergeant-victory",
@@ -1390,11 +1393,6 @@
    "y": 0.301,
    "zoom": 1
   },
-  "allies--tom": {
-   "x": 0.5,
-   "y": 0.472,
-   "zoom": 1
-  },
   "allies--johnny-one-eye": {
    "x": 0.5,
    "y": 0.452,
@@ -1653,6 +1651,26 @@
   "mythos--exalted-mi-go": {
    "x": 0.5,
    "y": 0.466,
+   "zoom": 1
+  },
+  "allies--rosie": {
+   "x": 0.5,
+   "y": 0.424,
+   "zoom": 1
+  },
+  "allies--captain-ledger": {
+   "x": 0.5,
+   "y": 0.452,
+   "zoom": 1
+  },
+  "allies--machete-mack-pistol": {
+   "x": 0.5,
+   "y": 0.472,
+   "zoom": 1
+  },
+  "allies--tom": {
+   "x": 0.5,
+   "y": 0.475,
    "zoom": 1
   }
  }
