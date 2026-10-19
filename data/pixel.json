@@ -1,5 +1,5 @@
 {
- "version": "202610190821",
+ "version": "202610190933",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -306,6 +306,7 @@
   "mythos--vk-stash",
   "ssu--air-ambulance",
   "ssu--aleksei-tsh",
+  "ssu--alexsandr",
   "ssu--anatoly-tsh",
   "ssu--assaulter",
   "ssu--assaulter-pla",
@@ -324,29 +325,37 @@
   "ssu--grom-pla",
   "ssu--guai-lo",
   "ssu--invader",
+  "ssu--iosef",
   "ssu--iron-joe",
   "ssu--ivan-the-butcher",
+  "ssu--karl",
   "ssu--karl-the-hammer",
   "ssu--koshka",
   "ssu--kv-152",
+  "ssu--lavrentiy",
   "ssu--master-yuk",
   "ssu--matrioshka",
   "ssu--mikhail-tsh",
   "ssu--nadya",
   "ssu--nadya-tsh",
+  "ssu--nastasia",
   "ssu--natasha-tsh",
+  "ssu--nikita",
   "ssu--nikolai",
+  "ssu--nina",
   "ssu--nina-tsh",
   "ssu--nina-tsh-pla",
   "ssu--pla-steel-guards-anti-infantry-squad",
   "ssu--professor-sum",
   "ssu--red-ace",
   "ssu--red-cossack",
+  "ssu--red-fury",
   "ssu--red-fury-pla",
   "ssu--red-fury-spetsnaz",
   "ssu--red-guards-assault-squad",
   "ssu--red-guards-command-squad",
   "ssu--red-lightning",
+  "ssu--red-rain",
   "ssu--red-rain-pla",
   "ssu--red-rain-spetsnaz",
   "ssu--red-yana",
@@ -370,8 +379,11 @@
   "ssu--the-red-star",
   "ssu--type-45",
   "ssu--type-46",
+  "ssu--type-47",
+  "ssu--type-47-pla",
   "ssu--vasiliy",
   "ssu--vk-stash",
+  "ssu--vladimir",
   "ssu--winter-child",
   "ssu--yakov"
  ],
@@ -1949,6 +1961,46 @@
   "ssu--the-red-star": {
    "x": 0.5,
    "y": 0.491,
+   "zoom": 1
+  },
+  "ssu--nina": {
+   "x": 0.5,
+   "y": 0.61,
+   "zoom": 1
+  },
+  "ssu--nastasia": {
+   "x": 0.5,
+   "y": 0.573,
+   "zoom": 1
+  },
+  "ssu--nikita": {
+   "x": 0.5,
+   "y": 0.475,
+   "zoom": 1
+  },
+  "ssu--red-rain": {
+   "x": 0.5,
+   "y": 0.506,
+   "zoom": 1
+  },
+  "ssu--type-47-pla": {
+   "x": 0.5,
+   "y": 0.494,
+   "zoom": 1
+  },
+  "ssu--vladimir": {
+   "x": 0.5,
+   "y": 0.472,
+   "zoom": 1
+  },
+  "ssu--alexsandr": {
+   "x": 0.5,
+   "y": 0.537,
+   "zoom": 1
+  },
+  "ssu--iosef": {
+   "x": 0.5,
+   "y": 0.503,
    "zoom": 1
   }
  }
