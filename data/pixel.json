@@ -1,5 +1,5 @@
 {
- "version": "202610190705",
+ "version": "202610190709",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -117,6 +117,7 @@
   "allies--usmc-reconnaissance-squad",
   "allies--usmc-rifle-squad",
   "allies--usmc-war-dogs-recon-squad",
+  "allies--vk-stash",
   "allies--wildfire",
   "allies--wildfire-usmc",
   "allies--wolverine-ii",
@@ -172,6 +173,7 @@
   "axis--sturmgrenadier-tank-hunter-squad",
   "axis--sturmluther",
   "axis--the-desert-fox",
+  "axis--vk-stash",
   "axis--wilfried",
   "ijn--akiko",
   "ijn--basan",
@@ -208,6 +210,7 @@
   "ijn--steel-samurai",
   "ijn--tengu",
   "ijn--the-traitor",
+  "ijn--vk-stash",
   "ijn--yukiko",
   "mercenaries--adelaide-ades-battaglia",
   "mercenaries--alex",
@@ -286,6 +289,7 @@
   "mythos--spawn-of-cthulhu",
   "mythos--spawn-of-shub-niggurath",
   "mythos--the-euphrates-crocodile",
+  "mythos--vk-stash",
   "ssu--air-ambulance",
   "ssu--aleksei-tsh",
   "ssu--anatoly-tsh",
