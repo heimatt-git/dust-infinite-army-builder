@@ -1,5 +1,5 @@
 {
- "version": "202610191104",
+ "version": "202610191139",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -386,9 +386,13 @@
   "ssu--roza",
   "ssu--sergei",
   "ssu--spetsnaz-anti-tank-squad",
+  "ssu--spetsnaz-assault-squad",
   "ssu--spetsnaz-command-squad",
   "ssu--spetsnaz-kill-squad",
+  "ssu--spetsnaz-observer-squad",
   "ssu--spetsnaz-saboteur-squad",
+  "ssu--spetsnaz-sniper-squad",
+  "ssu--steel-guards-anti-infantry-squad",
   "ssu--steel-guards-anti-tank-squad",
   "ssu--steel-guards-assault-squad",
   "ssu--steel-guards-close-combat-squad",
@@ -2099,6 +2103,26 @@
   "ssu--pt-47a": {
    "x": 0.5,
    "y": 0.534,
+   "zoom": 1
+  },
+  "ssu--steel-guards-anti-infantry-squad": {
+   "x": 0.5,
+   "y": 0.579,
+   "zoom": 1
+  },
+  "ssu--spetsnaz-sniper-squad": {
+   "x": 0.5,
+   "y": 0.59,
+   "zoom": 1
+  },
+  "ssu--spetsnaz-observer-squad": {
+   "x": 0.5,
+   "y": 0.59,
+   "zoom": 1
+  },
+  "ssu--spetsnaz-assault-squad": {
+   "x": 0.5,
+   "y": 0.562,
    "zoom": 1
   }
  }
