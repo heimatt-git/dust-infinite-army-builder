@@ -1,11 +1,12 @@
 {
- "version": "202610190556",
+ "version": "202610190623",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
   "allies--allied-heavy-commando-battle-squad",
   "allies--assault-truck",
   "allies--assault-truck-ds",
+  "allies--barking-dog",
   "allies--barking-dog-light",
   "allies--bazooka-joe",
   "allies--blackhawk",
@@ -48,8 +49,10 @@
   "allies--maggie",
   "allies--marek",
   "allies--mickey",
+  "allies--mickey-a-v-r-e",
   "allies--mickey-a-v-r-e-light",
   "allies--mickey-arv",
+  "allies--mickey-light",
   "allies--mobile-hq",
   "allies--mortar-truck",
   "allies--ozz-117",
@@ -68,6 +71,7 @@
   "allies--rattler",
   "allies--rattlesnake",
   "allies--recon-mickey",
+  "allies--recon-mickey-iii-usmc",
   "allies--rhino",
   "allies--rosie",
   "allies--rosie-sgt-major-i",
@@ -84,6 +88,7 @@
   "allies--thunder",
   "allies--tom",
   "allies--tornado",
+  "allies--transport-truck",
   "allies--usmc-anti-tank-squad",
   "allies--usmc-assault-squad",
   "allies--usmc-demolition-squad",
@@ -1699,6 +1704,21 @@
   "allies--gun-truck": {
    "x": 0.5,
    "y": 0.491,
+   "zoom": 1
+  },
+  "allies--transport-truck": {
+   "x": 0.5,
+   "y": 0.582,
+   "zoom": 1
+  },
+  "allies--mickey-light": {
+   "x": 0.5,
+   "y": 0.472,
+   "zoom": 1
+  },
+  "allies--mickey-a-v-r-e": {
+   "x": 0.5,
+   "y": 0.379,
    "zoom": 1
   }
  }
