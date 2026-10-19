@@ -1,5 +1,5 @@
 {
- "version": "202610190623",
+ "version": "202610190630",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -15,6 +15,7 @@
   "allies--bushmaster",
   "allies--captain-ledger",
   "allies--cobra",
+  "allies--cobra-amp",
   "allies--command-truck",
   "allies--command-truck-ds",
   "allies--costa",
@@ -61,6 +62,7 @@
   "allies--pounder",
   "allies--pounder-light",
   "allies--punisher",
+  "allies--punisher-ii",
   "allies--ranger-combat-squad",
   "allies--ranger-command-squad",
   "allies--ranger-heavy-mortar-squad",
@@ -69,6 +71,7 @@
   "allies--ranger-recon-squad",
   "allies--ranger-sniper-squad",
   "allies--rattler",
+  "allies--rattler-amp",
   "allies--rattlesnake",
   "allies--recon-mickey",
   "allies--recon-mickey-iii-usmc",
@@ -78,6 +81,8 @@
   "allies--seahorse",
   "allies--sergeant-victory",
   "allies--shaun",
+  "allies--six-shooter",
+  "allies--six-shooter-usmc",
   "allies--skysweeper",
   "allies--steel-rain",
   "allies--storm",
@@ -1719,6 +1724,26 @@
   "allies--mickey-a-v-r-e": {
    "x": 0.5,
    "y": 0.379,
+   "zoom": 1
+  },
+  "allies--cobra-amp": {
+   "x": 0.5,
+   "y": 0.491,
+   "zoom": 1
+  },
+  "allies--rattler-amp": {
+   "x": 0.5,
+   "y": 0.429,
+   "zoom": 1
+  },
+  "allies--six-shooter-usmc": {
+   "x": 0.5,
+   "y": 0.539,
+   "zoom": 1
+  },
+  "allies--six-shooter": {
+   "x": 0.5,
+   "y": 0.551,
    "zoom": 1
   }
  }
