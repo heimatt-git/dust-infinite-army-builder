@@ -1,5 +1,5 @@
 {
- "version": "202610190801",
+ "version": "202610190807",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -96,6 +96,7 @@
   "allies--rosie",
   "allies--rosie-s-crew",
   "allies--rosie-sgt-major-i",
+  "allies--rosie-sgt-major-ii",
   "allies--seahorse",
   "allies--sergeant-victory",
   "allies--shaun",
@@ -272,6 +273,7 @@
   "mercenaries--tito",
   "mercenaries--tito-s-crew",
   "mercenaries--vk-powerlifter",
+  "mercenaries--vk-stash",
   "mercenaries--wrecker",
   "mythos--annihilator",
   "mythos--avatar-of-cthulhu",
@@ -1895,6 +1897,11 @@
   "allies--alligator": {
    "x": 0.5,
    "y": 0.503,
+   "zoom": 1
+  },
+  "allies--rosie-sgt-major-ii": {
+   "x": 0.5,
+   "y": 0.562,
    "zoom": 1
   }
  }
