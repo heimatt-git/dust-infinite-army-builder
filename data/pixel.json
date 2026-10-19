@@ -1,5 +1,5 @@
 {
- "version": "202610191059",
+ "version": "202610191104",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -354,11 +354,22 @@
   "ssu--nina-tsh-pla",
   "ssu--pla-steel-guards-anti-infantry-squad",
   "ssu--professor-sum",
+  "ssu--pt-47a",
+  "ssu--pt-47a-amphibious",
+  "ssu--pt-47a-pla",
+  "ssu--pt-47a-pla-amphibious",
+  "ssu--pt-47a-spetsnaz",
+  "ssu--pt-47a-spetsnaz-amphibious",
+  "ssu--pt-47b",
+  "ssu--pt-47b-pla",
+  "ssu--pt-47b-spetsnaz",
   "ssu--pt-47c",
   "ssu--pt-47c-pla",
   "ssu--pt-47c-spetsnaz",
   "ssu--pt-47d-pla",
   "ssu--pt-47d-spetsnaz",
+  "ssu--pt-47e-pla",
+  "ssu--pt-47e-spetsnaz",
   "ssu--red-ace",
   "ssu--red-cossack",
   "ssu--red-fury",
@@ -2068,6 +2079,26 @@
   "ssu--pt-47d-pla": {
    "x": 0.5,
    "y": 0.554,
+   "zoom": 1
+  },
+  "ssu--pt-47b-pla": {
+   "x": 0.5,
+   "y": 0.537,
+   "zoom": 1
+  },
+  "ssu--pt-47b-spetsnaz": {
+   "x": 0.5,
+   "y": 0.525,
+   "zoom": 1
+  },
+  "ssu--pt-47b": {
+   "x": 0.5,
+   "y": 0.59,
+   "zoom": 1
+  },
+  "ssu--pt-47a": {
+   "x": 0.5,
+   "y": 0.534,
    "zoom": 1
   }
  }
