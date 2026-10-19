@@ -1,16 +1,20 @@
 {
- "version": "202610190541",
+ "version": "202610190556",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
   "allies--allied-heavy-commando-battle-squad",
+  "allies--assault-truck",
+  "allies--assault-truck-ds",
   "allies--barking-dog-light",
   "allies--bazooka-joe",
+  "allies--blackhawk",
   "allies--bull-s-eye",
   "allies--bulldog",
   "allies--bushmaster",
   "allies--captain-ledger",
   "allies--cobra",
+  "allies--command-truck",
   "allies--command-truck-ds",
   "allies--costa",
   "allies--crazy-jimmy",
@@ -28,6 +32,7 @@
   "allies--frank",
   "allies--gilmore",
   "allies--gregory-and-izzy",
+  "allies--gun-truck",
   "allies--heavy-ranger-attack-squad",
   "allies--heavy-ranger-tank-hunter-squad",
   "allies--honey",
@@ -35,6 +40,7 @@
   "allies--humber-mk-v",
   "allies--jack",
   "allies--johnny-one-eye",
+  "allies--lcm-46",
   "allies--long-tom-ii",
   "allies--m4a3e8-p-hvss",
   "allies--machete-mack",
@@ -45,6 +51,7 @@
   "allies--mickey-a-v-r-e-light",
   "allies--mickey-arv",
   "allies--mobile-hq",
+  "allies--mortar-truck",
   "allies--ozz-117",
   "allies--pershing-ii",
   "allies--pershing-iii",
@@ -71,6 +78,7 @@
   "allies--steel-rain",
   "allies--storm",
   "allies--super-pershing-ii",
+  "allies--tank-hunter-truck",
   "allies--the-chef",
   "allies--the-priest",
   "allies--thunder",
@@ -1671,6 +1679,26 @@
   "allies--tom": {
    "x": 0.5,
    "y": 0.475,
+   "zoom": 1
+  },
+  "allies--blackhawk": {
+   "x": 0.5,
+   "y": 0.415,
+   "zoom": 1
+  },
+  "allies--lcm-46": {
+   "x": 0.5,
+   "y": 0.537,
+   "zoom": 1
+  },
+  "allies--command-truck": {
+   "x": 0.5,
+   "y": 0.48,
+   "zoom": 1
+  },
+  "allies--gun-truck": {
+   "x": 0.5,
+   "y": 0.491,
    "zoom": 1
   }
  }
