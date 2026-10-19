@@ -1,5 +1,5 @@
 {
- "version": "202610190511",
+ "version": "202610190528",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -236,7 +236,9 @@
   "mythos--deadly-tilly",
   "mythos--ekaterina-and-sabertooth",
   "mythos--eradicator",
+  "mythos--exalted-mi-go",
   "mythos--farouk-the-turk",
+  "mythos--herald-of-nyarlathotep",
   "mythos--lilith",
   "mythos--lilith-possessed",
   "mythos--mi-go-assault-squad",
@@ -1641,6 +1643,16 @@
   "mercenaries--justine-and-co": {
    "x": 0.5,
    "y": 0.494,
+   "zoom": 1
+  },
+  "mythos--herald-of-nyarlathotep": {
+   "x": 0.5,
+   "y": 0.384,
+   "zoom": 1
+  },
+  "mythos--exalted-mi-go": {
+   "x": 0.5,
+   "y": 0.466,
    "zoom": 1
   }
  }
