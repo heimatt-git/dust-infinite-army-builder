@@ -1,5 +1,5 @@
 {
- "version": "202610190807",
+ "version": "202610190821",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -310,6 +310,9 @@
   "ssu--assaulter",
   "ssu--assaulter-pla",
   "ssu--babushka",
+  "ssu--blaster",
+  "ssu--burner",
+  "ssu--carrier",
   "ssu--chinese-volunteer-assault-squad",
   "ssu--chinese-volunteer-assault-squad-pla",
   "ssu--commissar-poon",
@@ -317,6 +320,8 @@
   "ssu--controller-pla",
   "ssu--evgeny",
   "ssu--grand-ma",
+  "ssu--grom",
+  "ssu--grom-pla",
   "ssu--guai-lo",
   "ssu--invader",
   "ssu--iron-joe",
@@ -359,8 +364,10 @@
   "ssu--steel-guards-fire-support-squad",
   "ssu--steel-guards-sniper-squad",
   "ssu--steel-guards-tesla-squad",
+  "ssu--striker",
   "ssu--the-dragon",
   "ssu--the-phoenix",
+  "ssu--the-red-star",
   "ssu--type-45",
   "ssu--type-46",
   "ssu--vasiliy",
@@ -1902,6 +1909,46 @@
   "allies--rosie-sgt-major-ii": {
    "x": 0.5,
    "y": 0.562,
+   "zoom": 1
+  },
+  "ssu--grom-pla": {
+   "x": 0.5,
+   "y": 0.472,
+   "zoom": 1
+  },
+  "ssu--grom": {
+   "x": 0.5,
+   "y": 0.466,
+   "zoom": 1
+  },
+  "ssu--burner": {
+   "x": 0.5,
+   "y": 0.412,
+   "zoom": 1
+  },
+  "ssu--blaster": {
+   "x": 0.5,
+   "y": 0.393,
+   "zoom": 1
+  },
+  "ssu--striker": {
+   "x": 0.5,
+   "y": 0.469,
+   "zoom": 1
+  },
+  "ssu--assaulter-pla": {
+   "x": 0.5,
+   "y": 0.472,
+   "zoom": 1
+  },
+  "ssu--carrier": {
+   "x": 0.5,
+   "y": 0.528,
+   "zoom": 1
+  },
+  "ssu--the-red-star": {
+   "x": 0.5,
+   "y": 0.491,
    "zoom": 1
   }
  }
