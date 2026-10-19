@@ -1,5 +1,5 @@
 {
- "version": "202610182132",
+ "version": "202610190511",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -184,6 +184,7 @@
   "mercenaries--fire-lizard",
   "mercenaries--gregor-the-defector",
   "mercenaries--justine",
+  "mercenaries--justine-and-co",
   "mercenaries--justine-and-co-ii",
   "mercenaries--justine-and-co-iii",
   "mercenaries--justine-and-co-vi",
@@ -202,10 +203,13 @@
   "mercenaries--mercenary-cleaning-team",
   "mercenaries--mercenary-command-squad",
   "mercenaries--mercenary-heavy-machinegun-squad",
+  "mercenaries--mercenary-heavy-machinegun-squad-ii",
   "mercenaries--mercenary-heavy-machinegun-squad-iii",
   "mercenaries--mercenary-heavy-mortar-squad",
+  "mercenaries--mercenary-heavy-weapon-squad",
   "mercenaries--mercenary-railgun-team",
   "mercenaries--mercenary-sniper-squad",
+  "mercenaries--mercenary-tank-hunter-squad",
   "mercenaries--nathalia",
   "mercenaries--obliterator",
   "mercenaries--pink-flamingo",
@@ -1617,6 +1621,26 @@
   "mercenaries--mercenary-battle-squad-with-recoilless-rifle": {
    "x": 0.5,
    "y": 0.571,
+   "zoom": 1
+  },
+  "mercenaries--mercenary-heavy-weapon-squad": {
+   "x": 0.5,
+   "y": 0.539,
+   "zoom": 1
+  },
+  "mercenaries--mercenary-tank-hunter-squad": {
+   "x": 0.5,
+   "y": 0.554,
+   "zoom": 1
+  },
+  "mercenaries--mercenary-heavy-machinegun-squad-ii": {
+   "x": 0.5,
+   "y": 0.539,
+   "zoom": 1
+  },
+  "mercenaries--justine-and-co": {
+   "x": 0.5,
+   "y": 0.494,
    "zoom": 1
   }
  }
