@@ -1,5 +1,5 @@
 {
- "version": "202610191155",
+ "version": "202610191200",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -372,7 +372,11 @@
   "ssu--pt-47e-spetsnaz",
   "ssu--red-ace",
   "ssu--red-army-battle-squad",
+  "ssu--red-army-close-combat-squad",
+  "ssu--red-army-command-squad",
+  "ssu--red-army-heavy-mortar-squad",
   "ssu--red-army-rifle-squad",
+  "ssu--red-army-tesla-gun-squad",
   "ssu--red-cossack",
   "ssu--red-fury",
   "ssu--red-fury-pla",
