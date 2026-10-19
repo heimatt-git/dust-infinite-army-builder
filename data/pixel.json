@@ -1,5 +1,5 @@
 {
- "version": "202610190756",
+ "version": "202610190801",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -1894,7 +1894,7 @@
   },
   "allies--alligator": {
    "x": 0.5,
-   "y": 0.508,
+   "y": 0.503,
    "zoom": 1
   }
  }
