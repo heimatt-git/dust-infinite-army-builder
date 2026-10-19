@@ -1,5 +1,5 @@
 {
- "version": "202610190955",
+ "version": "202610191059",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -314,6 +314,7 @@
   "ssu--babushka",
   "ssu--blaster",
   "ssu--burner",
+  "ssu--burster",
   "ssu--carrier",
   "ssu--chinese-volunteer-assault-squad",
   "ssu--chinese-volunteer-assault-squad-pla",
@@ -338,6 +339,10 @@
   "ssu--master-yuk",
   "ssu--matrioshka",
   "ssu--mikhail-tsh",
+  "ssu--motherland-tesla-gun",
+  "ssu--motherland-tesla-gun-bunker",
+  "ssu--motherland-twin-tesla-gun",
+  "ssu--motherland-twin-tesla-gun-bunker",
   "ssu--nadya",
   "ssu--nadya-tsh",
   "ssu--nastasia",
@@ -349,6 +354,11 @@
   "ssu--nina-tsh-pla",
   "ssu--pla-steel-guards-anti-infantry-squad",
   "ssu--professor-sum",
+  "ssu--pt-47c",
+  "ssu--pt-47c-pla",
+  "ssu--pt-47c-spetsnaz",
+  "ssu--pt-47d-pla",
+  "ssu--pt-47d-spetsnaz",
   "ssu--red-ace",
   "ssu--red-cossack",
   "ssu--red-fury",
@@ -2008,6 +2018,56 @@
   "allies--flying-banana": {
    "x": 0.5,
    "y": 0.548,
+   "zoom": 1
+  },
+  "ssu--motherland-tesla-gun-bunker": {
+   "x": 0.5,
+   "y": 0.556,
+   "zoom": 1
+  },
+  "ssu--motherland-tesla-gun": {
+   "x": 0.5,
+   "y": 0.573,
+   "zoom": 1
+  },
+  "ssu--burster": {
+   "x": 0.5,
+   "y": 0.508,
+   "zoom": 1
+  },
+  "ssu--motherland-twin-tesla-gun-bunker": {
+   "x": 0.5,
+   "y": 0.568,
+   "zoom": 1
+  },
+  "ssu--motherland-twin-tesla-gun": {
+   "x": 0.5,
+   "y": 0.593,
+   "zoom": 1
+  },
+  "ssu--pt-47c-pla": {
+   "x": 0.5,
+   "y": 0.534,
+   "zoom": 1
+  },
+  "ssu--pt-47c-spetsnaz": {
+   "x": 0.5,
+   "y": 0.537,
+   "zoom": 1
+  },
+  "ssu--pt-47c": {
+   "x": 0.5,
+   "y": 0.537,
+   "zoom": 1
+  },
+  "ssu--pt-47d-spetsnaz": {
+   "x": 0.5,
+   "y": 0.537,
+   "zoom": 1
+  },
+  "ssu--pt-47d-pla": {
+   "x": 0.5,
+   "y": 0.554,
    "zoom": 1
   }
  }
