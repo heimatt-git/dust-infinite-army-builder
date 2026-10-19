@@ -1,5 +1,5 @@
 {
- "version": "202610190738",
+ "version": "202610190740",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -101,11 +101,13 @@
   "allies--skysweeper",
   "allies--steel-rain",
   "allies--storm",
+  "allies--storm-usmc",
   "allies--super-pershing-ii",
   "allies--tank-hunter-truck",
   "allies--the-chef",
   "allies--the-priest",
   "allies--thunder",
+  "allies--thunder-usmc",
   "allies--tom",
   "allies--tornado",
   "allies--transport-truck",
@@ -1865,6 +1867,16 @@
   "allies--rosie-s-crew": {
    "x": 0.5,
    "y": 0.531,
+   "zoom": 1
+  },
+  "allies--storm-usmc": {
+   "x": 0.5,
+   "y": 0.466,
+   "zoom": 1
+  },
+  "allies--thunder-usmc": {
+   "x": 0.5,
+   "y": 0.503,
    "zoom": 1
   }
  }
