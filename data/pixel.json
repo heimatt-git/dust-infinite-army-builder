@@ -1,5 +1,5 @@
 {
- "version": "202610190936",
+ "version": "202610190938",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -1987,16 +1987,6 @@
   "ssu--type-47-pla": {
    "x": 0.5,
    "y": 0.494,
-   "zoom": 1
-  },
-  "ssu--vladimir": {
-   "x": 0.5,
-   "y": 0.472,
-   "zoom": 1
-  },
-  "ssu--alexsandr": {
-   "x": 0.5,
-   "y": 0.537,
    "zoom": 1
   },
   "ssu--iosef": {
