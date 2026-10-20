@@ -1,5 +1,5 @@
 {
- "version": "202610201120",
+ "version": "202610201201",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -152,6 +152,7 @@
   "axis--fallschirmjager-mortar-squad",
   "axis--field-laser-gun",
   "axis--field-laser-gun-bunker",
+  "axis--flammluther",
   "axis--flammpanzer-e-15-luft",
   "axis--florentine",
   "axis--frank-von-stein",
@@ -172,6 +173,8 @@
   "axis--hermann",
   "axis--hexe",
   "axis--jagdloki",
+  "axis--jagdloki-bk",
+  "axis--jagdwotan",
   "axis--johanna",
   "axis--kaori",
   "axis--kommandowagen",
@@ -185,7 +188,10 @@
   "axis--lara",
   "axis--laser-grenadier-squad",
   "axis--laser-tank-hunter-squad",
+  "axis--lohengrin",
   "axis--lothar",
+  "axis--luft-hans-trop",
+  "axis--luft-heinrich-trop",
   "axis--luft-hermann-trop",
   "axis--luft-horst-trop",
   "axis--luther",
@@ -194,6 +200,7 @@
   "axis--moskito",
   "axis--nordwind",
   "axis--nordwind-ii",
+  "axis--otto",
   "axis--panzermeister",
   "axis--panzerprinz",
   "axis--prinzluther",
@@ -220,6 +227,7 @@
   "axis--vk-stash",
   "axis--wilfried",
   "axis--wolfgang",
+  "axis--wotan",
   "axis--zombie-grenadier-squad",
   "axis--zombie-squad",
   "axis--zombie-suicide-squad",
@@ -2403,6 +2411,41 @@
   "axis--dual-field-laser-gun": {
    "x": 0.5,
    "y": 0.539,
+   "zoom": 1
+  },
+  "axis--lohengrin": {
+   "x": 0.5,
+   "y": 0.624,
+   "zoom": 1
+  },
+  "axis--luft-hans-trop": {
+   "x": 0.473,
+   "y": 0.706,
+   "zoom": 1.25
+  },
+  "axis--luft-heinrich-trop": {
+   "x": 0.5,
+   "y": 0.528,
+   "zoom": 1
+  },
+  "axis--jagdloki-bk": {
+   "x": 0.5,
+   "y": 0.497,
+   "zoom": 1
+  },
+  "axis--jagdwotan": {
+   "x": 0.5,
+   "y": 0.48,
+   "zoom": 1
+  },
+  "axis--flammluther": {
+   "x": 0.5,
+   "y": 0.554,
+   "zoom": 1
+  },
+  "axis--wotan": {
+   "x": 0.5,
+   "y": 0.528,
    "zoom": 1
   }
  }
