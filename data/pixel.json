@@ -1,5 +1,5 @@
 {
- "version": "202610200903",
+ "version": "202610200939",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -352,6 +352,9 @@
   "ssu--nina",
   "ssu--nina-tsh",
   "ssu--nina-tsh-pla",
+  "ssu--nkvd-political-commisar-machine-gunner",
+  "ssu--nkvd-political-commisar-submachine-gunner",
+  "ssu--nkvd-political-commisar-tank-hunter",
   "ssu--nkvd-political-commissar-squad",
   "ssu--pla-antitank-squad",
   "ssu--pla-assault-squad",
@@ -2219,6 +2222,21 @@
   "ssu--pla-steel-guards-anti-tank-squad": {
    "x": 0.5,
    "y": 0.576,
+   "zoom": 1
+  },
+  "ssu--nkvd-political-commisar-submachine-gunner": {
+   "x": 0.5,
+   "y": 0.658,
+   "zoom": 1
+  },
+  "ssu--nkvd-political-commisar-tank-hunter": {
+   "x": 0.5,
+   "y": 0.602,
+   "zoom": 1
+  },
+  "ssu--nkvd-political-commisar-machine-gunner": {
+   "x": 0.5,
+   "y": 0.661,
    "zoom": 1
   }
  }
