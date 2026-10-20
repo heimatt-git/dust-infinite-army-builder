@@ -1,5 +1,5 @@
 {
- "version": "202610201001",
+ "version": "202610201004",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -179,6 +179,7 @@
   "axis--manfred",
   "axis--markus",
   "axis--moskito",
+  "axis--nordwind-ii",
   "axis--panzermeister",
   "axis--panzerprinz",
   "axis--raketenmann",
@@ -2314,6 +2315,11 @@
   "axis--zombie-grenadier-squad": {
    "x": 0.5,
    "y": 0.559,
+   "zoom": 1
+  },
+  "axis--nordwind-ii": {
+   "x": 0.5,
+   "y": 0.554,
    "zoom": 1
   }
  }
