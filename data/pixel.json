@@ -1,5 +1,5 @@
 {
- "version": "202610200950",
+ "version": "202610201001",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -148,9 +148,11 @@
   "axis--fallschirmjager-missile-squad",
   "axis--fallschirmjager-mortar-squad",
   "axis--flammpanzer-e-15-luft",
+  "axis--florentine",
   "axis--frank-von-stein",
   "axis--galeazzo",
   "axis--geist",
+  "axis--goliath",
   "axis--gorilla-squad",
   "axis--gregor",
   "axis--grenadier-x",
@@ -158,11 +160,14 @@
   "axis--heavy-grenadier-anti-aircraft-squad",
   "axis--heavy-grenadier-command-squad",
   "axis--heavy-grenadier-engineer-squad",
+  "axis--heavy-laser-grenadier-squad",
   "axis--heinrich",
   "axis--heinrich-tropical-bk",
   "axis--hermann",
   "axis--hexe",
   "axis--jagdloki",
+  "axis--johanna",
+  "axis--kaori",
   "axis--kurt",
   "axis--lara",
   "axis--laser-grenadier-squad",
@@ -174,7 +179,9 @@
   "axis--manfred",
   "axis--markus",
   "axis--moskito",
+  "axis--panzermeister",
   "axis--panzerprinz",
+  "axis--raketenmann",
   "axis--raketentruppe-command-squad",
   "axis--raketentruppe-tank-hunter-squad",
   "axis--rolf",
@@ -189,10 +196,12 @@
   "axis--sturmgrenadier-tank-hunter-squad",
   "axis--sturmluther",
   "axis--the-desert-fox",
+  "axis--tina-and-hyane",
   "axis--totenmeister",
   "axis--vk-stash",
   "axis--wilfried",
   "axis--wolfgang",
+  "axis--zombie-grenadier-squad",
   "axis--zombie-squad",
   "axis--zombie-suicide-squad",
   "ijn--akiko",
@@ -1417,11 +1426,6 @@
    "y": 0.534,
    "zoom": 1
   },
-  "axis--laser-tank-hunter-squad": {
-   "x": 0.5,
-   "y": 0.537,
-   "zoom": 1
-  },
   "axis--gorilla-squad": {
    "x": 0.5,
    "y": 0.52,
@@ -2275,6 +2279,41 @@
   "axis--totenmeister": {
    "x": 0.5,
    "y": 0.582,
+   "zoom": 1
+  },
+  "axis--goliath": {
+   "x": 0.5,
+   "y": 0.463,
+   "zoom": 1
+  },
+  "axis--raketenmann": {
+   "x": 0.5,
+   "y": 0.452,
+   "zoom": 1
+  },
+  "axis--panzermeister": {
+   "x": 0.5,
+   "y": 0.568,
+   "zoom": 1
+  },
+  "axis--tina-and-hyane": {
+   "x": 0.5,
+   "y": 0.508,
+   "zoom": 1
+  },
+  "axis--laser-tank-hunter-squad": {
+   "x": 0.5,
+   "y": 0.534,
+   "zoom": 1
+  },
+  "axis--heavy-laser-grenadier-squad": {
+   "x": 0.5,
+   "y": 0.559,
+   "zoom": 1
+  },
+  "axis--zombie-grenadier-squad": {
+   "x": 0.5,
+   "y": 0.559,
    "zoom": 1
   }
  }
