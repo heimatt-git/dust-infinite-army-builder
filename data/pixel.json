@@ -1,5 +1,5 @@
 {
- "version": "202610201008",
+ "version": "202610201120",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -140,6 +140,8 @@
   "axis--angela-iii",
   "axis--blitz",
   "axis--bloody-blitz",
+  "axis--dual-field-laser-gun",
+  "axis--dual-field-laser-gun-bunker",
   "axis--experiment-x-33",
   "axis--falke",
   "axis--fallschirm-rso-flak-3",
@@ -148,6 +150,8 @@
   "axis--fallschirmjager-laser-gun-squad",
   "axis--fallschirmjager-missile-squad",
   "axis--fallschirmjager-mortar-squad",
+  "axis--field-laser-gun",
+  "axis--field-laser-gun-bunker",
   "axis--flammpanzer-e-15-luft",
   "axis--florentine",
   "axis--frank-von-stein",
@@ -171,6 +175,12 @@
   "axis--johanna",
   "axis--kaori",
   "axis--kommandowagen",
+  "axis--konigslothar",
+  "axis--konigslothar-ii",
+  "axis--konigslothar-ii-bk",
+  "axis--konigsluther",
+  "axis--konigswotan",
+  "axis--konigswotan-bk",
   "axis--kurt",
   "axis--lara",
   "axis--laser-grenadier-squad",
@@ -186,6 +196,7 @@
   "axis--nordwind-ii",
   "axis--panzermeister",
   "axis--panzerprinz",
+  "axis--prinzluther",
   "axis--raketenmann",
   "axis--raketentruppe-command-squad",
   "axis--raketentruppe-tank-hunter-squad",
@@ -193,12 +204,15 @@
   "axis--samson",
   "axis--sigrid-i",
   "axis--sigrid-iii",
+  "axis--snow-lynx",
   "axis--stefan",
   "axis--storch",
+  "axis--stummel",
   "axis--sturmgrenadier-assault-engineer-squad",
   "axis--sturmgrenadier-observer-squad",
   "axis--sturmgrenadier-sniper-squad",
   "axis--sturmgrenadier-tank-hunter-squad",
+  "axis--sturmkonig",
   "axis--sturmluther",
   "axis--the-desert-fox",
   "axis--tina-and-hyane",
@@ -2344,6 +2358,51 @@
   "axis--nordwind": {
    "x": 0.5,
    "y": 0.571,
+   "zoom": 1
+  },
+  "axis--konigswotan": {
+   "x": 0.5,
+   "y": 0.517,
+   "zoom": 1
+  },
+  "axis--konigswotan-bk": {
+   "x": 0.5,
+   "y": 0.548,
+   "zoom": 1
+  },
+  "axis--stummel": {
+   "x": 0.5,
+   "y": 0.571,
+   "zoom": 1
+  },
+  "axis--prinzluther": {
+   "x": 0.5,
+   "y": 0.463,
+   "zoom": 1
+  },
+  "axis--konigslothar-ii-bk": {
+   "x": 0.5,
+   "y": 0.554,
+   "zoom": 1
+  },
+  "axis--sturmkonig": {
+   "x": 0.5,
+   "y": 0.511,
+   "zoom": 1
+  },
+  "axis--konigsluther": {
+   "x": 0.5,
+   "y": 0.548,
+   "zoom": 1
+  },
+  "axis--snow-lynx": {
+   "x": 0.5,
+   "y": 0.59,
+   "zoom": 1
+  },
+  "axis--dual-field-laser-gun": {
+   "x": 0.5,
+   "y": 0.539,
    "zoom": 1
   }
  }
