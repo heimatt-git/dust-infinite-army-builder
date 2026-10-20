@@ -1,5 +1,5 @@
 {
- "version": "202610201004",
+ "version": "202610201008",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -134,6 +134,7 @@
   "allies--wildfire-usmc",
   "allies--wolverine-ii",
   "allies--wolverine-iii",
+  "axis--ab-47",
   "axis--adler",
   "axis--angela-ii",
   "axis--angela-iii",
@@ -156,6 +157,7 @@
   "axis--gorilla-squad",
   "axis--gregor",
   "axis--grenadier-x",
+  "axis--hanomag",
   "axis--hans",
   "axis--heavy-grenadier-anti-aircraft-squad",
   "axis--heavy-grenadier-command-squad",
@@ -168,6 +170,7 @@
   "axis--jagdloki",
   "axis--johanna",
   "axis--kaori",
+  "axis--kommandowagen",
   "axis--kurt",
   "axis--lara",
   "axis--laser-grenadier-squad",
@@ -179,6 +182,7 @@
   "axis--manfred",
   "axis--markus",
   "axis--moskito",
+  "axis--nordwind",
   "axis--nordwind-ii",
   "axis--panzermeister",
   "axis--panzerprinz",
@@ -2320,6 +2324,26 @@
   "axis--nordwind-ii": {
    "x": 0.5,
    "y": 0.554,
+   "zoom": 1
+  },
+  "axis--kommandowagen": {
+   "x": 0.5,
+   "y": 0.511,
+   "zoom": 1
+  },
+  "axis--hanomag": {
+   "x": 0.5,
+   "y": 0.562,
+   "zoom": 1
+  },
+  "axis--ab-47": {
+   "x": 0.5,
+   "y": 0.59,
+   "zoom": 1
+  },
+  "axis--nordwind": {
+   "x": 0.5,
+   "y": 0.571,
    "zoom": 1
   }
  }
