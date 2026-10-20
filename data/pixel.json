@@ -1,5 +1,5 @@
 {
- "version": "202610201223",
+ "version": "202610201227",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -2503,6 +2503,11 @@
   "axis--flammpanzer-e-15-bk": {
    "x": 0.5,
    "y": 0.568,
+   "zoom": 1
+  },
+  "axis--bergeluther": {
+   "x": 0.5,
+   "y": 0.539,
    "zoom": 1
   }
  }
