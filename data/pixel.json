@@ -1,5 +1,5 @@
 {
- "version": "202610201227",
+ "version": "202610201243",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -167,6 +167,13 @@
   "axis--goliath",
   "axis--gorilla-squad",
   "axis--gregor",
+  "axis--grenadier-battle-squad",
+  "axis--grenadier-command-squad",
+  "axis--grenadier-heavy-mortar-squad",
+  "axis--grenadier-observer-squad",
+  "axis--grenadier-recon-squad",
+  "axis--grenadier-security-squad",
+  "axis--grenadier-tank-hunter-squad",
   "axis--grenadier-x",
   "axis--hanomag",
   "axis--hans",
@@ -2508,6 +2515,36 @@
   "axis--bergeluther": {
    "x": 0.5,
    "y": 0.539,
+   "zoom": 1
+  },
+  "axis--grenadier-command-squad": {
+   "x": 0.5,
+   "y": 0.545,
+   "zoom": 1
+  },
+  "axis--grenadier-security-squad": {
+   "x": 0.5,
+   "y": 0.556,
+   "zoom": 1
+  },
+  "axis--grenadier-battle-squad": {
+   "x": 0.5,
+   "y": 0.52,
+   "zoom": 1
+  },
+  "axis--grenadier-recon-squad": {
+   "x": 0.5,
+   "y": 0.52,
+   "zoom": 1
+  },
+  "axis--grenadier-observer-squad": {
+   "x": 0.5,
+   "y": 0.542,
+   "zoom": 1
+  },
+  "axis--grenadier-heavy-mortar-squad": {
+   "x": 0.5,
+   "y": 0.511,
    "zoom": 1
   }
  }
