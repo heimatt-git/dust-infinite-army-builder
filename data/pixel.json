@@ -1,5 +1,5 @@
 {
- "version": "202610201247",
+ "version": "202610201348",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -73,7 +73,6 @@
   "allies--pershing-iii",
   "allies--pounder",
   "allies--pounder-light",
-  "allies--punisher",
   "allies--punisher-ii",
   "allies--ranger-assault-squad",
   "allies--ranger-attack-squad",
@@ -1682,11 +1681,6 @@
   "allies--fireball": {
    "x": 0.5,
    "y": 0.511,
-   "zoom": 1
-  },
-  "allies--punisher": {
-   "x": 0.5,
-   "y": 0.537,
    "zoom": 1
   },
   "allies--skysweeper": {
