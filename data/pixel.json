@@ -1,5 +1,5 @@
 {
- "version": "202610200939",
+ "version": "202610200950",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -148,10 +148,12 @@
   "axis--fallschirmjager-missile-squad",
   "axis--fallschirmjager-mortar-squad",
   "axis--flammpanzer-e-15-luft",
+  "axis--frank-von-stein",
   "axis--galeazzo",
   "axis--geist",
   "axis--gorilla-squad",
   "axis--gregor",
+  "axis--grenadier-x",
   "axis--hans",
   "axis--heavy-grenadier-anti-aircraft-squad",
   "axis--heavy-grenadier-command-squad",
@@ -170,12 +172,14 @@
   "axis--luft-horst-trop",
   "axis--luther",
   "axis--manfred",
+  "axis--markus",
   "axis--moskito",
   "axis--panzerprinz",
   "axis--raketentruppe-command-squad",
   "axis--raketentruppe-tank-hunter-squad",
   "axis--rolf",
   "axis--samson",
+  "axis--sigrid-i",
   "axis--sigrid-iii",
   "axis--stefan",
   "axis--storch",
@@ -185,8 +189,12 @@
   "axis--sturmgrenadier-tank-hunter-squad",
   "axis--sturmluther",
   "axis--the-desert-fox",
+  "axis--totenmeister",
   "axis--vk-stash",
   "axis--wilfried",
+  "axis--wolfgang",
+  "axis--zombie-squad",
+  "axis--zombie-suicide-squad",
   "ijn--akiko",
   "ijn--basan",
   "ijn--byakko",
@@ -2237,6 +2245,36 @@
   "ssu--nkvd-political-commisar-machine-gunner": {
    "x": 0.5,
    "y": 0.661,
+   "zoom": 1
+  },
+  "axis--wolfgang": {
+   "x": 0.5,
+   "y": 0.573,
+   "zoom": 1
+  },
+  "axis--markus": {
+   "x": 0.5,
+   "y": 0.523,
+   "zoom": 1
+  },
+  "axis--zombie-suicide-squad": {
+   "x": 0.5,
+   "y": 0.559,
+   "zoom": 1
+  },
+  "axis--frank-von-stein": {
+   "x": 0.5,
+   "y": 0.534,
+   "zoom": 1
+  },
+  "axis--grenadier-x": {
+   "x": 0.5,
+   "y": 0.596,
+   "zoom": 1
+  },
+  "axis--totenmeister": {
+   "x": 0.5,
+   "y": 0.582,
    "zoom": 1
   }
  }
