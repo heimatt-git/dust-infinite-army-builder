@@ -1,5 +1,5 @@
 {
- "version": "202610191224",
+ "version": "202610200858",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -354,6 +354,8 @@
   "ssu--nina-tsh-pla",
   "ssu--nkvd-political-commissar-squad",
   "ssu--pla-antitank-squad",
+  "ssu--pla-assault-squad",
+  "ssu--pla-command-squad",
   "ssu--pla-demolition-squad",
   "ssu--pla-fire-squad",
   "ssu--pla-fire-support-squad",
@@ -384,7 +386,9 @@
   "ssu--red-army-close-combat-squad",
   "ssu--red-army-command-squad",
   "ssu--red-army-heavy-mortar-squad",
+  "ssu--red-army-observer-squad",
   "ssu--red-army-rifle-squad",
+  "ssu--red-army-sniper-squad",
   "ssu--red-army-tesla-gun-squad",
   "ssu--red-cossack",
   "ssu--red-fury",
@@ -2189,6 +2193,26 @@
   "ssu--pla-demolition-squad": {
    "x": 0.5,
    "y": 0.556,
+   "zoom": 1
+  },
+  "ssu--red-army-sniper-squad": {
+   "x": 0.5,
+   "y": 0.599,
+   "zoom": 1
+  },
+  "ssu--red-army-observer-squad": {
+   "x": 0.5,
+   "y": 0.585,
+   "zoom": 1
+  },
+  "ssu--pla-command-squad": {
+   "x": 0.5,
+   "y": 0.523,
+   "zoom": 1
+  },
+  "ssu--pla-assault-squad": {
+   "x": 0.5,
+   "y": 0.596,
    "zoom": 1
   }
  }
