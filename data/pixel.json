@@ -1,5 +1,5 @@
 {
- "version": "202610201201",
+ "version": "202610201212",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -189,7 +189,11 @@
   "axis--laser-grenadier-squad",
   "axis--laser-tank-hunter-squad",
   "axis--lohengrin",
+  "axis--loki-tropical",
+  "axis--loth",
+  "axis--loth-tropical",
   "axis--lothar",
+  "axis--ludwig",
   "axis--luft-hans-trop",
   "axis--luft-heinrich-trop",
   "axis--luft-hermann-trop",
@@ -2446,6 +2450,21 @@
   "axis--wotan": {
    "x": 0.5,
    "y": 0.528,
+   "zoom": 1
+  },
+  "axis--loth-tropical": {
+   "x": 0.5,
+   "y": 0.421,
+   "zoom": 1
+  },
+  "axis--loth": {
+   "x": 0.5,
+   "y": 0.596,
+   "zoom": 1
+  },
+  "axis--loki-tropical": {
+   "x": 0.5,
+   "y": 0.52,
    "zoom": 1
   }
  }
