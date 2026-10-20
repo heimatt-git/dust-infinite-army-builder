@@ -1,5 +1,5 @@
 {
- "version": "202610200858",
+ "version": "202610200903",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -361,6 +361,7 @@
   "ssu--pla-fire-support-squad",
   "ssu--pla-kill-squad",
   "ssu--pla-steel-guards-anti-infantry-squad",
+  "ssu--pla-steel-guards-anti-tank-squad",
   "ssu--pla-steel-guards-assault-squad",
   "ssu--pla-steel-guards-attack-squad",
   "ssu--pla-steel-guards-fire-support-squad",
@@ -2213,6 +2214,11 @@
   "ssu--pla-assault-squad": {
    "x": 0.5,
    "y": 0.596,
+   "zoom": 1
+  },
+  "ssu--pla-steel-guards-anti-tank-squad": {
+   "x": 0.5,
+   "y": 0.576,
    "zoom": 1
   }
  }
