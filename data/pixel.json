@@ -1,5 +1,5 @@
 {
- "version": "202610201212",
+ "version": "202610201223",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -138,10 +138,15 @@
   "axis--adler",
   "axis--angela-ii",
   "axis--angela-iii",
+  "axis--bergeluther",
   "axis--blitz",
   "axis--bloody-blitz",
   "axis--dual-field-laser-gun",
   "axis--dual-field-laser-gun-bunker",
+  "axis--e-10-flammhetzer",
+  "axis--e-10-flammhetzer-ndak",
+  "axis--e-10-hetzer",
+  "axis--e-10-hetzer-ndak",
   "axis--experiment-x-33",
   "axis--falke",
   "axis--fallschirm-rso-flak-3",
@@ -153,6 +158,7 @@
   "axis--field-laser-gun",
   "axis--field-laser-gun-bunker",
   "axis--flammluther",
+  "axis--flammpanzer-e-15-bk",
   "axis--flammpanzer-e-15-luft",
   "axis--florentine",
   "axis--frank-von-stein",
@@ -187,6 +193,8 @@
   "axis--kurt",
   "axis--lara",
   "axis--laser-grenadier-squad",
+  "axis--laser-jagdpanzer-e-15-bk",
+  "axis--laser-jagdpanzer-e-15-luft",
   "axis--laser-tank-hunter-squad",
   "axis--lohengrin",
   "axis--loki-tropical",
@@ -969,7 +977,7 @@
   },
   "axis--flammpanzer-e-15-luft": {
    "x": 0.5,
-   "y": 0.655,
+   "y": 0.621,
    "zoom": 1
   },
   "axis--fallschirmjager-anti-tank-squad": {
@@ -2465,6 +2473,36 @@
   "axis--loki-tropical": {
    "x": 0.5,
    "y": 0.52,
+   "zoom": 1
+  },
+  "axis--e-10-flammhetzer-ndak": {
+   "x": 0.5,
+   "y": 0.565,
+   "zoom": 1
+  },
+  "axis--e-10-hetzer-ndak": {
+   "x": 0.5,
+   "y": 0.461,
+   "zoom": 1
+  },
+  "axis--e-10-flammhetzer": {
+   "x": 0.5,
+   "y": 0.545,
+   "zoom": 1
+  },
+  "axis--laser-jagdpanzer-e-15-bk": {
+   "x": 0.5,
+   "y": 0.571,
+   "zoom": 1
+  },
+  "axis--laser-jagdpanzer-e-15-luft": {
+   "x": 0.5,
+   "y": 0.554,
+   "zoom": 1
+  },
+  "axis--flammpanzer-e-15-bk": {
+   "x": 0.5,
+   "y": 0.568,
    "zoom": 1
   }
  }
