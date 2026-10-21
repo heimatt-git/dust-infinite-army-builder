@@ -1,5 +1,5 @@
 {
- "version": "202610211112",
+ "version": "202610211127",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -142,6 +142,7 @@
   "axis--blitz",
   "axis--bloody-blitz",
   "axis--btg-san-marco-assault-squad",
+  "axis--christoph",
   "axis--dual-field-laser-gun",
   "axis--dual-field-laser-gun-bunker",
   "axis--e-10-flammhetzer",
@@ -165,6 +166,8 @@
   "axis--field-laser-gun",
   "axis--field-laser-gun-bunker",
   "axis--flammluther",
+  "axis--flammluther-ii",
+  "axis--flammluther-ii-bk",
   "axis--flammpanzer-e-15-bk",
   "axis--flammpanzer-e-15-luft",
   "axis--flammtiger-mit-x7",
@@ -193,6 +196,7 @@
   "axis--heavy-grenadier-engineer-squad",
   "axis--heavy-laser-grenadier-squad",
   "axis--heinrich",
+  "axis--heinrich-tropical",
   "axis--heinrich-tropical-bk",
   "axis--hermann",
   "axis--hermann-tropical",
@@ -277,6 +281,11 @@
   "axis--wilfried",
   "axis--wolfgang",
   "axis--wotan",
+  "axis--wotan-ar",
+  "axis--wotan-ii",
+  "axis--wotan-ii-ar",
+  "axis--wotan-ii-ar-bk",
+  "axis--wotan-ii-bk",
   "axis--yukiko",
   "axis--zombie-grenadier-squad",
   "axis--zombie-squad",
@@ -2716,6 +2725,16 @@
   "axis--panzer-iv-k": {
    "x": 0.5,
    "y": 0.537,
+   "zoom": 1
+  },
+  "axis--christoph": {
+   "x": 0.5,
+   "y": 0.579,
+   "zoom": 1
+  },
+  "axis--flammluther-ii-bk": {
+   "x": 0.5,
+   "y": 0.534,
    "zoom": 1
   }
  }
