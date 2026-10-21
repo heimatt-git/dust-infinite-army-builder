@@ -1,5 +1,5 @@
 {
- "version": "202610210944",
+ "version": "202610210956",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -140,6 +140,7 @@
   "axis--bergeluther",
   "axis--blitz",
   "axis--bloody-blitz",
+  "axis--btg-san-marco-assault-squad",
   "axis--dual-field-laser-gun",
   "axis--dual-field-laser-gun-bunker",
   "axis--e-10-flammhetzer",
@@ -184,6 +185,8 @@
   "axis--hanomag",
   "axis--hans",
   "axis--heavy-grenadier-anti-aircraft-squad",
+  "axis--heavy-grenadier-anti-tank-squad",
+  "axis--heavy-grenadier-assault-squad",
   "axis--heavy-grenadier-command-squad",
   "axis--heavy-grenadier-engineer-squad",
   "axis--heavy-laser-grenadier-squad",
@@ -206,6 +209,7 @@
   "axis--konigswotan-bk",
   "axis--kurt",
   "axis--lara",
+  "axis--laser-grenadier-command-squad",
   "axis--laser-grenadier-squad",
   "axis--laser-jagdpanzer-e-15-bk",
   "axis--laser-jagdpanzer-e-15-luft",
@@ -231,6 +235,8 @@
   "axis--panzerprinz",
   "axis--prinzluther",
   "axis--raketenmann",
+  "axis--raketentruppe-anti-aircraft-squad",
+  "axis--raketentruppe-battle-squad",
   "axis--raketentruppe-command-squad",
   "axis--raketentruppe-tank-hunter-squad",
   "axis--rolf",
@@ -242,6 +248,8 @@
   "axis--storch",
   "axis--stummel",
   "axis--sturmgrenadier-assault-engineer-squad",
+  "axis--sturmgrenadier-assault-squad",
+  "axis--sturmgrenadier-command-squad",
   "axis--sturmgrenadier-observer-squad",
   "axis--sturmgrenadier-sniper-squad",
   "axis--sturmgrenadier-tank-hunter-squad",
@@ -1469,7 +1477,7 @@
   },
   "axis--laser-grenadier-squad": {
    "x": 0.5,
-   "y": 0.444,
+   "y": 0.469,
    "zoom": 1
   },
   "axis--sturmgrenadier-tank-hunter-squad": {
@@ -2605,6 +2613,41 @@
   "axis--gorilla-pioneer-squad": {
    "x": 0.5,
    "y": 0.571,
+   "zoom": 1
+  },
+  "axis--heavy-grenadier-anti-tank-squad": {
+   "x": 0.5,
+   "y": 0.562,
+   "zoom": 1
+  },
+  "axis--btg-san-marco-assault-squad": {
+   "x": 0.5,
+   "y": 0.491,
+   "zoom": 1
+  },
+  "axis--laser-grenadier-command-squad": {
+   "x": 0.5,
+   "y": 0.562,
+   "zoom": 1
+  },
+  "axis--raketentruppe-anti-aircraft-squad": {
+   "x": 0.5,
+   "y": 0.48,
+   "zoom": 1
+  },
+  "axis--raketentruppe-battle-squad": {
+   "x": 0.5,
+   "y": 0.489,
+   "zoom": 1
+  },
+  "axis--sturmgrenadier-command-squad": {
+   "x": 0.5,
+   "y": 0.514,
+   "zoom": 1
+  },
+  "axis--sturmgrenadier-assault-squad": {
+   "x": 0.5,
+   "y": 0.554,
    "zoom": 1
   }
  }
