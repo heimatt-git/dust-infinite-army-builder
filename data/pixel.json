@@ -1,5 +1,5 @@
 {
- "version": "202610211303",
+ "version": "202610211309",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -168,6 +168,7 @@
   "axis--fallschirmjager-tank-hunter-squad",
   "axis--field-laser-gun",
   "axis--field-laser-gun-bunker",
+  "axis--flakluther",
   "axis--flammluther",
   "axis--flammluther-ii",
   "axis--flammluther-ii-bk",
@@ -191,6 +192,7 @@
   "axis--grenadier-tank-hunter-squad",
   "axis--grenadier-x",
   "axis--hanomag",
+  "axis--hanomag-vampir",
   "axis--hans",
   "axis--heavy-grenadier-anti-aircraft-squad",
   "axis--heavy-grenadier-anti-tank-squad",
@@ -2753,6 +2755,16 @@
   "allies--punisher": {
    "x": 0.5,
    "y": 0.551,
+   "zoom": 1
+  },
+  "axis--hanomag-vampir": {
+   "x": 0.5,
+   "y": 0.534,
+   "zoom": 1
+  },
+  "axis--flakluther": {
+   "x": 0.5,
+   "y": 0.545,
    "zoom": 1
   }
  }
