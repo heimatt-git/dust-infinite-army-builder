@@ -1,5 +1,5 @@
 {
- "version": "202610211129",
+ "version": "202610211303",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -73,6 +73,7 @@
   "allies--pershing-iii",
   "allies--pounder",
   "allies--pounder-light",
+  "allies--punisher",
   "allies--punisher-ii",
   "allies--ranger-assault-squad",
   "allies--ranger-attack-squad",
@@ -136,6 +137,7 @@
   "axis--ab-43-lanciafiamme",
   "axis--ab-47",
   "axis--adler",
+  "axis--angela-i",
   "axis--angela-ii",
   "axis--angela-iii",
   "axis--bergeluther",
@@ -1733,11 +1735,6 @@
    "y": 0.444,
    "zoom": 1
   },
-  "axis--angela-ii": {
-   "x": 0.5,
-   "y": 0.537,
-   "zoom": 1
-  },
   "allies--wolverine-ii": {
    "x": 0.5,
    "y": 0.545,
@@ -2741,6 +2738,21 @@
   "axis--fallschirm-rso-pak-40": {
    "x": 0.5,
    "y": 0.545,
+   "zoom": 1
+  },
+  "axis--angela-i": {
+   "x": 0.5,
+   "y": 0.548,
+   "zoom": 1
+  },
+  "axis--angela-ii": {
+   "x": 0.5,
+   "y": 0.596,
+   "zoom": 1.3
+  },
+  "allies--punisher": {
+   "x": 0.5,
+   "y": 0.551,
    "zoom": 1
   }
  }
