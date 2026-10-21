@@ -1,5 +1,5 @@
 {
- "version": "202610211056",
+ "version": "202610211112",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -167,6 +167,7 @@
   "axis--flammluther",
   "axis--flammpanzer-e-15-bk",
   "axis--flammpanzer-e-15-luft",
+  "axis--flammtiger-mit-x7",
   "axis--florentine",
   "axis--frank-von-stein",
   "axis--galeazzo",
@@ -194,10 +195,12 @@
   "axis--heinrich",
   "axis--heinrich-tropical-bk",
   "axis--hermann",
+  "axis--hermann-tropical",
   "axis--hexe",
   "axis--jacob",
   "axis--jagdloki",
   "axis--jagdloki-bk",
+  "axis--jagdluther",
   "axis--jagdwotan",
   "axis--johanna",
   "axis--kaori",
@@ -208,6 +211,8 @@
   "axis--konigsluther",
   "axis--konigswotan",
   "axis--konigswotan-bk",
+  "axis--krokodil",
+  "axis--krokodil-bk",
   "axis--kurt",
   "axis--lara",
   "axis--laser-grenadier-command-squad",
@@ -228,12 +233,17 @@
   "axis--luther",
   "axis--manfred",
   "axis--markus",
+  "axis--mobelwagen-ausf-b",
   "axis--moskito",
   "axis--nordwind",
   "axis--nordwind-ii",
   "axis--otto",
+  "axis--pakwagen-251",
+  "axis--panzer-iv-k",
   "axis--panzermeister",
   "axis--panzerprinz",
+  "axis--phonix",
+  "axis--phonix-bk",
   "axis--prinzluther",
   "axis--raketenmann",
   "axis--raketentruppe-anti-aircraft-squad",
@@ -2666,6 +2676,46 @@
   "axis--ab-43-lanciafiamme": {
    "x": 0.5,
    "y": 0.52,
+   "zoom": 1
+  },
+  "axis--mobelwagen-ausf-b": {
+   "x": 0.5,
+   "y": 0.554,
+   "zoom": 1
+  },
+  "axis--jagdluther": {
+   "x": 0.5,
+   "y": 0.573,
+   "zoom": 1
+  },
+  "axis--hermann-tropical": {
+   "x": 0.5,
+   "y": 0.52,
+   "zoom": 1
+  },
+  "axis--phonix-bk": {
+   "x": 0.489,
+   "y": 0.714,
+   "zoom": 1.05
+  },
+  "axis--phonix": {
+   "x": 0.5,
+   "y": 0.699,
+   "zoom": 1
+  },
+  "axis--flammtiger-mit-x7": {
+   "x": 0.5,
+   "y": 0.452,
+   "zoom": 1
+  },
+  "axis--pakwagen-251": {
+   "x": 0.5,
+   "y": 0.573,
+   "zoom": 1
+  },
+  "axis--panzer-iv-k": {
+   "x": 0.5,
+   "y": 0.537,
    "zoom": 1
   }
  }
