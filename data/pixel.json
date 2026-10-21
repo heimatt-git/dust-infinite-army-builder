@@ -1,5 +1,5 @@
 {
- "version": "202610201348",
+ "version": "202610210944",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -150,11 +150,15 @@
   "axis--falke",
   "axis--fallschirm-rso-flak-3",
   "axis--fallschirm-rso-laserkanone",
+  "axis--fallschirmjager-anti-aircraft-squad",
   "axis--fallschirmjager-anti-tank-squad",
   "axis--fallschirmjager-battle-squad",
+  "axis--fallschirmjager-command-squad",
   "axis--fallschirmjager-laser-gun-squad",
   "axis--fallschirmjager-missile-squad",
   "axis--fallschirmjager-mortar-squad",
+  "axis--fallschirmjager-observer-squad",
+  "axis--fallschirmjager-rocket-launcher-squad",
   "axis--fallschirmjager-tank-hunter-squad",
   "axis--field-laser-gun",
   "axis--field-laser-gun-bunker",
@@ -166,6 +170,7 @@
   "axis--galeazzo",
   "axis--geist",
   "axis--goliath",
+  "axis--gorilla-pioneer-squad",
   "axis--gorilla-squad",
   "axis--gregor",
   "axis--grenadier-battle-squad",
@@ -186,6 +191,7 @@
   "axis--heinrich-tropical-bk",
   "axis--hermann",
   "axis--hexe",
+  "axis--jacob",
   "axis--jagdloki",
   "axis--jagdloki-bk",
   "axis--jagdwotan",
@@ -241,13 +247,16 @@
   "axis--sturmgrenadier-tank-hunter-squad",
   "axis--sturmkonig",
   "axis--sturmluther",
+  "axis--the-bloody-baron",
   "axis--the-desert-fox",
+  "axis--the-desert-fox-ndak",
   "axis--tina-and-hyane",
   "axis--totenmeister",
   "axis--vk-stash",
   "axis--wilfried",
   "axis--wolfgang",
   "axis--wotan",
+  "axis--yukiko",
   "axis--zombie-grenadier-squad",
   "axis--zombie-squad",
   "axis--zombie-suicide-squad",
@@ -756,11 +765,6 @@
   "axis--fallschirm-rso-laserkanone": {
    "x": 0.5,
    "y": 0.424,
-   "zoom": 1
-  },
-  "axis--fallschirmjager-missile-squad": {
-   "x": 0.5,
-   "y": 0.568,
    "zoom": 1
   },
   "axis--geist": {
@@ -2551,6 +2555,56 @@
   "axis--fallschirmjager-tank-hunter-squad": {
    "x": 0.5,
    "y": 0.537,
+   "zoom": 1
+  },
+  "axis--fallschirmjager-anti-aircraft-squad": {
+   "x": 0.5,
+   "y": 0.568,
+   "zoom": 1
+  },
+  "axis--jacob": {
+   "x": 0.5,
+   "y": 0.596,
+   "zoom": 1
+  },
+  "axis--the-desert-fox-ndak": {
+   "x": 0.5,
+   "y": 0.593,
+   "zoom": 1
+  },
+  "axis--the-bloody-baron": {
+   "x": 0.483,
+   "y": 0.652,
+   "zoom": 1.15
+  },
+  "axis--yukiko": {
+   "x": 0.5,
+   "y": 0.466,
+   "zoom": 1
+  },
+  "axis--fallschirmjager-command-squad": {
+   "x": 0.5,
+   "y": 0.542,
+   "zoom": 1
+  },
+  "axis--fallschirmjager-observer-squad": {
+   "x": 0.5,
+   "y": 0.556,
+   "zoom": 1
+  },
+  "axis--fallschirmjager-rocket-launcher-squad": {
+   "x": 0.5,
+   "y": 0.517,
+   "zoom": 1
+  },
+  "axis--fallschirmjager-missile-squad": {
+   "x": 0.5,
+   "y": 0.531,
+   "zoom": 1
+  },
+  "axis--gorilla-pioneer-squad": {
+   "x": 0.5,
+   "y": 0.571,
    "zoom": 1
   }
  }
