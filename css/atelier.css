@@ -38,3 +38,8 @@
 .opt-row .or { font-size: 12px; color: var(--muted); font-style: italic; }
 .pl-page { max-width: 560px; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; background: #fff; }
 .pl-page svg { display: block; width: 100%; height: auto; }
+
+/* Export PNG de la carte en cours */
+.at-export { display: grid; gap: 6px; margin-top: 6px; max-width: 460px; }
+.at-export select { margin-left: 6px; }
+.at-export-msg { font-size: .85rem; opacity: .85; min-height: 1em; }
