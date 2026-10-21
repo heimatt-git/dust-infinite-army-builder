@@ -8,6 +8,7 @@ import { exportListPDF, pdfDialogHTML, bindPdfDialog } from './pdf.js';
 import { initCardArt } from './cardart.js';
 import { initImages } from './images.js';
 import { openUnitCard, thumb, artOf } from './unitcard.js';
+import { generatedCardSVG, cardFontsReady } from './cardgen.js';
 
 const LS_KEY = 'dust1947.short.lists';
 const SLOTS = ['cmd', 'c1', 'c2', 'c3', 'c4', 'veh'];
@@ -412,7 +413,9 @@ function openPicker(slot) {
     const showCard = (id) => {
       const u = D.unitsById.get(id); if (!u) return;
       scrollPos = box.scrollTop;
-      card.innerHTML = unitCardHTML(u, D, { cost: unitCost(u), topHTML: `<div class="sf-card-bar"><button type="button" class="btn" data-back>${t('← Retour à la liste')}</button><button type="button" class="btn primary" data-choose>${t('Choisir cette unité ({n} PA)', { n: unitCost(u) })}</button></div>` });
+      const art = artOf(u, D), cardSvg = () => generatedCardSVG(u, D, { cost: unitCost(u), photo: art.photo || null, focus: art.focus, credit: art.credit });
+      card.innerHTML = unitCardHTML(u, D, { cost: unitCost(u), topHTML: `<div class="sf-card-bar"><button type="button" class="btn" data-back>${t('← Retour à la liste')}</button><button type="button" class="btn primary" data-choose>${t('Choisir cette unité ({n} PA)', { n: unitCost(u) })}</button></div><div class="gcard-box"><div class="gcard-wrap sf-gcard">${cardSvg()}</div></div>` });
+      cardFontsReady().then(() => { const w = card.querySelector('.sf-gcard'); if (w?.isConnected) w.innerHTML = cardSvg(); });
       card.querySelector('[data-back]').addEventListener('click', () => { card.hidden = true; card.innerHTML = ''; main.hidden = false; box.scrollTop = scrollPos; });
       card.querySelector('[data-choose]').addEventListener('click', () => choose(id));
       main.hidden = true; card.hidden = false; box.scrollTop = 0;
