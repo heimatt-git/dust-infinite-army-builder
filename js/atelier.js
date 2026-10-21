@@ -7,7 +7,7 @@ import { esc, uid, store, toast, openModal, unitCardHTML, brandLogo, mountCredit
 import { shrink } from './images.js';
 import { framingHTML, mountFraming } from './framing.js';
 import { skillPickerHTML, bindSkillPickers } from './skillpicker.js';
-import { generatedCardSVG, cardFontsReady, svgCanvas } from './cardgen.js';
+import { generatedCardSVG, cardFontsReady, svgCanvas, watermarkSVG } from './cardgen.js';
 import { platoonPageSVG } from './platoonpage.js';
 import { exportPagesPDF } from './pdf.js';
 import { t, LANG, initLang, setLang } from './i18n.js';
@@ -231,7 +231,10 @@ function renderUnits(body) {
         <button class="btn sm" id="u-tpl-go">${t('Copier comme modèle')}</button>
       </div>
     </aside>
-    <section>${u ? `<div class="at-unit"><div>${unitForm(u, D)}</div><aside class="at-prev-col"><div class="eyebrow">${t('Aperçu de la carte')}</div><div id="u-preview" class="at-preview"></div></aside></div>`
+    <section>${u ? `<div class="at-unit"><div>${unitForm(u, D)}</div><aside class="at-prev-col"><div class="eyebrow">${t('Aperçu de la carte')}</div><div id="u-preview" class="at-preview"></div>
+      <div class="at-export"><label>${t('Format')} <select id="u-fmt"><option value="square">${t('Carré (80×80 mm)')}</option><option value="wide">${t('Large (120×70 mm)')}</option></select></label>
+      <button type="button" class="btn" id="u-card-png">${t('Télécharger la carte (PNG)')}</button>
+      <div id="u-card-msg" class="at-export-msg"></div></div></aside></div>`
       : `<div class="ed-sec"><p class="hint" style="margin:0">${t('Créez une nouvelle unité, ou partez d\'une unité existante pour gagner du temps. Chaque unité est rattachée à un bloc et, si vous le souhaitez, à une faction (officielle ou créée dans l\'onglet Factions).')}</p></div>`}</section>
   </div>`;
   body.querySelectorAll('[data-sel]').forEach((b) => b.addEventListener('click', () => { A.sel = b.dataset.sel; render(); }));
@@ -372,12 +375,45 @@ function showPreview() {
   const pu = D.unitsById.get(u.id);
   if (!pu) { box.innerHTML = ''; return; }
   const ph = photoURL(u);
-  const card = `<div class="gcard-box"><div class="gcard-wrap at-gcard">${generatedCardSVG(pu, D, { cost: pu.cost, photo: ph, focus: u.photoFocus || null })}</div></div>`;
+  const card = `<div class="gcard-box"><div class="gcard-wrap at-gcard">${watermarkSVG(generatedCardSVG(pu, D, { cost: pu.cost, photo: ph, focus: u.photoFocus || null }), t('BROUILLON · DRAFT'))}</div></div>`;
   box.innerHTML = `<div class="modal at-card">${unitCardHTML(pu, D, { cost: pu.cost, topHTML: card })}</div>`;
+}
+
+function cardMissing(u) {
+  const m = [];
+  if (!String(u.name || '').trim()) m.push(t('le nom'));
+  if (!(Number(u.cost) > 0)) m.push(t('le coût'));
+  if (u.type !== 'token' && !u.weapons?.length) m.push(t('les armes'));
+  if (!photoURL(u)) m.push(t('l\'illustration'));
+  if ((u.customSkills || []).some((c) => !c.name || !c.description)) m.push(t('une règle inédite (nom ou description)'));
+  return m;
+}
+
+function bindCardExport(body, u) {
+  const btn = body.querySelector('#u-card-png'), msg = body.querySelector('#u-card-msg'), sel = body.querySelector('#u-fmt');
+  if (!btn) return;
+  sel.value = A.cardFmt || 'square';
+  sel.addEventListener('change', () => { A.cardFmt = sel.value; });
+  const miss = cardMissing(u);
+  msg.textContent = miss.length ? t('Carte incomplète, il manque : {l}. Vous pouvez quand même la télécharger.', { l: miss.join(', ') }) : '';
+  btn.addEventListener('click', async () => {
+    msg.textContent = t('Création de l\'image…');
+    try {
+      await cardFontsReady();
+      const D = preview(), pu = D.unitsById.get(u.id);
+      if (!pu) throw new Error('unit');
+      const svg = watermarkSVG(generatedCardSVG(pu, D, { cost: pu.cost, photo: photoURL(u), focus: u.photoFocus || null, format: sel.value }), t('BROUILLON · DRAFT'));
+      const c = await svgCanvas(svg, { scale: 2 });
+      download(await new Promise((r) => c.toBlob(r, 'image/png')), `carte-${slug(u.name)}.png`);
+      const mm = cardMissing(u);
+      msg.textContent = t('Image téléchargée.') + (mm.length ? ' ' + t('Carte incomplète, il manque : {l}. Vous pouvez quand même la télécharger.', { l: mm.join(', ') }) : '');
+    } catch (e) { console.error(e); msg.textContent = t('Impossible de créer l\'image dans ce navigateur.'); }
+  });
 }
 
 function bindUnitForm(body, u) {
   const P = A.P;
+  bindCardExport(body, u);
   const form = body.querySelector('#u-form');
   const apply = () => { readUnitForm(form, u); save(); };
   form.addEventListener('change', (e) => {

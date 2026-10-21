@@ -432,6 +432,16 @@ async function embeddedFonts() {
 const blobToDataURL = (blob) => new Promise((res, rej) => { const fr = new FileReader(); fr.onload = () => res(fr.result); fr.onerror = rej; fr.readAsDataURL(blob); });
 
 // SVG → canvas (polices et images intégrées), base des exports PNG et PDF
+// Filigrane diagonal répété (cartes en cours de création) : ajouté juste avant </svg>
+export function watermarkSVG(svg, text) {
+  const [, w, h] = svg.match(/viewBox="0 0 (\d+(?:\.\d+)?) (\d+(?:\.\d+)?)"/) || [];
+  const W = +w, H = +h; if (!W || !H) return svg;
+  const fs = Math.round(W * 0.060), step = Math.round(W * 0.16);
+  let rows = '';
+  for (let y = -H; y < 2 * H; y += step) rows += `<text x="${W / 2}" y="${y}" text-anchor="middle" font-family="Impact,'Arial Black',sans-serif" font-weight="900" font-size="${fs}" letter-spacing="${(fs * 0.15).toFixed(1)}" fill="#1a1a1a" fill-opacity="0.22" stroke="#ffffff" stroke-opacity="0.45" stroke-width="${(fs * 0.035).toFixed(1)}" paint-order="stroke">${xe(text)}</text>`;
+  return svg.replace(/<\/svg>\s*$/, `<g clip-path="inset(0)" pointer-events="none"><g transform="rotate(-35 ${W / 2} ${H / 2})">${rows}</g></g></svg>`);
+}
+
 export async function svgCanvas(svg, { scale = 2, bg = null } = {}) {
   await document.fonts?.ready;
   const css = await embeddedFonts();
