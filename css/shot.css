@@ -146,3 +146,6 @@
 
 .sf-sort { align-items: center; margin-bottom: 8px; }
 .sf-sort-l { font-size: 12px; color: var(--muted, #6b6f66); text-transform: uppercase; letter-spacing: .06em; font-weight: 600; }
+
+.sf-gcard { cursor: default; }
+.sf-card-bar + .gcard-box { margin: 10px 0; }
