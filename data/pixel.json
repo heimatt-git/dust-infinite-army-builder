@@ -1,5 +1,5 @@
 {
- "version": "202610211338",
+ "version": "202610211340",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -2117,11 +2117,6 @@
    "y": 0.573,
    "zoom": 1
   },
-  "ssu--nikita": {
-   "x": 0.5,
-   "y": 0.475,
-   "zoom": 1
-  },
   "ssu--red-rain": {
    "x": 0.5,
    "y": 0.506,
@@ -2786,6 +2781,11 @@
    "x": 0.5,
    "y": 0.542,
    "zoom": 1
+  },
+  "ssu--nikita": {
+   "x": 0.49,
+   "y": 0.589,
+   "zoom": 1.15
   }
  }
 }
