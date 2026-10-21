@@ -1,5 +1,5 @@
 {
- "version": "202610210956",
+ "version": "202610211056",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -133,6 +133,7 @@
   "allies--wildfire-usmc",
   "allies--wolverine-ii",
   "allies--wolverine-iii",
+  "axis--ab-43-lanciafiamme",
   "axis--ab-47",
   "axis--adler",
   "axis--angela-ii",
@@ -250,7 +251,9 @@
   "axis--sturmgrenadier-assault-engineer-squad",
   "axis--sturmgrenadier-assault-squad",
   "axis--sturmgrenadier-command-squad",
+  "axis--sturmgrenadier-mortar-squad",
   "axis--sturmgrenadier-observer-squad",
+  "axis--sturmgrenadier-recon-squad",
   "axis--sturmgrenadier-sniper-squad",
   "axis--sturmgrenadier-tank-hunter-squad",
   "axis--sturmkonig",
@@ -2648,6 +2651,21 @@
   "axis--sturmgrenadier-assault-squad": {
    "x": 0.5,
    "y": 0.554,
+   "zoom": 1
+  },
+  "axis--sturmgrenadier-mortar-squad": {
+   "x": 0.5,
+   "y": 0.503,
+   "zoom": 1
+  },
+  "axis--sturmgrenadier-recon-squad": {
+   "x": 0.5,
+   "y": 0.517,
+   "zoom": 1
+  },
+  "axis--ab-43-lanciafiamme": {
+   "x": 0.5,
+   "y": 0.52,
    "zoom": 1
   }
  }
