@@ -1,5 +1,5 @@
 {
- "version": "202610211127",
+ "version": "202610211129",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -153,6 +153,7 @@
   "axis--falke",
   "axis--fallschirm-rso-flak-3",
   "axis--fallschirm-rso-laserkanone",
+  "axis--fallschirm-rso-pak-40",
   "axis--fallschirmjager-anti-aircraft-squad",
   "axis--fallschirmjager-anti-tank-squad",
   "axis--fallschirmjager-battle-squad",
@@ -2735,6 +2736,11 @@
   "axis--flammluther-ii-bk": {
    "x": 0.5,
    "y": 0.534,
+   "zoom": 1
+  },
+  "axis--fallschirm-rso-pak-40": {
+   "x": 0.5,
+   "y": 0.545,
    "zoom": 1
   }
  }
