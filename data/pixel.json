@@ -1,5 +1,5 @@
 {
- "version": "202610211309",
+ "version": "202610211338",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -443,9 +443,12 @@
   "ssu--koshka",
   "ssu--kv-152",
   "ssu--lavrentiy",
+  "ssu--maksim",
   "ssu--mao",
+  "ssu--marlen",
   "ssu--master-yuk",
   "ssu--matrioshka",
+  "ssu--mikhail",
   "ssu--mikhail-tsh",
   "ssu--motherland-tesla-gun",
   "ssu--motherland-tesla-gun-bunker",
@@ -454,6 +457,8 @@
   "ssu--nadya",
   "ssu--nadya-tsh",
   "ssu--nastasia",
+  "ssu--natalya",
+  "ssu--natasha",
   "ssu--natasha-tsh",
   "ssu--nikita",
   "ssu--nikolai",
@@ -2765,6 +2770,21 @@
   "axis--flakluther": {
    "x": 0.5,
    "y": 0.545,
+   "zoom": 1
+  },
+  "ssu--natalya": {
+   "x": 0.5,
+   "y": 0.52,
+   "zoom": 1
+  },
+  "ssu--natasha": {
+   "x": 0.5,
+   "y": 0.466,
+   "zoom": 1
+  },
+  "ssu--maksim": {
+   "x": 0.5,
+   "y": 0.542,
    "zoom": 1
   }
  }
