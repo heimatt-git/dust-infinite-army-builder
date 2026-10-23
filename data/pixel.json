@@ -1,5 +1,5 @@
 {
- "version": "202610230651",
+ "version": "202610230700",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -2557,11 +2557,6 @@
    "y": 0.542,
    "zoom": 1
   },
-  "axis--grenadier-heavy-mortar-squad": {
-   "x": 0.5,
-   "y": 0.511,
-   "zoom": 1
-  },
   "axis--fallschirmjager-battle-squad": {
    "x": 0.5,
    "y": 0.525,
@@ -2790,6 +2785,16 @@
   "ssu--karl": {
    "x": 0.5,
    "y": 0.528,
+   "zoom": 1
+  },
+  "axis--grenadier-heavy-mortar-squad": {
+   "x": 0.5,
+   "y": 0.452,
+   "zoom": 1
+  },
+  "allies--rhino": {
+   "x": 0.5,
+   "y": 0.52,
    "zoom": 1
   }
  }
