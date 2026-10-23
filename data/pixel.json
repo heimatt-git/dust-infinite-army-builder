@@ -1,5 +1,5 @@
 {
- "version": "202610211349",
+ "version": "202610230651",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -1580,11 +1580,6 @@
   "allies--diver-ds": {
    "x": 0.5,
    "y": 0.472,
-   "zoom": 1
-  },
-  "allies--rhino": {
-   "x": 0.5,
-   "y": 0.418,
    "zoom": 1
   },
   "allies--gilmore": {
