@@ -13,6 +13,10 @@ export const typeLabel = (type) => t(TYPE_LABELS[type] || type);
 
 export const MERC = 'Mercenaries';
 
+// Résumés courts des compétences pour les cartes (facultatif) : skills.short.json (EN) et skills.short.fr.json (FR)
+let SHORT = {};
+export const skillShort = (name) => SHORT[name] || '';
+
 export async function loadData(base = 'data/') {
   const get = (f) => fetch(base + f, { cache: 'no-cache' }).then((r) => {
     if (!r.ok) throw new Error(`Impossible de charger ${f} (${r.status})`);
@@ -28,6 +32,8 @@ export async function loadData(base = 'data/') {
     const fr = await get('skills.fr.json').catch(() => ({}));
     for (const [k, v] of Object.entries(fr)) if (v) skills[k] = v;
   }
+  SHORT = await get('skills.short.json').catch(() => ({}));
+  if (LANG === 'fr') SHORT = { ...SHORT, ...(await get('skills.short.fr.json').catch(() => ({}))) };
   return indexData(unitsFile, blocsFile, skills, photos);
 }
 

@@ -2,6 +2,7 @@
 // Aucune image officielle n'est utilisée. Le même SVG sert à l'affichage et à l'export PNG
 // et à l'export PDF : ce qu'on voit est exactement ce qu'on télécharge.
 import { t, skillDesc } from './i18n.js';
+import { skillShort } from './data.js';
 import { diceInner, ATTACK_ICONS, attackParts } from './dice.js';
 
 // Largeur logique : 1000 pour la carte carrée (80 × 80 mm), 1500 pour la carte large (120 × 70 mm),
@@ -203,12 +204,12 @@ export function generatedCardSVG(u, D, { cost, photo, focus = null, format = 'sq
   // ---- Compétences : « • NOM • » centré, puis le résumé
   out.push(`<rect x="${SX}" y="${SY}" width="${SW}" height="${SH}" rx="34" fill="#fffdf7" stroke="${INK}" stroke-width="4"/>`);
   const skills = [
-    ...(u.skills || []).filter((s) => !(u.customSkills || []).some((c) => c.name === s)).map((s) => ({ head: s, desc: D.skills[s] || '' })),
+    ...(u.skills || []).filter((s) => !(u.customSkills || []).some((c) => c.name === s)).map((s) => ({ head: s, desc: D.skills[s] || '', short: skillShort(s) })),
     ...(u.customSkills || []).map((c) => ({ head: c.name, desc: skillDesc(c) })),
   ];
   const wsk = new Map();
   for (const w of ws) for (const sp of w.specials || []) {
-    if (!wsk.has(sp)) wsk.set(sp, { head: sp, weapons: [], desc: D.skills[sp] || '' });
+    if (!wsk.has(sp)) wsk.set(sp, { head: sp, weapons: [], desc: D.skills[sp] || '', short: skillShort(sp) });
     const e = wsk.get(sp); if (!e.weapons.includes(w.name)) e.weapons.push(w.name);
   }
   for (const e of wsk.values()) skills.push({ ...e, weapon: e.weapons.join(', ') });
@@ -365,7 +366,7 @@ function layoutSkills(skills, width, height, full = false) {
       const items = skills.map((s) => ({
         hs, ds, gap,
         head: wrap(`• ${s.head.toUpperCase()} •${s.weapon ? ` (${s.weapon})` : ''}`, `700 ${hs}px ${FONT}`, width),
-        desc: s.desc ? wrap(max ? skillSummary(s.desc, max) : fullText(s.desc), `400 ${ds}px ${FONT}`, width) : [],
+        desc: s.desc ? wrap(max ? (s.short ? dice(s.short) : skillSummary(s.desc, max)) : fullText(s.desc), `400 ${ds}px ${FONT}`, width) : [],
       }));
       const h = items.reduce((a, b) => a + b.head.length * hs + b.desc.length * ds * 1.2 + gap, -gap + 6);
       if (h <= height) return { items, height: h };
