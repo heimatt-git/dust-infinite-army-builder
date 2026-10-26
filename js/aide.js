@@ -110,6 +110,8 @@ const SECTIONS = () => [
         'In “Units”, create a unit (or copy an existing one as a template), fill in identity, stats, skills and weapons. The card preview updates below the form.'),
       L("Pour les compétences, tapez quelques lettres : les compétences officielles apparaissent avec leur description. Si votre règle n'existe pas, « Créer comme règle inédite » l'ajoute et vous demande de la décrire.",
         'For skills, type a few letters: official skills show up with their description. If your rule does not exist, “Create as a new rule” adds it and asks you to describe it.'),
+      L("Sous l'aperçu, choisissez le format (carré ou large) puis « Télécharger la carte (PNG) » pour garder l'image. Le téléchargement marche aussi si la carte est incomplète : un message indique ce qui manque. Un filigrane « BROUILLON · DRAFT » signale une carte en cours de création.",
+        'Under the preview, choose the format (square or wide) then “Download card (PNG)” to keep the image. Downloading also works for an incomplete card: a message tells you what is missing. A “DRAFT” watermark marks a card still being created.'),
       L("Quand c'est prêt, « Envoyer » exporte un fichier à poster dans le salon prévu du Discord. Il est relu avant publication.",
         'When ready, “Send” exports a file to post in the dedicated Discord channel. It is reviewed before publication.'),
     ],
