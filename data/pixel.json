@@ -1,5 +1,5 @@
 {
- "version": "202610230700",
+ "version": "202610260500",
  "units": [
   "allies--action-jackson",
   "allies--action-jackson-ds",
@@ -152,6 +152,9 @@
   "axis--e-10-hetzer",
   "axis--e-10-hetzer-ndak",
   "axis--experiment-x-33",
+  "axis--experiment-x-34",
+  "axis--experiment-x-35-koloss",
+  "axis--experiment-x-66-krampus-krieger",
   "axis--falke",
   "axis--fallschirm-rso-flak-3",
   "axis--fallschirm-rso-laserkanone",
@@ -262,6 +265,7 @@
   "axis--rolf",
   "axis--samson",
   "axis--sigrid-i",
+  "axis--sigrid-ii",
   "axis--sigrid-iii",
   "axis--snow-lynx",
   "axis--stefan",
@@ -448,6 +452,7 @@
   "ssu--marlen",
   "ssu--master-yuk",
   "ssu--matrioshka",
+  "ssu--melor",
   "ssu--mikhail",
   "ssu--mikhail-tsh",
   "ssu--motherland-tesla-gun",
@@ -2795,6 +2800,26 @@
   "allies--rhino": {
    "x": 0.5,
    "y": 0.52,
+   "zoom": 1
+  },
+  "axis--sigrid-ii": {
+   "x": 0.474,
+   "y": 0.596,
+   "zoom": 1.1
+  },
+  "axis--experiment-x-34": {
+   "x": 0.5,
+   "y": 0.472,
+   "zoom": 1
+  },
+  "axis--experiment-x-35-koloss": {
+   "x": 0.5,
+   "y": 0.432,
+   "zoom": 1
+  },
+  "axis--experiment-x-66-krampus-krieger": {
+   "x": 0.5,
+   "y": 0.435,
    "zoom": 1
   }
  }
