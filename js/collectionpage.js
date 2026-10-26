@@ -267,7 +267,13 @@ export function renderCollectionPage(ctx) {
     if (i) set(i.dataset.qi, i.value);
   });
 
-  app.querySelectorAll('[data-view]').forEach((b) => b.addEventListener('click', () => { V.view = b.dataset.view; V.q = ''; renderCollectionPage(ctx); }));
+  app.querySelectorAll('[data-view]').forEach((b) => b.addEventListener('click', () => {
+    const to = b.dataset.view;
+    // Le bloc et la sous-faction regardés restent les mêmes d'un onglet à l'autre (« Tous les blocs » n'existe pas à l'ajout sans recherche : on garde alors le dernier bloc d'ajout)
+    if (to === 'add' && V.view === 'owned' && V.obloc !== 'all') { V.bloc = V.obloc; V.fac = V.ofac; }
+    else if (to === 'owned' && V.view === 'add') { V.obloc = V.bloc; V.ofac = V.fac; }
+    V.view = to; V.q = ''; renderCollectionPage(ctx);
+  }));
   app.querySelectorAll('[data-type]').forEach((b) => b.addEventListener('click', () => {
     V.type = b.dataset.type;
     app.querySelectorAll('[data-type]').forEach((x) => x.classList.toggle('on', x === b));
