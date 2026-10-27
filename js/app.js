@@ -320,6 +320,8 @@ function setSlot(plk, role, value) {
 
 // ---------------------------------------------------------------- Constructeur
 function renderBuilder() {
+  // Position de défilement de la liste de gauche (catalogue) : conservée quand on ajoute ou retire une unité
+  const prevCat = document.querySelector('.cat-list'), keepCat = prevCat ? prevCat.scrollTop : 0;
   const D = S.data, L = S.list;
   const A = analyzeArmy(L, D);
   const bloc = D.blocsById.get(L.bloc);
@@ -375,6 +377,7 @@ function renderBuilder() {
   </main>`;
   bindTopbar();
   bindBuilder(A);
+  if (keepCat) { const c = document.querySelector('.cat-list'); if (c) c.scrollTop = keepCat; }
 }
 
 // ------------------------------ Catalogue
