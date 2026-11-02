@@ -2187,6 +2187,40 @@
    "image": "mythos_strike_from_the_shadows_platoon"
   },
   {
+   "id": "axis--blutkreuz-wave-of-death-platoon",
+   "bloc": "Axis",
+   "name": "Blutkreuz Wave of Death Platoon",
+   "advantage": "During the first three turns of the game, roll a die each time a Zombie is eliminated from a Zombie Grenadier Squad or Zombie Suicide Squad in or supporting the Platoon. On a roll of dice_block the dead zombie reanimates and is returned to play.",
+   "lore": "Bring Back The Undeads",
+   "onlyCombatUnitsAsSupport": false,
+   "command": [
+    [
+     [
+      "axis--experiment-x-33"
+     ]
+    ]
+   ],
+   "combat": [
+    [
+     [
+      "axis--zombie-grenadier-squad"
+     ],
+     [
+      "axis--zombie-suicide-squad"
+     ]
+    ],
+    [
+     [
+      "axis--zombie-grenadier-squad"
+     ],
+     [
+      "axis--zombie-suicide-squad"
+     ]
+    ]
+   ],
+   "image": "bk"
+  },
+  {
    "id": "ijn--shadow-of-death-ninja-platoon",
    "bloc": "IJN",
    "name": "Shadow of Death Ninja Platoon",
