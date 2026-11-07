@@ -1,4 +1,4 @@
-// Export PDF d'une liste : page(s) de récapitulatif + cartes générées 80 × 80 mm (6 par page A4, traits de coupe).
+// Export PDF d'une liste : page(s) de récapitulatif + cartes générées 120 × 70 mm (4 par page A4, traits de coupe).
 // Le PDF est fabriqué dans le navigateur, sans bibliothèque externe : chaque page est dessinée en SVG
 // (mêmes polices que le site), convertie en image JPEG, puis assemblée dans un fichier PDF minimal.
 import { generatedCardSVG, svgCanvas, cardFontsReady, measure, wrap, FONT, FONT_NAME, xe } from './cardgen.js';
@@ -9,9 +9,8 @@ const FORMAT_KEY = 'dust1947.pdfFormat';
 
 const MM = 72 / 25.4;                     // points PDF par millimètre
 const A4 = { w: 210, h: 297 };
-// Formats de cartes : carrée 80 × 80 (6 par page) ; large 120 × 70, placée tournée d'un quart de tour (2 × 2 par page)
+// Format de carte : large 120 × 70, placée tournée d'un quart de tour (2 × 2 par page)
 const LAYOUTS = {
-  square: { cw: 80, ch: 80, cols: 2, rows: 3, rotate: false },
   wide: { cw: 70, ch: 120, cols: 2, rows: 2, rotate: true },
 };
 const gridOf = (L) => ({ ...L, x: (A4.w - L.cols * L.cw) / 2, y: (A4.h - L.rows * L.ch) / 2 });
@@ -149,8 +148,8 @@ function rotated(src) {
 
 // ---------------------------------------------------------------- Export
 // cards = [{ u, D, cost, photo, focus, credit }]
-export async function exportListPDF({ filename, recap, cards = [], includeCards = true, format = 'square', onProgress = () => {} }) {
-  const G = gridOf(LAYOUTS[format] || LAYOUTS.square);
+export async function exportListPDF({ filename, recap, cards = [], includeCards = true, format = 'wide', onProgress = () => {} }) {
+  const G = gridOf(LAYOUTS[format] || LAYOUTS.wide);
   await cardFontsReady();
   const pages = [];
   const recapSvgs = recapSVGs(recap);
@@ -214,28 +213,21 @@ export async function exportPagesPDF({ filename, title, svgs, onProgress = () =>
 
 // Fenêtre d'options commune au builder et au Shot Format
 export function pdfDialogHTML(nCards) {
-  const fmt = store.get(FORMAT_KEY, 'square') === 'wide' ? 'wide' : 'square';
   return `<div class="modal-h"><div><div class="eyebrow">${t('Export')}</div><h2>${t('Exporter en PDF')}</h2></div><button class="btn icon" data-close-btn aria-label="${t('Fermer')}">✕</button></div>
     <div class="modal-b pdf-dlg">
       <p class="hint" style="margin:0">${t('Le PDF contient le récapitulatif de la liste. Vous pouvez y ajouter les cartes des unités, prêtes à imprimer et découper.')}</p>
       <label class="check"><input type="checkbox" id="pdf-cards" checked> ${t('Inclure les cartes des unités ({n})', { n: nCards })}</label>
-      <label class="field"><span>${t('Format des cartes')}</span><select id="pdf-format">
-        <option value="square" ${fmt === 'square' ? 'selected' : ''}>${t('80 × 80 mm (carrée), 6 par page')}</option>
-        <option value="wide" ${fmt === 'wide' ? 'selected' : ''}>${t('120 × 70 mm (format tarot, texte complet des compétences), 4 par page')}</option>
-      </select></label>
+      <p class="hint" style="margin:0"><b>${t('Format des cartes')}</b> : ${t('120 × 70 mm (format tarot, texte complet des compétences), 4 par page')}</p>
       <p class="hint" style="margin:0">${t('Pages A4 avec traits de coupe. Imprimez à 100 % (taille réelle), sans « ajuster à la page ».')}</p>
       <div class="pdf-acts"><button class="btn primary" id="pdf-go">${t('Télécharger le PDF')}</button><span class="hint" id="pdf-status" role="status"></span></div>
     </div>`;
 }
 export function bindPdfDialog(root, run) {
   const go = root.querySelector('#pdf-go'), st = root.querySelector('#pdf-status');
-  const cb = root.querySelector('#pdf-cards'), sel = root.querySelector('#pdf-format');
-  cb.addEventListener('change', () => { sel.disabled = !cb.checked; });
-  go.addEventListener('click', async () => {
+    go.addEventListener('click', async () => {
     go.disabled = true;
     try {
-      const format = root.querySelector('#pdf-format').value;
-      store.set(FORMAT_KEY, format);
+      const format = 'wide';
       await run({ includeCards: root.querySelector('#pdf-cards').checked, format }, (d, n) => { st.textContent = t('Création du PDF… {d}/{n}', { d, n }); });
       st.textContent = t('PDF téléchargé.');
     } catch (e) {

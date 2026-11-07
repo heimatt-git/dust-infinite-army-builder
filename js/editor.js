@@ -909,8 +909,8 @@ function openPixelFraming(id) {
   const card = (format) => (u ? generatedCardSVG(u, D, { photo: src, focus: focus || { x: 0.5, y: 0.5, zoom: 1, ar: 1 }, format }) : '');
   openModal(`<div class="modal-h"><div><div class="eyebrow">${t('Illustration')}</div><h2>${t('Cadrage')} · ${esc(u?.name || id)}</h2></div><button class="btn icon" data-close-btn aria-label="${t('Fermer')}">✕</button></div>
     <div class="modal-b fr-dlg">
-      <p class="hint" style="margin:0">${t("L'illustration remplit toujours la zone photo : selon le format et le nombre d'armes, le haut et le bas peuvent être coupés. Faites glisser l'image pour garder le sujet visible, et vérifiez les deux formats.")}</p>
-      <div class="fr-cols"><div>${framingHTML(PIXEL_FRAME)}</div><div class="px-cards"><div class="gcard-wrap" data-pxc="square"></div><div class="gcard-wrap" data-pxc="wide"></div></div></div>
+      <p class="hint" style="margin:0">${t("L'illustration remplit toujours la zone photo : selon le format et le nombre d'armes, le haut et le bas peuvent être coupés. Faites glisser l'image pour garder le sujet visible, et vérifiez l'aperçu de la carte.")}</p>
+      <div class="fr-cols"><div>${framingHTML(PIXEL_FRAME)}</div><div class="px-cards"><div class="gcard-wrap" data-pxc="wide"></div></div></div>
       <div class="pdf-acts"><button class="btn primary" id="fr-save">${t('Enregistrer')}</button><span class="hint">${t('Publiez ensuite depuis l\'onglet Publier.')}</span></div>
     </div>`, (root, close) => {
     const draw = () => root.querySelectorAll('[data-pxc]').forEach((el) => { el.innerHTML = card(el.dataset.pxc); });

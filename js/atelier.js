@@ -232,7 +232,7 @@ function renderUnits(body) {
       </div>
     </aside>
     <section>${u ? `<div class="at-unit"><div>${unitForm(u, D)}</div><aside class="at-prev-col"><div class="eyebrow">${t('Aperçu de la carte')}</div><div id="u-preview" class="at-preview"></div>
-      <div class="at-export"><label>${t('Format')} <select id="u-fmt"><option value="square">${t('Carré (80×80 mm)')}</option><option value="wide">${t('Large (120×70 mm)')}</option></select></label>
+      <div class="at-export">
       <button type="button" class="btn" id="u-card-png">${t('Télécharger la carte (PNG)')}</button>
       <div id="u-card-msg" class="at-export-msg"></div></div></aside></div>`
       : `<div class="ed-sec"><p class="hint" style="margin:0">${t('Créez une nouvelle unité, ou partez d\'une unité existante pour gagner du temps. Chaque unité est rattachée à un bloc et, si vous le souhaitez, à une faction (officielle ou créée dans l\'onglet Factions).')}</p></div>`}</section>
@@ -390,10 +390,8 @@ function cardMissing(u) {
 }
 
 function bindCardExport(body, u) {
-  const btn = body.querySelector('#u-card-png'), msg = body.querySelector('#u-card-msg'), sel = body.querySelector('#u-fmt');
+  const btn = body.querySelector('#u-card-png'), msg = body.querySelector('#u-card-msg');
   if (!btn) return;
-  sel.value = A.cardFmt || 'square';
-  sel.addEventListener('change', () => { A.cardFmt = sel.value; });
   const miss = cardMissing(u);
   msg.textContent = miss.length ? t('Carte incomplète, il manque : {l}. Vous pouvez quand même la télécharger.', { l: miss.join(', ') }) : '';
   btn.addEventListener('click', async () => {
@@ -402,7 +400,7 @@ function bindCardExport(body, u) {
       await cardFontsReady();
       const D = preview(), pu = D.unitsById.get(u.id);
       if (!pu) throw new Error('unit');
-      const svg = watermarkSVG(generatedCardSVG(pu, D, { cost: pu.cost, photo: photoURL(u), focus: u.photoFocus || null, format: sel.value }), t('BROUILLON · DRAFT'));
+      const svg = watermarkSVG(generatedCardSVG(pu, D, { cost: pu.cost, photo: photoURL(u), focus: u.photoFocus || null }), t('BROUILLON · DRAFT'));
       const c = await svgCanvas(svg, { scale: 2 });
       download(await new Promise((r) => c.toBlob(r, 'image/png')), `carte-${slug(u.name)}.png`);
       const mm = cardMissing(u);

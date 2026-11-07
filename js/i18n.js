@@ -730,7 +730,7 @@ const EN = {
   "Préparation des images…": "Preparing images…",
   "{n} illustration(s) ajoutée(s) au brouillon : vérifiez le cadrage, puis publiez dans l'onglet Publier.": "{n} illustration(s) added to the draft: check the framing, then publish from the Publish tab.",
   "Illustration": "Illustration",
-  "L'illustration remplit toujours la zone photo : selon le format et le nombre d'armes, le haut et le bas peuvent être coupés. Faites glisser l'image pour garder le sujet visible, et vérifiez les deux formats.": "The illustration always fills the photo area: depending on the format and the number of weapons, the top and bottom may be cut. Drag the image to keep the subject visible, and check both formats.",
+  "L'illustration remplit toujours la zone photo : selon le format et le nombre d'armes, le haut et le bas peuvent être coupés. Faites glisser l'image pour garder le sujet visible, et vérifiez l'aperçu de la carte.": "The illustration always fills the photo area: depending on the format and the number of weapons, the top and bottom may be cut. Drag the image to keep the subject visible, and check the card preview.",
   "Rechercher une unité": "Search for a unit",
   "illustrations": "illustrations",
   "Ma collection": "My collection",

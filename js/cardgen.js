@@ -105,7 +105,7 @@ export function skillSummary(text, max = 130) {
 }
 
 // credit : ligne de crédit affichée sur la photo (licence CC BY)
-export function generatedCardSVG(u, D, { cost, photo, focus = null, format = 'square', credit = '' } = {}) {
+export function generatedCardSVG(u, D, { cost, photo, focus = null, format = 'wide', credit = '' } = {}) {
   const wide = format === 'wide';
   const W = wide ? CARD_FORMATS.wide.w : CARD_FORMATS.square.w;
   const id = `gc${++uid}`;
@@ -240,7 +240,17 @@ export function generatedCardSVG(u, D, { cost, photo, focus = null, format = 'sq
     const cy = ry + ROW / 2;
     out.push(`<circle cx="${x0 + 24}" cy="${cy}" r="17" fill="${RED}" stroke="${INK}" stroke-width="2"/>`);
     out.push(txt(x0 + 24, cy + 8, 22, 'ABCDEFGH'[i] || '', { fill: CREAM }));
-    out.push(weaponLabel(w, x0 + 50, cy + 9, NAME_W - 56));
+    // Munitions limitées : une case à cocher par munition, à droite du nom de l'arme
+    let lblW = NAME_W - 56, am = '';
+    if (w.ammo > 0) {
+      const n = Math.min(12, Math.round(w.ammo)), gap = 5, ax = RANGE_X - 8;
+      const bs = Math.floor(Math.max(10, Math.min(32, ROW - 14, (150 + gap) / n - gap)));
+      const bw = n * (bs + gap) - gap;
+      lblW -= bw + 14;
+      for (let i = 0; i < n; i++) am += `<rect x="${ax - bw + i * (bs + gap)}" y="${cy - bs / 2}" width="${bs}" height="${bs}" rx="3" fill="#fffaf0" stroke="${RED}" stroke-width="3"/>`;
+    }
+    out.push(weaponLabel(w, x0 + 50, cy + 9, lblW));
+    out.push(am);
     out.push(txt(RANGE_X + RANGE_W / 2, cy + 10, 28, xe(w.range ?? '-')));
     const vals = [...pad(w.vsInfantry, 4), ...pad(w.vsVehicle, 7), ...pad(w.vsAircraft, 3)];
     vals.forEach((v, k) => {
